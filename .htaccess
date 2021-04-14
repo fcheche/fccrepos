@@ -12,7 +12,7 @@ RewriteRule ^(.*)$ index.php [L,QSA,E=PATH_INFO:$1]
 RewriteCond %{SCRIPT_FILENAME} \.php [NC]
 RewriteCond % !^$
 RewriteRule ^/?application/.*\.php - [F]
-RewriteRule ^/?backup/.*\.php - [F]
+#RewriteRule ^/?backup/.*\.php - [F]
 RewriteRule ^/?plugins/.*\.php - [F]
 RewriteRule ^/?runtime/.*\.php - [F]
 RewriteRule ^/?template/.*\.php - [F]
