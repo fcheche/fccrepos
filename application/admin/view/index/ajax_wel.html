@@ -1,0 +1,154 @@
+<table border="1" width="100%">
+            <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>当天业绩</th>
+                    <th>昨日业绩</th>
+                    <th>当天挂售</th>
+                    <th>昨日挂售</th>
+                    <th>销售推广</th>
+                    <th>挂售</th>
+                    <th>业绩</th>
+                    <th>提成</th>
+                    <!-- <th>在售网店</th> -->
+                    <th>客服状态</th>
+                </tr>
+            </thead>
+
+
+            <!--第一个body-->
+            <foreach name="list" item="v" key="k" >
+        
+            <tbody>
+                <tr>
+                    <td colspan="10" class="teamName">
+                        <span><if condition="$v['type'] eq 1">短视频<elseif condition="$v['type'] eq 2">自媒体<elseif condition="$v['type'] eq 3">微博<elseif condition="$v['type'] eq 4">微信</if></span> <span>{$v['corps_name']}</span>战队，主管<span>{$v['zhuguan_name']}</span>,本月挂售<span>{$v['dyguadian']}</span>,本月业绩<span>{$v['dyyeji']}</span>
+                    </td>
+                </tr>
+                        <foreach name="v['admins']" item="v1" key="k1" >
+
+    <?php 
+    $y=date("Y",time());
+    $m=date("m",time());
+    $jbegintime=mktime(0,0,0,date('m'),date('d'),date('Y'));//今天开始时间
+    $zbegintime=mktime(0,0,0,date('m'),date('d')-1,date('Y'));//昨天开始时间
+    $t1=mktime(0,0,0,$m,1,$y); // 创建本月开始时间
+    //$starttime=strtotime("2019-11-15 00:00:00"); // 起始时间
+
+    $admin_id=$v1['admin_id'];
+    $username=trim($v1['user_name']);
+                   // 挂店数  今天
+    $todaygoodsnum = M('goods')->where("admin_id='$admin_id' and $jbegintime <= on_time and is_delete= 0")->count();
+                   // 挂店数  昨天
+    $yestodaygoodsnum = M('goods')->where("admin_id='$admin_id' and $zbegintime <= on_time and $jbegintime > on_time and is_delete= 0")->count();
+                   // 挂店数  本月
+    $thismonthgoodsnum = M('goods')->where("admin_id='$admin_id' and $t1 <= on_time and is_delete= 0")->count();
+
+
+                                // 销售业绩  今天
+    $todayxssum = M('order_list')->where("xs_adminid='$admin_id' and $jbegintime <= add_time and order_status > 0 and order_status != 5")->sum('shiji_yeji');
+                                // 挂店业绩  今天
+    $todaygdsum = M('order_list')->where("gs_adminid='$admin_id' and $jbegintime <= add_time and order_status > 0 and order_status != 5")->sum('shiji_yeji');
+    
+    $todaysum = $todayxssum*0.5+$todaygdsum*0.5;
+
+        // 销售业绩  昨天
+$yestodayxssum = M('order_list')->where("xs_adminid='$admin_id' and $zbegintime <= add_time and $jbegintime > add_time and order_status > 0 and order_status != 5")->sum('shiji_yeji');
+        // 挂店业绩  昨天
+$yestodaygdsum = M('order_list')->where("gs_adminid='$admin_id' and $zbegintime <= add_time and $jbegintime > add_time and order_status > 0 and order_status != 5")->sum('shiji_yeji');
+    // 销售个数  本月
+    $thismonthxscount = M('order_list')->where("xs_adminid='$admin_id' and $t1 <= add_time and order_status > 0 and order_status != 5")->count();
+    // 挂店个数  本月
+    $thismonthgdcount = M('order_list')->where("gs_adminid='$admin_id' and $t1 <= add_time and order_status > 0 and order_status != 5")->count();
+
+        // 销售业绩  本月
+    $thismonthxssum = M('order_list')->where("xs_adminid='$admin_id' and $t1 <= add_time and order_status > 0 and order_status != 5")->sum('shiji_yeji');
+        // 挂店业绩  本月
+    $thismonthgdsum = M('order_list')->where("gs_adminid='$admin_id' and $t1 <= add_time and order_status > 0 and order_status != 5")->sum('shiji_yeji');
+
+    $yestodaysum = $yestodayxssum*0.5+$yestodaygdsum*0.5;//昨天业绩
+    $thismonthsum = $thismonthxssum*0.5+$thismonthgdsum*0.5;//当月业绩
+
+        //存储当月业绩
+    $data['dyyeji']=$thismonthsum;
+        //存储当月挂店数
+    $data['dyguadian']=$thismonthgoodsnum;
+
+    M('admin')->where("admin_id='$admin_id'")->save($data);
+
+
+    //在售网店
+    $allgoodsnum = M('goods')->where("admin_id='$admin_id' and is_on_sale=1 and is_delete= 0")->count();
+                ?>
+                            <tr>
+                                <td><strong>{$username}</strong></td>
+                                <td>
+                                <if condition="$todaysum neq 0 ">{$todaysum|number_format=###, 0, '.', ''}</if>
+                                </td>
+                                <td>
+                                <if condition="$yestodaysum neq 0 ">{$yestodaysum|number_format=###, 0, '.', ''}</if>
+                                </td>
+                                <td><if condition="$todaygoodsnum neq 0 ">{$todaygoodsnum}</if>
+                                </td>
+                                <td><if condition="$yestodaygoodsnum neq 0 ">{$yestodaygoodsnum}</if>
+                                </td>
+                                <td>
+<if condition="$admin_info['user_name'] eq $username or $v['zhuguan_name'] eq $admin_info['user_name'] or $roleid eq 1 or $roleid eq 2 or $roleid eq 50 or $roleid eq 51 or $roleid eq 52">
+    <a href="{:U('Admin/Order/yeji',array('xs_name'=>$username,'type'=>$v['type']))}">{$thismonthxscount}</a>/<a href="{:U('Admin/Order/yeji',array('gs_name'=>$username))}">{$thismonthgdcount}</a>
+<else>
+    {$thismonthxscount}/{$thismonthgdcount}
+</if>
+                                </td>
+                                <td>{$thismonthgoodsnum}</td>
+                                <td>{$thismonthsum|number_format=0}</td>
+                                <td>
+<if condition="$thismonthsum egt 50000 ">{$thismonthsum*0.05|number_format=###, 0, '.', ''}<else>{$thismonthsum*0.03|number_format=###, 0, '.', ''}</if>
+                                </td>
+                                <!-- <td>{$allgoodsnum}</td> -->
+                                <td>
+<if condition="$v1.leibie eq 2">
+<span <if condition='!empty(strstr($v1[is_online], "2"))'>style="color: #1b61ab;"<else>style="color:#888383;"</if> <if condition="$roleid eq 1 or $roleid eq 2 or $roleid eq 52 or $roleid eq 103 or $roleid eq 101">onclick="changeOnline(2,'{$v1.admin_id}')"</if>>自媒体</span>
+</if>
+
+<if condition="$v1.leibie eq 1">
+<span <if condition='!empty(strstr($v1[is_online], "1"))'>style="color: #1b61ab;"<else>style="color:#888383;"</if> <if condition="$roleid eq 1 or $roleid eq 2 or $roleid eq 50 or $roleid eq 105 or $roleid eq 102">onclick="changeOnline(1,'{$v1.admin_id}')"</if>>短视频</span>
+</if>
+
+<if condition="$v1.leibie eq 3">
+<span <if condition='!empty(strstr($v1[is_online], "3"))'>style="color: #1b61ab;"<else>style="color:#888383;"</if> <if condition="$roleid eq 1 or $roleid eq 2 or $roleid eq 53 or $roleid eq 106">onclick="changeOnline(3,'{$v1.admin_id}')"</if>>微博</span>
+</if>
+
+<if condition="$v1.leibie eq 4">
+<span <if condition='!empty(strstr($v1[is_online], "4"))'>style="color: #1b61ab;"<else>style="color:#888383;"</if> <if condition="$roleid eq 1 or $roleid eq 2 or $roleid eq 54 or $roleid eq 107">onclick="changeOnline(4,'{$v1.admin_id}')"</if>>微信</span>
+</if>
+
+</td>
+                            </tr>
+                        </foreach>
+            </tbody>
+             </foreach>
+            
+        </table>
+
+<script type="text/javascript">
+// 修改指定表的指定字段值 包括有按钮点击切换是否 或者 排序 或者输入框文字
+function changeOnline(value,admin_id) {
+    var r=confirm("你确定要修改客服状态吗？！");
+    if (r==true) {
+        $.ajax({
+                type: 'get',
+                url: '/index.php?m=Admin&c=Index&a=changeOnline',
+                data : {value:value,admin_id:admin_id},
+                dataType: 'json',
+                success: function (data) {
+                    if (data.status == 1) {
+                        alert(data.msg);
+                        location.reload();
+                    } else {
+                        alert(data.msg)
+                    }
+                }
+            })
+    }
+}
+</script>

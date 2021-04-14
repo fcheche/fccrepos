@@ -1,0 +1,313 @@
+<include file="public/layout" />
+<script type="text/javascript" src="__ROOT__/public/static/js/layer/laydate/laydate.js"></script>
+<style>
+.searchBox .small {
+    width: 120px;
+}
+.searchBox .select {
+    width: 120px;
+}
+    span.type-virtual {
+        background-color: #3598DC;
+        line-height: 16px;
+        color: #FFF;
+        display: inline-block;
+        height: 16px;
+        padding: 1px 4px;
+        margin-right: 2px;
+        box-shadow: inset 1px 1px 0 rgba(255,255,255,0.25);
+        cursor: default;
+    }
+</style>
+<body style="background-color: rgb(255, 255, 255); overflow: auto; cursor: default; -moz-user-select: inherit;">
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+  <div class="fixed-bar">
+    <div class="item-title">
+      <div class="subject">
+        <h3><if condition="$goods_type eq 1">短视频<elseif condition="$goods_type eq 2">自媒体<elseif condition="$goods_type eq 3">微博<elseif condition="$goods_type eq 4">微信公众号</if>管理</h3>
+        <h5>商城所有<if condition="$goods_type eq 1">短视频<elseif condition="$goods_type eq 2">自媒体<elseif condition="$goods_type eq 3">微博<elseif condition="$goods_type eq 4">微信公众号</if>索引及管理</h5>
+      </div>
+    </div>
+  </div>
+  <div class="flexigrid">
+    <div class="mDiv">
+      <div class="ftitle">
+        <h3><if condition="$goods_type eq 1">短视频<elseif condition="$goods_type eq 2">自媒体<elseif condition="$goods_type eq 3">微博<elseif condition="$goods_type eq 4">微信公众号</if>列表</h3>
+      </div>
+        <a href=""><div title="刷新数据" class="pReload"><i class="fa fa-refresh"></i></div></a>
+  <form action="" id="search-form2" class="navbar-form form-inline" method="post" onSubmit="return false">
+     
+      <!--新版搜索框-->
+    <div class="orderSearch">
+      <div class="searchBox">
+        <span>登记时间：</span>
+        <input type="text" size="10" id="start_time" name="start_time" value="" class="qsbox"  placeholder="登记开始时间">
+        <span>&nbsp-&nbsp</span>
+        <input type="text" size="10" id="end_time" name="end_time" value="" class="qsbox"  placeholder="登记结束时间">
+      </div>
+      <div class="searchBox">
+        <span>所属平台：</span>
+        <select name="pingtai_id" id="pingtai_id" class="select">
+          <option value="">请选择平台</option>
+          <foreach name="pingtaiList" item="v" key="k" >
+           <option value="{$v['attr_id']}">{$v['attr_name']}</option>
+         </foreach>
+       </select>     
+      </div>
+
+      <div class="searchBox">
+        <span>行业分类：</span>
+        <select name="cat_id" id="cat_id" class="small form-control">
+          <option value="" selected="selected">请选择分类</option>
+         <foreach name="categoryList" item="vcat" key="kcat" >
+           <option value="{$vcat['id']}">{$vcat['name']}</option>
+         </foreach>
+        </select>
+      </div>
+    
+      <div class="searchBox">
+        <span>商品状态：</span>
+        <select name="is_on_sale" id="is_on_sale" class="select">
+          <option value="">请选择状态</option>                  
+          <option value="1">在售</option>
+          <option value="0">未审核</option>
+          <option value="2">已售</option>
+        </select>
+      </div>
+      <div class="searchBox">
+        <span>价格区间：</span>
+        <select name="price_qujian" class="select">
+          <option value="">请选择区间</option>
+          <option value="1">5000以内</option>
+          <option value="2">5000-1万</option>
+          <option value="3">1万-2万</option>
+          <option value="4">2万-3万</option>
+          <option value="5">3万-5万</option>
+          <option value="6">5万-8万</option>
+          <option value="7">8万-10万</option>
+          <option value="8">10万-15万</option>
+          <option value="9">15万-20万</option>
+          <option value="10">20万以上</option>
+        </select>     
+      </div>
+       <div class="searchBox">
+        <span>粉丝数量：</span>
+        <select name="fensi_qujian" class="select">
+          <option value="">请选择区间</option>
+          <option value="1">5万以下</option>
+          <option value="2">5-10万</option>
+          <option value="3">10-20万</option>
+          <option value="4">20-30万</option>
+          <option value="5">30-50万</option>
+          <option value="6">50-100万</option>
+          <option value="7">100-200万</option>
+          <option value="8">200万以上</option>
+        </select>     
+      </div>
+      <div class="searchBox">
+        <span>注册时间：</span>
+        <select name="zhuce_time" class="select">
+          <option value="">请选择时间</option>
+          <option value="2008">2008</option>
+          <option value="2009">2009</option>
+          <option value="2010">2010</option>
+          <option value="2011">2011</option>
+          <option value="2012">2012</option>
+          <option value="2013">2013</option>
+          <option value="2014">2014</option>
+          <option value="2015">2015</option>
+          <option value="2016">2016</option>
+          <option value="2017">2017</option>
+          <option value="2018">2018</option>
+          <option value="2019">2019</option>
+          <option value="2020">2020</option>
+        </select>     
+      </div>
+      <div class="searchBox">
+        <span>是否开通直播：</span>
+        <select name="is_zhibo" class="select">
+          <option value="">是否开通直播</option>
+          <option value="1">已开通</option>
+          <option value="2">未开通</option>
+          <option value="3">可申请</option>
+        </select>     
+      </div>
+      <div class="searchBox">
+        <span>是否开通橱窗：</span>
+        <select name="is_chuchuang" class="select">
+          <option value="">是否开通橱窗</option>
+          <option value="1">已开通</option>
+          <option value="2">未开通</option>
+        </select>     
+      </div>
+      <div class="searchBox">
+        <span>认证主体：</span>
+        <select name="renzheng_type" class="select">
+          <option value="">请选择主体</option>
+          <option value="0">未认证</option>
+          <option value="1">个人认证</option>
+          <option value="2">企业认证</option>
+        </select>     
+      </div>
+       <div class="searchBox">
+        <span>有无处罚：</span>
+        <select name="is_chufa" class="select">
+          <option value="">有无处罚</option>
+          <option value="1">有处罚</option>
+          <option value="2">无处罚</option>
+        </select>     
+      </div>
+      <div class="searchBox">
+        <input type="hidden" name="orderby1" value="goods_id" />
+        <input type="hidden" name="orderby2" value="desc" />
+        <input type="text" size="30" name="key_word" class="qsbox" placeholder="搜索词...">
+        <input type="button" onClick="ajax_get_table('search-form2',1)" class="btn1" value="搜索">
+      </div>
+    </div>
+
+     </form>
+    </div>
+    <div class="hDiv">
+      <div class="hDivBox">
+        
+        <table cellspacing="0" cellpadding="0">
+          <thead>
+            <tr>
+            <!--   <th class="sign" axis="col6" onclick="checkAllSign(this)">
+                <div style="width: 10px;"><i class="ico-check"></i></div>
+              </th> -->
+
+              <th align="center" abbr="article_title" axis="col6" class="">
+                <div style="text-align: center; width:100px;" class="">操作</div>
+              </th>
+
+              <th align="center" abbr="article_title" axis="col6" class="">
+                <div style="text-align: center; width:60px;" class="" onClick="sort('goods_sn');">所属平台</div>
+              </th>
+               <th align="center" abbr="article_time" axis="col6" class="">
+                <div style="text-align: center; width: 80px;" class="" onClick="sort('cat_id');">所属类目</div>
+              </th> 
+              <th align="center" abbr="article_title" axis="col6" class="">
+                <div style="text-align: center; width:150px;" class="" onClick="sort('goods_sn');">商品编号</div>
+              </th>
+            
+              <th align="center" abbr="article_title" axis="col6" class="">
+                <div style="text-align: center; width: 300px;" class="" onClick="sort('goods_name');">商品标题</div>
+              </th>
+              
+              <th align="center" abbr="article_show" axis="col6" class="">
+                <div style="text-align: center; width: 100px;" class="" onClick="sort('shop_price');">出售价格</div>
+              </th>
+           
+              <th align="center" abbr="article_time" axis="col6" class="">
+                <div style="text-align: center; width: 80px;" class="" onClick="sort('zhuce_time');">注册时间</div>
+              </th>
+              
+               <th align="center" abbr="article_time" axis="col6" class="">
+                <div style="text-align: center; width: 80px;" class="" onClick="sort('fensi_num');">粉丝数量</div>
+              </th> 
+               <th align="center" abbr="article_time" axis="col6" class="">
+                <div style="text-align: center; width: 80px;" class="" onClick="sort('guishu');">挂售人</div>
+              </th>
+          
+              <th align="center" abbr="article_time" axis="col6" class="">
+                <div style="text-align: center; width:100px;" class="" onClick="sort('on_time');">登记时间</div>
+              </th> 
+             
+              <th align="center" abbr="article_time" axis="col6" class="">
+                <div style="text-align: center; width: 50px;" class="" onClick="sort('is_hot');">热卖</div>
+              </th>
+              <th align="center" abbr="article_time" axis="col6" class="">
+                <div style="text-align: center; width: 80px;" class="" onClick="sort('is_on_sale');">状态</div>
+              </th>
+
+              <th align="center" abbr="article_time" axis="col6" class="">
+                <div style="text-align: center; width:80px;" class="" onClick="sort('shenhe');">审核人</div>
+              </th> 
+
+              <th style="width:100%" axis="col7">
+                <div></div>
+              </th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>    
+    <div class="tDiv">
+      <div class="tDiv2">
+        <div class="fbutton">
+          <if condition="$goods_type eq 1"><a href="{:U('Admin/goodsdsp/addGoods')}"><elseif condition="$goods_type eq 2"><a href="{:U('Admin/goodszmt/addGoods')}"><elseif condition="$goods_type eq 3"><a href="{:U('Admin/goodswb/addGoods')}"><elseif condition="$goods_type eq 4"><a href="{:U('Admin/goodswx/addGoods')}"></if>
+          <div class="add" title="添加商品">
+            <span><i class="fa fa-plus"></i>添加商品</span>
+          </div>
+          </a>          
+          </div> 
+
+      </div>
+      <div style="clear:both"></div>
+    </div>
+    <div class="bDiv" style="height: auto;">
+     <!--ajax 返回 --> 
+      <div id="flexigrid" cellpadding="0" cellspacing="0" border="0" data-url="{:U('admin/goods/delGoods')}"></div>
+    </div>
+
+     </div>
+</div>
+<script>
+  $(document).ready(function(){
+    //加载时获取sessionStorage里面的页码
+    var pagelist='pagelist{$goods_type}{$status}';
+    let mypage=parseInt(sessionStorage.getItem(pagelist));
+    console.log(pagelist);
+    cur_page=mypage;
+    ajax_get_table('search-form2',cur_page);
+
+     // ajax 加载列表
+    $('#start_time').layDate();
+    $('#end_time').layDate();
+});
+
+
+
+    // 刷选条件 鼠标 移动进去 移出 样式
+    $(".hDivBox > table > thead > tr > th").mousemove(function(){
+      $(this).addClass('thOver');
+    }).mouseout(function(){
+      $(this).removeClass('thOver');
+    });
+
+    // 表格行点击选中切换
+    $(document).on('click','#flexigrid > table>tbody >tr',function(){
+      // $(this).toggleClass('trSelected');
+      var checked = $(this).hasClass('trSelected');
+      $(this).find('input[type="checkbox"]').attr('checked',checked);
+    });
+
+   // 短视频1 自媒体2 微博3 微信4/
+
+    // ajax 抓取页面 form 为表单id  page 为当前第几页
+    function ajax_get_table(form, page) {
+        cur_page = page; //当前页面 保存为全局变量
+        $.ajax({
+            type: "POST",
+            url: "/index.php?m=Admin&c=goods&a=ajaxGoodsList&goods_type={$goods_type}&p=" + page,//+tab,
+            data: $('#' + form).serialize(),// 你的formid
+            success: function (data) {
+                $("#flexigrid").html('');
+                $("#flexigrid").append(data);
+            }
+        });
+    }
+
+        // 点击排序
+        function sort(field){
+           $("input[name='orderby1']").val(field);
+           var v = $("input[name='orderby2']").val() == 'desc' ? 'asc' : 'desc';             
+           $("input[name='orderby2']").val(v);
+           ajax_get_table('search-form2',cur_page);
+        }
+</script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>汇款退回</title>
+<style>
+    *{margin:0;padding: 0}
+    ul li{list-style:none;}
+    a{text-decoration: none;color: #333333}
+    .online_support{width: 700px;margin:0 auto;}
+    .online_instruction{width: 217px;float: left;}
+    .online_support .tit-top{text-align: center;padding: 20px 0;}
+    .online_support .tit-top h2{font-size: 18px;color: #333333;}
+    .online_support .tit-top p{font-size: 16px;color: #333333;}
+    .online_support .area_four{padding-left: 18px}
+    .area_four .external{float: left;width: 190px;border:1px solid #e8e8e8;margin-bottom: 10px;margin-right: 10px;background-color: #f3f5f7}
+    .row{
+      overflow: hidden;
+      margin-bottom: 20px
+    }
+    .tit{
+      float: left;
+      margin-left: 60px;
+      margin-top: 4px;
+    }
+    .opt{
+      float: left;
+    }
+    .opt input{
+        width: 240px;
+    height: 25px;
+    margin-top: 1px;
+    margin-left: 26px;
+    }
+    .opt select{
+        width: 240px;
+    height: 25px;
+    margin-top: 1px;
+    margin-left: 26px;
+    }
+    .opt strong{
+          margin-left: 20px;
+    font-weight: lighter;
+    font-size: 13px;
+    }
+    .ncap-btn-green{
+          background-color: #0b880b;
+    color: white;
+    padding: 2px 10px;
+    border-radius: 5px;
+        margin: 0 10px;
+    }
+    .ncap-btn-mini{
+      background-color: #848282;
+      color: white;
+    padding: 2px 10px;
+    border-radius: 5px;
+        margin: 0 10px;
+    }
+    .bot{
+          text-align: center;
+    margin-top: 20px;
+    }
+    table{
+      margin:10px auto;
+      border: 1px solid #aeaeb1;
+    border-collapse: collapse;
+    }
+    thead tr{
+      background-color: #c5ddf5
+    }
+    tr{
+      height: 30px
+    }
+    th{
+      font-weight: lighter;
+      font-size: 13px;
+      height: 30px;
+    }
+    td{
+      text-align: center;
+          color: #666;
+    font-size: 13px;
+    }
+    .th1{width: 80px}
+    .th2{width: 200px}
+    .th3{width: 100px}
+    .th4{width: 400px}
+    .td1{width: 80px}
+    .td2{width: 200px}
+    .td3{width: 100px}
+    .td4{width: 400px}
+    .fkHeader{
+      color: #666;
+          margin-left: 36px;
+    margin-top: 30px;
+    }
+    #beizhu{
+          margin-left: 26px;
+    width: 400px;
+    resize:none;
+    }
+</style>
+</head>
+<body>
+    <div class="online_support">
+        <div class="tit-top">
+            <h2>添加汇款退回记录</h2>
+            <p></p>
+        </div>
+        <div class="area_four">
+<form action="{:U('Admin/User/hkbackadd')}" method="post"  name="priceForm">
+    <div class="ncap-form-default">
+      <dl class="row">
+        <dt class="tit">
+          <label>退款金额：</label>
+        </dt>
+        <dd class="opt">
+           <input type="text" name="money" id="money" value="" placeholder="0.00"  class="input-txt" />
+        </dd>
+      </dl>
+     
+      <dl class="row">
+        <dt class="tit">
+          <label>机构名称：</label>
+        </dt>
+        <dd class="opt">
+           <select id="bank_name" name="bank_name">
+              <option value="0">选择机构</option>
+              <option value="支付宝">支付宝</option>
+              <option value="银行卡">银行卡</option>
+          </select>
+        </dd>
+      </dl>
+      <dl class="row">
+        <dt class="tit">
+          <label>账户名称：</label>
+        </dt>
+        <dd class="opt">
+           <input type="text" name="realname" id="realname" value="" class="input-txt" />
+        </dd>
+      </dl>
+      <dl class="row">
+        <dt class="tit">
+          <label>账户号码：</label>
+        </dt>
+        <dd class="opt">
+           <input type="text" name="bank_card" id="bank_card" value="" class="input-txt" />
+        </dd>
+      </dl>
+      <dl class="row">
+        <dt class="tit">
+          <label>用 户 I D：</label>
+        </dt>
+        <dd class="opt">
+           <input type="text" name="user_id" id="user_id" value="" class="input-txt" />
+        </dd>
+      </dl>
+     
+      <dl class="row">
+        <dt class="tit">
+          <label>退款备注：</label>
+        </dt>
+        <dd class="opt">
+           <textarea id="beizhu" name="beizhu" rows="3"  maxlength="120" placeholder="请输入放款备注" class="tarea">{$keyword.text}</textarea>
+        </dd>
+      </dl>
+      <div class="bot">
+          <input type="hidden" name="order_sn" value="{$order['order_sn']}"/>
+          <a href="JavaScript:void(0);" onclick="document.priceForm.submit()" class="ncap-btn-big ncap-btn-green" >提交</a>
+        </div>
+    </div>
+  </form>
+        </div>
+    </div>
+ 
+</body>
+</html>

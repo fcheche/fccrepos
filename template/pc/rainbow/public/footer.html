@@ -1,0 +1,270 @@
+<!-- 底部bottom -->
+<div class="footBottom">
+    <div class="tpshopWrap">
+        <div class="tpshop-service">
+            <ul class="clearfix footerListBox">
+                <li>
+                    <p class="service">关于我们</p>
+                    <div class="footerList">
+                        <p><a href="/Home/article/aboutUs" target="_blank">公司简介</a></p>
+                        <p><a href="/Home/Topic/topicList" target="_blank">新闻资讯</a></p>
+                        <p><a href="/Home/Article/articleList" target="_blank">公司动态</a></p>
+                    </div>
+                </li>
+                <li>
+                    <p class="service">安全保障</p>
+                    <div class="footerList">
+                        <p><a href="/Home/Article?article_id=851" target="_blank">担保交易</a></p>
+                        <p><a href="/Home/Article?article_id=849" target="_blank">隐私保护</a></p>
+                    </div>
+                </li>
+                <li>
+                    <p class="service">客服中心</p>
+                    <div class="footerList">
+                        <p><a href="" target="_blank" class="kfQQ">在线问答</a></p>
+                        <p><a href="" target="_blank" class="kfQQ">业务咨询</a></p>
+                        <p><a href="" target="_blank" class="kfQQ">投诉建议</a></p>
+                    </div>
+                </li>
+                <li>
+                    <p class="service">帮助中心</p>
+                    <div class="footerList">
+                        <p><a href="/Home/Article?article_id=23" target="_blank">如何充值</a></p>
+                        <p><a href="/Home/Article?article_id=22" target="_blank">如何提现</a></p>
+                        <p><a href="/Home/Rmwd" target="_blank">常见问题</a></p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="tpshop-up">
+            <!-- <div class="lxWX">
+                <img src="__STATIC__/img/footer/erwm.png">
+                <p style="margin-top: 10px;">微信扫一扫</p>
+            </div> -->
+            <div class="lianxiInfo">
+                <span class="info1">免费热线:<p class="phone">{$tpshop_config['shop_info_phone']}</p></span>
+                <span class="info1">地址:<p>{$tpshop_config['shop_info_address']}</p></span>
+            </div>
+        </div>
+    </div>
+	<div class="footer">
+		<div style="padding-bottom: 10px;width: 1224px;margin: 0 auto;">
+			<div class="left-help-list">
+				<div class="friendship-links">
+		            <span>友情链接 : </span>
+	                <div class="links-wrap-h" style="max-width: 1140px">
+	                <tpshop sql="select * from `__PREFIX__friend_link` where is_show=1" key="k" item='v'>
+	                    <a href="{$v[link_url]}" <if condition="$v.target eq 1">target="_blank"</if> >{$v[link_name]}</a>
+	                </tpshop>
+	                </div>
+		        </div>	
+			</div>
+		</div>
+	    <div class="mod_copyright p">
+	        <div class="grid-top">
+	            <tpshop sql="SELECT * FROM `__PREFIX__navigation` where is_show = 1 AND position = 'bottom' ORDER BY `sort` DESC" key="kk" item='vv'>
+	                <a href="{$vv[url]}" <if condition="$vv[is_new] eq 1"> target="_blank" </if> >{$vv[name]}</a><span>|</span>
+	            </tpshop>
+	        </div>
+	        <p style="color: #ab9f9f;font-size: 14px;">Copyright © 2016-2025 {$tpshop_config.shop_info_store_name|default='蜂车车'} 版权所有 保留一切权利 <a href="http://www.beian.miit.gov.cn/" target="_blank" title="{$tpshop_config['shop_info_record_no']|default='蜀ICP备18022979号-1'}" style="color: #ab9f9f;">备案号:{$tpshop_config['shop_info_record_no']|default='蜀ICP备18022979号-1'} 友链交换QQ： {$tpshop_config['shop_info_qq']}</a></p>
+	        <p class="mod_copyright_auth">
+	            <!-- <a class="mod_copyright_auth_ico mod_copyright_auth_ico_1" href="http://www.beian.miit.gov.cn/" target="_blank">经营性网站备案中心</a> -->
+	            <!-- <a class="mod_copyright_auth_ico mod_copyright_auth_ico_2" href="http://www.kxnet.cn/" target="_blank">可信网站信用评估</a> -->
+	            <a class="mod_copyright_auth_ico mod_copyright_auth_ico_3" href="http://www.cyberpolice.cn/wfjb/" target="_blank">网络警察提醒你</a>
+	            <!-- <a class="mod_copyright_auth_ico mod_copyright_auth_ico_4" target="_blank">诚信网站</a> -->
+
+                <a href="https://www.fcheche.com/public/images/yyzz.jpg" target="_blank"><img style="margin-bottom: 30px;" src="https://ipr.fcheche.com/public/images/zz.png" width="103" height="40" border="0" /></a>
+	            <!-- <a href="https://cec.osichina.cn/bz8687345698.html" target="_blank"><img src="http://cec.osichina.cn/cec/gswj.png" alt="企业亮照验证电子标识" width="100px" height="32px" border="0" /></a> -->
+	            <a class="mod_copyright_auth_ico mod_copyright_auth_ico_5" href="http://www.12377.cn/" target="_blank">中国互联网举报中心</a>
+	            <a class="mod_copyright_auth_ico mod_copyright_auth_ico_6" href="https://v.yunaq.com/certificate?domain=www.fcheche.com&from=label&code=90020" target="_blank">实名认证</a>
+	        </p>
+	    </div>
+	</div>
+</div>
+<script type="text/javascript">
+    $(function(){
+        ajaxGetData('/home/Ajaxapi/kefu','get',{"num": 1}).then(data => {
+            console.log(data)
+            $('.kfQQ').attr('href','https://wpa.qq.com/msgrd?v=3&uin='+data[0].qq+'&Site=fcc%E5%95%86%E5%9F%8E&Menu=yes')
+        })
+    })
+</script>
+<!-- 底部bottom End -->
+<style type="text/css">
+	/*底部bottom*/
+.footBottom:before{
+    content: "";
+    clear: both;
+}
+.footBottom{
+    height: 440px;
+    /*background-image: url("__STATIC__/img/footer/bottombg.jpg");
+    background-size: 100%;*/
+    background: #eeeeee;
+    border-top: 1px solid #D6D6D6;
+    margin-top: 50px;
+}
+.footBottom .tpshopWrap{
+    width: 1224px;
+    overflow: hidden;
+    margin: 40px auto 0;
+}
+.tpshop-service{
+    float: left;
+    width: 55%;
+}
+.footerListBox{
+    /*width: 70%;
+    margin:0 auto;
+    overflow: hidden;*/
+}
+.tpshop-service li{
+    float: left;
+    width: 13%;
+    padding-right: 12%;
+    height: 150px;
+    text-align: center;
+}
+.tpshop-service .service {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #888;
+    vertical-align: top;
+}
+.footerList {
+    /*height: 70px;*/
+    width: 70px;
+    text-align: center;
+    width: 100%;
+    padding-top: 3px;
+    font-size: 14px;
+    font-family: "微软雅黑";
+    overflow: hidden;
+}
+.footerList p {
+    float: left;
+    margin: 0 auto;
+    width: 100%;
+}
+.footerList p a{
+    color: #888;
+}
+.footBottom .tpshop-up{
+    float: left;
+    width: 45%;
+}
+.footBottom .tpshop-up .lxWX{
+    /*height: 100px;*/
+    width: 100px;
+    overflow: hidden;
+    float: left;
+    text-align: center;
+    color: #888;
+}
+.footBottom .tpshop-up .lxWX img{
+    width: 100%;
+}
+.footBottom .tpshop-up .lxWX .upName{
+    color: #EFEFEF;
+    font-size: 18px;
+}
+.footBottom .tpshop-up .lianxiInfo{
+    width: 360px;
+    padding-left: 40px;
+    float: left;
+}
+.footBottom .tpshop-up .lianxiInfo .info1{
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+.footBottom .tpshop-up .lianxiInfo .info1 .phone{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.footer {
+    min-width: 1224px;
+    height: 150px;
+    margin-top: 80px;
+}
+.grid-top {
+    margin-top: 20px;
+    text-align: center;
+}
+.mod_copyright > p {
+    margin-top: 10px;
+    color: #666;
+    text-align: center;
+}
+.friendship-links {
+    padding-top: 10px;
+    /*width: 675px;*/
+    font-size: 14px;
+    margin: 0 auto;
+}
+.friendship-links>span {
+    float: left;
+    width: 80px;
+    line-height: 20px;
+    font-weight: bold;
+    color: #888;
+}
+.links-wrap-h {
+    float: left;
+}
+.links-wrap-h>a {
+    float: left;
+    line-height: 1;
+    margin: 3px 0;
+    padding: 0 10px;
+    color: #888;
+}
+.mod_copyright > p {
+    margin-top: 20px;
+    color: #666;
+    text-align: center;
+}
+.p:before, .p:after {
+    content: "";
+    clear: both;
+    display: block;
+}
+.mod_copyright_auth{
+    width: 458px;
+    background: #fff;
+    margin: 0 auto;
+    height: 40px;
+}
+.mod_copyright_auth_ico {
+    overflow: hidden;
+    display: inline-block;
+    margin: 4px 3px;
+    width: 103px;
+    height: 32px;
+    background-image: url("__STATIC__/img/footer/ico_footer.png");
+    line-height: 1000px;
+}
+ .mod_copyright_auth_ico_1 {
+        background-position: 0 -151px;
+    }
+    .mod_copyright_auth_ico_2 {
+        background-position: -104px -151px;
+    }
+    .mod_copyright_auth_ico_3 {
+        background-position: 0 -184px;
+    }
+    .mod_copyright_auth_ico_4 {
+        background-position: -104px -184px;
+    }
+    .mod_copyright_auth_ico_5 {
+        background-position: 0 -217px;
+    }
+    .mod_copyright_auth_ico_6{
+        background-image: url("https://aqyzmedia.yunaq.com/labels/label_sm_90020.png");
+        background-size: cover;
+    }
+/*底部bottom End*/
+</style>

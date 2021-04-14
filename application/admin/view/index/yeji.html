@@ -1,0 +1,536 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="__PUBLIC__/static/css/index.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/static/css/perfect-scrollbar.min.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/static/css/purebox.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/static/js/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__PUBLIC__/static/js/jquery.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/static/js/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/static/js/jquery.cookie.js"></script>
+    <style>
+        .contentWarp_item .section_select .item_comment{
+            padding: 83px 0 31px 38px;
+        }
+        .contentWarp_item .section_select .item {
+            padding: 83px 0 38px 38px;
+        }
+         .contentWarp_item .section_select .item_comment{
+            padding: 83px 0 31px 38px;
+        }
+        .contentWarp_item .section_select .item {
+            padding: 83px 0 38px 38px;
+        }
+        @media only screen and (min-width: 900px) and (max-width: 1761px) {
+            .contentWarp_item{
+                margin-right: 1%;
+            }
+            .contentWarp_item .section_select .icon img{
+                max-width: 74px;
+                max-height: 74px;
+            }
+            .contentWarp_item:nth-child(1){
+                    margin-bottom: 10px;
+            }
+        }
+           @media only screen and (min-width: 900px) and (max-width: 1312px) {
+            .contentWarp_item .section_select .item{
+                    width: 35%;
+                    margin-bottom: 10px;
+            }
+            
+        }
+        .allData{
+            width: 550px;
+            margin-right: 28px;
+            background-color: white;
+            float: left;
+            height: 94px;
+        }
+        
+        .table_left_box{
+            float: left;
+            width: 75%;
+            margin: 0 15px;
+        }
+        .table_left_box table tr{
+            height: 30px
+        }
+        .table_left_box table tr td strong{
+            height: 30px;
+            font-size: 15px;
+        }
+         .table_left_box table thead tr th{
+            height: 30px;
+            font-weight: bold;
+            font-size: 20px;
+            color:#1f7492;
+            text-align: center;
+        }
+        .table_left_box table tr:hover{
+            background-color: #e7e7e7
+        }
+        .table_right_box{
+            float: left;
+            width: 14%;
+        }
+        .teamName{
+            height: 25px;
+            text-align: center;
+            font-size: 15px;
+            background-color:#1f7492;
+            color: white
+        }
+        .teamName span{
+            margin: 0 10px;
+            border-bottom: 1px solid;
+        }
+        .table_right_box table thead tr th{
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+            color: red
+        }
+        .moneyBox{
+            float: left;
+            width: 33%;
+            height: 100%;
+        }
+        .allMoney{
+            height: 45px
+        }
+        .allMoney h1{
+            font-size: 17px;
+            margin-top: 5px
+        }
+        .allMoney span{
+            color: red
+        }
+        .allMoneyed h1{
+            font-size: 18px
+        }
+        .allMoneyed span{
+            color: red
+        }
+        .contentWarp_item .section_order_select .newBox{
+            background-color: #1f7492;
+        }
+        .contentWarp_item .section_order_select .newBoxEnd{
+            background-color: #ec5151;
+        }
+        .contentWarp_item .section_order_select .newBox .t{
+            color: white;
+            line-height: 94px
+        }
+        .contentWarp_item .section_order_select .newBoxEnd .t{
+            color: white;
+            line-height: 94px
+        }
+        .contentWarp_item .section_order_select .newBox a{
+            color: white;
+            padding: 0 0
+        }
+        .contentWarp_item .section_order_select .newBoxEnd a{
+            color: white;
+            padding: 0 0
+        }
+    </style>
+</head>
+<body class="iframe_body">
+<div class="warpper">
+    <div class="title">管理中心</div>
+    <div class="content start_content">
+        <div class="contentWarp">
+            <div class="allData clearfix">
+                <div class="moneyBox" style="border-right: 1px solid #e7e7e7">
+                    <div class="allMoney">
+                        <h1>本月业绩:</h1>
+                        <span>2000000</span>
+                    </div>
+                    <div class="allMoneyed">
+                        <h1>已完成:{$yeji/20000|round=###,2}%</h1>
+                        <span>{$yeji}</span>
+                    </div>
+                </div>
+                <div class="moneyBox" style="border-right: 1px solid #e7e7e7">
+                    <div class="allMoney">
+                        <h1>天猫业绩:</h1>
+                        <span>1200000</span>
+                    </div>
+                    <div class="allMoneyed">
+                        <h1>已完成:{$tmyeji/12000|round=###,2}%</h1>
+                        <span>{$tmyeji}</span>
+                    </div>
+                </div>
+                <div class="moneyBox">
+                    <div class="allMoney">
+                        <h1>淘宝业绩:</h1>
+                        <span>800000</span>
+                    </div>
+                    <div class="allMoneyed">
+                        <h1>已完成:{$tbyeji/8000|round=###,2}%</h1>
+                        <span>{$tbyeji}</span>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="contentWarp_item clearfix">
+                <div class="section_order_select">
+                    <ul>
+                      
+
+                       <!--  <li class="newBox" style="background-color: #b83b39">
+                            <a href="<if condition="$roleid lt 7">{:U('Admin/Order/tianmao_order',array('order_status'=>2))}</if>">
+                                <div class="t">天猫完成订单</div>
+                            </a>
+                        </li>
+                        <li class="newBox" style="background-color: #fe6d02">
+                            <a href="<if condition="$roleid lt 7">{:U('Admin/Order/taobao_order',array('order_status'=>2))}</if>">
+                                <div class="t">淘宝完成订单</div>
+                            </a>
+                        </li> -->
+                        <li class="newBox" style="background-color: #1f9246">
+                            <a href="https://www.fcheche.com/index.php/admin/Article/read/act/edit/article_id/37">
+                                <div class="t">常用网址</div>
+                            </a>
+                        </li>
+                         <!--  <li>
+                            <a href="">
+                                <div class="t" style="color:red">待处理充值</div>
+                                <span class="number">{$recharge}</span>
+                            </a>
+                        </li> -->
+                        <li>
+                            <a href="">
+                                <div class="t">待处理订单</div>
+                                <span class="number">{$count.handle_order}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a  href="">
+                                <div class="t">店铺数量</div>
+                                <span class="number">{$count.goods}</span>
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="">
+                                <div class="t">会员总数</div>
+                                <span class="number">{$count.users}</span>
+                            </a>
+                        </li>
+                        
+                        <li class="newBoxEnd">
+                            <a href="">
+                                <div class="t">公司公告</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="warpper" style="overflow: hidden;">
+    <div class="table_left_box">
+        <table border="1" width="100%">
+            <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>当天业绩</th>
+                    <th>昨日业绩</th>
+                    <th>当天挂店</th>
+                    <th>昨日挂店</th>
+                    <th>销售推广</th>
+                    <th>挂店</th>
+                    <th>业绩</th>
+                    <th>提成</th>
+                    <!-- <th>在售网店</th> -->
+                    <th>客服状态</th>
+                </tr>
+            </thead>
+
+
+            <!--第一个body-->
+            <foreach name="list" item="v" key="k" >
+        
+               
+
+            <tbody>
+                <tr>
+                    <td colspan="10" class="teamName">
+                        <span>{$v['corps_name']}</span>战队，主管<span>{$v['zhuguan_name']}</span>,本月挂店<span>{$v['dyguadian']}</span>,本月业绩<span>{$v['dyyeji']}</span>
+                    </td>
+                </tr>
+                        <foreach name="v['admins']" item="v1" key="k1" >
+
+                             <?php 
+    $y=date("Y",time());
+    $m=date("m",time());
+    $jbegintime=mktime(0,0,0,date('m'),date('d'),date('Y'));//今天开始时间
+    $zbegintime=mktime(0,0,0,date('m'),date('d')-1,date('Y'));//昨天开始时间
+    $t1=mktime(0,0,0,$m,1,$y); // 创建本月开始时间
+
+    $username=trim($v1['user_name']);
+                   // 挂店数  今天
+    $todaygoodsnum = M('goods')->where("guishu='$username' and $jbegintime <= on_time and is_delete= 0")->count();
+                   // 挂店数  昨天
+    $yestodaygoodsnum = M('goods')->where("guishu='$username' and $zbegintime <= on_time and is_delete= 0")->count();
+                   // 挂店数  本月
+    $thismonthgoodsnum = M('goods')->where("guishu='$username' and $t1 <= on_time and is_delete= 0")->count();
+
+
+                                // 销售业绩  今天
+    $todayxssum = M('order')->where("xs_name='$username' and $jbegintime <= add_time and pay_status != 0 and order_status < 3")->sum('shiji_yeji');
+                                // 挂店业绩  今天
+    $todaygdsum = M('order')->where("gs_name='$username' and $jbegintime <= add_time and pay_status != 0 and order_status < 3")->sum('shiji_yeji');
+    
+    $todaysum = $todayxssum*0.5+$todaygdsum*0.5;
+
+        // 销售业绩  昨天
+    $yestodayxssum = M('order')->where("xs_name='$username' and $zbegintime <= add_time and pay_status != 0 and order_status < 3")->sum('shiji_yeji');
+        // 挂店业绩  昨天
+    $yestodaygdsum = M('order')->where("gs_name='$username' and $zbegintime <= add_time and pay_status != 0 and order_status < 3")->sum('shiji_yeji');
+    // 销售个数  本月
+    $thismonthxscount = M('order')->where("xs_name='$username' and $t1 <= add_time and pay_status != 0 and order_status < 3")->count();
+    // 挂店个数  本月
+        $thismonthgdcount = M('order')->where("gs_name='$username' and $t1 <= add_time and pay_status != 0 and order_status < 3")->count();
+
+        // 销售业绩  本月
+    $thismonthxssum = M('order')->where("xs_name='$username' and $t1 <= add_time and pay_status != 0 and order_status < 3")->sum('shiji_yeji');
+        // 挂店业绩  本月
+    $thismonthgdsum = M('order')->where("gs_name='$username' and $t1 <= add_time and pay_status != 0 and order_status < 3")->sum('shiji_yeji');
+
+    $yestodaysum = $yestodayxssum*0.5+$yestodaygdsum*0.5;//昨天业绩
+    $thismonthsum= $thismonthxssum*0.5+$thismonthgdsum*0.5;//当月业绩
+
+        //存储当月业绩
+    $data['dyyeji']=$thismonthsum;
+        //存储当月挂店数
+    $data['dyguadian']=$thismonthgoodsnum;
+        
+    M('admin')->where("user_name='$username'")->save($data);
+
+
+    //在售网店
+    $allgoodsnum = M('goods')->where("guishu='$username' and is_on_sale=1 and is_shenhe=1 and is_delete= 0")->count();
+                ?>
+                            <tr>
+                                <td><strong>{$username}</strong></td>
+                                
+                                <td>
+                                <if condition="$todaysum neq 0 ">{$todaysum}</if>
+                                </td>
+                                <td>
+                                <if condition="$yestodaysum neq 0 ">{$yestodaysum}</if>
+                                </td>
+                                <td><if condition="$todaygoodsnum neq 0 ">{$todaygoodsnum}</if>
+                                </td>
+                                <td><if condition="$yestodaygoodsnum neq 0 ">{$yestodaygoodsnum}</if>
+                                </td>
+                                <td>
+                                    <if condition="$roleid neq 18">
+<a href="{:U('Admin/Order/yeji',array('xs_names'=>$username))}">{$thismonthxscount}</a>/<a href="{:U('Admin/Order/yeji',array('gs_names'=>$username))}">{$thismonthgdcount}</a>
+<else>
+    {$thismonthxscount}/{$thismonthgdcount}
+    </if>
+                                </td>
+                                <td>{$thismonthgoodsnum}</td>
+                                <td>{$thismonthsum}</td>
+                                <td>
+<if condition="$thismonthsum egt 100000 ">{$thismonthsum*0.05}<else>{$thismonthsum*0.03}</if>
+                                </td>
+                                <!-- <td>{$allgoodsnum}</td> -->
+                                <td>
+                   
+<span <if condition="$v1.is_taobao_online eq 1">style="color: #1b61ab;" onclick="changekefu('admin','is_taobao_online','{$username}','user_name','0')"<else>style="color:#888383; onclick="changekefu('admin','is_taobao_online','{$username}','user_name','1')"</if>>淘宝</span>
+<span <if condition="$v1.is_tianmao_online eq 1">style="color: #1b61ab;" onclick="changekefu('admin','is_tianmao_online','{$username}','user_name','0')"<else>style="color:#888383;" onclick="changekefu('admin','is_tianmao_online','{$username}','user_name','1')"</if>>天猫</span></td>
+                            </tr>
+                        </foreach>
+            </tbody>
+             </foreach>
+            
+        </table>
+    </div>
+    <div class="table_right_box">
+        <table border="1" width="100%">
+            <thead>
+                <tr>
+                    <th colspan="3">本月排名</th>
+                </tr>
+                <tr>
+                    <th>排名</th>
+                    <th>姓名</th>
+                    <th>业绩</th>
+                </tr>
+            </thead>
+            <tbody>
+                <foreach name="admins" item="vs1" key="ks1" >
+                <tr>
+                    <td><strong>{$ks1+1}</strong></td>
+                    <td>{$vs1.user_name}</td>
+                    <td>{$vs1.dyyeji}</td>
+                </tr>
+             </foreach>
+               
+            </tbody>
+        </table>
+    </div>
+</div>
+<div id="footer" style="position: static; bottom: 0px; font-size:14px;">
+    <p><b>版权所有 © 2012-2027 {$tpshop_config.shop_info_store_name|default=''}，并保留所有权利。</b></p>
+</div>
+<script type="text/javascript">
+    $(function(){
+        $("*[data-toggle='tooltip']").tooltip({
+            position: {
+                my: "left top+5",
+                at: "left bottom"
+            }
+        });
+    });
+    
+     
+</script>
+<script type="text/javascript" src="__PUBLIC__/static/js/jquery.purebox.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/js/echart/echarts.min.js"></script>
+<script type="text/javascript">
+    /*
+       * 修改客服状态
+       */
+      function changekefu(table,field,id_value,id_name,value)
+      {
+var data={table:table,field:field,id_value:id_value,id_name:id_name,};
+        alert{data};
+
+        $.ajax({
+            type:'GET',
+            url:"{:U('Admin/Index/changeTableVal')}",
+            data:{table:table,field:field,id_value:id_value,id_name:id_name,},
+            dataType:'json',
+            success:function(data){
+              layer.alert(data.msg, {icon: 2});                
+            }
+        });
+      }
+      
+    set_statistical_chart(".section_order_count .filter_date a:first", "order", "week"); //初始设置
+    set_statistical_chart(".section_total_count .filter_date a:first", "sale", "week"); //初始设置
+    function set_statistical_chart(obj, type, date)
+    {
+        var obj = $(obj);
+        obj.addClass("active");
+        obj.siblings().removeClass("active");
+
+        $.ajax({
+            type:'get',
+            url:'index.php',
+            data:'act=set_statistical_chart&type='+type+'&date='+date,
+            dataType:'json',
+            success:function(data){
+                if(type == 'order'){
+                    var div_id = "order_main";
+                }
+                if(type == 'sale'){
+                    var div_id = "total_main";
+                }
+                var myChart = echarts.init(document.getElementById(div_id));
+                myChart.setOption(data);
+            }
+        })
+    }
+
+    var option = {
+        title : {
+            text: ''
+        },
+        tooltip : {
+            trigger: 'axis',
+            backgroundColor:"#f5fdff",
+            borderColor:"#8cdbf6",
+            borderRadius:"4",
+            borderWidth:"1",
+            padding:"10",
+            textStyle:{
+                color:"#272727",
+            },
+            axisPointer:{
+                lineStyle:{
+                    color:"#6cbd40",
+                }
+            }
+        },
+        toolbox: {
+            show : true,
+            orient:"vertical",
+            x:"right",
+            y:"60",
+            feature : {
+                magicType : {show: true, type: ['line', 'bar']},
+                saveAsImage : {show: true}
+            },
+        },
+        calculable : true,
+        xAxis : [
+            {
+                type : 'category',
+                boundaryGap : false,
+                axisLine:{
+                    lineStyle:{
+                        color:"#ccc",
+                        width:"0",
+                    }
+                },
+                data : ['07-01','07-02','07-03','07-04','07-05','07-06','07-07']
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value',
+                axisLine:{
+                    lineStyle:{
+                        color:"#ccc",
+                        width:"0",
+                    }
+                },
+                axisLabel : {
+                    formatter: '{value}个',
+                }
+            }
+        ],
+        series : [
+            {
+                name:'订单个数',
+                type:'line',
+                itemStyle:{
+                    normal:{
+                        color:"#6cbd40",
+                        lineStyle:{
+                            color:"#6cbd40",
+                        }
+                    }
+                },
+                data:[0, 5, 8, 3, 10, 15, 2],
+                markPoint : {
+                    itemStyle:{
+                        normal:{
+                            color:"#6cbd40"
+                        }
+                    },
+                    data : [
+                        {type : 'max', name: '最大值'},
+                        {type : 'min', name: '最小值'}
+                    ]
+                }
+            }
+
+        ]
+    }
+//    $("#system_section").click(function(){
+//        $("#system_warp").slideDown();
+//    });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,225 @@
+<link rel="stylesheet" type="text/css" href="__STATIC__/icon/iconfont.css">
+<link rel="stylesheet" type="text/css" href="__STATIC__/icon/user_iconfont.css">
+<script type="text/javascript" src="__STATIC__/js/publicJs.js"></script>
+<style type="text/css">
+	body{
+		padding: 0;
+		margin: 0;
+	}
+	.wrap{
+		width: 1224px;
+		margin: 0 auto;
+	}
+	.top{
+		width: 100%;
+		height: 40px;
+		border-bottom: 1px solid #E0E0E0;
+		line-height: 40px;
+		background: #fff;
+	}
+	.top .topLeft{
+		float: left;
+	}
+	/*.topLeft .welcome{
+		padding-left: 0;
+		padding-right: 24px!important;
+	}
+	.topLeft .phone{
+		padding-left: 24px!important;
+	}*/
+	.topLeft .link,
+	.topRight .link{
+		color: #999999;
+		font-size: 12px;
+		position: relative;
+		padding: 0 13px;
+	}
+	.topLeft .link:after,
+	.topRight .link:after{
+		content: '';
+		background: #999999;
+		height: 8px;
+		width: 1px;
+		position: absolute;
+		top: 3px;
+		margin-left: 13px;
+	}
+	.top .iconfont{
+		padding: 0 5px;
+	}
+	.top .topRight{
+		float: right;
+	}
+	.nav{
+		width: 100%;
+		padding-top: 20px;
+		height: 69px;
+		background: #fff;
+	}
+	.nav1{
+		width: 100%;
+		padding-top: 20px;
+		height: 69px;
+		position: fixed;
+		top: 0;
+		background: #fff;
+		z-index: 999999;
+	}
+	.nav .logo,.nav1 .logo{
+		width: 240px;
+    	height: 48px;
+		float: left;
+	}
+	/*.nav .logoLine,.nav1 .logoLine{
+		display: inline-block;
+		width: 1px;
+		height: 45px;
+		background: #5B64DE;
+		margin: 0 5px;
+		float: left;
+	}
+	.logoTi1{
+		font-size: 20px;
+		font-weight: bold;
+		color: #5B64DE;
+    	letter-spacing: 5px;
+    	float: left;
+	}
+	.logoTi2{
+		font-size: 18px;
+		color: #5B64DE;
+		letter-spacing: 5px;
+   		margin-left: 5px;
+   		float: left;
+	}*/
+	.navList{
+		height: 50px;
+		line-height: 50px;
+		margin-left: 20px;
+		position: relative;
+		float: left;
+	}
+	.navList>.link{
+	    color: #333333;
+	    font-size: 16px;
+	    float: left;
+	    padding: 0 15px;
+	    cursor: pointer;
+	    width: 113px;
+	    text-align: center;
+	    z-index: 1;
+    	position: relative;
+	}
+	.navList>.link .up{
+		width: 17px;
+	}
+	.navList>.link.active{
+		color: #5B64DE;
+	}
+	.subNavList{
+	    box-shadow: 0px 3px 10px 0px rgba(136, 136, 136, 0.35);
+	    background: #fff;
+	    border-radius: 4px;
+	    margin-top: -10px;
+	    opacity: 0;
+	}
+	.subNavList .subLink{
+		width: 113px;
+   		height: 50px;
+   		color: #333;
+	}
+	.navList>.link:hover .subNavList{
+		opacity: 1;
+		transition: .5s;
+	}
+	.subNavList .subLink:hover{
+		color: #5B64DE;
+	}
+	.activeState{
+		display: inline-block;
+		width: 34px;
+		height: 4px;
+		border-radius: 2px;
+		background: #5B64DE;
+		position: absolute;
+		left: 54px;
+		top: 45px;
+	}
+</style>
+<div class="top">
+	<div class="wrap">
+		<div class="topLeft noLogin">
+			<span class="link welcome">HI，您好，欢迎来到蜂车车网店交易服务平台！</span>
+			<a href="{:U('/Home/user/login')}" class="link" target="_blank">请登录</a>
+			<a href="{:U('/Home/user/reg')}" class="link" target="_blank">免费注册</a>
+		</div>
+		<div class="topLeft isLogin">
+			<span class="link welcome">HI，您好，欢迎来到蜂车车网店交易服务平台！</span>
+			<a href="{:U('/Home/user/index')}" class="link username" target="_blank"></a>
+			<a href="{:U('/Home/user/logout')}" class="link">安全退出</a>
+		</div>
+		<div class="topRight">
+			<a href="{:U('/Home/user/chushou')}" class="link" target="_blank">
+				<i class="iconfont icon-paimai"></i>发布出售
+			</a>
+			<a href="{:U('/Home/user/qiugou')}" class="link" target="_blank">
+				<i class="iconfont icon-dianji"></i>发布求购
+			</a>
+			<a href="{:U('/Home/user/index')}" class="link" target="_blank">个人中心</a>
+			<span class="link phone"><i class="iconfont iconrexiandianhua"></i>24小时服务热线：{$tpshop_config['shop_info_phone']}</span>
+		</div>
+	</div>
+</div>
+<div class="nav" id="nav">
+	<div class="wrap">
+		<div class="logo">
+			<img src="{$tpshop_config.shop_info_store_logo}" style="width: 240px;float: left;">
+		</div>
+		<ul class="navList">
+			<li class="link active"><a href="/" target="_blank">首页</a></li>
+			<tpshop sql="SELECT * FROM `__PREFIX__navigation` where is_show = 1 and position = 'top' and yiji = '0' ORDER BY `sort` DESC" key="k" item='v'>
+					
+			<li class="link">
+				<a href="{$v[url]}" target="_blank">
+					{$v[name]}
+					<?php  $yiji=M('navigation')->group('yiji')->getField('yiji',true); if(in_array($v[name],$yiji)) {  echo ''; } ?>
+				</a>
+				
+				<!-- <ul class="secondNav">
+					<tpshop sql="SELECT * FROM `__PREFIX__navigation` where is_show = 1 and position = 'top' and yiji = '$v[name]' ORDER BY `sort` DESC" key="kk" item='vv'>
+					<a href="{$vv[url]}" target="_blank"><li>{$vv[name]}</li></a>
+					</tpshop>
+				</ul> -->
+			<!-- 	<if condition="$k lt 3">
+				<img src="__STATIC__/images/v1/header{$k+1}.png" >
+				</if> -->
+			</li>
+			</tpshop>
+			<span class="activeState"></span>
+		</ul>
+	</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		$(".navList>li").each(function(){
+			$(this).hover(function(){
+				$('.activeState').stop().animate({
+					left: Number($(this).position().left)+54+'px'
+				})
+				$(this).siblings().removeClass('active');
+				$(this).addClass('active');
+			})
+		    event.preventDefault();
+		})
+		window.addEventListener("scroll",function(e){
+			var t =document.documentElement.scrollTop||document.body.scrollTop;
+			var navElem = document.getElementById('nav');
+			if (t>40){
+				navElem.className = 'nav1'
+			}else{
+				navElem.className = 'nav'
+			}
+		});
+		userIsLogin();
+	})
+</script>

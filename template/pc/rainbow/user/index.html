@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>个人中心主页</title>
+	<script type="text/javascript" src="__STATIC__/js/publicJs.js"></script>
+	<link rel="stylesheet" type="text/css" href="__STATIC__/css/userIndex.css">
+	<style type="text/css">
+		.indexUser{
+			width: 1200px;
+		    margin-left: 15px;
+		    margin-top: 20px;
+		    margin-bottom: 40px;
+		    -moz-box-shadow: 0px 0px 6px #b5b1b1;
+		    -webkit-box-shadow: 0px 0px 6px #b5b1b1;
+		    box-shadow: 0px 0px 6px #b5b1b1;
+		    background-color: white;
+		    height: 267px;
+		    border-radius: 10px;
+		    position: relative;
+		    overflow: hidden;
+		}
+		.indexUserHead,
+		.indexMoneyHead{
+			padding: 20px;
+   			border-bottom: 1px solid #e7e7e7;
+   			overflow: hidden;
+		}
+		.indexUserHeadLeft,
+		.indexMoneyHeadLeft{
+			float: left;
+		}
+		.indexUserHeadLeft img,
+		.indexMoneyHeadLeft img{
+			float: left;
+		}
+		.indexUserHeadLeft p,
+		.indexUserEdit p,
+		.indexMoneyHeadLeft p,
+		.indexMoneyEdit p{
+			float: left;
+		    line-height: 22px;
+		    font-size: 18px;
+		    margin-left: 17px;
+		}
+		.indexUserEdit,
+		.indexMoneyEdit{
+			float: right;
+		}
+		.indexUserEdit img,
+		.indexMoneyEdit img{
+			float: left;
+		}
+		.indexUserBody{
+		    overflow: hidden;
+		    padding: 20px;
+		}
+		.indexUserBody1,.indexUserBody2,.indexUserBody3{
+			padding: 19px;
+			float: left;
+			width: 30%;
+		}
+		.indexUserBodyLine{
+		    width: 1px;
+		    height: 150px;
+		    float: left;
+		    background-color: #e7e7e7;
+		}
+		.indexUserImg{
+			width: 70px;
+			height: 70px;
+			float: left;
+		}
+		.indexUserImg img{
+			width: 100%;
+		}
+		.indexUserXX{
+			padding-left: 20px;
+			float: left;
+		}
+		.myUserName{
+		    color: #7E31FF;
+		    font-size: 20px;
+		}
+		.indexUserXXBox{
+   			margin-top: 27px;
+		}
+		.myindexUserXXBox{
+			text-align: center;
+		}
+		.myindexUserXXBox a{
+		    margin-right: 20px;
+			float: left;
+		}
+		.indexUserText{
+		}
+		.indexUserTextP{
+			font-size: 17px;
+			margin-top: 10px;
+		}
+		.indexUserBody2Box p{
+		    margin-left: 15%;
+		    margin-bottom: 17px;
+		}
+		.indexUserBody3Box{
+			display: block;
+			padding-left: 20px;
+			margin-bottom: 20px;
+			overflow: hidden;
+		}
+		.indexUserBody3Box img{
+			float: left;
+			width: 27px;
+		}
+		.indexUserBody3Box p{
+			float: left;
+			margin-left: 30px;
+		}
+		.indexMoneyBody{
+		    overflow: hidden;
+		    padding: 20px 70px;
+		}
+		.indexMoneyBodyLeft{
+			float: left;
+    		width: 60%;
+		}
+		.indexMoneyBodyRight{
+			float: left;
+		    width: 40%;
+		    padding-top: 25px;
+		}
+		.allMoneyT{
+
+		}
+		.allMoney{
+			color: #dd191a;
+		    font-size: 27px;
+		    margin-top: 20px;
+		}
+		.allMoney span{
+			font-weight: bold;
+		    font-size: 47px;
+		}
+		.indexMoney .indexMoneyIn{
+		    overflow: hidden;
+   			margin-top: 27px;
+		}
+		.indexMoneyIn .canUseMoney{
+			float: left;
+    		width: 15%;
+    		color: #333;
+		}
+		.indexMoneyIn .cantUseMoney{
+			float: left;
+    		width: 20%;
+    		color: #333;
+		    padding-left: 20px;
+		}
+		.indexMoneyLine{
+		    float: left;
+		    width: 1px;
+		    height: 23px;
+		    background-color: #c7c5c5;
+		    margin: 10px 17px;
+		}
+		.canUseMoney h5{
+
+		}
+		.canUseMoney h4,
+		.cantUseMoney h4{
+			margin-top: 10px;
+		}
+		.indexMoneyBodyRight{
+
+		}
+		.indexMoneyBodyRight .indexCZ{
+		    display: block;
+		    width: 117px;
+		    height: 47px;
+		    border-radius: 5px;
+		    background-color: #ff8a00;
+		    color: white;
+		    text-align: center;
+		    line-height: 47px;
+		    font-size: 17px;
+		    float: left;
+		    margin-right: 47px;
+		    transition: 0.3s;
+		}
+		.indexMoneyBodyRight .indexTX{
+			display: block;
+		    width: 117px;
+		    height: 47px;
+		    border-radius: 5px;
+		    background-color: #8d7afe;
+		    color: white;
+		    text-align: center;
+		    line-height: 47px;
+		    font-size: 17px;
+		    float: left;
+		    transition: 0.3s;
+		}
+	</style>
+</head>
+<body>
+<include file="user/userHeader">
+<div class="userContent">
+	<include file="user/userMenu">
+	<div class="userCont">
+		<div class="userTitle">个人信息</div>
+		<div class="indexUser">
+			<div class="indexUserHead">
+				<h1 class="indexUserHeadLeft">
+					<img src="__STATIC__/img/user/indexUserHeadLeft.jpg">
+					<p>账户信息</p>
+				</h1>
+				<a href="{:U('Home/User/info')}" class="indexUserEdit">
+					<img src="__STATIC__/img/user/indexUserEdit.jpg">
+					<p>编辑资料</p>
+				</a>
+			</div>
+			<div class="indexUserBody">
+				<div class="indexUserBody1">
+					<div class="indexUserImg">
+						<img src="{$user.head_pic|default='__STATIC__/img/user/userLogo.jpg'}">
+					</div>
+					<div class="indexUserXX">
+						<div class="myUserName">
+							<p>{$user.nickname}</p>
+						</div>
+						<div class="indexUserXXBox">
+							<div class="myindexUserXXBox">
+								<a href="{:U('Home/User/goods_collect')}">
+									<div class="indexUserText">我的收藏</div>
+									<p style="color: #e03c42" class="indexUserTextP">{$user.count_goods_collect}个</p>
+								</a>
+								<a href="{:U('Home/User/visit_log')}">
+									<div class="indexUserText">我的足迹</div>
+									<p style="color: #7ea3e8" class="indexUserTextP">{$user.count_goods_visit}个</p>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="indexUserBodyLine"></div>
+				<div class="indexUserBody2">
+					<div class="indexUserBody2Box">
+					<p>电话号码: <span><if condition="$user.mobile neq ''">{$user.mobile}<else><a href="{:U('Home/User/info')}">补充信息</a></if></span></p>
+					<p>Q Q 号码: <span><if condition="$user.qq neq ''">{$user.qq}<else><a href="{:U('Home/User/info')}">补充信息</a></if></span></p>
+					</div>
+				</div>
+				<div class="indexUserBodyLine"></div>
+				<div class="indexUserBody3">
+					<if condition="$user.cash_alipay neq ''">
+						<a href="" class="indexUserBody3Box">
+							<img src="__STATIC__/img/user/userzfbZF.jpg">
+							<p>{$user.cash_alipay}</p>
+						</a>
+					<else>
+						<a href="/Home/User/withdrawals" class="indexUserBody3Box">
+							<img src="__STATIC__/img/user/userzfbZF.jpg">
+							<p>立即绑定</p>
+						</a>
+					</if>
+					<if condition="$user.yinhangka neq ''">
+						<a href="" class="indexUserBody3Box">
+							<img src="__STATIC__/img/user/useryhkZF.jpg" style="margin-top: 5px">
+							<p>{$user.yinhangka}</p>
+						</a>
+					<else>
+						<a href="/Home/User/withdrawals" class="indexUserBody3Box">
+							<img src="__STATIC__/img/user/useryhkZF.jpg" style="margin-top: 5px">
+							<p>立即绑定</p>
+						</a>
+					</if>
+				</div>
+			</div>
+		</div>
+		<div class="indexUser indexMoney">
+			<div class="indexMoneyHead">
+				<h1 class="indexMoneyHeadLeft">
+					<img src="__STATIC__/img/user/zichanqingkuang.jpg">
+					<p>资产情况</p>
+				</h1>
+				<a href="{:U('Home/User/record')}" class="indexMoneyEdit">
+					<img src="__STATIC__/img/user/myindexMoney.jpg">
+					<p>我的账单</p>
+				</a>
+			</div>
+			<div class="indexMoneyBody">
+				<div class="indexMoneyBodyLeft">
+					<p class="allMoneyT">总资产（元）</p>
+					<h1 class="allMoney">￥ <span>{$user.user_money+$user.dongjie_money}</span></h1>
+					<div class="indexMoneyIn">
+						<div class="canUseMoney">
+							<h5>可用余额</h5>
+							<h4>{$user.user_money}</h4>
+						</div>
+						<div class="indexMoneyLine"></div>
+						<div class="cantUseMoney">
+							<h5>冻结资金</h5>
+							<h4>{$user.dongjie_money}</h4>
+						</div>
+					</div>
+				</div>
+				<div class="indexMoneyBodyRight">
+					<a href="{:U('Home/User/recharge')}" class="indexCZ">充值</a>
+					<a href="{:U('Home/User/withdrawals')}" class="indexTX">提现</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

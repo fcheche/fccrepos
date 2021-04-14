@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>个人信息</title>
+	<script type="text/javascript" src="__STATIC__/js/publicJs.js"></script>
+	<link rel="stylesheet" type="text/css" href="__STATIC__/css/userIndex.css">
+	<style type="text/css">
+		.personerinfro{
+			margin-left: 150px;
+		}
+		.personerinfro ul {
+    		overflow: hidden;
+		}
+		.personerinfro ul li{
+			float: left;
+		    font-size: 14px;
+		    width: 234px;
+		    height: 36px;
+		    padding: 10px 0;
+		}
+		.infor_wi_le a {
+    		float: right;
+    		margin-right: 20px;
+		}
+		.personerinfro .hend_jz {
+		    line-height: 30px;
+		}
+		.infor_img {
+    		height: 100px!important;
+		}
+		.personerinfro .name_jz{
+			line-height: 38px;
+		}
+		.personerinfro .name_jz .name_zjxs {
+		    width: 220px;
+		    height: 30px;
+		    padding: 2px 6px;
+		    font-size: 14px;
+		    outline: none;
+		}
+		.personerinfro .name_jz input {
+    		border: 1px solid #ddd;
+		}
+		.name_jz .notic{
+			display: inline-block;
+			padding: 10px;
+		}
+		.personerinfro ul li a {
+    		display: block;
+    		cursor: text;
+		}
+		.personerinfro .hend_jz .infor_img a {
+		    width: 100px;
+		    height: 100px;
+		    border: 1px solid #DADADA;
+		}
+		.personerinfro .hend_jz .infor_img img {
+    		width: 100px;
+    		height: 100px;
+		}
+		.personerinfro .sex_jz input, .personerinfro .sex_jz label {
+    		vertical-align: middle;
+		}
+		.personerinfro .sex_jz label {
+    		margin-left: 8px;
+    		margin-right: 35px;
+		}
+		.las_ver {
+		text-align: center;
+   		 line-height: 38px;
+   		 color: #666666;
+   		 width: 286px;
+   		 margin-left: 156px;
+		}
+		.personerinfro .save_s {
+    		padding: 10px 0;
+		}
+		.personerinfro .save_s .save {
+   		 color: white;
+   		 background: #7363ff;
+   		 border: 0;
+  		 padding: 6px 22px;
+  		 font-size: 14px;
+ 		 outline: none;
+ 		 border-radius: 5px;
+		}
+	</style>
+</head>
+<body>
+<include file="user/userHeader">
+<div class="userContent">
+	<include file="user/userMenu">
+	<div class="userCont">
+		<div class="userTitle">编辑信息</div>
+		<div class="personerinfro">
+			<form action="" method="post">
+				<ul class="hend_jz">
+					<li class="infor_wi_le"><a href="javascript:void(0);">头像：</a></li>
+					<li class="infor_img" id="infor_img">
+						<a href="javascript:void(0);">
+							<img id="preview" src="{$user.head_pic|default='__STATIC__/img/user/userLogo.jpg'}" onClick="GetUploadify2(1,'head_pic','head_pic','add_img')"/>
+						</a>
+						<input type="hidden" name="head_pic" id="head_pic" value="{$user.head_pic}">
+					</li>
+				</ul>
+				<ul class="name_jz">
+					<li class="infor_wi_le"><a href="javascript:void(0);">昵称：</a></li>
+					<li><a href="javascript:void(0);"><input class="name_zjxs" type="text" name="nickname" id="nickname" value="{$user.nickname}" maxlength="20" readonly="" /></a></li><p class="notic">会员昵称不可修改。</p>
+				</ul>
+
+				<ul class="name_jz">
+					<li class="infor_wi_le"><a href="javascript:void(0);">电话：</a></li>
+					<li><a href="javascript:void(0);"><input class="name_zjxs" type="text" name="mobile" id="mobile" value="{$user.mobile}" readonly="" /></a></li><p class="notic">会员电话不可修改。</p>
+				</ul>
+				<ul class="name_jz">
+					<li class="infor_wi_le"><a href="javascript:void(0);">QQ：</a></li>
+					<li>
+						<input type="text" class="name_zjxs" name="qq" id="qq" value="{$user.qq}" />
+					</li>
+				</ul>
+				
+				<ul class="sex_jz">
+					<li class="infor_wi_le"><a href="javascript:void(0);">性别：</a></li>
+					<li>
+						<a href="javascript:void(0);">
+							<input type="radio" name="sex" id="man" <if condition="$user['sex'] eq '1'">checked</if> value="1"/><label for="man">男</label>
+							<input type="radio" name="sex" id="woman" <if condition="$user['sex'] eq '2'">checked</if> value="2"/><label for="woman">女</label>
+						</a>
+					</li>
+				</ul>
+				<p class="las_ver">如需更改联系电话请点击<a target="_blank" href="" class="kfWangQQ"><span style="color: red">联系管理员</span></a>重置</p>
+					<ul class="name_jz">
+						<li class="infor_wi_le" style="margin-left: 170px;">
+						<div class="save_s">
+							<input class="save" type="submit" id="" name="" value="确认保存" />
+						</div>
+						</li>
+				    </ul>
+				<!-- <ul class="hobby_jz">
+					<li class="infor_wi_le"></li>
+					<li class="infor_wi_ri" style="width: 320px">
+						<div class="pcews">
+							<span><i class="ph_c"></i>手机</span>
+							<span class="<if condition='$user[mobile_validated] eq 0'>change_e<else/>change_p</if>"><a href="{:U('Home/User/mobile_validate',array('type'=>'mobile','step'=>1))}" style="cursor:pointer;"><if condition="$user['mobile_validated'] eq 0">未绑定<else/>更换绑定</if></a></span>
+							<span><i class="em_c"></i>邮箱</span>
+							<span class="<if condition='$user[email_validated] eq 0'>change_e<else/>change_p</if>"><a href="{:U('Home/User/email_validate',array('type'=>'email','step'=>1))}" style="cursor:pointer;"><if condition="$user['email_validated'] eq 0">未绑定<else/>更换绑定</if></a></span>
+						</div>
+						<div class="careful">
+							<span class="fir_sen">注：修改密码、手机等信息到</span>
+							<span class="co_blue"><a href="{:U('Home/User/safety_settings')}" style="cursor:pointer;">安全设置</a></span>
+						</div>
+						
+					</li>
+				</ul> -->
+			</form>
+		</div>
+	</div>
+</div>
+</body>
+<script type="text/javascript">
+	layui.use('layer', function(){
+	  var layer = layui.layer;
+	  
+	});
+	function add_img(str){
+		var head_pic = $('#head_pic').val();
+		$('#head_pic').val(str);
+		$('#preview').attr('src',str);
+		$('img[class="headpic"]').attr('src',str);
+	}
+</script>
+</html>

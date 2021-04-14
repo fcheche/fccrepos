@@ -1,0 +1,29 @@
+<IfModule mod_rewrite.c>
+Options +FollowSymlinks
+RewriteEngine On
+
+#RewriteCond  %{HTTPS} !=on
+#RewriteRule  ^(.*) https://%{SERVER_NAME}/$1 [L,R]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php [L,QSA,E=PATH_INFO:$1]
+
+RewriteCond %{SCRIPT_FILENAME} \.php [NC]
+RewriteCond % !^$
+RewriteRule ^/?application/.*\.php - [F]
+RewriteRule ^/?backup/.*\.php - [F]
+RewriteRule ^/?plugins/.*\.php - [F]
+RewriteRule ^/?runtime/.*\.php - [F]
+RewriteRule ^/?template/.*\.php - [F]
+RewriteRule ^/?vendor/.*\.php - [F]
+RewriteRule ^/?extend/.*\.php - [F]
+RewriteRule ^/?public/.*\.php - [F]
+RewriteRule ^/?errpage/.*\.php - [F]
+</IfModule>
+        
+        
+        
+        
+        
+        

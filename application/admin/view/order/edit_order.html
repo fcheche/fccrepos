@@ -1,0 +1,260 @@
+<include file="public/layout" />
+  
+<style type="text/css">
+html, body {
+	overflow: visible;
+}
+
+a.btn {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #f5f5f5;
+    border-radius: 4px;
+    color: #999;
+    cursor: pointer !important;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: normal;
+    height: 20px;
+    letter-spacing: normal;
+    line-height: 20px;
+    margin: 0 5px 0 0;
+    padding: 1px 6px;
+    vertical-align: top;
+}
+
+ a.red:hover {
+    background-color: #e84c3d;
+    border-color: #c1392b;
+    color: #fff;
+}
+</style>  
+<body style="background-color: #FFF; overflow: auto;">
+<div id="toolTipLayer" style="position: absolute; z-index: 9999; display: none; visibility: visible; left: 95px; top: 573px;"></div>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+  <div class="fixed-bar">
+    <div class="item-title"><a class="back" href="javascript:history.back();" title="返回列表"><i class="fa fa-arrow-circle-o-left"></i></a>
+      <div class="subject">
+        <h3>修改订单</h3>
+        <h5>修改订单基本信息</h5>
+      </div>
+    </div>
+  </div>
+  <form class="form-horizontal" action="{:U('Admin/Order/edit_order')}" id="order-add" method="post">    
+    <div class="ncap-form-default">
+      <dl class="row">
+        <dt class="tit">
+          <label><em></em>订单总额</label>
+        </dt>
+        <dd class="opt">
+          <strong>{$order.total_amount}</strong>
+          <span class="err"></span>
+          <p class="notic">订单总额=商品总价+手续费（默认手续费20%） </p>
+        </dd>
+      </dl>
+
+       <dl class="row">
+        <dt class="tit">
+          <label for="consignee">订单大类</label>
+        </dt>
+        <dd class="opt">
+                              <select name="goods_type">
+                                  <option value="0">未分类</option>
+                                  <option value="1"<if condition="$order['goods_type'] eq 1">selected="selected"</if>>视频</option>
+                                  <option value="2"<if condition="$order['goods_type'] eq 2">selected="selected"</if>>媒体</option>
+                                  <option value="3"<if condition="$order['goods_type'] eq 3">selected="selected"</if>>微博</option>
+                                  <option value="4"<if condition="$order['goods_type'] eq 4">selected="selected"</if>>微信</option>
+                              </select>
+        </dd>
+      </dl>
+
+
+	  <dl class="row">
+        <dt class="tit">
+          <label for="consignee">客户</label>
+        </dt>
+        <dd class="opt">
+        
+        <input type="text" name="consignee" id="consignee" value="<if condition='empty($order.consignee)'>{$maijiaselect.nickname}<else>{$order.consignee}</if>" class="input-txt" placeholder="客户名字" readonly="readonly" />
+        
+        </dd>
+      </dl>
+           
+      <dl class="row">
+        <dt class="tit">
+          
+          <label for="consignee">手机</label>
+        </dt>
+        <dd class="opt">
+         
+          <input type="text" name="mobile" id="mobile" value="<if condition='empty($order.mobile)'>{$maijiaselect.mobile}<else>{$order.mobile}</if>" class="input-txt" placeholder="客户联系电话" readonly="readonly"/>
+         
+        </dd>
+      </dl>
+       <dl class="row">
+        <dt class="tit">
+          <label for="consignee">卖家账号</label>
+        </dt>
+        <dd class="opt">
+        <input type="text" name="sellername" id="sellername" value="{$order.sellername}" class="input-txt" <if condition="$admin_id gt 1">readonly="readonly"</if>/>
+        </dd>
+      </dl>  
+      <dl class="row">
+        <dt class="tit">
+          <label for="consignee">销售人</label>
+        </dt>
+        <dd class="opt">
+           <select name="xs_adminid">
+                                  <option value="0">请选择销售人</option>
+                                  <volist name="admins" id="template_admins">
+                                      <option value="{$template_admins.admin_id}"<if condition="$template_admins['admin_id'] eq $order['xs_adminid'] ">selected="selected"</if>>{$template_admins.user_name}</option>
+                                  </volist>
+                              </select>
+        </dd>
+      </dl>
+      <dl class="row">
+        <dt class="tit">
+          <label for="consignee">挂售人</label>
+        </dt>
+        <dd class="opt">
+           <select name="gs_adminid">
+                                  <option value="0">请选择挂售人</option>
+                                  <volist name="admins" id="template_admins">
+                                      <option value="{$template_admins.admin_id}"<if condition="$template_admins['admin_id'] eq $order['gs_adminid'] ">selected="selected"</if>>{$template_admins.user_name}</option>
+                                  </volist>
+                              </select>
+        </dd>
+      </dl>
+    
+      <dl class="row">
+        <dt class="tit">
+          <label for="invoice_title">商品列表</label>
+        </dt>
+        <dd class="opt">
+          	<div class="ncap-order-details">
+		      <div class="hDivBox" id="ajax_return">
+		        <table cellspacing="0" cellpadding="0" style="border:0px">
+		          <thead>
+			        	<tr>
+			              <th class="sign" axis="col0">
+			                <div style="width: 24px;"><i class="ico-check"></i></div>
+			              </th>
+			              <th align="left" abbr="order_sn" axis="col3" class="">
+			                <div style="text-align: left; width: 200px;" class="">商品名称</div>
+			              </th>
+			              <th align="left" abbr="consignee" axis="col4" class="">
+			                <div style="text-align: left; width: 160px;" class="">商品编号</div>
+			              </th>
+			              <th align="center" abbr="article_show" axis="col5" class="">
+			                <div style="text-align: center; width: 120px;" class="">价格</div>
+			              </th>
+			            </tr>
+			          </thead>
+			          <tbody>
+                    <tr>
+                      <td class="sign" axis="col0">
+                        <div style="width: 24px;"><i class="ico-check"></i></div>
+                      </td>
+                      <td align="left" abbr="goods_name" axis="col3" class="">
+                        <div style="text-align: left; width: 200px;" class="">{$orderGoods.goods_name}</div>
+                      </td>
+                      <td align="left" abbr="spec_key_name" axis="col4" class="">
+                        <div style="text-align: left; width: 160px;" class="">{$orderGoods.goods_sn}</div>
+                      </td>
+                      <td align="left" abbr="goods_price" axis="col4" class="">
+                        <div style="text-align: left; width: 120px;" class="">{$orderGoods.shop_price}</div>
+                      </td>
+                    </tr>
+                </tbody>
+		        </table>
+		        <div class="form-group">                                       
+                       <div class="col-xs-10" id="goods_td">
+                       </div>                                                                                                                                                      
+               </div>  
+		      </div>
+		    </div>
+          	 
+        </dd>
+      </dl>
+      <dl class="row">
+        <dt class="tit">管理员备注</dt>
+        <dd class="opt">
+	      <textarea class="tarea" style="width:440px; height:150px;" name="admin_note" id="admin_note">{$order.admin_note|htmlspecialchars_decode}</textarea>
+          <span class="err"></span>
+          <p class="notic"></p>
+        </dd>
+      </dl>
+      <input type="hidden" name="order_id" value="{$order.order_id}">
+      <input type="hidden" name="goods_id" value="{$order.goods_id}">
+      <div class="bot"><a href="JavaScript:void(0);" onClick="checkSubmit()" class="ncap-btn-big ncap-btn-green" id="submitBtn">确认提交</a></div>
+    </div>
+        
+  </form>
+</div>
+<div onclick="aaa()" style="height: 50px"></div>
+<script type="text/javascript">
+/* 用户订单区域选择 */
+$(document).ready(function(){
+	$('#province').val({$order.province});
+	$('#city').val({$order.city});
+	$('#district').val({$order.district});
+	$('#shipping_id').val({$order.shipping_id});
+});
+// 选择商品
+function selectGoods(){
+    var url = "{:U('Admin/Order/search_goods')}";
+    layer.open({
+        type: 2,
+        title: '选择商品',
+        shadeClose: true,
+        shade: 0.8,
+        area: ['60%', '60%'],
+        content: url, 
+    });
+}
+
+// 选择商品返回
+function call_back(table_html)
+{ 
+	$('#goods_td').empty().html('<table id="new_table" class="table table-bordered">'+table_html+'</table>');
+	//过滤选择重复商品
+	$('input[name*="spec"]').each(function(i,o){
+		if($(o).val()){
+			var name='goods_id['+$(o).attr('rel')+']['+$(o).val()+'][goods_num]';
+			$('input[name="'+name+'"]').parent().parent().parent().remove();
+		}
+	});
+	layer.closeAll('iframe');
+}
+
+function delRow(obj){
+	$(obj).parent().parent().parent().remove();
+	var length = $("#goos_table tr").length;
+	if(length == 0){
+		$('#goods_td').empty();
+	}
+}
+function aaa(){
+console.log($("input[name^='goods_id']").length) 
+console.log(document.getElementsByName("goods_id")[0])
+console.log(document.getElementsByName("goods_num")[0])
+
+}
+function checkSubmit()
+{							
+	$("span[id^='err_']").each(function(){
+		$(this).hide();
+	});
+		
+   if(($("input[name^='goods_id']").length ==0) && ($("input[name^='old_goods']").length == 0)){
+	   layer.alert('订单中至少要有一个商品', {icon: 2});  // alert('少年,订单中至少要有一个商品');
+	   return false;
+   }												   
+   if($("span[id^='err_']:visible").length > 0 ) 
+      return false;							  
+   $('#order-add').submit();	  
+}
+</script>
+</body>
+</html>

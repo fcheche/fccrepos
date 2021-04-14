@@ -1,0 +1,110 @@
+<table>
+ 	<tbody>
+ 	<if condition="empty($orderList) eq true">
+ 		<tr data-id="0">
+	        <td class="no-data" align="center" axis="col0" colspan="50">
+	        	<i class="fa fa-exclamation-circle"></i>没有符合条件的记录
+	        </td>
+	     </tr>
+	<else/>
+ 	<volist name="orderList" id="list">
+  	<tr data-order-id="{$list.order_id}" id="{$list.order_id}">
+       <!--  <td class="sign" axis="col0">
+          <div style="width: 24px;"><i class="ico-check"></i></div>
+        </td> -->
+        <td align="left" abbr="order_sn" axis="col3" class="">
+          <div style="text-align: left; width: 200px;" class="">{$list.order_sn}
+              
+          </div>
+
+        </td>
+        <td align="left" abbr="goods_name" axis="col3" class="">
+          <div style="text-align: left; width: 160px;" class=""> 
+                      {$list.goods_name}
+              </div>
+        </td>
+
+        <td align="left" abbr="order_sn" axis="col3" class="">
+          <div style="text-align: left; width: 260px;" class=""> 
+                      <if condition="$list.used_kdk gt 0"><a href="{:U('Admin/Coupon/coupon_list',array('id'=>$list['user_id']))}">已使用{$list.used_kdk}张看店卡</a><else>看店卡尚未使用</if>|
+                                        <if condition="$list.used_djq gt 0"><a href="{:U('Admin/Coupon/coupon_list',array('id'=>$list['user_id']))}">已使用代金券</a><else>代金券尚未使用</if>
+              </div>
+        </td>
+        
+        <td align="left" abbr="consignee" axis="col4" class="">
+          <div style="text-align: left; width: 150px;" class="">
+            <if condition="$admin_info[admin_id] eq $list[gs_adminid] or $admin_info[admin_id] eq $list[xs_adminid] or !in_array(15,$act_list)">
+            <a href="{:U('Admin/User/detail',array('id'=>$list['user_id']))}">{$list.user_names}</a>
+            <else>
+              ******
+            </if>          </div>
+        </td>
+        <td align="center" abbr="article_show" axis="col5" class="">
+          <div style="text-align: center; width: 80px;" class="">{$list.goods_price}</div>
+        </td>
+        <td align="center" abbr="article_show" axis="col5" class="">
+          <div style="text-align: center; width: 80px;" class="money">{$list.shiji_yeji}</div>
+        </td>
+      
+        <td align="center" abbr="article_time" axis="col6" class="">
+          <div style="text-align: center; width: 100px;" class="">{$list.total_amount}</div>
+        </td>
+      
+         <td align="center" abbr="article_time" axis="col6" class="">
+          <div style="text-align: center; width: 60px;" class="">{$list.xs_name|default='/'}</div>
+        </td>
+        
+
+        <td align="left" axis="col1" class="handle" align="center">
+        		<div style="text-align: center; ">
+        			 <a class="btn green" href="{:U('Admin/coupon/edit_order',array('order_id'=>$list['order_id']))}"><i class="fa fa-list-alt"></i>修改</a>
+        		</div>
+        </td>
+
+         <td align="center" abbr="article_time" axis="col6" class="">
+          <div style="text-align: center; width: 140px;" class="">{$list.add_time|date='Y-m-d H:i',###}</div>
+        </td>
+		<td style="width: 100%;">
+          <div></div>
+        </td>
+      </tr>
+      </volist>
+      </if>
+    </tbody>
+</table>
+<!-- <div class="myMoney">
+  <div class="myMoneyBox">
+    <div class="allMoney">
+      <p>总业绩： <span id="moneyOne"></span></p>
+    </div>
+    <div class="nowMoney">
+      <p>完成业绩： <span id="moneyTwo"></span></p>
+    </div>
+  </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-6 text-left"></div>
+    <div class="col-sm-6 text-right">{$page}</div>
+</div>
+<script>
+  $(function(){
+    //订单状态背景颜色渲染
+    $(".djzf").parent().parent().css("background-color","#e04949")
+    $(".jjz").parent().parent().css("background-color","#3532a7")
+    $(".qkzf").parent().parent().css("background-color","#0d6d0d")
+  })
+
+
+
+  $(".pagination  a").click(function(){
+    sessionStorage.removeItem("orderPagelistpg");
+    var page = $(this).data('p');
+    ajax_get_table('search-form2',page);
+    sessionStorage.setItem('orderPagelistpg',page);
+
+    // alert(page);
+  });
+
+    
+    $('.ftitle>h5').empty().html("(共{$pager->totalRows}条记录)");
+</script>

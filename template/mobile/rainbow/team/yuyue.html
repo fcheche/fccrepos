@@ -1,0 +1,101 @@
+
+<include file="public/header" title="预约"  body=""/>
+<include file="public/header_nav" title="预约"  href="javascript:history.back(-1);"/>
+<div class="logo-wrap-bg">
+    <a class="login-logo-wrap" style="font-size: 20px;width: 9rem;text-align:center">
+        中国工商银行金堂支行
+        <br><br>
+        对公开户预约平台
+        <!-- <img src="{$tpshop_config.shop_info_store_user_logo|default='/public/static/images/logo/pc_home_user_logo_default.png'}" alt="LOGO"/> -->
+    </a>
+</div>
+
+<div class="loginsingup-input">
+    <!--登录表单-s-->
+    <form  id="loginform" method="post"  >
+        <div class="lsu">
+            <span class="ico ico-v-code"></span>
+            <input type="text" name="company" id="company" value="" placeholder="请输入单位名称"/>
+        </div>
+        <div class="lsu">
+            <span class="ico ico-username"></span>
+            <input type="text" name="username" id="username" value=""  placeholder="请输入经办人姓名"/>
+        </div>
+        <div class="lsu">
+             <span class="ico ico-referee"></span>
+            <input type="text" name="tel" id="tel" value="" placeholder="请输入经办人电话"/>
+        </div>
+         <div class="lsu">
+            <span class="ico ico-password"></span>
+            <input type="text" name="time" class="v-code-input" id="time" value="2019-10-25" placeholder="请输入预约时间"/>
+                                    <select name="time2" id="time2" class="v-code-pic" style="height: 1.2rem;border: 0; background: transparent;-moz-appearance:none;-webkit-appearance:none;appearance:none;text-align: center;text-align-last: center;">
+                                          <option value="上午9:00">上午9:00</option>
+                                          <option value="下午14:00">下午14:00</option>
+                                    </select>
+        </div>
+        <div class="lsu-submit">
+            <input type="button"  value="确 认 提 交"  onclick="submitverify()" class="btn_big1"  />
+        </div>
+    </form>
+   
+<!--登录表单-e-->
+
+</div>
+
+<script type="text/javascript" src="__ROOT__/public/static/js/layer/laydate/laydate.js"></script>
+<script type="text/javascript">
+    $('#time').layDate();
+  
+    function submitverify()
+    {
+        var company = $.trim($('#company').val());
+        var username = $.trim($('#username').val());
+        var tel = $.trim($('#tel').val());
+        var time = $('#time').val();
+        var time2 = $('#time2').val();
+        if(company == ''){
+            showErrorMsg('单位名称不能为空!');
+            return false;
+        }
+        if(username == ''){
+            showErrorMsg('经办人姓名不能为空!');
+            return false;
+        }
+        // if(!checkMobile(username) && !checkEmail(username)){
+        //     showErrorMsg('账号格式不匹配!');
+        //     return false;
+        // }
+        if(tel == ''){
+            showErrorMsg('经办人电话不能为空!');
+            return false;
+        }
+        if(time == ''){
+            showErrorMsg('预约时间不能为空!');
+            return false;
+        }
+       
+        var data = {company:company,username:username,tel:tel,time:time,time2:time2};
+        
+        $.ajax({
+            type : 'post',
+            url : '/index.php?m=Mobile&c=team&a=do_yuyue&t='+Math.random(),
+            data : data,
+            dataType : 'json',
+            success : function(data){
+                if(data.status == 1){
+                    layer.open({content: data.msg,time:10,end:function () {
+                            location.reload();
+                    }});
+                    // location.href='/Mobile/team/yuyue';
+                }else{
+                    showErrorMsg(data.msg);
+                }
+            },
+            error : function(XMLHttpRequest, textStatus, errorThrown) {
+                showErrorMsg('网络异常，请稍后重试');
+            }
+        })
+    }
+    </script>
+</body>
+</html>

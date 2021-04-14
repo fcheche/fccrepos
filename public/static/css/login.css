@@ -1,0 +1,1188 @@
+body {
+    overflow: hidden;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.body_box {
+    height: 969px;
+    overflow: hidden;
+}
+
+.banner_box {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.banner_box img {
+    width: 100%;
+    height: 100%;
+}
+
+.logo,
+.logo img {
+    width: 100%;
+}
+
+.login-layout {
+    position: relative;
+    z-index: 2;
+}
+
+.logo {
+    position: absolute;
+    top: -971px;
+}
+
+.login-form {
+    width: 1219px;
+    height: 757px;
+    display: flex;
+    position: relative;
+    top: -764px;
+}
+
+.bannerLoginbox .banner_logo {
+    position: absolute;
+    left: 544px;
+    top: 13px;
+}
+
+.bannerLoginbox .banner_login {
+    position: absolute;
+    left: 871px;
+    top: 70px;
+}
+
+.formContent {
+    position: absolute;
+    top: 176px;
+    width: 320px;
+    height: 326px;
+    left: 986px;
+}
+
+.formText {
+    width: 320px;
+    height: 52px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(42, 220, 246, 1);
+}
+
+.formText input {
+    height: 52px;
+    border: none;
+    padding-left: 20px;
+    color: #1AD4FF;
+    font-size: 16px;
+    width: 300px;
+}
+
+input {
+    background-color: transparent!important;
+}
+
+.admin_vertify2 {
+    width: 184px;
+    height: 52px;
+    float: left;
+    border: 1px solid rgba(42, 220, 246, 1);
+}
+
+#vertify {
+    width: 165px;
+    height: 52px;
+    border: none;
+    padding-left: 20px;
+    font-size: 16px;
+    color: #1AD4FF;
+}
+
+.admin_vertify {
+    width: 116px;
+    height: 52px;
+    float: right;
+    border: 1px solid rgba(42, 220, 246, 1);
+}
+
+.admin_vertify img {
+    width: 100%;
+    height: 100%;
+}
+
+.formText1 {
+    width: 320px;
+}
+
+.formText1 a {
+    text-decoration: none;
+    font-size: 14px;
+    color: rgba(25, 209, 255, 1);
+    float: right;
+    margin-top: 10px;
+}
+
+.formText2 {
+    width: 320px;
+    height: 52px;
+    margin-bottom: 20px;
+}
+
+.submitDiv {
+    width: 320px;
+    height: 52px;
+    background: rgba(161, 219, 247, 1);
+}
+
+.submitDiv input {
+    width: 320px;
+    height: 52px;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: rgba(10, 53, 71, 1);
+    cursor: pointer;
+}
+
+.icon-user {
+    background: url(__PUBLIC__/static/images/logo/user.png) no-repeat;
+    position: absolute;
+    top: 14px;
+    left: 276px;
+    width: 28px;
+    height: 28px;
+    z-index: 9;
+}
+
+.formText:hover .icon-box {
+    opacity: 1;
+    transition: 0.3s;
+}
+
+.icon-pwd {
+    background: url(__PUBLIC__/static/images/logo/locked.png) no-repeat;
+    position: absolute;
+    top: 86px;
+    left: 276px;
+    width: 25px;
+    height: 28px;
+    z-index: 9;
+}
+
+.icon-box {
+    position: absolute;
+    left: 305px;
+    width: 0;
+    height: 0;
+    border-width: 17px;
+    border-style: solid;
+    border-color: transparent #A1DBF7 transparent transparent;
+    transform: rotate(-225deg);
+    top: -17px;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+ ::-webkit-input-placeholder {
+    /* WebKit browsers */
+    color: #1AD4FF;
+}
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: #1AD4FF !important;
+    /*浏览器记住密码的字的颜色*/
+    transition: background-color 5000s ease-in-out 0s;
+    /*通过延时渲染背景色变相去除背景颜色*/
+    caret-color: #1AD4FF;
+    /*光标颜色*/
+}
+
+#mydiv {
+    height: 960px;
+    padding: 0px;
+    margin: 0px;
+    position: absolute;
+    top: 61px;
+    z-index: 1;
+}
+
+#theForm {
+    position: relative;
+    z-index: 2;
+}
+
+.icon-box1 {
+    top: 57px;
+}
+
+input {
+    outline: none
+}
+
+@media screen and (orientation: portrait) and (max-width: 533px) {
+    .logo {
+        position: absolute;
+        top: -129%;
+        left: -90%;
+    }
+    .logo,
+    .logo img {
+        width: 168%;
+    }
+    .bannerLoginbox .banner_login {
+        width: 72%;
+        left: 0;
+        top: 0;
+        position: inherit;
+    }
+    .bannerLoginbox .banner_login img {
+        width: 100%;
+        height: 100%;
+    }
+    .formContent {
+        position: absolute;
+        left: 5%;
+        top: 9%;
+        width: 25%;
+    }
+    .formText {
+        margin-bottom: 12px;
+        border: 1px solid rgba(42, 220, 246, 1);
+        width: 90%;
+        height: 40px;
+    }
+    .icon-box {
+        position: absolute;
+        left: 259px;
+        width: 0;
+        height: 0;
+        border-width: 17px;
+        border-style: solid;
+        border-color: transparent #A1DBF7 transparent transparent;
+        transform: rotate(-225deg);
+        top: -17px;
+        opacity: 0;
+        transition: 0.3s;
+    }
+    .icon-box1 {
+        top: 38px;
+    }
+    .icon-user {
+        background: url(/public/static/images/logo/user.png) no-repeat;
+        position: absolute;
+        top: 14px;
+        width: 28px;
+        height: 28px;
+        z-index: 9;
+        left: 75%;
+    }
+    .formText input {
+        height: 40px;
+        border: none;
+        padding-left: 20px;
+        color: #1AD4FF;
+        font-size: 14px;
+        width: 300px;
+        width: 76%;
+    }
+    .icon-pwd {
+        background: url(/public/static/images/logo/locked.png) no-repeat;
+        position: absolute;
+        width: 25px;
+        height: 28px;
+        z-index: 9;
+        left: 75%;
+        top: 19%;
+    }
+    .formText2 {
+        height: 40px;
+        margin-bottom: 12px;
+        width: 94%;
+    }
+    .admin_vertify2 {
+        height: 40px;
+        float: left;
+        border: 1px solid rgba(42, 220, 246, 1);
+        width: 54%;
+    }
+    #vertify {
+        height: 40px;
+        border: none;
+        padding-left: 20px;
+        font-size: 16px;
+        color: #1AD4FF;
+        width: 87%;
+    }
+    .admin_vertify {
+        height: 40px;
+        float: right;
+        border: 1px solid rgba(42, 220, 246, 1);
+        width: 34%;
+        margin-right: 9px;
+    }
+    .submitDiv {
+        height: 47px;
+        background: rgba(161, 219, 247, 1);
+        width: 91%;
+    }
+    .submitDiv input {
+        height: 40px;
+        border: none;
+        font-size: 18px;
+        font-weight: bold;
+        color: rgba(10, 53, 71, 1);
+        cursor: pointer;
+        width: 100%;
+    }
+    .formText1 a {
+        text-decoration: none;
+        font-size: 14px;
+        color: rgba(25, 209, 255, 1);
+        float: right;
+        margin-top: 5px;
+    }
+    .login-form {
+        left: -2%;
+    }
+    .formText1 {
+        width: 92%;
+    }
+}
+
+@media screen and (min-width:533px) and (max-width:600px) {
+    .logo {
+        position: absolute;
+        top: -975px;
+        left: -248px;
+    }
+    .logo,
+    .logo img {
+        width: 138%;
+    }
+    .login-form {
+        width: 1215px;
+        height: 757px;
+        display: flex;
+        position: relative;
+        top: -764px;
+        left: -561px;
+    }
+    .bannerLoginbox .banner_logo {
+        position: absolute;
+        left: 512px;
+        width: 614px;
+        height: 395px;
+        top: 56px;
+    }
+    .bannerLoginbox .banner_logo img {
+        width: 100%;
+        height: 100%;
+    }
+    .bannerLoginbox .banner_login {
+        position: absolute;
+        left: 732px;
+        top: 85px;
+        width: 461px;
+        height: 406px;
+    }
+    .bannerLoginbox .banner_login img {
+        width: 100%;
+        height: 100%;
+    }
+    .formContent {
+        position: absolute;
+        top: 154px;
+        width: 311px;
+        height: 326px;
+        left: 803px;
+    }
+    .formText {
+        width: 260px;
+        height: 36px;
+        margin-bottom: 20px;
+        border: 1px solid rgba(42, 220, 246, 1);
+    }
+    .icon-box {
+        position: absolute;
+        left: 245px;
+        width: 0;
+        height: 0;
+        border-width: 17px;
+        border-style: solid;
+        border-color: transparent #A1DBF7 transparent transparent;
+        transform: rotate(-225deg);
+        top: -17px;
+        opacity: 0;
+        transition: 0.3s;
+    }
+    .icon-user {
+        background: url(/public/static/images/logo/user.png) no-repeat;
+        position: absolute;
+        top: 7px;
+        left: 208px;
+        width: 28px;
+        height: 28px;
+        z-index: 9;
+    }
+    .formText input {
+        height: 37px;
+        border: none;
+        padding-left: 20px;
+        color: #1AD4FF;
+        font-size: 16px;
+        width: 240px;
+    }
+    .icon-box1 {
+        top: 42px;
+    }
+    .icon-pwd {
+        background: url(/public/static/images/logo/locked.png) no-repeat;
+        position: absolute;
+        top: 62px;
+        left: 208px;
+        width: 25px;
+        height: 28px;
+        z-index: 9;
+    }
+    .formText2 {
+        width: 262px;
+        height: 37px;
+        margin-bottom: 20px;
+    }
+    .admin_vertify2 {
+        width: 142px;
+        height: 37px;
+        float: left;
+        border: 1px solid rgba(42, 220, 246, 1);
+    }
+    #vertify {
+        width: 123px;
+        height: 37px;
+        border: none;
+        padding-left: 20px;
+        font-size: 16px;
+        color: #1AD4FF;
+    }
+    .admin_vertify {
+        width: 85px;
+        height: 37px;
+        float: right;
+        border: 1px solid rgba(42, 220, 246, 1);
+    }
+    .submitDiv {
+        width: 262px;
+        height: 37px;
+        background: rgba(161, 219, 247, 1);
+    }
+    .submitDiv input {
+        width: 263px;
+        height: 37px;
+        border: none;
+        font-size: 20px;
+        font-weight: bold;
+        color: rgba(10, 53, 71, 1);
+        cursor: pointer;
+    }
+    .formText1 {
+        width: 266px;
+    }
+}
+
+@media screen and (min-width: 601px) and (max-width:800px) {
+    .logo {
+        position: absolute;
+        top: -975px;
+        left: -136px;
+    }
+    .logo,
+    .logo img {
+        width: 115%;
+    }
+    .login-form {
+        width: 1215px;
+        height: 757px;
+        display: flex;
+        position: relative;
+        top: -764px;
+        left: -561px;
+    }
+    .bannerLoginbox .banner_logo {
+        position: absolute;
+        left: 512px;
+        width: 800px;
+        height: 520px;
+        top: 56px;
+    }
+    .bannerLoginbox .banner_logo img {
+        width: 100%;
+        height: 100%;
+    }
+    .bannerLoginbox .banner_login {
+        position: absolute;
+        left: 804px;
+        top: 97px;
+        width: 544px;
+        height: 450px;
+    }
+    .bannerLoginbox .banner_login img {
+        width: 100%;
+        height: 100%;
+    }
+    .formContent {
+        position: absolute;
+        top: 176px;
+        width: 311px;
+        height: 326px;
+        left: 911px;
+    }
+    .formText {
+        width: 260px;
+        height: 36px;
+        margin-bottom: 20px;
+        border: 1px solid rgba(42, 220, 246, 1);
+    }
+    .icon-box {
+        position: absolute;
+        left: 245px;
+        width: 0;
+        height: 0;
+        border-width: 17px;
+        border-style: solid;
+        border-color: transparent #A1DBF7 transparent transparent;
+        transform: rotate(-225deg);
+        top: -17px;
+        opacity: 0;
+        transition: 0.3s;
+    }
+    .icon-user {
+        background: url(/public/static/images/logo/user.png) no-repeat;
+        position: absolute;
+        top: 7px;
+        left: 208px;
+        width: 28px;
+        height: 28px;
+        z-index: 9;
+    }
+    .formText input {
+        height: 37px;
+        border: none;
+        padding-left: 20px;
+        color: #1AD4FF;
+        font-size: 16px;
+        width: 240px;
+    }
+    .icon-box1 {
+        top: 42px;
+    }
+    .icon-pwd {
+        background: url(/public/static/images/logo/locked.png) no-repeat;
+        position: absolute;
+        top: 62px;
+        left: 208px;
+        width: 25px;
+        height: 28px;
+        z-index: 9;
+    }
+    .formText2 {
+        width: 262px;
+        height: 37px;
+        margin-bottom: 20px;
+    }
+    .admin_vertify2 {
+        width: 142px;
+        height: 37px;
+        float: left;
+        border: 1px solid rgba(42, 220, 246, 1);
+    }
+    #vertify {
+        width: 123px;
+        height: 37px;
+        border: none;
+        padding-left: 20px;
+        font-size: 16px;
+        color: #1AD4FF;
+    }
+    .admin_vertify {
+        width: 85px;
+        height: 37px;
+        float: right;
+        border: 1px solid rgba(42, 220, 246, 1);
+    }
+    .submitDiv {
+        width: 262px;
+        height: 37px;
+        background: rgba(161, 219, 247, 1);
+    }
+    .submitDiv input {
+        width: 263px;
+        height: 37px;
+        border: none;
+        font-size: 20px;
+        font-weight: bold;
+        color: rgba(10, 53, 71, 1);
+        cursor: pointer;
+    }
+    .formText1 {
+        width: 266px;
+    }
+}
+
+@media screen and (min-width: 801px) and (max-width:999px) {
+    .logo {
+        position: absolute;
+        top: -975px;
+        left: -136px;
+    }
+    .logo,
+    .logo img {
+        width: 115%;
+    }
+    .login-form {
+        width: 1215px;
+        height: 757px;
+        display: flex;
+        position: relative;
+        top: -764px;
+        left: -477px;
+    }
+    .bannerLoginbox .banner_logo {
+        position: absolute;
+        left: 512px;
+        width: 800px;
+        height: 520px;
+        top: 56px;
+    }
+    .bannerLoginbox .banner_logo img {
+        width: 100%;
+        height: 100%;
+    }
+    .bannerLoginbox .banner_login {
+        position: absolute;
+        left: 804px;
+        top: 97px;
+        width: 544px;
+        height: 450px;
+    }
+    .bannerLoginbox .banner_login img {
+        width: 100%;
+        height: 100%;
+    }
+    .formContent {
+        position: absolute;
+        top: 176px;
+        width: 311px;
+        height: 326px;
+        left: 911px;
+    }
+    .formText {
+        width: 260px;
+        height: 36px;
+        margin-bottom: 20px;
+        border: 1px solid rgba(42, 220, 246, 1);
+    }
+    .icon-box {
+        position: absolute;
+        left: 245px;
+        width: 0;
+        height: 0;
+        border-width: 17px;
+        border-style: solid;
+        border-color: transparent #A1DBF7 transparent transparent;
+        transform: rotate(-225deg);
+        top: -17px;
+        opacity: 0;
+        transition: 0.3s;
+    }
+    .icon-user {
+        background: url(/public/static/images/logo/user.png) no-repeat;
+        position: absolute;
+        top: 7px;
+        left: 208px;
+        width: 28px;
+        height: 28px;
+        z-index: 9;
+    }
+    .formText input {
+        height: 37px;
+        border: none;
+        padding-left: 20px;
+        color: #1AD4FF;
+        font-size: 16px;
+        width: 240px;
+    }
+    .icon-box1 {
+        top: 42px;
+    }
+    .icon-pwd {
+        background: url(/public/static/images/logo/locked.png) no-repeat;
+        position: absolute;
+        top: 62px;
+        left: 208px;
+        width: 25px;
+        height: 28px;
+        z-index: 9;
+    }
+    .formText2 {
+        width: 262px;
+        height: 37px;
+        margin-bottom: 20px;
+    }
+    .admin_vertify2 {
+        width: 142px;
+        height: 37px;
+        float: left;
+        border: 1px solid rgba(42, 220, 246, 1);
+    }
+    #vertify {
+        width: 123px;
+        height: 37px;
+        border: none;
+        padding-left: 20px;
+        font-size: 16px;
+        color: #1AD4FF;
+    }
+    .admin_vertify {
+        width: 85px;
+        height: 37px;
+        float: right;
+        border: 1px solid rgba(42, 220, 246, 1);
+    }
+    .submitDiv {
+        width: 262px;
+        height: 37px;
+        background: rgba(161, 219, 247, 1);
+    }
+    .submitDiv input {
+        width: 263px;
+        height: 37px;
+        border: none;
+        font-size: 20px;
+        font-weight: bold;
+        color: rgba(10, 53, 71, 1);
+        cursor: pointer;
+    }
+    .formText1 {
+        width: 266px;
+    }
+}
+
+@media screen and (min-width: 1000px) and (max-width: 1200px) {
+    .logo {
+        position: absolute;
+        top: -975px;
+        left: -136px;
+    }
+    .logo,
+    .logo img {
+        width: 115%;
+    }
+    .login-form {
+        width: 1215px;
+        height: 757px;
+        display: flex;
+        position: relative;
+        top: -764px;
+        left: -436px;
+    }
+    .bannerLoginbox .banner_logo {
+        position: absolute;
+        left: 512px;
+        width: 800px;
+        height: 520px;
+        top: 56px;
+    }
+    .bannerLoginbox .banner_logo img {
+        width: 100%;
+        height: 100%;
+    }
+    .bannerLoginbox .banner_login {
+        position: absolute;
+        left: 804px;
+        top: 97px;
+        width: 544px;
+        height: 450px;
+    }
+    .bannerLoginbox .banner_login img {
+        width: 100%;
+        height: 100%;
+    }
+    .formContent {
+        position: absolute;
+        top: 176px;
+        width: 311px;
+        height: 326px;
+        left: 911px;
+    }
+    .formText {
+        width: 260px;
+        height: 36px;
+        margin-bottom: 20px;
+        border: 1px solid rgba(42, 220, 246, 1);
+    }
+    .icon-box {
+        position: absolute;
+        left: 245px;
+        width: 0;
+        height: 0;
+        border-width: 17px;
+        border-style: solid;
+        border-color: transparent #A1DBF7 transparent transparent;
+        transform: rotate(-225deg);
+        top: -17px;
+        opacity: 0;
+        transition: 0.3s;
+    }
+    .icon-user {
+        background: url(/public/static/images/logo/user.png) no-repeat;
+        position: absolute;
+        top: 7px;
+        left: 208px;
+        width: 28px;
+        height: 28px;
+        z-index: 9;
+    }
+    .formText input {
+        height: 37px;
+        border: none;
+        padding-left: 20px;
+        color: #1AD4FF;
+        font-size: 16px;
+        width: 240px;
+    }
+    .icon-box1 {
+        top: 42px;
+    }
+    .icon-pwd {
+        background: url(/public/static/images/logo/locked.png) no-repeat;
+        position: absolute;
+        top: 62px;
+        left: 208px;
+        width: 25px;
+        height: 28px;
+        z-index: 9;
+    }
+    .formText2 {
+        width: 262px;
+        height: 37px;
+        margin-bottom: 20px;
+    }
+    .admin_vertify2 {
+        width: 142px;
+        height: 37px;
+        float: left;
+        border: 1px solid rgba(42, 220, 246, 1);
+    }
+    #vertify {
+        width: 123px;
+        height: 37px;
+        border: none;
+        padding-left: 20px;
+        font-size: 16px;
+        color: #1AD4FF;
+    }
+    .admin_vertify {
+        width: 85px;
+        height: 37px;
+        float: right;
+        border: 1px solid rgba(42, 220, 246, 1);
+    }
+    .submitDiv {
+        width: 262px;
+        height: 37px;
+        background: rgba(161, 219, 247, 1);
+    }
+    .submitDiv input {
+        width: 263px;
+        height: 37px;
+        border: none;
+        font-size: 20px;
+        font-weight: bold;
+        color: rgba(10, 53, 71, 1);
+        cursor: pointer;
+    }
+    .formText1 {
+        width: 266px;
+    }
+}
+
+@media screen and (min-width:1201px) and (max-width: 1366px) {
+    .logo {
+        position: absolute;
+        top: -975px;
+        left: -136px;
+    }
+    .logo,
+    .logo img {
+        width: 115%;
+    }
+    .login-form {
+        width: 1215px;
+        height: 757px;
+        display: flex;
+        position: relative;
+        top: -764px;
+        left: -346px;
+    }
+    .bannerLoginbox .banner_logo {
+        position: absolute;
+        left: 512px;
+        width: 800px;
+        height: 520px;
+        top: 56px;
+    }
+    .bannerLoginbox .banner_logo img {
+        width: 100%;
+        height: 100%;
+    }
+    .bannerLoginbox .banner_login {
+        position: absolute;
+        left: 804px;
+        top: 97px;
+        width: 544px;
+        height: 450px;
+    }
+    .bannerLoginbox .banner_login img {
+        width: 100%;
+        height: 100%;
+    }
+    .formContent {
+        position: absolute;
+        top: 176px;
+        width: 311px;
+        height: 326px;
+        left: 911px;
+    }
+    .formText {
+        width: 260px;
+        height: 36px;
+        margin-bottom: 20px;
+        border: 1px solid rgba(42, 220, 246, 1);
+    }
+    .icon-box {
+        position: absolute;
+        left: 245px;
+        width: 0;
+        height: 0;
+        border-width: 17px;
+        border-style: solid;
+        border-color: transparent #A1DBF7 transparent transparent;
+        transform: rotate(-225deg);
+        top: -17px;
+        opacity: 0;
+        transition: 0.3s;
+    }
+    .icon-user {
+        background: url(/public/static/images/logo/user.png) no-repeat;
+        position: absolute;
+        top: 7px;
+        left: 208px;
+        width: 28px;
+        height: 28px;
+        z-index: 9;
+    }
+    .formText input {
+        height: 37px;
+        border: none;
+        padding-left: 20px;
+        color: #1AD4FF;
+        font-size: 16px;
+        width: 240px;
+    }
+    .icon-box1 {
+        top: 42px;
+    }
+    .icon-pwd {
+        background: url(/public/static/images/logo/locked.png) no-repeat;
+        position: absolute;
+        top: 62px;
+        left: 208px;
+        width: 25px;
+        height: 28px;
+        z-index: 9;
+    }
+    .formText2 {
+        width: 262px;
+        height: 37px;
+        margin-bottom: 20px;
+    }
+    .admin_vertify2 {
+        width: 142px;
+        height: 37px;
+        float: left;
+        border: 1px solid rgba(42, 220, 246, 1);
+    }
+    #vertify {
+        width: 123px;
+        height: 37px;
+        border: none;
+        padding-left: 20px;
+        font-size: 16px;
+        color: #1AD4FF;
+    }
+    .admin_vertify {
+        width: 85px;
+        height: 37px;
+        float: right;
+        border: 1px solid rgba(42, 220, 246, 1);
+    }
+    .submitDiv {
+        width: 262px;
+        height: 37px;
+        background: rgba(161, 219, 247, 1);
+    }
+    .submitDiv input {
+        width: 263px;
+        height: 37px;
+        border: none;
+        font-size: 20px;
+        font-weight: bold;
+        color: rgba(10, 53, 71, 1);
+        cursor: pointer;
+    }
+    .formText1 {
+        width: 266px;
+    }
+}
+
+@media screen and (min-width:1367px) and (max-width:1600px) {
+    .logo {
+        position: absolute;
+        top: -979px;
+        left: -190px;
+    }
+    .logo,
+    .logo img {
+        width: 115%;
+    }
+    .login-form {
+        width: 1215px;
+        height: 757px;
+        display: flex;
+        position: relative;
+        top: -764px;
+        left: -254px;
+    }
+    .bannerLoginbox .banner_logo {
+        position: absolute;
+        left: 512px;
+        width: 800px;
+        height: 520px;
+        top: 56px;
+    }
+    .bannerLoginbox .banner_logo img {
+        width: 100%;
+        height: 100%;
+    }
+    .bannerLoginbox .banner_login {
+        position: absolute;
+        left: 804px;
+        top: 97px;
+        width: 544px;
+        height: 450px;
+    }
+    .bannerLoginbox .banner_login img {
+        width: 100%;
+        height: 100%;
+    }
+    .formContent {
+        position: absolute;
+        top: 176px;
+        width: 311px;
+        height: 326px;
+        left: 911px;
+    }
+    .formText {
+        width: 260px;
+        height: 36px;
+        margin-bottom: 20px;
+        border: 1px solid rgba(42, 220, 246, 1);
+    }
+    .icon-box {
+        position: absolute;
+        left: 245px;
+        width: 0;
+        height: 0;
+        border-width: 17px;
+        border-style: solid;
+        border-color: transparent #A1DBF7 transparent transparent;
+        transform: rotate(-225deg);
+        top: -17px;
+        opacity: 0;
+        transition: 0.3s;
+    }
+    .icon-user {
+        background: url(/public/static/images/logo/user.png) no-repeat;
+        position: absolute;
+        top: 7px;
+        left: 208px;
+        width: 28px;
+        height: 28px;
+        z-index: 9;
+    }
+    .formText input {
+        height: 37px;
+        border: none;
+        padding-left: 20px;
+        color: #1AD4FF;
+        font-size: 16px;
+        width: 240px;
+    }
+    .icon-box1 {
+        top: 42px;
+    }
+    .icon-pwd {
+        background: url(/public/static/images/logo/locked.png) no-repeat;
+        position: absolute;
+        top: 62px;
+        left: 208px;
+        width: 25px;
+        height: 28px;
+        z-index: 9;
+    }
+    .formText2 {
+        width: 262px;
+        height: 37px;
+        margin-bottom: 20px;
+    }
+    .admin_vertify2 {
+        width: 142px;
+        height: 37px;
+        float: left;
+        border: 1px solid rgba(42, 220, 246, 1);
+    }
+    #vertify {
+        width: 123px;
+        height: 37px;
+        border: none;
+        padding-left: 20px;
+        font-size: 16px;
+        color: #1AD4FF;
+    }
+    .admin_vertify {
+        width: 85px;
+        height: 37px;
+        float: right;
+        border: 1px solid rgba(42, 220, 246, 1);
+    }
+    .submitDiv {
+        width: 262px;
+        height: 37px;
+        background: rgba(161, 219, 247, 1);
+    }
+    .submitDiv input {
+        width: 263px;
+        height: 37px;
+        border: none;
+        font-size: 20px;
+        font-weight: bold;
+        color: rgba(10, 53, 71, 1);
+        cursor: pointer;
+    }
+    .formText1 {
+        width: 266px;
+    }
+}

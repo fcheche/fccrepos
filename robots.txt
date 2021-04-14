@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: 
+Disallow: /404.html
+Disallow:/Home/Article?article_id=37/
+Sitemap: https://www.fcheche.vip/sitemap.txt

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="content-language" content="zh-cn"/>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand"/>
+    <meta http-equiv="Cache-control" content="public" max-age="no-cache"/>
+    <title>热门问答-{$tpshop_config['shop_info_store_title']}</title>
+    <meta name="keywords" content="{$tpshop_config['shop_info_store_keyword']}"/>
+    <meta name="description" content="{$tpshop_config['shop_info_store_desc']}"/>
+    <link rel="shortcut  icon" type="image/x-icon" href="{$tpshop_config.shop_info_store_ico|default='/public/static/images/logo/storeico_default.png'}" media="screen"/>
+    <script type="text/javascript" src="__STATIC__/js/publicJs.js"></script>
+    <style type="text/css">
+        .rmBox{
+            width: 100%;
+            overflow: hidden;
+        }
+        .rmWrap{
+            width: 1224px;
+            margin: 0 auto;
+        }
+        .rm_tab{
+            line-height: 40px;
+            height: 40px;
+            color: #999;
+        }
+        .rm_tab a{
+            color: #999;
+        }
+        .rmBoxLeft{
+            float: left;
+            width: 70%;
+            background: #fff;
+        }
+        .leftList{
+            padding: 20px 10px;
+        }
+        .leftList li{
+            border: 1px solid #eee;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .leftList li .rmWen{
+            line-height: 24px;
+            color: #333;
+            font-size: 16px;
+            letter-spacing: 2px;
+            position: relative;
+            cursor: pointer;
+        }
+        .leftList li .rmWen .rmWenLeft{
+            width: 775px;
+            display: inline-block;
+        }
+        .leftList li .rmWen img{
+            position: absolute;
+            top: 0;
+            right: 0;
+            float: right;
+        }
+        .leftList li .rmDa{
+            color: #999999;
+            font-size: 14px;
+            letter-spacing: 2px;
+            display: none;
+            margin-top: 10px;
+        }
+        .rmBoxRight{
+            float: right;
+            width: 27%;
+            background: #fff;
+        }
+        .rmLX{
+            padding: 20px 10px;
+            text-align: center;
+        }
+        .rmLX .rmLXImg{
+            width: 150px;
+            margin: 0 auto;
+        }
+        .rmLX .rmLXbtn{
+            width: 200px;   
+            background: #5b64de;
+            color: #fff;
+            padding: 10px 0;
+            margin: 0 auto;
+            display: block;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .rmLX .s1{
+            display: block;
+            color: #333;
+            font-size: 15px;
+            margin-top: 20px;
+        }
+        .rmLX .s2{
+            display: block;
+            color: #000;
+            font-size: 28px;
+            margin-top: 10px;
+        }
+        /*分页 s*/
+        .operating{
+            width: calc(100% - 20px);
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px 10px;
+            text-align: center;
+        }
+        .operating .pagination{
+            /*text-align: center;*/
+            display: inline-block;
+        }
+        .operating .pagination li{
+            float: left;
+            width: 35px;
+            height: 35px;
+            line-height: 35px;
+            text-align: center;
+            border: 1px solid #ddd;
+            margin-left: 10px;
+        }
+        .operating .pagination li a{
+            color: #8d7afe;
+            font-size: 16px;
+        }
+        .operating .pagination li.active{
+            background: #8d7afe;
+            border: 1px solid #8d7afe;
+        }
+        .operating .pagination li:not(.active):hover{
+            background: #f5f5f5;
+        }
+        .operating .pagination li.active a{
+            color: #fff;
+        }
+        .operating .pagination li.next,
+        .operating .pagination li.previous{
+            width: 60px;
+        }
+        /*分页 e*/
+    </style>
+</head>
+<body>
+<!--header-s-->
+<include file="public/header" w="w1224"/>
+    <!--header-e-->
+
+<div class="rmBox">
+    <div class="rmWrap">
+        <div class="rm_tab">
+            当前位置：<a href="http://www.fcheche.vip/">蜂车车首页</a>>><a href="" style="color: #333;">新媒热门问答</a>
+        </div>
+        <div class="rmBoxLeft">
+            <div class="leftList">
+                <ul>
+                    <foreach name="rmwd" item="v" key="k">
+                        <li>
+                            <div class="rmWen" onclick="lookMore(this)">
+                                <span class="rmWenLeft">问：{$v.k_wen}</span>
+                                <img src="__STATIC__/img/index/problems-add.png" class="rmMin">
+                                <img src="__STATIC__/img/index/problems-min.png" class="rmAdd" style="display: none;"></div>
+                            <div class="rmDa">答：{$v.k_da}</div>
+                        </li>
+                    </foreach>
+                </ul>
+            </div>
+            <div class="operating" id="bottom">
+                <div class="clearfix">
+                    {$page}
+                </div>
+            </div>
+        </div>
+        <div class="rmBoxRight">
+            <div class="rmLX">
+                <div>
+                    <img src="" style="width: 200px;" class="rmLXImg">
+                </div>
+                <a href="" class="rmLXbtn">联系在线客服</a>
+                <span class="s1">客服服务热线</span>
+                <span class="s2 rmLXPhone"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<include file="public/footer"/>
+<script type="text/javascript">
+    $(function(){
+        ajaxGetData('/home/Ajaxapi/kefu','get',{"num": 1}).then(data => {
+            $('.rmLXImg').attr('src',data[0].head_pic)
+            $('.rmLXbtn').attr('href','https://wpa.qq.com/msgrd?v=3&uin='+data[0].qq+'&Site=fcc%E5%95%86%E5%9F%8E&Menu=yes')
+            $('.rmLXPhone').text(data[0].tel)
+        })
+    })
+    function lookMore(_this){
+        // $(_this).parent('li').children('.rmDa').slideToggle()
+        $(_this).parent('li').children('.rmDa').slideDown();
+        $(_this).parent('li').siblings('li').children('.rmDa').slideUp();
+        $(_this).find('.rmMin').hide();
+        $(_this).find('.rmAdd').show();
+        $(_this).parent('li').siblings('li').find('.rmMin').show();
+        $(_this).parent('li').siblings('li').find('.rmAdd').hide();
+    }
+</script>
+</body>
+</html>

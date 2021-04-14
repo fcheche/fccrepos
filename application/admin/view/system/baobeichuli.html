@@ -1,0 +1,119 @@
+<include file="public/layout" />
+<load href="__ROOT__/public/plugins/Ueditor/ueditor.config.js"/>
+<load href="__ROOT__/public/plugins/Ueditor/ueditor.all.min.js"/>
+<script type="text/javascript" charset="utf-8" src="__ROOT__/public/plugins/Ueditor/lang/zh-cn/zh-cn.js"></script>
+<script src="__ROOT__/public/static/js/layer/laydate/laydate.js"></script>
+
+<style type="text/css">
+html, body {overflow: visible;}
+</style>  
+<body style="background-color: #FFF; overflow: auto;">
+<div id="toolTipLayer" style="position: absolute; z-index: 9999; display: none; visibility: visible; left: 95px; top: 573px;"></div>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+  <div class="fixed-bar">
+    <div class="item-title"><a class="back" href="javascript:history.back();" title="返回列表"><i class="fa fa-arrow-circle-o-left"></i></a>
+      <div class="subject">
+        <h3>报备处理</h3>
+        <h5>报备处理索引与管理</h5>
+      </div>
+    </div>
+  </div>
+  <form class="form-horizontal" action="{:U('System/bbHandle')}" id="add_post" method="post">    
+    <div class="ncap-form-default">
+      <dl class="row">
+        <dt class="tit">
+          <label><em>*</em>订单编号</label>
+        </dt>
+        <dd class="opt">
+          <input type="text" value="{$info.order_sn}" name="order_sn" class="input-txt">
+          <span class="err" id="err_title"></span>
+          <p class="notic"></p>
+        </dd>
+      </dl>
+     
+      <dl class="row">
+        <dt class="tit">选择订单状态</dt>
+        <dd class="opt">
+	         <select class="small form-control" name="order_status" id="order_status">
+            <option value="">选择状态</option>
+            <option value="1" <if condition="$info[order_status] eq '1'">selected</if>>交接中</option>
+            <option value="2" <if condition="$info[order_status] eq '2'">selected</if>>已完成</option>
+            <option value="3" <if condition="$info[order_status] eq '3'">selected</if>>已取消</option>
+            <option value="5" <if condition="$info[order_status] eq '5'">selected</if>>已退款</option>
+            <option value="0" <if condition="$info[order_status] eq '0'">selected</if>>其他</option>
+          </select>
+          <span class="err"></span>
+          <p class="notic"></p>
+        </dd>
+      </dl>
+      <dl class="row">
+        <dt class="tit">备注</dt>
+        <dd class="opt">
+        <textarea class="input-txt" id="beizhu" name="beizhu" title="">{$info.beizhu}</textarea>
+          <span class="err"></span>
+          <p class="notic">不能超过80个字和标点符号</p>
+        </dd>
+      </dl>
+      <div class="bot"><a href="JavaScript:void(0);" class="ncap-btn-big ncap-btn-green" id="submitBtn">确认提交</a></div>
+    </div>
+
+        <input type="hidden" name="ct_id" value="{$ct_id}">
+  </form>
+</div>
+<script type="text/javascript">
+   
+    var url="{:url('Ueditor/index',array('savePath'=>'anlixq'))}";
+    var ue = UE.getEditor('post_content',{
+        serverUrl :url,
+        zIndex: 999,
+        initialFrameWidth: "80%", //初化宽度
+        initialFrameHeight: 300, //初化高度            
+        focus: false, //初始化时，是否让编辑器获得焦点true或false
+        maximumWords: 99999, removeFormatAttributes: 'class,style,lang,width,height,align,hspace,valign',//允许的最大字符数 'fullscreen',
+        pasteplain:false, //是否默认为纯文本粘贴。false为不使用纯文本粘贴，true为使用纯文本粘贴
+        autoHeightEnabled: true
+    });
+
+    $(document).on("click", '#submitBtn', function () {
+        verifyForm();
+    });
+    function verifyForm(){
+        $('span.err').hide();
+        $.ajax({
+            type: "POST",
+            url: "{:U('System/bbHandle')}",
+            data: $('#add_post').serialize(),
+            dataType: "json",
+            error: function () {
+                layer.alert("服务器繁忙, 请联系管理员!");
+            },
+            success: function (data) {
+                if (data.status === 1) {
+                    layer.msg(data.msg, {icon: 1,time: 1000}, function() {
+                        location.href = "{:U('System/baobei')}";
+                    });
+                } else if(data.status === 0) {
+                    layer.msg(data.msg, {icon: 2,time: 1000});
+                    $.each(data.result, function(index, item) {
+                        $('#err_' + index).text(item).show();
+                    });
+                } else {
+                    layer.msg(data.msg, {icon: 2,time: 1000});
+                }
+            }
+        });
+    }
+
+
+    function img_call_back(fileurl_tmp)
+    {
+        $("#image_url").val(fileurl_tmp);
+        $("#img_a").attr('href', fileurl_tmp);
+        $("#img_i").attr('onmouseover', "layer.tips('<img src="+fileurl_tmp+">',this,{tips: [1, '#fff']});");
+    }
+    
+</script>
+</body>
+</html>

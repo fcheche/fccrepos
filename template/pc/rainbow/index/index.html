@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>首页-{$tpshop_config['shop_info_store_title']}</title>
+		<meta name="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+		<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+		<script type="text/javascript" src="template/pc/rainbow/static/js/publicJs.js"></script>
+		<link rel="stylesheet" type="text/css" href="/template/pc/rainbow/static/css/index.css">
+	</head>
+	<body>
+		<div class="banner">
+			<!--头部-->
+			<include file="public/headerIndex" />
+			<!--头部end-->
+			<div class="bannerBox">
+				<div class="bannerLeft">
+					<div class="bannerLeft_top">
+						<div class="search">
+							<div class="searchLeft">
+								<select id="myChoose">
+									<option value="4">微信公众号</option>
+									<option value="1">短视频</option>
+									<option value="3">微博号</option>
+									<option value="2">自媒体</option>
+								</select>
+							</div>
+							<div class="searchRight">
+								<img src="template/pc/rainbow/static/img/index/sousuo.png" alt="">
+								<input type="text" placeholder="搜索新媒名称" id="mySearchWords"/>
+								<button type="button" onclick="goSearch()">搜索</button>
+							</div>
+						</div>
+						<a href="{:U('/Home/user/chushou')}">
+							<div class="IwantSell">
+								我要出售
+							</div>
+						</a>
+					</div>
+					<div class="bannerLeft_bottom">
+						<div class="blbLeft">
+							<h1>短视频交易<img src="template/pc/rainbow/static/img/index/hot.png" alt=""></h1>
+							<div class="blbBox">
+								<foreach name="dspList" item="dspListv" key="dspListk">
+									<a href="/home/lists?l=1--{$dspListk}" target="_blank">{$dspListv}</a>
+								</foreach>
+							</div>
+						</div>
+						<div class="blbRight">
+							<h1>自媒体交易<img src="template/pc/rainbow/static/img/index/hot.png" alt=""></h1>
+							<div class="blbBox">
+								<foreach name="zmtList" item="zmtListv" key="zmtListk">
+									<a href="/home/lists?l=2--{$zmtListk}" target="_blank">{$zmtListv}</a>
+								</foreach>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="bannerRight">
+					<input type="text" placeholder="输入您的账号">
+					<a href="https://wpa.qq.com/msgrd?v=3&uin=3002046491&Site=fcc%E5%95%86%E5%9F%8E&Menu=yes">
+						<img src="template/pc/rainbow/static/img/index/gjButton.png" alt="">
+					</a>
+				</div>
+			</div>
+
+		</div>
+		<div class="deal">
+			<h1>交易市场</h1>
+			<div class="weMedia">
+				<div class="weMediaLeft leftBox">
+					<div class="leftBoxHeader">
+						<h1>自媒体账号交易<img src="template/pc/rainbow/static/img/index/hot.png" alt=""></h1>
+						<h2>海量优质自媒体账号资源</h2>
+						<div class="smallLine"></div>
+					</div>
+					<div class="leftBoxbody">
+						<div class="leftsBox leftsBox0 leftsBoxHover">
+							<h1>公众号交易<span> > </span></h1>
+							<div class="hideBox">
+								<foreach name="wxList" item="wxListv" key="wxListk">
+									<a href="/home/lists?l=4--{$wxListk}" target="_blank"><span>{$wxListv}</span></a>
+								</foreach>
+
+							</div>
+							<div class="triangle"></div>
+						</div>
+						<div class="leftsBox leftsBox1">
+							<h1>微博号交易<span> > </span></h1>
+							<div class="hideBox">
+								<foreach name="wbList" item="wbListv" key="wbListk">
+									<a href="/home/lists?l=3--{$wbListk}" target="_blank"><span>{$wbListv}</span></a>
+								</foreach>
+							</div>
+							<div class="triangle"></div>
+						</div>
+						<div class="leftsBox leftsBox2">
+							<h1>头条号交易<span> > </span></h1>
+							<div class="hideBox">
+								<foreach name="zmtList" item="zmtListv" key="zmtListk">
+									<a href="/home/lists?l=2-18-{$zmtListk}" target="_blank"><span>{$zmtListv}</span></a>
+								</foreach>
+							</div>
+							<div class="triangle"></div>
+						</div>
+					</div>
+				</div>
+				<div class="weMediaRight0 rightBox"></div>
+				<div class="weMediaRight1 rightBox"></div>
+				<div class="weMediaRight2 rightBox"></div>
+			</div>
+		</div>
+		<div class="shortVideo">
+			<div class="shortVideoLeft leftBox">
+				<div class="leftBoxHeader">
+					<h1>短视频账号交易<img src="template/pc/rainbow/static/img/index/hot.png" alt=""></h1>
+					<h2>海量优质短视频账号资源</h2>
+					<div class="smallLine"></div>
+				</div>
+				<div class="leftBoxbody">
+					<div class="leftsBoxs leftsBoxs0 leftsBoxHover">
+						<h1>抖音号交易<span> > </span></h1>
+						<div class="hideBox">
+							<foreach name="dspList" item="dspListv" key="dspListk">
+								<a href="/home/lists?l=1-1-{$dspListk}" target="_blank"><span>{$dspListv}</span></a>
+							</foreach>
+						</div>
+						<div class="triangle"></div>
+					</div>
+					<div class="leftsBoxs leftsBoxs1">
+						<h1>快手号交易<span> > </span></h1>
+						<div class="hideBox">
+							<foreach name="dspList" item="dspListv" key="dspListk">
+								<a href="/home/lists?l=1-2-{$dspListk}" target="_blank"><span>{$dspListv}</span></a>
+							</foreach>
+						</div>
+						<div class="triangle"></div>
+					</div>
+				</div>
+			</div>
+			<div class="shortVideoRight0 rightBoxs"></div>
+			<div class="shortVideoRight1 rightBoxs"></div>
+		</div>
+		<div class="indexkf">
+			<h1>客服团队</h1>
+			<h2>一对一专属客服免费咨询,准确高效解决您的问题</h2>
+			<h3></h3>
+			<div class="kfBox"></div>
+		</div>
+		<div class="new">
+			<h1>新闻动态</h1>
+			<div class="newBox">
+				<div class="newBox_left">
+					<div class="newNav">
+						<p class="newP newP1 newChooseLine">公司动态</p>
+						<p class="newP newP2">新闻资讯</p>
+					</div>
+					<div class="newBody newBody1"></div>
+					<div class="newBody newBody2"></div>
+				</div>
+				<div class="newBox_right">
+					<div class="newRtop">
+						<p>热门问题</p>
+						<a href="/home/rmwd" target="_blank">更多</a>
+					</div>
+					<div class="newRbody">
+					</div>
+				</div>
+			</div>
+		</div>
+		<include file="public/footer" />
+	</body>
+	
+	
+	<!--首页公众号数据模板-->
+	<script type="text/template" id="gzhBox">
+		{{each val value}}
+		<div class="rightsBox">
+			<div class="rboxTop">
+				<div class="p1">
+				{{if value.goods_type==4}}
+				<img src="__STATIC__/img/index/vxL.png" alt="">
+				{{else if value.goods_type==3}}
+				<img src="__STATIC__/img/index/wbL.png" alt="">
+				{{else if value.pingtai_id==18}}
+				<img src="__STATIC__/img/index/ttL.png" alt="">
+				{{else if value.pingtai_id==1}}
+				<img src="__STATIC__/img/index/dyL.png" alt="">
+				{{else if value.pingtai_id==2}}
+				<img src="__STATIC__/img/index/ksL.png" alt="">
+				{{/if}}
+				{{value.goods_name}}</div>
+				<div class="p2">注册时间：{{value.zhuce_time}} <span>{{value.catname}}</span></div>
+				<div class="line"></div>
+				<div class="p3">￥{{value.shop_price}}</div>
+			</div>
+			<div class="rboxBottom">
+				<div class="rboxBottomShow">
+					<div class="boxWords">
+						<p>粉丝数量</p>
+						<div>{{value.fensi_num*0.0001|moneyFormat}}W+</div>
+					</div>
+					<div class="boxWords">
+						<p>注册年限</p>
+						<div>{{value.zhuce_time}}年</div>
+					</div>
+					<div class="boxWords">
+						<p>认证类型</p>
+					    {{if value.renzheng_type==1}}
+						<div>个人</div>
+						{{else}}
+						<div>企业</div>
+						{{/if}}
+					</div>
+					<div class="boxWords">
+						<p>有无处罚</p>
+						{{if value.is_chufa==1}}
+						<div>有</div>
+						{{else}}
+						<div>无</div>
+						{{/if}}
+					</div>
+				</div>
+				<div class="rboxBottomHover">
+					<a href="https://wpa.qq.com/msgrd?v=3&uin={{value.qq}}&Site=fcc%E5%95%86%E5%9F%8E&Menu=yes">
+						<div class="sBoxChat">
+							在线咨询
+						</div>
+					</a>
+					<a href="/home/goods/goodsinfo?id={{value.goods_id}}">
+						<div class="sBoxChat1">
+							查看详情
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+		{{/each}}
+	</script>
+	
+	<!--首页动态模板-->
+	<script type="text/template" id="dongtai">
+		{{each val value key}}
+		{{if key===0}}
+		<div class="articleHead">
+			<img src="{{value.thumb}}" alt="">
+			<h2>{{value.title}}</h2>
+			<a href="/home/article/id={{value.article_id}}">
+				<p>
+					{{value.description}}
+				</p>
+			</a>
+			<h3>{{value.publish_time*1000|dateFormat:'yyyy-MM-dd'}}</h3>
+		</div>
+		{{else if key===3}}
+		<div class="articleBody">
+			<a href="/home/article/id={{value.article_id}}">
+				<div class="articleBodyLine">
+					<p>{{value.title}}</p>
+					<h3>{{value.publish_time*1000|dateFormat:'yyyy-MM-dd'}}</h3>
+				</div>
+			</a>
+		</div>
+		<div class="lookMore">
+			<a href="/home/article/articleList">查看更多</a>
+		</div>
+		{{else}}
+		<div class="articleBody">
+			<a href="/home/article/id={{value.article_id}}">
+				<div class="articleBodyLine">
+					<p>{{value.title}}</p>
+					<h3>{{value.publish_time*1000|dateFormat:'yyyy-MM-dd'}}</h3>
+				</div>
+			</a>
+		</div>
+		{{/if}}
+		{{/each}}
+	</script>
+	
+	
+	<!--首页新闻模板-->
+	<script type="text/template" id="new">
+		{{each val value key}}
+		{{if key===0}}
+		<div class="articleHead">
+			<img src="{{value.topic_image}}" alt="">
+			<h2>{{value.topic_title}}</h2>
+			<a href="/home/topic/info?id={{value.topic_id}}">
+				<p>
+					{{value.topic_description}}
+				</p>
+			</a>
+			<h3>{{value.ctime*1000|dateFormat:'yyyy-MM-dd'}}</h3>
+		</div>
+		{{else if key===3}}
+		<div class="articleBody">
+			<a href="/home/topic/info?id={{value.topic_id}}">
+				<div class="articleBodyLine">
+					<p>{{value.topic_title}}</p>
+					<h3>{{value.ctime*1000|dateFormat:'yyyy-MM-dd'}}</h3>
+				</div>
+			</a>
+		</div>
+		<div class="lookMore">
+			<a href="/home/topic/topicList">查看更多</a>
+		</div>
+		{{else}}
+		<div class="articleBody">
+			<a href="/home/topic/info?id={{value.topic_id}}">
+				<div class="articleBodyLine">
+					<p>{{value.topic_title}}</p>
+					<h3>{{value.ctime*1000|dateFormat:'yyyy-MM-dd'}}</h3>
+				</div>
+			</a>
+		</div>
+		{{/if}}
+		{{/each}}
+	</script>
+	
+	
+	<!--首页问答模板-->
+	<script type="text/template" id="qes">
+		{{each val value}}
+		<a href="/home/rmwd?id={{value.shid}}">
+			<div class="qName">问：{{value.k_wen}}</div>
+			<div class="aBody">答：{{value.k_da}}</div>
+		</a>
+		{{/each}}
+	</script>
+	
+	
+	<script type="text/template" id="kf">
+		{{each val value}}
+		<div class="kfSmallBox">
+		<div class="kfimgBox">
+		<img src="{{value.head_pic}}" alt="">
+		</div>
+			<h2>{{value.user_name}}</h2>
+			{{if value.leibie==1}}
+			<p>短视频转让</p>
+			{{else if value.leibie==2}}
+			<p>自媒体转让</p>
+			{{else if value.leibie==3}}
+			<p>微博号转让</p>
+			{{else}}
+			<p>微信公众号转让</p>
+			{{/if}}
+			<div class="zxBox">
+				<a href="https://wpa.qq.com/msgrd?v=3&uin={{value.qq}}&Site=fcc%E5%95%86%E5%9F%8E&Menu=yes">在线咨询</a>
+				<div class="vxzx">微信咨询</div>
+			</div>
+			<div class="VXCode">
+				<img src="{{value.erwei_pic}}" alt="">
+			</div>
+		</div>
+		{{/each}}
+	</script>
+	
+	
+	
+	
+	
+	
+	<script>
+		var indexkf=$(".indexkf")
+		//客服
+		ajaxGetData('/home/Ajaxapi/kefu?num=4&pingtai=1', 'get',{})
+			.then(res => {
+				var mydata = res
+				var html = template('kf', {
+					val: mydata
+				});
+				indexkf.find('.kfBox').html(html); 
+			}).catch(err => {
+				console.log(err)
+		})
+		
+		
+		
+		var news=$(".new")
+		//动态
+		ajaxGetData('/home/Index/dongtai', 'post',{d:4})
+			.then(res => {
+				var mydata = res
+				var html = template('dongtai', {
+					val: mydata
+				});
+				news.find('.newBody1').html(html); 
+			}).catch(err => {
+				console.log(err)
+		})
+		
+		
+		
+		//新闻
+		ajaxGetData('/home/Index/news_z', 'post',{d:4})
+			.then(res => {
+				var mydata = res
+				var html = template('new', {
+					val: mydata
+				});
+				news.find('.newBody2').html(html); 
+			}).catch(err => {
+				console.log(err)
+		})
+		
+		
+		
+		//问答
+		ajaxGetData('/home/Index/shcf', 'post',{d:4})
+			.then(res => {
+				console.log(res)
+				var mydata = res
+				var html = template('qes', {
+					val: mydata
+				});
+				news.find('.newRbody').html(html); 
+			}).catch(err => {
+				console.log(err)
+		})
+		
+		
+		
+		
+		
+		
+		
+		var weMedia = $(".weMedia")
+		//公众号
+		ajaxGetData('/home/Lists/ajax_goods', 'post', {goods_type: 4})
+			.then(res => {console.log(res)
+				var gzh = res
+				var html = template('gzhBox', {
+					val: gzh
+				});
+				weMedia.find('.weMediaRight0').html(html); 
+			}).catch(err => {
+				console.log(err)
+		})
+		
+		//微博号
+		ajaxGetData('/home/Lists/ajax_goods', 'post', {goods_type: 3})
+			.then(res => {
+				var gzh = res
+				var html = template('gzhBox', {
+					val: gzh
+				});
+				weMedia.find('.weMediaRight1').html(html); 
+			}).catch(err => {
+				console.log(err)
+		})
+		
+		//头条号
+		ajaxGetData('/home/Lists/ajax_goods', 'post', {pingtai_id: 18})
+			.then(res => {
+				var gzh = res
+				var html = template('gzhBox', {
+					val: gzh
+				});
+				weMedia.find('.weMediaRight2').html(html); 
+			}).catch(err => {
+				console.log(err)
+		})
+		
+		
+		
+		
+		
+		var shortVideo = $(".shortVideo")
+		
+		//抖音号
+		ajaxGetData('/home/Lists/ajax_goods', 'post', {pingtai_id: 1})
+			.then(res => {
+				var gzh = res
+				var html = template('gzhBox', {
+					val: gzh
+				});
+				shortVideo.find('.shortVideoRight0').html(html); 
+			}).catch(err => {
+				console.log(err)
+		})
+		
+		
+		//快手号
+		ajaxGetData('/home/Lists/ajax_goods', 'post', {pingtai_id: 2})
+			.then(res => {
+				var gzh = res
+				var html = template('gzhBox', {
+					val: gzh
+				});
+				shortVideo.find('.shortVideoRight1').html(html); 
+			}).catch(err => {
+				console.log(err)
+		})
+		
+		
+		
+		function goSearch(){
+			var myChoose=$("#myChoose option:selected").val()
+			var mySearchWords=$("#mySearchWords").val()
+			window.location.href = "/home/lists?l="+myChoose+"-------"+mySearchWords;
+		}
+		
+		
+		
+		$("body").delegate(".vxzx","mouseover",function(){
+			$(this).parent().parent().find(".VXCode").css("top","0")
+		})
+		$("body").delegate(".vxzx","mouseout",function(){
+			$(this).parent().parent().find(".VXCode").css("top","-300px")
+		})
+		
+		
+		$(".newP").hover(function(){
+			$(".newP").removeClass("newChooseLine")
+			$(".newBody").css("display","none")
+			$(this).addClass("newChooseLine")
+		})
+		$(".newP1").hover(function(){
+			$(".newBody1").css("display","block")
+		})
+		$(".newP2").hover(function(){
+			$(".newBody2").css("display","block")
+		})
+		
+		
+		$(function() {
+			$(".rightBox").css("display", "none")
+			$(".weMediaRight0").css("display", "block")
+
+			$(".rightBoxs").css("display", "none")
+			$(".shortVideoRight0").css("display", "block")
+		})
+
+		$(".leftsBox").hover(function() {
+			$(".leftsBox").removeClass("leftsBoxHover")
+			$(this).addClass("leftsBoxHover")
+		})
+
+		$(".leftsBoxs").hover(function() {
+			$(".leftsBoxs").removeClass("leftsBoxHover")
+			$(this).addClass("leftsBoxHover")
+		})
+
+
+		$(".leftsBox0").hover(function() {
+			$(".rightBox").css("display", "none")
+			$(".weMediaRight0").css("display", "block")
+		})
+		$(".leftsBox1").hover(function() {
+			$(".rightBox").css("display", "none")
+			$(".weMediaRight1").css("display", "block")
+		})
+		$(".leftsBox2").hover(function() {
+			$(".rightBox").css("display", "none")
+			$(".weMediaRight2").css("display", "block")
+		})
+
+
+		$(".leftsBoxs0").hover(function() {
+			$(".rightBoxs").css("display", "none")
+			$(".shortVideoRight0").css("display", "block")
+		})
+		$(".leftsBoxs1").hover(function() {
+			$(".rightBoxs").css("display", "none")
+			$(".shortVideoRight1").css("display", "block")
+		})
+		$(".leftsBoxs2").hover(function() {
+			$(".rightBoxs").css("display", "none")
+			$(".shortVideoRight2").css("display", "block")
+		})
+	</script>
+	<script>
+		
+		//日期
+		function dateFormat(date, format) {
+		date = new Date(date);
+		var map = {
+		"M": date.getMonth() + 1,
+		"d": date.getDate(),
+		"h": date.getHours(),
+		"m": date.getMinutes(),
+		"s": date.getSeconds(),
+		"q": Math.floor((date.getMonth() + 3) / 3),
+		"S": date.getMilliseconds() 
+		};
+		format = format.replace(/([yMdhmsqS])+/g, function(all, t){
+		var v = map[t];
+		if(v !== undefined){
+		if(all.length > 1){
+		v = '0' + v;
+		v = v.substr(v.length-2);
+		}
+		return v;
+		}
+		else if(t === 'y'){
+		return (date.getFullYear() + '').substr(4 - all.length);
+		}
+		return all;
+		});
+		return format;
+		};
+		template.defaults.imports.dateFormat = dateFormat;
+		
+		
+		
+		
+		//金额
+		template.defaults.imports.moneyFormat = function (money) {
+		if(money){
+		return money.toFixed(2);
+		}
+		return "0.00";
+		}
+	</script>
+</html>

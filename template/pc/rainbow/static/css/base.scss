@@ -1,0 +1,43 @@
+/* CSS 常用 */
+body, ul, ol, dl, li, dd, h1, h2, h3, h4, h5, h6, p, input { margin: 0;padding: 0; }
+h1, h2, h3, h4, h5, h6 { font-size: 100%; font-weight: normal; font-family: "Microsoft YaHei"; }
+img { border: none }
+input, button, textarea, select {*font-size: 100%; border: none; }
+body { background: #fff; color: #5e5e5e; font: 14px/24px Microsoft YaHei, SimSun, Arial; }
+ul, ol { list-style: none; padding: 0 }
+table { border-collapse: collapse; border-spacing: 0 }/*默认a标签样式*/
+/* 默认不显示下划线，保持页面简洁 */
+ins,a {text-decoration:none;}
+/* 去除 ie6 & ie7 焦点点状线 */
+a:focus,*:focus {outline:none;}
+/* 清除浮动 */
+.clearfix:before,.clearfix:after {
+    content:"";
+    display:table;
+}
+.clearfix:after {
+    clear:both;
+    overflow:hidden;
+}
+.clearfix {
+    zoom:1; /* for ie6 & ie7 */
+}
+/* 版心*/
+.w1224{
+    width: 1224px;
+    margin: 0 auto;
+}
+body{
+	background: #f4f4f4;
+}
+/* CSS 常用End */
+/*封装的sass*/
+$themeColor: #5B64DE;
+/*封装的sass End*/
+/*公共样式*/
+/*主题颜色*/
+.themeColor{
+	color: $themeColor;
+}
+
+/*公共样式End*/

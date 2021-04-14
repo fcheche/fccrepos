@@ -1,0 +1,232 @@
+<include file="public/header" title="预约管理"  body=""/>
+<include file="public/header_nav" title="预约管理"  href="javascript:history.back(-1);"/>
+
+
+    <!--商品列表-s-->
+    <div id="goods_list">
+        <empty name="goods_list">
+            <p class="goods_title" id="goods_title" style="line-height: 100px;text-align: center;margin-top: 30px;">抱歉暂时没有相关结果，换个筛选条件试试吧</p>
+        <else />
+            <!--商品-s-->
+            <foreach name="goods_list" item="vo" key="k">
+                <div class="orderlistshpop p"  >
+                    <div class="maleri30">
+                        <!-- <a href="{:U('Mobile/Goods/goodsInfo',array('id'=>$vo[goods_id]))}" class="item"> -->
+                            <div class="sc_list se_sclist">
+                               
+                                <div class="deleshow fr" style="width: 100%;padding-left: 2.5rem;">
+                                    <div class="deletes">
+                                        <span class="similar-product-text fl">单位名称：{$vo.company}</span><span class="similar-product-text fl">经办人姓名：{$vo.username}/{$vo.tel}</span>
+                                    </div>
+                                    <div class="prices">
+                                        <p class="sc_pri fl" style="font-size: 0.5rem;"><span>申请时间：{:date('Y-m-d',$vo[time])}{$vo[time2]}</span></p>
+                                        
+                                    </div>
+                                    <div class="prices">
+                                        <p class="sc_pri fl" style="font-size: 0.5rem;"><span>提交时间：{:date('Y-m-d H:i:s',$vo[addtime])}</span></p>
+                                    </div>
+                                    <!-- <p class="weight"><span>{$vo[comment_count]}</span><span>条评价</span></p> -->
+                                </div>
+                            </div>
+                        <!-- </a> -->
+                    </div>
+                </div>
+            </foreach>
+
+            <!--商品-e-->
+        </empty>
+    </div>
+    <!--商品列表-e-->
+
+
+   
+
+<script>
+        //确定按钮
+        $('.suce_ok').click(function(){
+            //判断当前二级筛选状态
+            if($('.suce_ok').is('.two')) {
+//                        get_parment += 'spec=@'+key+'_'+val.join('_');
+////                        $('.screen_wi,.popcover,.one-related').show();
+////                        $('.two-related').hide();
+////                        $('.sx_jsxz').html('筛选');
+////                        $('.suce_ok').removeClass('two');
+                var t=$('#key').attr('class');
+                submitMoreFilter(t);
+            }else{
+                var sel = $('.sel').val();
+                // 组装请求的url
+                var url = '';
+                for ( var k in get_parment )
+                {
+                    if(k != 'a' && k != 'c' && k != 'm' && k!='price'){
+                        url += "&"+k+'='+get_parment[k];
+                    }
+                }
+                if(sel){
+                    url += '&sel='+sel;
+                }
+                location.href= "/index.php?m=Mobile&c=Goods&a=search"+url;
+            }
+        })
+        //返回按钮
+        $('.seac_retu').click(function(){
+            //判断当前二级筛选状态
+            if($('.suce_ok').is('.two')){
+                $(".filterspec").each(function(i,o){
+                    //去掉全部选择
+                    $(o).find('.fr input').attr('checked',false);
+                });
+                $('#key').removeAttr('class');
+                //显示一级筛选
+                $('.screen_wi,.popcover,.one-related').show();
+                $('.two-related').hide();
+                $('.sx_jsxz').html('筛选');
+                $('.suce_ok').removeClass('two');
+            }else{
+                $('.screen_wi').animate({width: '0', opacity: 'hide'}, 'normal',function(){
+                    undercover();
+                    $('.screen_wi').hide();
+                });
+            }
+        })
+    //筛选弹窗的品牌筛选
+    function filtercriteria(criteria){
+        $('#key').addClass(criteria);
+        $('.filter').show();
+        $('.tow-price').hide();
+    }
+
+    //筛选弹窗的价格筛选
+    function filterprice(){
+        $('.tow-price').show();
+        $('.filter').hide();
+    }
+
+    //加载更多商品
+    var  page = 1;
+    /*** ajax 提交表单 查询订单列表结果*/
+    function ajax_sourch_submit(){
+        page += 1;
+        $.ajax({
+            type : "GET",
+            url:"{:U('Mobile/Goods/search')}",//+tab,
+            data:{id:'{$Request.param.id}',sort:'{$Request.param.sort}',sort_asc:'{$Request.param.sort_asc}',sel:'{$Request.param.sel}',q:$('#q').val(),is_ajax:1,p:page},
+            success: function(data)
+            {
+                if($.trim(data) == '')
+                    $('#getmore').hide();
+                else
+                    $("#goods_list").append(data);
+            }
+        });
+    }
+
+    //筛选菜单栏切换效果
+    var lb = $('.search_list_dump .lb')
+    var fil = $('.fil_all_comm');
+    var cs = $('.classreturn,.search_list_dump');
+    var son = $('.search_list_dump .jg').siblings();
+    $(function(){
+    $('.storenav ul li span').click(function(){
+        $(this).parent().parent().addClass('red').siblings('li').removeClass('red')
+        if(!$(this).hasClass('lb')){
+            fil.hide();
+            undercover();
+            cs.removeClass('pore');
+        }
+        if(!$(this).hasClass('jg')){
+            son.removeClass('bpr1');
+            son.removeClass('bpr2');
+        }
+    });
+
+
+    //综合
+    lb.click(function(){
+        fil.show();
+        cover();
+        cs.addClass('pore');
+    });
+
+    lb.html($('.on').html());
+
+
+     //显示隐藏筛选弹窗
+    $('.search_list_dump .sx').click(function(){
+        $('body').css('position','relative');
+        $('.screen_wi').animate({width: '14.4rem', opacity: 'show'}, 'normal',function(){
+            $('.screen_wi').show();
+            cover();
+        });
+    })
+
+    //  筛选顶部 筛选1-popcover
+    $('.popcover ul li span').click(function(){
+        //给span添加样式，并给其子代input添加class
+        $(this).addClass('ch_dg').find('input').addClass('sel');
+        $(this).parent('li').siblings('li').find('span').removeClass('ch_dg')
+                .find('input').removeClass('sel');
+    })
+
+    // 一级筛选条件筛选2-one-related
+    $('.one-related .myorder .order').click(function(){
+        $('.two-related').show();
+        $('.suce_ok').addClass('two');
+        $('.tow-price,.one-related,.popcover').hide();
+        $('.sx_jsxz').html($(this).find('.fl span').text());
+    })
+
+    //筛选3-two-related
+    $(function(){
+        $('.two-related .myorder .order').click(function(){
+            var mright = $(this).find('.fr i');
+            var input = mright.find("input");
+            mright.toggleClass('Mright');
+            //改变复选框状态
+            mright.hasClass('Mright') ? input.attr('checked',true) : input.attr('checked',false);
+        })
+    })
+
+    //切换商品排列样式
+    $('.listorimg').click(function(){
+        $(this).toggleClass('orimg');
+        $('#goods_list').toggleClass('addimgchan');
+    })
+})
+
+    //############   点击多选确定按钮      ############
+    // t 为类型  是品牌 还是 规格 还是 属性
+    // btn 是点击的确定按钮用于找位置
+    get_parment = <?php echo json_encode($_GET); ?>;
+    function submitMoreFilter(t){
+        var val = new Array();  // 请求的参数值
+        $(".filter").each(function(i,o){
+            var che=$(o).find('.fr input');
+            if(che.attr('checked')){    //选中的值
+                val.push(che.val());
+            }
+        });
+        // 没有被勾选的时候
+        if(key == ''){
+            return false;
+        }
+        // 品牌
+        if(t == 'brand')
+        {
+            get_parment.brand_id = val.join('_');
+        }
+
+        // 组装请求的url
+        var url = '';
+        for ( var k in get_parment )
+        {
+            if(k != 'a' && k != 'c' && k != 'm') {
+                url += "&" + k + '=' + get_parment[k];
+            }
+        }
+        location.href ="/index.php?m=Mobile&c=Goods&a=search"+url;
+    }
+</script>
+</body>
+</html>

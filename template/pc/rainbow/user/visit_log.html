@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>我的足迹</title>
+	<script type="text/javascript" src="__STATIC__/js/publicJs.js"></script>
+	<link rel="stylesheet" type="text/css" href="__STATIC__/css/userIndex.css">
+	<style type="text/css">
+		.personerinfro{
+			width: 100%;
+    		float: left;
+		}
+		.menumain{
+			padding: 30px 15px 40px;
+		}
+		.menumain:before, .menumain:after {
+		    content: "";
+		    clear: both;
+		    display: block;
+		}
+		.m-prod-list {
+		    width: 1014px;
+		}
+
+		.m-prod-list {
+		    float: left;
+		}
+		.shop-list-splb {
+		    margin-bottom: 20px;
+		}
+
+		.feetprin .u-title {
+		    position: relative;
+		    height: 28px;
+		    line-height: 28px;
+		    padding-left: 5px;
+		}
+
+		.feetprin .u-title .z-date {
+		    font-size: 14px;
+		    font-weight: 600;
+		}
+
+		.feetprin .u-title span {
+		    margin-left: 15px;
+		}
+		.feetprin .u-title span {
+		    margin-left: 15px;
+		}
+		.feetprin ul {
+		    overflow: hidden;
+		    padding-left: 5px;
+		}
+		.shop-list-splb>ul>li {
+		    margin-top: 10px;
+		}
+		.shop-list-splb>ul>li:hover {
+		    transition: 0.3s;
+		}
+		.feetprin ul li {
+		    position: relative;
+		    margin-left: 10px;
+		    width: 232px;
+		    margin-bottom: 10px;
+		    float: left;
+		    border-radius: 10px;
+		    transition: 0.3s;
+		    background-color: #f5f5f5;
+		}
+		.s_xsall {
+		    height: 110px;
+		    padding: 5px;
+		}
+		.shop_name2 {
+		    width: 100%;
+		    text-align: left;
+		    margin-top: 28px;
+		    height: 30px;
+		    overflow: hidden;
+		    text-overflow: ellipsis;
+		    white-space: nowrap;
+		    float: left;
+		}
+		.shop_name2 a{
+		    color: #333;
+		    font-size: 16px;
+		    font-weight: bold;
+		}
+		.price-tag {
+		    padding: 15px 0;
+		    font-size: 18px;
+		    color: #ec3737;
+		    text-align: left;
+		    clear: both;
+		}
+		.now .li_xfo {
+		    font-size: 22px;
+		    font-weight: bold;
+		}
+		.feetprin ul li .dele {
+		    right: -3px;
+    		top: -5px;
+		    /*background-color: #f5f5f5;*/
+		    display: none;
+		}
+		.feetprin ul li:hover .dele {
+		    display: block;
+		}
+		.dele:hover {
+		    background-position-x: -62px;
+		}
+		.dele {
+		    cursor: pointer;
+		    width: 41px;
+		    height: 41px;
+		    position: absolute;
+		    right: 0px;
+		    top: -8px;
+		    background: url(__STATIC__/img/user/dele.png) 11px center no-repeat;
+		}
+	</style>
+</head>
+<body>
+<include file="user/userHeader">
+<div class="userContent">
+	<include file="user/userMenu">
+	<div class="userCont">
+		<div class="userTitle">我的足迹</div>
+		<div class="personerinfro">
+            <div class="menumain">
+                <div class="feetprin">
+                    <div class="shop-list-splb m-prod-list">
+                        <!--足迹 -s-->
+                        <foreach name="visit_log" key="key2" item="vo">
+                            <div class="u-title">
+                                <span class="z-date">{$key2}</span>
+                                <span class="z-time">{$vo[0][visittime]|date='Y-m-d',###}</span>
+								<span class="z-del">
+									<a class="J-delHistory" style="display:none" href="javascript:;" type="2" text="2016-12-13">删除</a>
+								</span>
+                            </div>
+                            <ul>
+                                <!--商品-s-->
+                                <volist name="vo" id="vv">
+                                    <li>
+                                        <div class="s_xsall">
+                                            <div class="shop_name2">
+                                                <a href="{:U('Home/Goods/goodsInfo',array('id'=>$vv['goods_id']))}">
+                                                    {$vv.goods_name}
+                                                </a>
+                                            </div>
+                                            <div class="price-tag">
+                                                <span class="now"><span class="li_xfo">￥{$vv[shop_price]*0.0001|number_format=###,2,'.',''}万</span></span>
+                                            </div>
+                                        </div>
+                                        <div class="dele" onclick="del_visit({$vv['visit_id']})"></div>
+                                    </li>
+                                </volist>
+                                <!--商品-e-->
+                            </ul>
+                        </foreach>
+                        <!--足迹 -e-->
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+</body>
+<script type="text/javascript">
+	$(function(){
+		$('.foot-print ul li').click(function(){
+			$(this).addClass('red').siblings().removeClass('red');
+		})
+	})
+	function del_visit(visit_id){
+		console.log(visit_id)
+		ajaxGetData(urlList.user.delVisitLog,'post',{"visit_id": visit_id}).then(data => {
+			console.log(data)
+    		if(data.status == 1){
+    			showMsg(data.msg,1,function () {
+					window.location.reload()
+				})
+			}else{
+				showMsg(data.msg,2)
+			}
+    	})
+	}
+</script>
+</html>

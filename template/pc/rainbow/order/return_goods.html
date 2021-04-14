@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>售后申请</title>
+    <script type="text/javascript" src="__STATIC__/js/publicJs.js"></script>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/userIndex.css">
+    <style>
+        .afterSaleWrap{
+            padding: 20px;
+        }
+        .afterSaleWrap .asTop{
+            padding-bottom: 30px;
+        }
+        .afterSaleWrap .asTop .asTopTable{
+            width: 100%;
+            text-align: center;
+        }
+        .asTopTable th{
+            background: #f5f5f5;
+            padding: 5px 0;
+            height: 30px;
+            width: 18%;
+            color: #333;
+            border-right: 1px solid #f2f2f2;
+        }
+        .asTopTable  td{
+            padding: 10px 0;
+            border: 1px solid #f2f2f2;
+        }
+        .asTopTable  .price{
+            color: #ff0000;
+        }
+        .asTopNote{
+            font-size: 12px;
+            padding: 15px;
+        }
+        .afterSaleWrap .asMiddle{
+            border: 1px solid #e6e6e6;
+            padding: 10px 50px;
+        }
+
+        .asMiddle .item{
+            line-height: 50px;
+            width: 100%;
+            overflow: hidden;
+        }
+        .asMiddle .itemTitle,
+        .asBottom .itemTitle{
+            color: #666;
+            float: left;
+        }
+        .asMiddle .itemRight{
+            float: left;
+            padding-left: 20px;
+        }
+        .asMiddle .itemRightSelect{
+            border: 1px solid #ddd;
+            height: 30px;
+        }
+        .asMiddle textarea{
+            width: 500px;
+            height: 140px;
+            border: 1px solid #ddd;
+            margin-top: 20px;
+            padding: 5px;
+        }
+        .asMiddle .itemNote,
+        .asBottom .asBottomNote{
+            color: #666;
+            font-size: 12px;
+        }
+        .afterSaleWrap .asBottom{
+            border: 1px solid #e6e6e6;
+            padding: 10px 50px;
+            margin-top: 20px;
+        }
+        .asBottom .item{
+            line-height: 40px;
+            width: 100%;
+            overflow: hidden;
+        }
+        .asBottom .itemTitle{
+
+        }
+        .asBottom .itemRight{
+            float: left;
+            padding-left: 20px;
+            color: #333;
+            font-size: 12px;
+        }
+        .asBottom .asBottomNote{
+            margin-top: 20px;
+            padding-left: 10px;
+        }
+        .afterSaleWrap .asSubmit{
+            width: 200px;
+            height: 50px;
+            background: #8d7afe;
+            color: #fff;
+            font-size: 18px;
+            text-align: center;
+            line-height: 50px;
+            border-radius: 8px;
+            margin: 30px auto;
+        }
+    </style>
+</head>
+<body>
+<include file="user/userHeader"/>
+<div class="userContent">
+    <include file="user/userMenu">
+    <div class="userCont">
+        <div class="userTitle">售后申请</div>
+        <div class="personerinfro">
+            <!--退货记录-->
+            <form name="return_form" id="return_form" autocomplete="off" method="post">
+                <input type="hidden" name="mobile" id="mobile" value="{$user['mobile']}">
+                <div class="afterSaleWrap">
+                    <div class="asTop">
+                        <table class="asTopTable">
+                            <thead>
+                                <tr>
+                                    <th style="width: 28%;">商品</th><th>平台</th><th>金额</th><th>手续费</th><th>总金额</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <a href="{:U('Home/Goods/goodsinfo',array('id'=>$order['goods_id']))}" target="_blank" >
+                                            名字
+                                        </a>
+                                    </td>
+                                    <td>抖音</td>
+                                    <td class="price">￥<span>52.55</span></td>
+                                    <td class="price">￥<span>5200</td>
+                                    <td class="price">￥<span>7500.00</td>
+                                </tr>
+                            <!-- <tr>
+                                <td>
+                                    <ul class="list-proinfo">
+                                        <li class="fore1" style="text-align: center;">
+                                            <a href="{:U('Home/Goods/goodsinfo',array('id'=>$order['goods_id']))}" target="_blank" >
+                                                {$order['goods_name']}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td>{$order['pingtai_name']}</td>
+                                <td>￥<span>{$order['goods_price']}</span></td>
+                                <td>￥<span>{$order.goods_price*0.1}</td>
+                                <td>￥<span>{$order.total_amount}</td>
+                            </tr> -->
+                            </tbody>
+                        </table>
+                        <div class="asTopNote">
+                            <span style="color: red; "> *温馨提示：
+                                <label>请提前与平台客服协商同意，否则申请将不予通过！</label>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="asMiddle">
+                        <!-- 服务类型 -->
+                        <div class="item">
+                            <span class="itemTitle"><span style="color: red;"> * </span> 服务类型： </span>
+                            <div class="itemRight">
+                                <a href="javascript:void(0);">申请退款<b></b> </a>
+                                <input type="hidden" id="type_reido" name="type" value="0" hidden/>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <span class="itemTitle"><span style="color: red;"> * </span> 退款金额： </span>
+                            <div class="itemRight" style="color: red;">
+                               ￥{$order.return_money}
+                            </div>
+                        </div>
+                        <div class="item">
+                            <span class="itemTitle"><span style="color: red;"> * </span> 提交原因： </span>
+                            <div class="itemRight">
+                                <select class="itemRightSelect" id="reason" name="reason">
+                                <option value="">请选择</option>
+                                <option value="不想买了">不想买了</option>
+                                <option value="已和平台达成退款意见">已和平台达成退款意见</option>
+                                <option value="其他">其他</option>
+                                </select>
+                            </div>
+                            <!-- <div class="clr">请注意保持电话畅通，及时与平台沟通</div> -->
+                        </div>
+                        <!-- 问题描述 外层div-->
+                        <div class="item">
+                            <span class="itemTitle"><span style="color: red;"> * </span> 问题描述： </span>
+                            <div class="itemRight">
+                                <textarea name="describe" id="describe" cols="" rows="" class="area" maxlength="500"></textarea>
+                                <div class="itemNote"> 请您如实填写申请原因及商品情况，字数在10-500字内。 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="asBottom">
+                        <!-- 客服电话 -->
+                        <div class="item">
+                            <span class="itemTitle"><span style="color: red;"> * </span>客服电话：</span>
+                            <div class="itemRight">{$tpshop_config['shop_info_phone']}</div>
+                        </div>
+                        <div class="item">
+                            <span class="itemTitle"><span style="color: red;"> * </span>公司地址：</span>
+                            <div class="itemRight">{$return_address},{$tpshop_config['shop_info_address']}</div>
+                        </div>
+                        <div class="item">
+                            <span class="itemTitle"><span style="color: red;"> * </span>联&nbsp;系&nbsp;人&nbsp;：</span>
+                            <div class="itemRight">{$tpshop_config['shop_info_contact']}</div>
+                        </div>
+                        <div class="asBottomNote">
+                            注意：提交服务单后，售后专员可能与您电话沟通，请保持手机畅通(（后台审核时间为1-3个工作日，如有特殊原因请主动联系客服，谢谢！）
+                        </div>
+                    </div>
+                    <!-- 提交按钮 -->
+                    <div class="asSubmit" id="submitDiv" onclick="submit_form();">
+                        确认提交
+                    </div>
+                </div>
+                <input type="hidden" name="order_id" value="{$order.order_id}" />
+                <input type="hidden" name="order_sn" value="{$order.order_sn}" />
+                <input type="hidden" name="goods_id" value="{$goods.goods_id}" />
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function(){
+        //初始化 - 仅退款
+        $('.clr_unfinished').show();
+        $('.clr_unfinished').children('input').prop('checked',true);
+        $('#type_reido').val(0);
+        $('.clr_achieve').hide();
+    })
+    
+    function submit_form()
+    {
+        // var imgs = $('.return_img');
+        // var img_str = '';
+        // for (var i = 0; i < imgs.length; i++) {
+        //     img_str += imgs.attr('data-img')+',';
+        // }
+        // $('#return_imgs').val(img_str.substring(0,img_str.length-1));
+        var describe = $.trim($('#describe').val());
+        var money = $.trim($('#money').val());
+        var reason = $.trim($('#reason').val());
+        var mobile = $.trim($("input[name='mobile']").val());
+        if(money == '0'){
+            layer.alert('对不起，该订单尚未支付，无法退款!', {icon: 2});// alert('请输入退换货原因!');
+            return false;
+        }
+        if(reason == ''){
+            showMsg('请选择原因!', 2);
+            return false;
+        }
+        if(describe.length<10 || describe.length>500)
+        {
+            showMsg('请按要求输入问题描述!', 2);
+            return false;
+        }
+        if(!checkMobile(mobile) && !checkTelphone(mobile)){
+            showMsg('请输入正确的联系号码!', 2);
+            return false;
+        }
+        $('#return_form').submit();
+    }
+
+    // 上传退货拍照图片
+    // function return_imgs(img) {
+    //     $('#return_img').val();
+    //     $('#i-btns').find('span').each(function(i,o){
+    //         var imgurl = $(this).data('img');
+    //         delimg(imgurl,o)
+    //     })
+    //     $('#i-btns').html('');
+    //     var tpl_list = String(img).split(',');
+    //     for (var i = 0; i < tpl_list.length; i++) {
+    //             var tpl = '<span class="msg-text return_img" onclick="delimg(\'$IMG\',this)" data-img="$IMG">' +
+    //                     '<img src="$IMG" border="0" alt="" style="width: 100px;height: 100px;">' +
+    //                     '</span>';
+    //             var str_do = tpl.replace(/\$IMG/g, tpl_list[i]);
+    //             $('#i-btns').append(str_do);
+    //             $('#return_img').val(tpl_list);
+    //     }
+    // }
+
+    // function delimg(file,t){
+    //     $.get(
+    //         "/index.php?m=Home&c=Uploadify&a=delupload",{action:"del", filename:file},function(){}
+    //     );
+    //     $(t).remove();
+    //     var return_imgs = '';
+    //     $('.return_img').each(function (i,o) {
+    //         return_imgs += $(o).data('img')+',';
+    //     })
+    //     $('#return_img').val(return_imgs.substring(0,return_imgs.length-1));
+    // }
+    
+    // //服务类型切换
+    // $(document).ready(function(){
+    //     $("ul.list-type-new li").click(function(){
+            
+    //         var  typeval= $(this).attr('tvalue')
+    //         if(typeval == 0){   
+    //             //仅退款
+    //             $('.clr_unfinished').show();
+    //             $('.clr_unfinished').children('input').prop('checked',true);
+    //             $('.clr_achieve').hide();
+    //         }else if(typeval == 2){
+    //             //换货
+    //             $('.clr_unfinished').hide();
+    //             $('.clr_achieve').show();
+    //             $('.clr_achieve').children('input').prop('checked',true);
+    //         }else{
+    //             //退款退货
+    //             $('.clr_unfinished').hide();
+    //             $('.clr_achieve').show();
+    //             $('.clr_achieve').children('input').prop('checked',true);
+    //         }
+    //         $('#type_reido').val(typeval);
+    //         $(this).addClass('selected').siblings().removeClass('selected');
+    //         $(this).children('input').trigger('click');
+    //     });
+    // });
+    
+   
+</script>
+</body>
+</html>

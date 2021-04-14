@@ -1,0 +1,148 @@
+  
+<table>
+  <tbody>
+      <volist name="goodsList" id="list">
+         <tr data-id="{$list[goods_id]}" <?php $is_chakan=explode(",", $list['is_chakan']); if(in_array($user_name,$is_chakan)){?> style="background-color:#d9dada" <?php } ?>>
+            <td class="center" >
+              <div style="text-align:center; width:100px;">
+                <span class="btn"><em>
+                  <a href="{:U('Admin/Goods/addEditGoods',array('id'=>$list['goods_id'],'act'=>'read'))}">看</a>
+              <if condition="$status neq 2">
+                    --<a href="{:U('Admin/Goods/addEditGoods',array('id'=>$list['goods_id']))}">编</a>
+                  <if condition="$goods_type eq 1">
+                    --<a target="_blank" href="/Home/shipin/goodsInfo?id={$list['goods_id']}">览</a>
+                  </if>
+                  <if condition="$roleid eq 1 or in_array(19,$act_list)">
+                    --<a href="javascript:void(0);" onclick="publicHandle('{$list[goods_id]}','del','Admin/Goodsdsp/GoodsList')">下</a>
+                  </if>
+              <else>
+                --<a href="{:U('Admin/Goods/huishouzhan',array('id'=>$list['goods_id']))}">删</a>
+              </if>
+                  </em></span>
+              </div>
+            </td>
+            <if condition="$list['goods_type'] neq 3">
+            <td align="center" axis="col0">
+                <div style="text-align: center; width: 60px;">{$list.pingtai_name}</div>
+            </td>
+          </if>
+            <td align="center" axis="col0">
+                <div style="text-align: center; width: 80px;">{$list.cat_name}</div>
+            </td>
+            <td align="center" axis="col0">
+                <div style="text-align: center; width: 150px;">{$list.goods_sn}</div>
+            </td>
+            <td align="center" axis="col0">
+                <div style="text-align: center; width: 300px;">{$list.goods_name|getSubstr=0,40}</div>
+            </td>
+            <td align="center" axis="col0">
+                <div style="text-align: center; width: 100px;">{$list.shop_price}</div>
+            </td>
+            <td align="center" axis="col0">
+                <div style="text-align: center; width: 80px;">{$list.zhuce_time|default='--'}</div>
+            </td>
+            <td align="center" axis="col0">
+                <div style="text-align: center; width: 80px;">
+                  <if condition='$list[fensi_num] gt 10000'>
+                    {$list.fensi_num*0.0001}万
+                  <else>
+                    {$list.fensi_num|default='--'}
+                  </if>
+                </div>
+            </td>
+            <td align="center" axis="col0">
+                <div style="text-align: center; width: 80px;">{$list.guishu|default='--'}</div>
+            </td>
+            <td align="center" axis="col0">
+                <div style="text-align: center; width: 100px;">{$list.on_time|date="Y-m-d",###}</div>
+            </td>
+            <if condition='$status neq 2'>
+            <td align="center" axis="col0">
+                <div style="text-align: center; width: 50px;">
+                  <if condition='$list[is_hot] eq 1'>
+                    <span class="yes" onClick="changeTableVal('goods','goods_id','{$list.goods_id}','is_hot',this)" ><i class="fa fa-check-circle"></i>是</span>
+                  <else />
+                    <span class="no" onClick="changeTableVal('goods','goods_id','{$list.goods_id}','is_hot',this)" ><i class="fa fa-ban"></i>否</span>
+                  </if>
+                </div>
+            </td>
+          </if>
+
+            <td align="center" axis="col0">
+                <div style="text-align: center; width: 80px;">
+                  <if condition='$status eq 2'>
+                      <if condition='$list[is_delete] eq 1'>
+                        <span class="yes" onClick="changeTableVal('goods','goods_id','{$list.goods_id}','is_delete',this)" ><i class="fa fa-check-circle"></i>下架</span>
+                      <else />
+                        <span class="no" onClick="changeTableVal('goods','goods_id','{$list.goods_id}','is_delete',this)" ><i class="fa fa-ban"></i>上架</span>
+                      </if>
+                  <else>
+                      <if condition='$list[is_on_sale] eq 1'>
+                          <span class="yes"><i class="fa fa-check-circle"></i>在售</span>
+                      <elseif condition='$list[is_on_sale] eq 2'>
+                          <span class="no"><i class="fa fa-check-circle"></i>已售</span>
+                      <else>
+                          <span class="no"><i class="fa fa-check-circle"></i>未审核</span>
+                      </if>
+                  </if>
+                </div>
+            </td>
+            <td align="center" axis="col0">
+                <div style="text-align: center; width: 80px;">{$list.shenhe|default='--'}</div>
+            </td>
+              
+                <td align="" class="" style="width: 100%;">
+                  <div>&nbsp;</div>
+                </td> 
+              </tr>
+            </volist>             
+          </tbody>
+        </table>
+        <!-- <h5>(共{$count}条记录)</h5> -->
+        <!--分页位置--> {$page}
+		<script>
+       
+            // 点击分页触发的事件
+            $(".pagination  a").click(function(){
+              var pagelist='pagelist{$goods_type}{$status}';
+                sessionStorage.removeItem(pagelist);
+                cur_page = $(this).data('p');
+                ajax_get_table('search-form2',cur_page);
+                sessionStorage.setItem(pagelist,cur_page);
+                
+              console.log({$pagelist});
+            });
+      
+      /*
+       * 清除静态页面缓存
+       */
+      function ClearGoodsHtml(goods_id)
+      {
+        $.ajax({
+            type:'GET',
+            url:"{:U('Admin/System/ClearGoodsHtml')}",
+            data:{goods_id:goods_id},
+            dataType:'json',
+            success:function(data){
+              layer.alert(data.msg, {icon: 2});                
+            }
+        });
+      }
+      /*
+       * 清除店铺缩列图缓存
+       */
+      function ClearGoodsThumb(goods_id)
+      {
+        $.ajax({
+            type:'GET',
+            url:"{:U('Admin/System/ClearGoodsThumb')}",
+            data:{goods_id:goods_id},
+            dataType:'json',
+            success:function(data){
+              layer.alert(data.msg, {icon: 2});                
+            }
+        });
+      }   
+      
+      
+        </script>

@@ -1,0 +1,138 @@
+<style type="text/css">
+	.rightWrap{
+		position: relative;
+	}
+	#slider{
+		position: absolute;
+		height: 58px;
+		width: 51px;
+		background-color: #5B64DE;
+	}
+	.right{
+		width: 51px;
+    	height: 280px;	
+		position: fixed;
+	    right: 110px;
+    	top: 400px;
+	}
+	.right2{
+	    width: 51px;
+	    height: 280px;
+	    position: fixed;
+	    right: 110px;
+	    z-index: 3;
+	    top: 1100px;
+	}
+	.rightBox{
+	    height: 50px;
+    	width: 51px;
+	    text-align: center;
+    	transition: all .5s;
+		padding-top: 8px;
+		box-sizing: content-box;
+		position: relative;
+	}
+	.rightBox i{
+		color: #5B64DE;
+	    font-size: 24px;
+	    position: absolute;
+	    top: 10px;
+	    left: 13px;
+		box-sizing: content-box!important;
+		line-height: 24px;
+	}
+	.rightBox i:before{
+	}
+	.rightBox p{
+		font-size: 14px;
+		opacity: 0;
+		color: #F8F8F8;
+		transition: all .5s;
+		position: relative;
+	    top: 35px;
+	    height: 19px;
+	}
+	.rightBox:nth-of-type(1) i{
+		color: #F8F8F8;
+	}
+	.rightBox:nth-of-type(1) p{
+		opacity: 1;
+		top: 10px;
+	}
+	/*.rightBox:hover{
+		height: 58px;
+		background-color: #32B9E2;
+	}
+	.rightBox:hover i{
+		color: #F8F8F8;
+	}
+	.rightBox:hover p{
+		opacity: 1;
+		top: 10px;
+	}*/
+</style>
+<!--右侧操作菜单-->
+<div class="right" id="right">
+	<div class="rightWrap">
+		<div id="slider"></div>
+		<div class="rightBox">
+			<a href="{:U('Home/user/login')}" class="noLogin">
+				<i class="iconfont icon-gerenzhongxin"></i>
+				<p>登录</p>
+			</a>
+			<a href="{:U('Home/user/logout')}" class="isLogin">
+				<i class="iconfont icon-gerenzhongxin"></i>
+				<p>退出</p>
+			</a>
+		</div>
+		<div class="rightBox">
+			<a href="https://wpa.qq.com/msgrd?v=3&uin={$tpshop_config.shop_info_qq}&Site=fcc%E5%95%86%E5%9F%8E&Menu=yes" target="_blank">
+				<i class="iconfont icon-kefu-copy"></i>
+				<p>客服</p>
+			</a>
+		</div>
+		<div class="rightBox">
+			<a href="https://wpa.qq.com/msgrd?v=3&uin={$tpshop_config.shop_info_qq}&Site=fcc%E5%95%86%E5%9F%8E&Menu=yes" target="_blank">
+				<i class="iconfont icon-yijianfankui"></i>
+				<p>反馈</p>
+			</a>
+		</div>
+		<div class="rightBox" id="returnBtn" style="display: none;">
+			<a href="javascript:;" onclick="goTop()">
+				<i class="iconfont icon-ziyuanldpi"></i>
+				<p>返回</p>
+			</a>
+		</div>	
+	</div>
+</div>
+<!--右侧操作菜单 End-->
+<script type="text/javascript">
+	$(function(){
+		//用户登录情况
+		userIsLogin();
+	})
+	$(window).on('scroll', function() {
+		var t = $(window).scrollTop();
+		var returnBtn = $('#returnBtn');
+		if(t > 200){
+			returnBtn.css('display','block');
+		}else{
+			returnBtn.css('display','none');
+		}
+	});
+	$('.rightWrap .rightBox').eq(0).find('i').css('color','#F8F8F8');
+	$('.rightWrap .rightBox').eq(0).find('p').css({'opacity':'1','top':'26px'});	
+	$(".rightWrap .rightBox").mouseenter(function() {
+	    $("#slider").animate({
+	        top: $(this).offset().top - $('.rightWrap .rightBox').eq(0).offset().top,
+	    }, 80);
+	    $(this).siblings('.rightBox').find('i').css('color','#5B64DE');
+	    $(this).siblings('.rightBox').find('p').css({'opacity':'0','top':'58px'});
+	    $(this).find('i').css('color','#F8F8F8');
+	    $(this).find('p').css({'opacity':'1','top':'26px'});
+	})
+
+	function goTop(){
+		$('html,body').animate({'scrollTop':0},500);
+	}
+</script>

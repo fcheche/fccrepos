@@ -1,0 +1,163 @@
+<style type="text/css">
+	body{
+		background: #fff;
+	}
+	.userMenu{
+		/*width: 280px;*/
+		width: 15%;
+	    /*height: 900px;*/
+	    float: left;
+	    transition: .5s;
+	}
+	.userMenu .packUp{
+	    /*width: 247px;*/
+	    width: 100%;
+	    height: 60px;
+	    text-align: right;
+	    padding-right: 35px;
+	    line-height: 60px;
+	}
+	.userMenu .packUp img{
+		width: 29px;
+		cursor: pointer;
+	}
+	.userMenu .menuList{
+
+	}
+	.userMenu .menuList .menuLink{
+	    height: 78px;
+	    /*width: 246px;*/
+	    width: 95%;
+	    margin-bottom: 13px;
+	    display: inline-block;
+	    position: relative;
+	    cursor: pointer;
+	}
+	.userMenu .menuLink .hoverBg{
+		width: 6px;
+	    height: inherit;
+		background: linear-gradient(20deg, #b29bfc, #6c5dff 100%);
+		box-shadow: 0px 3px 8px 0px rgba(32, 121, 232, 0.31);
+		border-radius: 0px 4px 6px 0px;
+		position: absolute;
+		z-index: -1;
+		left: 0;
+		transition: all .3s;
+	}
+	.userMenu .menuLink:hover .hoverBg{
+		/*width: 246px;*/
+	    width: 90%;
+	}
+	.userMenu .menuLink:hover .menuListText{
+		color: #fff;
+	}
+	.userMenu .menuLink .menuListText{
+	    color: #4D4D4D;
+	    font-size: 20px;
+	    display: inline-block;
+	    margin-left: 26px;
+	    line-height: 78px;
+	}
+	.userMenu .menuLink.active{
+		text-align: center;
+		background: url("/template/pc/rainbow/static/img/user/act.png") no-repeat;
+		background-size: 15%;
+    	background-position: 15% 50%;
+	}
+	.userMenu .menuLink.active .hoverBg{
+		/*width: 246px;*/
+		width: 90%;
+	}
+	.userMenu .menuLink.active .menuListText{
+		color: #fff;
+		margin: 0;
+	}
+	.userMenu .menuLink .subMenu{
+	    overflow: hidden;
+	    display: none;
+	}
+	.userMenu .menuLink .subLink{
+		color: #4D4D4D;
+		font-size: 18px;
+		padding: 15px 0;
+	    /*width: 246px;*/
+	    width: 90%;
+	    text-align: center;
+	}
+	.userMenu .menuLink .subLink:hover{
+		color: #6C5DFF;
+	}
+</style>
+<div class="userMenu">
+	<div class="packUp" onclick="packUp();">
+		<img src="__STATIC__/img/user/packUp.png" id="packUp">
+	</div>
+	<div class="menuList">
+		<div class="menuLink">
+			<div class="hoverBg"></div>
+			<span class="menuListText">我是买家</span>
+			<ul class="subMenu">
+				<li class="subLink"><a href="/home/user/qiugou">我要求购</a></li>
+				<li class="subLink"><a href="/home/order/order_list">我的订单</a></li>
+			</ul>
+		</div>
+		<div class="menuLink">
+			<div class="hoverBg"></div>
+			<span class="menuListText">我是卖家</span>
+			<ul class="subMenu">
+				<li class="subLink"><a href="/home/user/chushou">我要出售</a></li>
+				<li class="subLink"><a href="/home/user/insellshop">我的商品</a></li>
+			</ul>
+		</div>
+		<div href="" class="menuLink">
+			<div class="hoverBg"></div>
+			<span class="menuListText">财务管理</span>
+			<ul class="subMenu">
+				<li class="subLink"><a href="/home/user/recharge">充值</a></li>
+				<li class="subLink"><a href="/home/user/withdrawals">提现</a></li>
+				<li class="subLink"><a href="/home/user/record">充提记录</a></li>
+			</ul>
+		</div>
+		<div href="" class="menuLink">
+			<div class="hoverBg"></div>
+			<span class="menuListText">我的信息</span>
+			<ul class="subMenu">
+				<li class="subLink"><a href="/home/user/index">个人信息</a></li>
+				<li class="subLink"><a href="/home/user/visit_log">我的足迹</a></li>
+				<li class="subLink"><a href="/home/user/goods_collect">我的收藏</a></li>
+			</ul>
+		</div>
+		<div href="" class="menuLink">
+			<div class="hoverBg"></div>
+			<span class="menuListText">账户安全</span>
+			<ul class="subMenu">
+				<li class="subLink"><a href="/home/user/safety_settings">修改密码</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	var isShow = 1;
+	function packUp(){
+		if (isShow == 1){
+			isShow = 0;
+			$('.userMenu').css('margin-left','-13%');
+			$('#packUp').css('transform','rotate(180deg)');
+		}else{
+			isShow = 1;
+			$('.userMenu').css('margin-left','0');
+			$('#packUp').css('transform','rotate(0deg)');
+		}
+	}
+	var item = sessionStorage.getItem('item');
+	$('.menuLink').each(function(){
+		$('.menuLink').eq(item).trigger('click');
+		$(this).click(function(){
+			sessionStorage.setItem('item',$(this).index())
+			$(this).addClass('active');
+			$(this).siblings('.menuLink').removeClass('active');
+			$(this).find('.subMenu').slideDown();
+			$(this).siblings(".menuLink").find('.subMenu').slideUp();
+		})
+	})
+</script>

@@ -1,0 +1,484 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="__PUBLIC__/static/css/index.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/static/css/perfect-scrollbar.min.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/static/css/purebox.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/static/js/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__PUBLIC__/static/js/jquery.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/static/js/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/static/js/jquery.cookie.js"></script>
+    <style>
+        .contentWarp_item .section_select .item_comment{
+            padding: 83px 0 31px 38px;
+        }
+        .contentWarp_item .section_select .item {
+            padding: 83px 0 38px 38px;
+        }
+         .contentWarp_item .section_select .item_comment{
+            padding: 83px 0 31px 38px;
+        }
+        .contentWarp_item .section_select .item {
+            padding: 83px 0 38px 38px;
+        }
+        @media only screen and (min-width: 900px) and (max-width: 1761px) {
+            .contentWarp_item{
+                margin-right: 1%;
+            }
+            .contentWarp_item .section_select .icon img{
+                max-width: 74px;
+                max-height: 74px;
+            }
+            .contentWarp_item:nth-child(1){
+                    margin-bottom: 10px;
+            }
+        }
+           @media only screen and (min-width: 900px) and (max-width: 1312px) {
+            .contentWarp_item .section_select .item{
+                    width: 35%;
+                    margin-bottom: 10px;
+            }
+            
+        }
+        .allData{
+            width: 700px;
+            margin-right: 28px;
+            background-color: white;
+            float: left;
+            height: 94px;
+        }
+        
+        .table_left_box{
+            float: left;
+            width: 70%;
+            margin: 0 15px;
+        }
+        .table_left_box table tr{
+            height: 30px
+        }
+        .table_left_box table tr td strong{
+            height: 30px;
+            font-size: 15px;
+        }
+         .table_left_box table thead tr th{
+            height: 30px;
+            font-weight: bold;
+            font-size: 20px;
+            color:#1f7492;
+            text-align: center;
+        }
+        .table_left_box table tr:hover{
+            background-color: #e7e7e7
+        }
+        .table_right_box{
+            float: left;
+            width: 20%;
+        }
+        .teamName{
+            height: 25px;
+            text-align: center;
+            font-size: 15px;
+            background-color:#1f7492;
+            color: white
+        }
+        .teamName span{
+            margin: 0 10px;
+            /*border-bottom: 1px solid;*/
+        }
+        .table_right_box table thead tr th{
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+            color: red
+        }
+        .moneyBox{
+            float: left;
+            width: 19.5%;
+            height: 100%;
+        }
+        .allMoney{
+            height: 45px
+        }
+        .allMoney h1{
+            font-size: 17px;
+            margin-top: 5px
+        }
+        .allMoney span{
+            color: red
+        }
+        .allMoneyed h1{
+            font-size: 18px
+        }
+        .allMoneyed span{
+            color: red
+        }
+        .contentWarp_item .section_order_select .newBox{
+            background-color: #1f7492;
+        }
+        .contentWarp_item .section_order_select .newBoxEnd{
+            background-color: #ec5151;
+        }
+        .contentWarp_item .section_order_select .newBox .t{
+            color: white;
+            line-height: 94px
+        }
+        .contentWarp_item .section_order_select .newBoxEnd .t{
+            color: white;
+            line-height: 94px
+        }
+        .contentWarp_item .section_order_select .newBox a{
+            color: white;
+            padding: 0 0
+        }
+        .contentWarp_item .section_order_select .newBoxEnd a{
+            color: white;
+            padding: 0 0
+        }
+    </style>
+</head>
+<body class="iframe_body">
+<div class="warpper">
+    <div class="title">管理中心</div>
+    <span style="color: red">温馨提示：请每月及时更换登陆密码，以防泄露！</span>
+    <div class="content start_content">
+        <div class="contentWarp">
+            <div class="allData clearfix">
+                <div class="moneyBox" style="border-right: 1px solid #e7e7e7">
+                    <div class="allMoney">
+                        <h1>本月业绩:</h1>
+                        <span>9000000</span>
+                    </div>
+                    <div class="allMoneyed">
+                        <h1 id="yejih"></h1>
+                        <span id="yeji"></span>
+                    </div>
+                </div>
+                <div class="moneyBox">
+                    <div class="allMoney">
+                        <h1>自媒体业绩:</h1>
+                        <span>3000000</span>
+                    </div>
+                    <div class="allMoneyed">
+                        <h1 id="tbyejih"></h1>
+                        <span id="tbyeji"></span>
+                    </div>
+                </div>
+                <div class="moneyBox" style="border-right: 1px solid #e7e7e7">
+                    <div class="allMoney">
+                        <h1>短视频业绩:</h1>
+                        <span>3000000</span>
+                    </div>
+                    <div class="allMoneyed">
+                        <h1 id="tmyejih"></h1>
+                        <span id="tmyeji"></span>
+                    </div>
+                </div>
+                <div class="moneyBox">
+                    <div class="allMoney">
+                        <h1>微博业绩:</h1>
+                        <span>3000000</span>
+                    </div>
+                    <div class="allMoneyed">
+                        <h1 id="sbyejih"></h1>
+                        <span id="sbyeji"></span>
+                    </div>
+                </div>
+                <div class="moneyBox">
+                    <div class="allMoney">
+                        <h1>微信业绩:</h1>
+                        <span>3000000</span>
+                    </div>
+                    <div class="allMoneyed">
+                        <h1 id="zlyejih"></h1>
+                        <span id="zlyeji"></span>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="contentWarp_item clearfix">
+                <div class="section_order_select">
+                    <ul>
+                      
+                       <!--  <li class="newBox" style="background-color: #1f9246">
+                            <a href="/admin/Article/read/act/edit/article_id/37">
+                                <div class="t">常用网址</div>
+                            </a>
+                        </li> -->
+                         <!--  <li>
+                            <a href="">
+                                <div class="t" style="color:red">待处理充值</div>
+                                <span class="number">{$recharge}</span>
+                            </a>
+                        </li> -->
+                        <!-- <li>
+                            <a href="">
+                                <div class="t">待处理订单</div>
+                                <span class="number">{$count.handle_order}</span>
+                            </a>
+                        </li> -->
+                       <!--  <li>
+                            <a  href="">
+                                <div class="t">店铺数量</div>
+                                <span class="number">{$count.goods}</span>
+                            </a>
+                        </li> -->
+                        
+                       <!--  <li>
+                            <a href="">
+                                <div class="t">会员总数</div>
+                                <span class="number">7256</span>
+                            </a>
+                        </li> -->
+                        
+                        <li class="newBoxEnd">
+                            <a href="/admin/Article/read/act/edit/article_id/858">
+                                <div class="t">公司公告</div>
+                            </a>
+                        </li>
+                        <!-- <li class="newBox" style="background-color: #b83b39">
+                            <a href="/home/upact">
+                                <div class="t">意外事项报备</div>
+                            </a>
+                        </li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="warpper" style="overflow: hidden;">
+    <div class="table_left_box" id="flexigrid" >
+       <span style="font-weight: bold;font-size: 30px;color: #1f7492;margin-top: 50px;">数据加载中...</span>
+    </div>
+    <div class="table_right_box">
+        <table border="1" width="100%">
+            <thead>
+                <tr>
+                    <th colspan="4">当月业绩排名</th>
+                </tr>
+                <tr>
+                    <th>排名</th>
+                    <th>姓名</th>
+                    <th>业绩</th>
+                </tr>
+            </thead>
+            <tbody>
+                <foreach name="admins" item="vs1" key="ks1" >
+                <tr>
+                    <td><strong>{$ks1+1}</strong></td>
+                    <td>{$vs1.user_name}</td>
+                    <td>{$vs1.dyyeji}</td>
+                </tr>
+             </foreach>
+               
+            </tbody>
+        </table>
+    </div>
+</div>
+<div id="footer" style="position: static; bottom: 0px; font-size:14px;">
+    <p><b>版权所有 © 2012-2027 {$tpshop_config.shop_info_store_name|default=''}，并保留所有权利。</b></p>
+</div>
+<script type="text/javascript">
+    $(function(){
+        $.ajax({
+            type: "POST",
+            url: "/index.php?m=Admin&c=index&a=ajax_wel",//+tab,
+            success: function (data) {
+                $("#flexigrid").html('');
+                $("#flexigrid").append(data);
+            }
+        });
+
+
+        $("*[data-toggle='tooltip']").tooltip({
+            position: {
+                my: "left top+5",
+                at: "left bottom"
+            }
+        });
+    });
+     // ajax 抓取页面 form 为表单id  page 为当前第几页
+   
+        
+</script>
+<script type="text/javascript" src="__PUBLIC__/static/js/jquery.purebox.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/js/echart/echarts.min.js"></script>
+<script type="text/javascript">
+    /*
+       * 修改客服状态
+       */
+
+// 修改指定表的指定字段值 包括有按钮点击切换是否 或者 排序 或者输入框文字
+function changekefu(table,field,id_value,id_name,value) {
+    var r=confirm("你确定要修改客服状态吗？！");
+    if (r==true) {
+        $.ajax({
+        url: "/index.php?m=Admin&c=Index&a=changeTableVal&table=" + table + "&id_name=" + id_name + "&id_value=" + id_value + "&field=" + field + '&value=' + value,
+        success: function (data) {
+            window.location.reload();
+                        layer.msg('更新成功', {icon: 1});
+                }
+            });
+    }
+        
+}
+ //请求ipr数据
+    $.ajax({
+        url:"/admin/Index/admin_yeji",
+        type:'get',
+        dataType: 'json',
+        success:function(data){
+            console.log(data);
+
+            document.getElementById('yejih').innerHTML = '已完成:'+(data.yeji/90000).toFixed(2)+'%';
+            document.getElementById('tbyejih').innerHTML = '已完成:'+(data.tbyeji/30000).toFixed(2)+'%';
+            document.getElementById('tmyejih').innerHTML = '已完成:'+(data.tmyeji/30000).toFixed(2)+'%';
+            document.getElementById('sbyejih').innerHTML = '已完成:'+(data.sbyeji/30000).toFixed(2)+'%';
+            document.getElementById('zlyejih').innerHTML = '已完成:'+(data.zlyeji/30000).toFixed(2)+'%';
+            document.getElementById('yeji').innerHTML = data.yeji
+            document.getElementById('tbyeji').innerHTML = data.tbyeji
+            document.getElementById('sbyeji').innerHTML = data.sbyeji
+            document.getElementById('tmyeji').innerHTML = data.tmyeji
+            document.getElementById('zlyeji').innerHTML = data.zlyeji
+        },error:function(){
+
+        }
+    })
+
+//       function changekefu(table,field,id_value,id_name,value)
+//       {
+//         alert('功能开发中。。。');
+// // var data={table:table,field:field,id_value:id_value,id_name:id_name,};
+//         // alert{data};
+
+//         $.ajax({
+//             type:'GET',
+//             url:"{:U('Admin/Index/changeTableVal')}",
+//             data:{table:table,field:field,id_value:id_value,id_name:id_name,},
+//             dataType:'json',
+//             success:function(data){
+//               layer.alert(data.msg, {icon: 2});                
+//             }
+//         });
+//       }
+      
+    set_statistical_chart(".section_order_count .filter_date a:first", "order", "week"); //初始设置
+    set_statistical_chart(".section_total_count .filter_date a:first", "sale", "week"); //初始设置
+    function set_statistical_chart(obj, type, date)
+    {
+        var obj = $(obj);
+        obj.addClass("active");
+        obj.siblings().removeClass("active");
+
+        $.ajax({
+            type:'get',
+            url:'index.php',
+            data:'act=set_statistical_chart&type='+type+'&date='+date,
+            dataType:'json',
+            success:function(data){
+                if(type == 'order'){
+                    var div_id = "order_main";
+                }
+                if(type == 'sale'){
+                    var div_id = "total_main";
+                }
+                var myChart = echarts.init(document.getElementById(div_id));
+                myChart.setOption(data);
+            }
+        })
+    }
+
+    var option = {
+        title : {
+            text: ''
+        },
+        tooltip : {
+            trigger: 'axis',
+            backgroundColor:"#f5fdff",
+            borderColor:"#8cdbf6",
+            borderRadius:"4",
+            borderWidth:"1",
+            padding:"10",
+            textStyle:{
+                color:"#272727",
+            },
+            axisPointer:{
+                lineStyle:{
+                    color:"#6cbd40",
+                }
+            }
+        },
+        toolbox: {
+            show : true,
+            orient:"vertical",
+            x:"right",
+            y:"60",
+            feature : {
+                magicType : {show: true, type: ['line', 'bar']},
+                saveAsImage : {show: true}
+            },
+        },
+        calculable : true,
+        xAxis : [
+            {
+                type : 'category',
+                boundaryGap : false,
+                axisLine:{
+                    lineStyle:{
+                        color:"#ccc",
+                        width:"0",
+                    }
+                },
+                data : ['07-01','07-02','07-03','07-04','07-05','07-06','07-07']
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value',
+                axisLine:{
+                    lineStyle:{
+                        color:"#ccc",
+                        width:"0",
+                    }
+                },
+                axisLabel : {
+                    formatter: '{value}个',
+                }
+            }
+        ],
+        series : [
+            {
+                name:'订单个数',
+                type:'line',
+                itemStyle:{
+                    normal:{
+                        color:"#6cbd40",
+                        lineStyle:{
+                            color:"#6cbd40",
+                        }
+                    }
+                },
+                data:[0, 5, 8, 3, 10, 15, 2],
+                markPoint : {
+                    itemStyle:{
+                        normal:{
+                            color:"#6cbd40"
+                        }
+                    },
+                    data : [
+                        {type : 'max', name: '最大值'},
+                        {type : 'min', name: '最小值'}
+                    ]
+                }
+            }
+
+        ]
+    }
+//    $("#system_section").click(function(){
+//        $("#system_warp").slideDown();
+//    });
+</script>
+</body>
+
+</html>

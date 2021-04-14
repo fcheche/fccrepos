@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>列表页-{$tpshop_config['shop_info_store_title']}</title>
+		<meta name="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+		<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+		<script type="text/javascript" src="__STATIC__/js/publicJs.js"></script>
+		<title>list</title>
+		<style type="text/css">
+			.goodsBox{
+				width: 280px;
+				    height: 300px;
+				    background-color: white;
+				    border-radius: 5px;
+				    padding: 10px;
+					float: left;
+					margin: 3px;
+			}
+			.rboxTop{
+				height: 170px;
+			}
+			.rboxTop .p1{
+				    color: #333333;
+				    font-size: 16px;
+				    letter-spacing: 0;
+				    overflow: hidden;
+				    display: -webkit-box;
+				    text-overflow: ellipsis;
+				    -webkit-line-clamp: 1;
+				    -webkit-box-orient: vertical;
+			}
+			.rboxTop .p2{
+				    margin-top: 15px;
+				    color: #999999;
+			}
+			.rboxTop .p2 span{
+				    color: #4ABD3B;
+				    background-color: #dbf2d8;
+				    padding: 0 10px;
+				    border-radius: 10px;
+			}
+			.line{
+				background-color: #999999;
+				    width: 50px;
+				    height: 1px;
+				    margin: 23px 0;
+			}
+			.rboxTop .p3{
+				    color: #FB5040;
+				    font-size: 28px;
+				    margin-top: 20px;
+			}
+			.rboxBottom{
+				height: 120px;
+				background-color: #E0E0E0;
+				
+				    position: relative;
+				    overflow: hidden;
+			}
+			.rboxBottomShow{
+				background-color: #E0E0E0;
+				overflow: hidden;
+			}
+			.boxWords{
+				    width: 138px;
+				    float: left;
+				    height: 58px;
+				    margin: 1px;
+				    background-color: #fbfbfb;
+				    text-align: center;
+			}
+			.boxWords p{
+				    color: #999999;
+				    font-size: 14px;
+				    margin: 6px auto 0 auto;
+			}
+			.boxWords div{
+				color: #666666;
+				    font-size: 13px;
+			}
+			.rboxBottomHover{
+				    position: absolute;
+				    width: 100%;
+				    background-color: white;
+				    height: 120px;
+				    top: 120px;
+				    border-top: 1px solid #e7e7e7;
+				    transition: 0.3s;
+			}
+			.sBoxChat{
+				    float: left;
+				    width: 106px;
+				    height: 44px;
+				    text-align: center;
+				    line-height: 44px;
+				    background-color: #5b64de;
+				    color: white;
+				    border-radius: 21px;
+				    margin: 40px 15px;
+			}
+			.sBoxChat1{
+				float: left;
+				    width: 104px;
+				    height: 42px;
+				    text-align: center;
+				    line-height: 42px;
+				    background-color: white;
+				    color: #5b64de;
+				    border-radius: 21px;
+				    border: 1px solid #5b64de;
+				    margin: 40px 15px;
+			}
+			.goodsBox:hover .rboxBottomHover{
+				top:0;
+				transition: 0.3s;
+			}
+			
+			.choosed{
+				 color: #5B64DE;
+			}
+			
+			body{
+				background-color:#EEF2F7 ;
+			}
+			.listNav{
+				width: 1224px;
+				    margin: 10px auto;
+				    overflow: hidden;
+			}
+			.listNavLeft{
+				float: left;
+				    line-height: 30px;
+				    margin-left: 35px;
+			}
+			.listNavLeft a{
+				margin: 0 4px;
+				 color: #5B64DE;
+			}
+			.listNavLeft div{
+				float: right;
+				    border: 1px solid #5B64DE;
+				    color: #5B64DE;
+				    padding: 0 5px;
+				    cursor: pointer;
+				    margin: 0 5px;
+			}
+			.listNavRight{
+				float: right;
+				    height: 30px;
+				    width: 200px;
+				    border: 1px solid #5B64DE;
+				    border-radius: 5px;
+				    overflow: hidden;
+				    background-color: white;
+			}
+			.listNavRight input{
+				border-style: none;
+				    width: 160px;
+				    height: 30px;
+				    padding-left: 20px;
+			}
+			.filtrate{
+				margin: 0 auto;
+				    width: 1224px;
+				    background-color: #F4F4F4;
+					overflow: hidden;
+			}
+			.filtrateBox{
+				overflow: hidden;
+				    margin-bottom: 1px;
+			}
+			.filtrateName{
+				float: left;
+				    width: 10%;
+				    text-align: center;
+				    padding: 8px 0;
+					background-color: #e0e0e0;
+			}
+			.filtrateBody{
+				    float: left;
+				    min-height: 39px;
+				    background-color: white;
+				    width: 90%;
+				    line-height: 39px;
+			}
+			.filtrateBody a{
+				margin: 0 20px;
+				float: left;
+			}
+			.order{
+				width: 1224px;
+				    margin: 20px auto;
+				    background-color: white;
+				    overflow: hidden;
+				    height: 30px;
+				    line-height: 30px;
+			}
+			.order a{
+				float: left;
+				    margin: 0 35px;
+			}
+			.goods{
+				width: 1224px;
+				margin: 0 auto;
+				overflow: hidden;
+			}
+			/*分页 s*/
+			        .operating{
+			            width: calc(100% - 20px);
+			            margin: 0 auto;
+			            background: #fff;
+			            padding: 20px 10px;
+			            text-align: center;
+			        }
+			        .operating .pagination{
+			            /*text-align: center;*/
+			            display: inline-block;
+			        }
+			        .operating .pagination li{
+			            float: left;
+			            width: 35px;
+			            height: 35px;
+			            line-height: 35px;
+			            text-align: center;
+			            border: 1px solid #ddd;
+			            margin-left: 10px;
+			        }
+			        .operating .pagination li a{
+			            color: #8d7afe;
+			            font-size: 16px;
+			        }
+			        .operating .pagination li.active{
+			            background: #8d7afe;
+			            border: 1px solid #8d7afe;
+			        }
+			        .operating .pagination li:not(.active):hover{
+			            background: #f5f5f5;
+			        }
+			        .operating .pagination li.active a{
+			            color: #fff;
+			        }
+			        .operating .pagination li.next,
+			        .operating .pagination li.previous{
+			            width: 60px;
+			        }
+			        /*分页 e*/
+					.listNavRight img{
+						    width: 20px;
+						    float: right;
+						    margin-top: 5px;
+						    cursor: pointer;
+					}
+		</style>
+	</head>
+	<body>
+		<include file="public/header"/>
+		<div class="listNav">
+			<div class="listNavLeft">
+				当前位置：
+				<a href=""><if condition="$urls[0] eq 1">短视频<elseif condition="$urls[0] eq 2">自媒体<elseif condition="$urls[0] eq 3">微博<elseif condition="$urls[0] eq 4">微信<else>短视频</if></a>>
+				
+				<div><a href="/Home/lists">清空筛选</a></div>
+			</div>
+			<div class="listNavRight">
+				<input type="text" placeholder="搜索关键词" id="listSearch">
+				<img src="__STATIC__/img/index/listsousuo.png" onclick="listGoSearch()" alt="">
+			</div>
+		</div>
+		<div class="filtrate">
+			<notempty name="pingtaiList">
+				<div class="filtrateBox">
+					<div class="filtrateName">
+						平台分类
+					</div>
+					<div class="filtrateBody">
+						<foreach name="pingtaiList" item="pv" key="pk">
+		                        <li><a href="/Home/lists/index/l/{$urls[0]}-{$pv['attr_id']}-{$urls[2]}-{$urls[3]}-{$urls[4]}-{$urls[5]}-{$urls[6]}-{$urls[7]}-{$urls[8]}-{$urls[9]}-{$urls[10]}-{$urls[11]}.html" <if condition="$urls[1] eq $pv['attr_id']">class="choosed"</if>>{$pv[attr_name]}</a></li>
+		                </foreach>
+					</div>
+				</div>
+			</notempty>
+			<div class="filtrateBox">
+				<div class="filtrateName" style="height: 101px;">
+					领域分类
+				</div>
+				<div class="filtrateBody">
+					<a href="/Home/lists/index/l/{$urls[0]}-{$urls[1]}-{$urls[2]}-{$urls[3]}-{$urls[4]}-{$urls[5]}-{$urls[6]}-{$urls[7]}-{$urls[8]}-{$urls[9]}-{$urls[10]}-{$urls[11]}.html">不限</a>
+					<foreach name="categoryList" item="cv" key="ck">
+                            <li><a href="/Home/lists/index/l/{$urls[0]}-{$urls[1]}-{$cv['id']}-{$urls[3]}-{$urls[4]}-{$urls[5]}-{$urls[6]}-{$urls[7]}-{$urls[8]}-{$urls[9]}-{$urls[10]}-{$urls[11]}.html" <if condition="$urls[2] eq $cv['id']">class="choosed"</if>>{$cv[name]}</a></li>
+                    </foreach>
+				</div>
+			</div>
+			<div class="filtrateBox">
+				<div class="filtrateName">
+					价格区间
+				</div>
+				<div class="filtrateBody">
+					<a href="/Home/lists/index/l/{$urls[0]}-{$urls[1]}-{$urls[2]}-{$urls[3]}-{$urls[4]}-{$urls[5]}-{$urls[6]}-{$urls[7]}-{$urls[8]}-{$urls[9]}-{$urls[10]}-{$urls[11]}.html">不限</a>
+					<a href="/Home/lists/index/l/{$urls[0]}-{$urls[1]}-{$urls[2]}-1-{$urls[4]}-{$urls[5]}-{$urls[6]}-{$urls[7]}-{$urls[8]}-{$urls[9]}-{$urls[10]}-{$urls[11]}.html" <if condition="$urls[3] eq 1">class="choosed"</if>>5000以下</a>
+					<a href="/Home/lists/index/l/{$urls[0]}-{$urls[1]}-{$urls[2]}-2-{$urls[4]}-{$urls[5]}-{$urls[6]}-{$urls[7]}-{$urls[8]}-{$urls[9]}-{$urls[10]}-{$urls[11]}.html" <if condition="$urls[3] eq 2">class="choosed"</if>>5000-1万</a>
+					<a href="/Home/lists/index/l/{$urls[0]}-{$urls[1]}-{$urls[2]}-3-{$urls[4]}-{$urls[5]}-{$urls[6]}-{$urls[7]}-{$urls[8]}-{$urls[9]}-{$urls[10]}-{$urls[11]}.html" <if condition="$urls[3] eq 3">class="choosed"</if>>1-2万</a>
+					<a href="/Home/lists/index/l/{$urls[0]}-{$urls[1]}-{$urls[2]}-4-{$urls[4]}-{$urls[5]}-{$urls[6]}-{$urls[7]}-{$urls[8]}-{$urls[9]}-{$urls[10]}-{$urls[11]}.html" <if condition="$urls[3] eq 4">class="choosed"</if>>2-5万</a>
+					<a href="/Home/lists/index/l/{$urls[0]}-{$urls[1]}-{$urls[2]}-5-{$urls[4]}-{$urls[5]}-{$urls[6]}-{$urls[7]}-{$urls[8]}-{$urls[9]}-{$urls[10]}-{$urls[11]}.html" <if condition="$urls[3] eq 5">class="choosed"</if>>5-8万</a>
+					<a href="/Home/lists/index/l/{$urls[0]}-{$urls[1]}-{$urls[2]}-6-{$urls[4]}-{$urls[5]}-{$urls[6]}-{$urls[7]}-{$urls[8]}-{$urls[9]}-{$urls[10]}-{$urls[11]}.html" <if condition="$urls[3] eq 6">class="choosed"</if>>8-10万</a>
+					<a href="/Home/lists/index/l/{$urls[0]}-{$urls[1]}-{$urls[2]}-7-{$urls[4]}-{$urls[5]}-{$urls[6]}-{$urls[7]}-{$urls[8]}-{$urls[9]}-{$urls[10]}-{$urls[11]}.html" <if condition="$urls[3] eq 7">class="choosed"</if>>10-15万</a>
+					<a href="/Home/lists/index/l/{$urls[0]}-{$urls[1]}-{$urls[2]}-8-{$urls[4]}-{$urls[5]}-{$urls[6]}-{$urls[7]}-{$urls[8]}-{$urls[9]}-{$urls[10]}-{$urls[11]}.html" <if condition="$urls[3] eq 8">class="choosed"</if>>15-20万</a>
+					<a href="/Home/lists/index/l/{$urls[0]}-{$urls[1]}-{$urls[2]}-9-{$urls[4]}-{$urls[5]}-{$urls[6]}-{$urls[7]}-{$urls[8]}-{$urls[9]}-{$urls[10]}-{$urls[11]}.html" <if condition="$urls[3] eq 9">class="choosed"</if>>20万以上</a>
+				</div>
+			</div>
+			<div class="filtrateBox">
+				<div class="filtrateName">
+					粉丝数量
+				</div>
+				<div class="filtrateBody">
+					<a href="/Home/lists/index/l/{$urls[0]}-{$urls[1]}-{$urls[2]}-{$urls[3]}-{$urls[4]}-{$urls[5]}-{$urls[6]}-{$urls[7]}-{$urls[8]}-{$urls[9]}-{$urls[10]}-{$urls[11]}.html">不限</a>
+					<a href="/Home/lists/index/l/{$urls[0]}-{$urls[1]}-{$urls[2]}-{$urls[3]}-1-{$urls[5]}-{$urls[6]}-{$urls[7]}-{$urls[8]}-{$urls[9]}-{$urls[10]}-{$urls[11]}.html" <if condition="$urls[4] eq 1">class="choosed"</if>>1万以下</a>
+					<a href="/Home/lists/index/l/{$urls[0]}-{$urls[1]}-{$urls[2]}-{$urls[3]}-2-{$urls[5]}-{$urls[6]}-{$urls[7]}-{$urls[8]}-{$urls[9]}-{$urls[10]}-{$urls[11]}.html" <if condition="$urls[4] eq 2">class="choosed"</if>>1-5万</a>
+					<a href="/Home/lists/index/l/{$urls[0]}-{$urls[1]}-{$urls[2]}-{$urls[3]}-3-{$urls[5]}-{$urls[6]}-{$urls[7]}-{$urls[8]}-{$urls[9]}-{$urls[10]}-{$urls[11]}.html" <if condition="$urls[4] eq 3">class="choosed"</if>>5-10万</a>
+					<a href="/Home/lists/index/l/{$urls[0]}-{$urls[1]}-{$urls[2]}-{$urls[3]}-4-{$urls[5]}-{$urls[6]}-{$urls[7]}-{$urls[8]}-{$urls[9]}-{$urls[10]}-{$urls[11]}.html" <if condition="$urls[4] eq 4">class="choosed"</if>>10-20万</a>
+					<a href="/Home/lists/index/l/{$urls[0]}-{$urls[1]}-{$urls[2]}-{$urls[3]}-5-{$urls[5]}-{$urls[6]}-{$urls[7]}-{$urls[8]}-{$urls[9]}-{$urls[10]}-{$urls[11]}.html" <if condition="$urls[4] eq 5">class="choosed"</if>>20-50万</a>
+					<a href="/Home/lists/index/l/{$urls[0]}-{$urls[1]}-{$urls[2]}-{$urls[3]}-6-{$urls[5]}-{$urls[6]}-{$urls[7]}-{$urls[8]}-{$urls[9]}-{$urls[10]}-{$urls[11]}.html" <if condition="$urls[4] eq 6">class="choosed"</if>>50-100万</a>
+					<a href="/Home/lists/index/l/{$urls[0]}-{$urls[1]}-{$urls[2]}-{$urls[3]}-7-{$urls[5]}-{$urls[6]}-{$urls[7]}-{$urls[8]}-{$urls[9]}-{$urls[10]}-{$urls[11]}.html" <if condition="$urls[4] eq 7">class="choosed"</if>>100万以上</a>
+				</div>
+			</div>
+		</div>
+		<div class="order">
+			<a href="/Home/lists/index/l/{$urls[0]}-{$urls[1]}-{$urls[2]}-{$urls[3]}-{$urls[4]}-{$urls[5]}-{$urls[6]}-{$urls[7]}-{$urls[8]}-{$urls[9]}-{$urls[10]}-{$urls[11]}.html">综合排序</a>
+			
+			<if condition="$urls.sort eq 1">
+				<a id="c2" href="/Home/lists/index/sort/2/l/{$urls[0]}-{$urls[1]}-{$urls[2]}-{$urls[3]}-{$urls[4]}-{$urls[5]}-{$urls[6]}-{$urls[7]}-{$urls[8]}-{$urls[9]}-{$urls[10]}-{$urls[11]}.html">
+				    <p>时间排序↓</i></p>
+				</a>
+			<else>
+				<a id="c1" href="/Home/lists/index/sort/1/l/{$urls[0]}-{$urls[1]}-{$urls[2]}-{$urls[3]}-{$urls[4]}-{$urls[5]}-{$urls[6]}-{$urls[7]}-{$urls[8]}-{$urls[9]}-{$urls[10]}-{$urls[11]}.html">
+			    	<p>时间排序↑</p>
+				</a>
+			</if>
+
+			<if condition="$urls.sort eq 3">
+				<a id="p2" href="/Home/lists/index/sort/4/l/{$urls[0]}-{$urls[1]}-{$urls[2]}-{$urls[3]}-{$urls[4]}-{$urls[5]}-{$urls[6]}-{$urls[7]}-{$urls[8]}-{$urls[9]}-{$urls[10]}-{$urls[11]}.html">
+			    	<p>价格排序↓</p>
+				</a>
+			<else>
+				<a id="p1" href="/Home/lists/index/sort/3/l/{$urls[0]}-{$urls[1]}-{$urls[2]}-{$urls[3]}-{$urls[4]}-{$urls[5]}-{$urls[6]}-{$urls[7]}-{$urls[8]}-{$urls[9]}-{$urls[10]}-{$urls[11]}.html">
+				    <p>价格排序↑</p>
+				</a>
+			</if>
+		</div>
+		<div class="goods">
+			<empty name="goods">
+				<p class="ncyekjl" style="font-size: 16px;margin:100px auto;text-align: center;">--暂无合适商品--</p>
+			<else>
+				<foreach name="goods" item="v" key="k">
+					<div class="goodsBox">
+						<div class="rboxTop">
+							<div class="p1"><img src="" alt="">{$v.goods_name}...</div>
+							<div class="p2">商品编号：{$v.goods_sn} <span>美妆</span></div>
+							<div class="line"></div>
+							<div class="p3">￥{$v.shop_price*0.0001}万</div>
+						</div>
+						<div class="rboxBottom">
+							<div class="rboxBottomShow">
+								<div class="boxWords">
+									<p>粉丝数量</p>
+									<div>{$v.fensi_num*0.0001}W+</div>
+								</div>
+								<div class="boxWords">
+									<p>注册年限</p>
+									<div>{$v.zhuce_time}年</div>
+								</div>
+								<div class="boxWords">
+									<p>认证类型</p>
+									<div><if condition="$v.renzheng_type eq 0">未认证<elseif condition="$v.renzheng_type eq 1">个人<elseif condition="$v.renzheng_type eq 2">企业</if></div>
+								</div>
+								<div class="boxWords">
+									<p>有无处罚</p>
+									<div><if condition="$v.is_chufa eq 1">有<elseif condition="$v.is_chufa eq 1">无<else>未知</if></div>
+								</div>
+							</div>
+							<div class="rboxBottomHover">
+								<a href="https://wpa.qq.com/msgrd?v=3&uin={$v.qq}&Site=fcc%E5%95%86%E5%9F%8E&Menu=yes">
+									<div class="sBoxChat">
+										在线咨询
+									</div>
+								</a>
+								<a href="/Home/goods/goodsinfo?id={$v.goods_id}">
+									<div class="sBoxChat1">
+										查看详情
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</foreach>
+			</empty>
+		</div>
+		<div class="operating" id="bottom">
+		    <div class="clearfix">
+		        {$page}
+		    </div>
+		</div>
+		<include file="public/footer"/>
+	</body>
+	<script type="text/javascript">
+		function listGoSearch(){
+			if($("#listSearch").val()==""||$("#listSearch").val()==null||$("#listSearch").val()==undefined){
+				alert("请输入名称")
+			}else{
+				var myChoose={$urls[0]};
+				var mySearchWords=$("#listSearch").val();
+				window.location.href = "/home/lists?l="+myChoose+"-------"+mySearchWords;
+			}
+		}
+	</script>
+</html>

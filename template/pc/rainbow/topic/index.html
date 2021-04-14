@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>蜂车车-{$topic.topic_title}</title>
+		<meta name="keywords" content="{$topic.keyword}" />
+		<meta name="description" content="{$topic.topic_description|getSubstr=0,200}" />
+		<script type="text/javascript" src="__STATIC__/js/publicJs.js"></script>
+		<style type="text/css">
+			.topic_body{
+				width: 1224px;
+			    margin: 0 auto;
+			    padding: 20px;
+			}
+			.topic_tab{
+			    height: 40px;
+			    padding-left: 10px;
+			    border-radius: 5px;
+			    line-height: 40px;
+			    background: #fff;
+			    border: 1px solid #eee;
+			}
+			.topic_tab a{
+			    color: #5b64de;
+			}
+			.topic_tab .title{
+				color: #333;
+			}
+			.topic_navleft{
+			    background: #fff;
+			    border-radius: 5px;
+			    border-left: 1px solid #eee;
+	            border-right: 1px solid #eee;
+	            border-bottom: 1px solid #eee;
+			}
+			.topic_weil{
+    			padding: 50px 20px;
+			}
+			.topicInfoHeader{
+				text-align: center;
+			}
+			.topicInfoHeader h1{
+			    font-size: 20px;
+			    font-weight: bold;
+			    color: #333;
+			}
+			.topicInfoHeader p{
+			    color: #999;
+			    font-size: 14px;
+			    margin-top: 10px;
+			}
+			.topicInfoBody{
+    			margin-top: 20px;
+			}
+			.topicInfoBody p{
+    			color: #808080!important;
+			}
+		</style>
+	</head>
+	<body>
+		<!--------头部开始-------------->
+		<include file="public/header" w='w1224' />
+	    <div class="topic_body">
+			<div class="topic_tab">
+				当前位置：<a href="http://www.fcheche.vip/">蜂车车首页</a>>><a href="../Home/Topic/topicList">新媒服务资讯</a>>><a class="title">{$topic.topic_title|getSubstr=0,15}</a>
+			</div>
+			<!-- 文章左边开始 -->
+			<div class="topic_navleft">
+				<div class="topic_weil">
+				   <div class="topicInfoHeader">
+					  <h1>{$topic.topic_title}</h1>
+					  <p>发布者：蜂车车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发布时间：{$topic.ctime|date='Y-m-d',###}</p>
+				   </div>
+				   <div class="topicInfoBody">{$topic.topic_content}</div>
+				</div>
+	       </div>
+		
+			<!-- 文章右边结束 -->
+		</div>
+		<!--------footer-开始-------------->
+		<include file="public/footer"/>
+		<!--------footer-结束-------------->
+	</body>
+</html>

@@ -1,0 +1,83 @@
+<include file="public/layout" />
+<body style="background-color: #FFF; overflow: auto;">
+<div id="toolTipLayer" style="position: absolute; z-index: 9999; display: none; visibility: visible; left: 95px; top: 573px;"></div>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    <div class="fixed-bar">
+        <div class="item-title"><a class="back" href="javascript:history.back();" title="返回列表"><i class="fa fa-arrow-circle-o-left"></i></a>
+            <div class="subject">
+                <h3>黑名单管理 - 添加黑名单</h3>
+                <h5>网站系统添加黑名单</h5>
+            </div>
+        </div>
+    </div>
+    <form class="form-horizontal" method="post" id="add_form">
+        <div class="ncap-form-default">
+            <dl class="row">
+               
+            <dl class="row">
+                <dt class="tit">
+                    <label for="tel"><em>*</em>手机号码</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="tel" id="tel" class="input-txt">
+                    <span class="err"></span>
+                    
+                </dd>
+            </dl>
+            
+            <dl class="row">
+                <dt class="tit">
+                    <label for="qq"><em>*</em>Q Q</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="qq" id="qq" class="input-txt">
+                    <span class="err"></span>
+                </dd>
+            </dl>
+
+             <dl class="row">
+                <dt class="tit">
+                    <label for="wangwang"><em>*</em>旺旺</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="wangwang" id="wangwang" class="input-txt">
+                    <span class="err"></span>
+                </dd>
+            </dl>
+            
+            <dl class="row">
+                <dt class="tit">
+                    <label for="beizhu"><em>*</em>备注</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="beizhu" id="beizhu" class="input-txt" style="width: 290px;height: 300px">
+                    <span class="err"></span>
+                </dd>
+            </dl>
+           
+            <div class="bot"><a href="JavaScript:void(0);" onclick="checkUserUpdate();" class="ncap-btn-big ncap-btn-green" id="submitBtn">确认提交</a></div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    function checkUserUpdate(){
+        var tel = $('input[name="tel"]').val();
+        var error ='';
+        if(tel == ''){
+            error += "电话不能为空\n";
+        }
+        if(qq == ''){
+            error += "QQ不能为空\n";
+        }
+        
+        if(error){
+            layer.alert(error, {icon: 2});  //alert(error);
+            return false;
+        }
+        $('#add_form').submit();
+    }
+</script>
+</body>
+</html>

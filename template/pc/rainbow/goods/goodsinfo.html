@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="text/javascript" src="__STATIC__/js/publicJs.js"></script>
+		<link rel="stylesheet" type="text/css" href="__STATIC__/icon/infoIconfont.css"> 
+		<title>详情页-{$tpshop_config['shop_info_store_title']}</title>
+		<meta name="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+		<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+	</head>
+	<body>
+		<!--头部-->
+		<include file="public/header"/>
+		<!--头部end-->
+		<style>
+			.infoIndex{
+				width: 1224px;
+				    margin: 0 auto;
+				    overflow: hidden;
+			}
+			.iiLeft{
+				width: 985px;
+				    float: left;
+					background-color: white;
+			}
+			.goodsName{
+				line-height: 30px;
+				    overflow: hidden;
+				    margin: 20px 0;
+			}
+			.goodsName img{
+				float: left;
+				    width: 30px;
+				    height: 30px;
+					margin-left: 10px;
+			}
+			.goodsName h1{
+				float: left;
+				    margin-left: 10px;
+				    font-size: 22px;
+			}
+			.goodsIndexBox{
+				overflow: hidden;
+			}
+			.box1{background-color: #ff6060;}
+			.box2{background-color: #4db6c7;}
+			.box3{background-color: #7b63de;}
+			.box4{background-color: #dea763;}
+			.box{
+				        float: left;
+				        width: 236px;
+				        height: 150px;
+				        border-radius: 5px;
+				        overflow: hidden;
+				        margin: 5px;
+				        cursor: pointer;
+				        position: relative;
+			}
+			.boxLine1{
+				position: absolute;
+				width: 0;
+				height: 1px;
+				left: 2%;
+				top: 10%;
+				transition: 0.3s;
+				background-color: white;
+			}
+			.boxLine2{
+				position: absolute;
+				width: 1px;
+				height: 0;
+				left: 5%;
+				top: 5%;
+				transition: 0.3s;
+				background-color: white;
+			}
+			.box:hover .boxLine1{
+				width: 90%;
+				transition: 0.3s;
+			}
+			.box:hover .boxLine2{
+				height: 80%;
+				transition: 0.3s;
+			}
+			.iconBox{
+				float: left;
+				    height: 150px;
+				    line-height: 150px;
+				    width: 120px;
+				    text-align: center;
+					
+			}
+			.iconBox i{
+				    color: white;
+				    font-size: 50px;
+			}
+			.myGoodsWords{
+				float: left;
+				    width: 110px;
+				    margin-top: 45px;
+			}
+			.myGoodsWords h1{
+				    color: white;
+				    font-size: 20px;
+			}
+			.myGoodsWords p{
+				color: white;
+				    font-size: 18px;
+				    margin-top: 10px;
+			}
+			.goodsPrice{
+				height: 80px;
+				    line-height: 80px;
+				    border-radius: 5px;
+				    width: 975px;
+				    margin-left: 5px;
+					margin-top: 5px;
+				    border: 1px solid #bfbdbd;
+				    overflow: hidden;
+			}
+			.priceBox{
+				float: left;
+				    width: 50%;
+				    text-align: center;
+			}
+			.priceBox span{
+				color: #f96161;
+				    font-size: 25px;
+			}
+			.do{
+				float: left;
+				width: 50%;
+			}
+			.buyNow{
+				float: left;
+				    width: 50%;
+				    text-align: center;
+				    background-color: #e7e7e7;
+			}
+			.consult{
+				float: left;
+				    width: 50%;
+				    text-align: center;
+				    background-color: #dedede;
+			}
+			.more{
+				    margin-top: 5px;
+				    height: 250px;
+				    border-radius: 5px;
+				    width: 975px;
+				    margin-left: 5px;
+				    /* border: 1px solid #bfbdbd; */
+				    overflow: hidden;
+			}
+			.more p{
+				padding:5px 10px;
+			}
+			.iiRight{
+				float: left;
+				    height: 573px;
+				    width: 235px;
+				    background-color: white;
+				    border-radius: 5px;
+				    text-align: center;
+				    margin-left: 4px;
+			}
+			.headBox{
+				width: 150px;
+				    height: 150px;
+				    border-radius: 75px;
+				    text-align: center;
+				    line-height: 150px;
+				    margin: 50px auto 30px auto;
+				    border: 1px solid #e7e7e7;
+					overflow: hidden;
+			}
+			.kfName{
+				font-size: 20px;
+			}
+			.kfQQ{
+				    margin-top: 5px;
+			}
+			.kfPhone{
+				margin-top: 5px;
+			}
+			.consultNow{
+				    width: 150px;
+				    height: 40px;
+				    margin: 10px auto;
+				    background-color: #4db6c7;
+				    color: white;
+				    line-height: 40px;
+				    border-radius: 5px;
+			}
+			.QRcode{
+				margin-top: 20px;
+			}
+			.QRcode img{
+				width: 150px;
+				    height: 150px;
+			}
+			.flow{
+				width: 1224px;
+				    margin: 50px auto;
+			}
+			.shuLine{
+				float: left;
+				    width: 5px;
+				    height: 30px;
+				    line-height: 30px; 
+				    background-color: #4db6c7;
+			}
+			.flowHead{
+				overflow: hidden;
+			}
+			.flowHead h1{
+				height: 30px;
+				    float: left;
+				    line-height: 30px;
+				    font-size: 18px;
+				    margin-left: 15px;
+			}
+			.flowBody{
+				    overflow: hidden;
+				    margin-top: 20px;
+					display: flex;
+					    justify-content: space-between;
+			}
+			.flowSmallBox{
+				width: 220px;
+				    float: left;
+				    height: 210px;
+				    text-align: center;
+				    background-color: white;
+				    border-radius: 5px;
+				    padding-top: 60px;
+					position: relative;
+			}
+			.flowSmallBox i{
+				font-size: 40px;
+			}
+			.flowSmallBox p{
+				font-size: 18px;
+				margin: 20px;
+			}
+			.flowNum{
+				margin-top: 20px;
+				font-size: 20px;
+			}
+			.flowHideWords{
+				position: absolute;
+				    width: 100%;
+				    bottom: -50px;
+				    height: 50px;
+				    line-height: 50px;
+				    background-color: #a2a2a2;
+				    color: white;
+				    transition: 0.3s;
+			}
+			.flowSmallBox:hover .flowHideWords{
+				bottom: 0;
+				transition: 0.3s;
+			}
+			.question{
+				    width: 1224px;
+				    margin: 0px auto;
+				    padding-top: 50px;
+					overflow: hidden;
+					
+			}
+			.queBox{
+				width: 45%;
+				    background-color: white;
+				    height: 100px;
+				    float: left;
+				    padding: 30px 20px;
+				    margin-top: 20px;
+					margin-right: 20px;
+			}
+			.queBox h1{
+				width: 100%;
+			}
+			.queBox p{
+				    width: 100%;
+				    overflow-wrap: break-word;
+			}
+			.headBox img{
+				width: 100%;
+				height: 100%;
+			}
+			
+			
+			
+			
+		</style>
+		<div class="infoIndex">
+			<div class="iiLeft">
+				<div class="goodsName">
+					<if condition="$goods[goods_type] eq 4">
+					<img src="__STATIC__/img/index/vxL.png" alt="">
+					<elseif condition="$goods[goods_type] eq 3">
+					<img src="__STATIC__/img/index/wbL.png" alt="">
+					<elseif condition="$goods[pingtai_id] eq 18">
+					<img src="__STATIC__/img/index/ttL.png" alt="">
+					<elseif condition="$goods[pingtai_id] eq 1">
+					<img src="__STATIC__/img/index/dyL.png" alt="">
+					<elseif condition="$goods[pingtai_id] eq 2">
+					<img src="__STATIC__/img/index/ksL.png" alt="">
+					</if>
+					<!-- <img src="{{}}" alt=""> -->
+					<h1>{$goods.goods_name}</h1>
+				</div>
+				<div class="goodsIndexBox">
+					<div class="box1 box">
+						<div class="boxLine1"></div>
+						<div class="boxLine2"></div>
+						<div class="iconBox">
+						    <i class="iconfont icon-RectangleCopy"></i>
+						</div>
+						<div class="myGoodsWords">
+							<h1>所属平台</h1>
+							<p>{$goods.pingtai}</p>
+						</div>
+					</div>
+					<div class="box2 box">
+						<div class="boxLine1"></div>
+						<div class="boxLine2"></div>
+						<div class="iconBox">
+						    <i class="iconfont icon-fensi"></i>
+						</div>
+						<div class="myGoodsWords">
+							<h1>粉丝数量</h1>
+							<p>{$goods.fensi_num*0.0001}W</p>
+						</div>
+					</div>
+					<div class="box3 box">
+						<div class="boxLine1"></div>
+						<div class="boxLine2"></div>
+						<div class="iconBox">
+						    <i class="iconfont icon-leimu"></i>
+						</div>
+						<div class="myGoodsWords">
+							<h1>行业分类</h1>
+							<p>{$goods.catname}</p>
+						</div>
+					</div>
+					<div class="box4 box">
+						<div class="boxLine1"></div>
+						<div class="boxLine2"></div>
+						<div class="iconBox">
+							<i class="iconfont icon-renzheng"></i>
+						</div>
+						<div class="myGoodsWords">
+							<h1>认证主体</h1>
+							<p><if condition="$goods[renzheng_type] eq 1">个人<else>企业</if></p>
+						</div>
+					</div>
+				</div>
+				<div class="goodsPrice">
+					<div class="priceBox">
+						<span>￥{$goods.shop_price}</span>
+					</div>
+					<div class="do">
+						<a href="/home/order/addorder?goods_id={$goods.goods_id}"><div class="buyNow">立即购买</div></a>
+						<a href="https://wpa.qq.com/msgrd?v=3&uin={$goods.adminqq}&Site=fcc%E5%95%86%E5%9F%8E&Menu=yes"><div class="consult">在线咨询</div></a>
+					</div>
+				</div>
+				<div class="more">
+					<p>详情描述：{$goods.goods_remark}</p>
+					<p>互动数量：{$goods.hudong_num}</p>
+					<p>系统编号：{$goods.goods_sn}</p>
+					<p>注册时间：{$goods.zhuce_time}</p>
+					<p>是否处罚：<if condition="$goods[is_chufa] eq 1">是<elseif condition="$goods[is_chufa] eq 2">否<else>未知</if></p>
+					<if condition="$goods[goods_type] eq 3"><p>微博等级：{$goods.wb_dengji}</p></if>
+				</div>
+			</div>
+			<div class="iiRight">
+				<div class="headBox">
+					<img src="{$goods.headpic|default='__STATIC__/img/user/fccLogo.png'}" alt="">
+				</div>
+				<div class="kfQQ">QQ号码：{$goods.adminqq}</div>
+				<div class="kfPhone">电话号码：{$goods.admintel}</div>
+				<div class="consultNow"><a href="https://wpa.qq.com/msgrd?v=3&uin={$goods.adminqq}&Site=fcc%E5%95%86%E5%9F%8E&Menu=yes">立即联系</a></div>
+				<div class="consultBoth"></div>
+				<div class="QRcode">
+					<img src="{$goods.erweipic|default='__STATIC__/img/user/erweima.png'}" alt="">
+				</div>
+			</div>
+		</div>
+		<div class="flow">
+			<div class="flowHead">
+				<div class="shuLine"></div>
+				<h1>交易流程</h1>
+			</div>
+			<div class="flowBody">
+				<div class="flowSmallBox">
+					<i class="iconfont icon-gouwuche"></i>
+					<p>选择商品</p>
+					<div class="flowNum">01</div>
+					<div class="flowHideWords">选择所需的账号类型</div>
+				</div>
+				<div class="flowSmallBox">
+					<i class="iconfont icon-zixun"></i>
+					<p>咨询客服</p>
+					<div class="flowNum">02</div>
+					<div class="flowHideWords">咨询客服了解账号详情</div>
+				</div>
+				<div class="flowSmallBox">
+					<i class="iconfont icon-hetong"></i>
+					<p>签署合同</p>
+					<div class="flowNum">03</div>
+					<div class="flowHideWords">下单交接账号签署合同</div>
+				</div>
+				<div class="flowSmallBox">
+					<i class="iconfont icon-yanshou3"></i>
+					<p>验收账号</p>
+					<div class="flowNum">04</div>
+					<div class="flowHideWords">验收账号绑定个人信息</div>
+				</div>
+				<div class="flowSmallBox">
+					<i class="iconfont icon-wancheng"></i>
+					<p>完成交易</p>
+					<div class="flowNum">05</div>
+					<div class="flowHideWords">完成交易开始运营账号</div>
+				</div>
+			</div>
+		</div>
+		<div class="question">
+			<div class="flowHead">
+				<div class="shuLine"></div>
+				<h1>常见问题</h1>
+			</div>
+			<div class="queBox">
+				<h1>Q：公众号交易合同如何签署？</h1>
+				<p>公众号卖家打印合同3份并签字盖章->通过快递全部邮寄给公众号买家-> 买家签字盖章后全部寄往成都蜂车车网络科技有限公司。经买卖双方认可后也可以通过扫描打印的方式签署。</p>
+			</div>
+			<div class="queBox">
+				<h1>Q：微博号交易合同如何签署？</h1>
+				<p>微博号卖家打印合同3份并签字盖章->通过快递全部邮寄给微博号买家-> 买家签字盖章后全部寄往成都蜂车车网络科技有限公司。经买卖双方认可后也可以通过扫描打印的方式签署。</p>
+			</div>
+			<div class="queBox">
+				<h1>Q：新媒体和社会媒体</h1>
+				<p>有人对新媒体下过定义，新媒体（New Media）是指当下万物皆媒的环境，简单地说：新媒体是一种环境。微信、微博、短视频、直播、论坛等等这些都是属于新媒体的一种。</p>
+			</div>
+			<div class="queBox">
+				<h1>Q：新媒体的发展趋势</h1>
+				<p>新媒体的发展让我们获取内容的方式发生了翻天覆地的变化。我们每个人的时间变得尤为宝贵，商业的战场仿佛变成了时间战场，商家纷纷争夺用户的时间，谁抢夺的时间多，谁就能从中获得更大的利润。</p>
+			</div>
+		</div>
+			<br>
+		<include file="public/footer"/>
+	</body>
+</html>

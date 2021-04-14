@@ -1,0 +1,105 @@
+<table>
+ 	<tbody>
+ 	<if condition="empty($pinggu) eq true">
+ 		<tr data-id="0">
+	        <td class="no-data" align="center" axis="col0" colspan="50">
+	        	<i class="fa fa-exclamation-circle"></i>没有符合条件的记录
+	        </td>
+	     </tr>
+	<else/>
+ 	<volist name="pinggu" id="list">
+    <if condition="!empty($adminid) and ($list.cl_adminid eq $adminid or $adminid eq 4 or $adminid eq 82 or $adminid eq 1 or $adminid eq 2)">
+  	<tr data-id="{$list.v_id}">
+        <td class="sign" axis="col0">
+          <div style="width: 24px;"><i class="ico-check" ><input type="checkbox" name="selected[]" value="{$list.kjid}" style="display:none;"/></i></div>
+        </td>
+        <td align="left" abbr="tel" axis="col3" class="">
+          <div style="text-align: left; width: 100px;" class="">{$list.tel}</div>
+        </td>
+       <td align="center" abbr="tel" axis="col3" class="">
+          <div style="text-align: center; width: 60px;" class="">{$list.price}</div>
+        </td>
+        <td align="center" abbr="add_time" axis="col6" class="">
+          <div style="text-align: center; width: 120px;" class="">{$list.ip}</div>
+        </td>
+       <td align="center" abbr="cl_time" axis="col6" class="">
+          <div style="text-align: center; width: 160px;" class="">{$list.time|date='Y-m-d H:i:s',###}</div>
+        </td>
+        <td align="center" abbr="cl_time" axis="col6" class="">
+          <div style="text-align: center; width: 160px;" class=""><if condition="$list.cl_time neq 0">{$list.cl_time|date='Y-m-d H:i:s',###}</if></div>
+        </td>   
+         <td align="center" abbr="cl_time" axis="col6" class="">
+          <div style="text-align: center; width: 80px;" class="">{$list.name}</div>
+        </td>
+        <td align="center" abbr="article_time" axis="col6" class="">
+               <div style="text-align: center; width: 150px;" class="">
+                <if condition="$huodong eq 1">活动已结束<else>
+                  <if condition="$adminid eq 82 or $adminid eq 1 or $adminid eq 4"><a class="btn green" style="display:"  href="{:U('Comment/voucher_info',array('id'=>$list[v_id]))}"><i class="fa fa-list-alt"></i>分配</a></if>
+                  <if condition="$list.cl_time eq 0"><a class="btn green" onclick="chuli({$list.v_id});" ><i class="fa fa-list-alt"></i>标记联系</a><else>已联系</if>
+                </if>
+       		</div>
+           </td>
+        <td align="center" abbr="cl_time" axis="col6" class="">
+          <div style="text-align: center; width: 250px;" class="">{$list.desc}</div>
+        </td>
+        <td align="center" abbr="cl_time" axis="col6" class="">
+          <div style="text-align: center; width: 320px;" class="">
+            <if condition="$huodong eq 1">活动已结束<else>
+              <if condition="$list.order_id eq 0">未使用<else>该红包已在订单{$list.order_id}中使用</if>
+            </if>
+            </div>
+        </td> 
+         <td align="" class="" style="width: 100%;">
+            <div>&nbsp;</div>
+          </td>
+      </tr>
+    </if>
+      </volist>
+      </if>
+    </tbody>
+</table>
+<div class="row">
+    <div class="col-sm-6 text-left"></div>
+    <div class="col-sm-6 text-right">{$page}</div>
+</div>
+<script>
+    $(".pagination  a").click(function(){
+        var page = $(this).data('p');
+        ajax_get_table('search-form2',page);
+    }); 
+    
+    $( '.ftitle > h5').empty().html("(共{$pager->totalRows}条记录)");
+
+
+function chuli(id){
+
+var id = id;
+
+// alert(goodsid);
+
+   $.ajax({
+                type: "POST",
+                url: "{:U('Comment/cl_voucher')}",
+                data: {id: id},
+                async:false,
+                dataType: "json",
+                error: function (data) {
+                    layer.alert("服务器繁忙, 请联系管理员!");
+                },
+                success: function (data) {
+                    if (data.status == 1) {
+                        layer.msg(data.msg, {icon: 1, time: 2000},function(){
+                                    location.href = data.url;
+                                });
+                    } else {
+                        layer.msg(data.msg, {icon: 2,time: 3000});
+                        return false;
+                    }
+                }
+            });
+
+
+
+}
+
+</script>

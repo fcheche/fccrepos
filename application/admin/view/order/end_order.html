@@ -1,0 +1,260 @@
+<include file="public/layout" />
+<script type="text/javascript" src="__ROOT__/public/static/js/layer/laydate/laydate.js"></script>
+
+<body style="background-color: rgb(255, 255, 255); overflow: auto; cursor: default; -moz-user-select: inherit;">
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+  <div class="fixed-bar">
+    <div class="item-title">
+      <div class="subject">
+        <h3><if condition="$goods_type eq 1">短视频<elseif condition="$goods_type eq 2">自媒体<elseif condition="$goods_type eq 3">微博<elseif condition="$goods_type eq 4">微信公众号</if>完成订单</h3>
+        <h5>商城<if condition="$goods_type eq 1">短视频<elseif condition="$goods_type eq 2">自媒体<elseif condition="$goods_type eq 3">微博<elseif condition="$goods_type eq 4">微信公众号</if>交易订单查询及管理</h5>
+      </div>
+    </div>
+  </div>
+  <!-- 操作说明 -->
+  <div id="explanation" class="explanation" style=" width: 99%; height: 100%;">
+    <div id="checkZoom" class="title"><i class="fa fa-lightbulb-o"></i>
+      <h4 title="提示相关设置操作时应注意的要点">操作提示</h4>
+      <span title="收起提示" id="explanationZoom" style="display: block;"></span>
+    </div>
+     <ul>
+      <li>查看操作可以查看订单详情, 包括支付费用, 视频详情等</li>
+      <li>未支付的订单可以取消</li>
+    </ul>
+  </div>
+  <div class="flexigrid">
+    <div class="mDiv">
+      <div class="ftitle">
+        <h3><if condition="$goods_type eq 1">短视频<elseif condition="$goods_type eq 2">自媒体<elseif condition="$goods_type eq 3">微博<elseif condition="$goods_type eq 4">微信公众号</if>订单列表</h3>
+        <h5>(共{$page->totalRows}条记录)</h5>
+      </div>
+      <div title="刷新数据" class="pReload"><i class="fa fa-refresh"></i></div>
+	  <form class="navbar-form form-inline"  method="post" action="{:U('Admin/order/export_order')}"  name="search-form2" id="search-form2">  
+	  		<input type="hidden" name="order_by" value="confirm_time">
+            <input type="hidden" name="sort" value="desc">
+            <input type="hidden" name="user_id" value="{$Request.param.user_id}">
+            <input type="hidden" name="order_ids" value="">
+            <!--用于查看结算统计 包含了哪些订单-->
+            <input type="hidden" value="{$order_status}" name="order_status" />
+        
+    <!--新版搜索框-->
+    <div class="orderSearch" style="height: 50px">
+      <div class="searchBox">
+        <span>完成时间：</span>
+        <input type="text" size="30" id="start_time" name="start_time" value="2019-01-01" class="qsbox"  placeholder="订单完成时间" style="width: 80px">
+        <span>&nbsp-&nbsp</span>
+        <input type="text" size="30" id="end_time" name="end_time" value="{$end_time}" class="qsbox"  placeholder="订单完成时间" style="width: 80px">
+      </div>
+    
+      <div class="searchBox">
+        <span>销售人/挂售人：</span>
+        <input type="text" name="ss_name" placeholder="请输入销售人/挂售人..." id="sbNeed">
+      </div>     
+    
+      <div class="searchBox">
+        <span>订单编号：</span>
+        <input type="text" name="order_sn" placeholder="请输入订单编号...">
+      </div>
+      
+      <div class="searchBox" style="margin-left: 200px">
+        <input type="button" onclick="ajax_get_table('search-form2',1)"  class="btn1" value="搜索">
+        <input type="button" onclick="clearSearch()"  class="btn2" value="清空">
+      </div>
+    </div>
+  </form>
+    </div>
+    <div class="hDiv">
+      <div class="hDivBox" id="ajax_return">
+        <table cellspacing="0" cellpadding="0">
+          <thead>
+	        	<tr>
+	              <!-- <th axis="col0">
+	                <div style="width: 24px;"><i class="ico-check"></i></div>
+	              </th> -->
+	              <th align="left" abbr="order_sn" axis="col3" class="">
+	                <div style="text-align: left; width: 190px;" class="">订单编号</div>
+	              </th>
+                <th align="left" abbr="order_sn" axis="col3" class="">
+                  <div style="text-align: left; width: 180px;" class="">商品编号</div>
+                </th>
+                
+	          <th align="left" abbr="order_sn" axis="col3" class="">
+                  <div style="text-align: left; width: 150px;" class="">客户账号</div>
+                </th>
+                <th align="center" abbr="article_show" axis="col5" class="">
+                  <div style="text-align: center; width: 80px;" class="">实际业绩</div>
+                </th>
+               
+	              <th align="center" abbr="article_time" axis="col6" class="">
+	                <div style="text-align: center; width: 80px;" class="">总金额</div>
+	              </th>
+	             <th align="center" abbr="article_time" axis="col6" class="">
+                  <div style="text-align: center; width: 90px;" class="">订单状态</div>
+                </th>
+                <th align="center" abbr="col1" axis="col6" class="">
+                  <div style="text-align: center; width: 90px;" class="">挂售人</div>
+                </th>
+
+	              <th align="center" abbr="col1" axis="col6" class="">
+	                <div style="text-align: center; width: 90px;" class="">销售人</div>
+	              </th>
+                
+                  <th align="left" axis="col1" class="handle">
+                      <div style="text-align: left; width: 150px;">操作</div>
+                  </th>
+                  <th align="left" axis="article_time" class="handle">
+                  <div style="text-align: center; width: 140px;" >完成时间</div>
+                </th>
+                 <th align="left" axis="article_time" class="handle">
+                  <div style="text-align: center; width: 140px;" >下单时间</div>
+                </th>
+	            </tr>
+	          </thead>
+        </table>
+      </div>
+    </div>
+    <div class="tDiv">
+
+      <div style="clear:both"></div>
+    </div>
+    <div class="bDiv" style="height: auto;">
+      <div id="flexigrid" cellpadding="0" cellspacing="0" border="0">
+        
+      </div>
+      <div class="iDiv" style="display: none;"></div>
+    </div>
+    <!--分页位置--> 
+   	</div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){	
+      let mypage=parseInt(sessionStorage.getItem('orderPagelistendp'))
+
+     	$('#start_time').layDate();
+     	$('#end_time').layDate();
+     	
+		// 点击刷新数据
+		$('.fa-refresh').click(function(){
+			location.href = location.href;
+		});
+		ajax_get_table('search-form2',mypage);
+		$('.ico-check ' , '.hDivBox').click(function(){
+			$('tr' ,'.hDivBox').toggleClass('trSelected' , function(index,currentclass){
+	    		var hasClass = $(this).hasClass('trSelected');
+	    		$('tr' , '#flexigrid').each(function(){
+	    			if(hasClass){
+	    				$(this).addClass('trSelected');
+	    			}else{
+	    				$(this).removeClass('trSelected');
+	    			}
+	    		});  
+	    	});
+		});
+	});
+
+
+function clearSearch(){
+  window.location.reload();
+
+}
+
+    /**
+     * ajax 抓取页面
+     * @param tab
+     * @param page
+     */
+    function ajax_get_table(tab,page){
+        cur_page = page; //当前页面 保存为全局变量
+        $.ajax({
+            type : "POST",
+            url:"/Admin/order/ajaxindex?goods_type={$goods_type}&p="+page,//+tab,
+            data : $('#'+tab).serialize(),//
+            success: function(data){
+                $("#flexigrid").html('');
+                $("#flexigrid").append(data);
+                // 表格行点击选中切换
+                $('#flexigrid > table>tbody >tr').click(function(){
+                    $(this).toggleClass('trSelected');
+                });
+                //拿本页总业绩和已完成业绩
+                //总业绩
+                let money=document.getElementsByClassName("money");
+                let sum = 0;
+                for (var i = 0; i < money.length; i++) {
+                  let butongji=$(money[i]).parents("tr").find(".overMoney>span>strong")[0].innerText
+                  if(butongji=="退款订单"){
+                    continue;
+                  }
+                  if(butongji=="未支付"){
+                    continue;
+                  }
+                  sum+=parseInt(money[i].innerText)
+                }
+                let moneyOne=document.getElementById("moneyOne")
+                moneyOne.innerText=sum
+
+                //已完成业绩
+                let overMoney=$(".overMoney").find("span>strong")
+                let overSum=0
+                for (var i = 0; i < overMoney.length; i++) {
+                  if(overMoney[i].innerText=="已完成"){
+                    let overMoneyDad=$(overMoney[i]).parents("tr").find(".money")
+                    let myOverMoneyDad=parseInt(overMoneyDad[0].innerText)
+                    overSum+=myOverMoneyDad
+                  }
+                }
+                let moneyTwo=document.getElementById("moneyTwo")
+                moneyTwo.innerText=overSum
+
+                //个人已完成业绩
+                let searchName=$("#sbNeed").val()
+                let sbBox=0
+                let gsName=document.getElementsByClassName("gsName")
+                let xsName=document.getElementsByClassName("xsName")
+                for (var i = 0; i < gsName.length; i++) {
+                  if (gsName[i].innerText==searchName) {
+                    let gsMoney=$(gsName[i]).parents("tr").find(".money")
+                    let gsMoneyAll=parseInt(gsMoney[0].innerText)/2
+                    sbBox+=gsMoneyAll
+                  }
+                }
+                for (var i = 0; i < xsName.length; i++) {
+                  if (xsName[i].innerText==searchName) {
+                    let xsMoney=$(xsName[i]).parents("tr").find(".money")
+                    let xsMoneyAll=parseInt(xsMoney[0].innerText)/2
+                    sbBox+=xsMoneyAll
+                  }
+                }
+                let moneyThree=document.getElementById("moneyThree")
+                moneyThree.innerText=sbBox
+            }
+        });
+    }
+    /**
+     * 点击排序
+     * @param field
+     */
+    function sort(field){
+        $("input[name='order_by']").val(field);
+        var v = $("input[name='sort']").val() == 'desc' ? 'asc' : 'desc';
+        $("input[name='sort']").val(v);
+        ajax_get_table('search-form2',cur_page);
+    }
+	
+	function exportReport(){
+        var selected_ids = '';
+        $('.trSelected' , '#flexigrid').each(function(i){
+            selected_ids += $(this).data('order-id')+',';
+        });
+        if(selected_ids != ''){
+            $('input[name="order_ids"]').val(selected_ids.substring(0,selected_ids.length-1));
+        }
+		$('#search-form2').submit();
+	}
+	
+	 
+</script>
+</body>
+</html>

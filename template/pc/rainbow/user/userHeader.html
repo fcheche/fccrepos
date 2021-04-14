@@ -1,0 +1,82 @@
+<style type="text/css">
+	.userHeader{
+		height: 86px;
+		width: 100%;
+		background: linear-gradient(90deg, #7E31FF 50%, #e99ef9 100%);
+	}
+	.userHeader .logo{
+		float: left;
+	    margin: 14px 0 0 24px;
+	}
+	.userHeader .userHRight{
+		float: right;
+	}
+	.userHeader .userHRight .link{
+		width: 148px;
+		height: 86px;
+		color: #e0dbdb;
+		font-size: 18px;
+	    display: inline-block;
+	    position: relative;
+	    text-align: center;
+	    line-height: 86px;
+	    cursor: pointer;
+	}
+	.userHeader .userHRight .link:hover{
+    	background: rgba(255, 255, 255, 0.12);
+	}
+	.userHeader .userHRight .linkImg{
+		width: 38px;
+	    margin-right: 10px;
+	}
+	.userHeader .userHRight .linkUp{
+        width: 20px;
+	    /*position: absolute;
+	    top: 34px;*/
+	}
+	.userHeader .account{
+		position: absolute;
+	    top: 86px;
+	    right: 0;
+	    width: 160px;
+	    height: 0;
+	    background: #fff;
+	    box-shadow: 0 2px 10px 0px #e0e0e0;
+        border-radius: 5px;
+        overflow: hidden;
+        transition: .3s;
+	}
+	.userHeader .account li{
+	    /*height: 60px;*/
+		font-size: 16px;
+	    line-height: 60px;
+	    color: #666;
+	}
+	.userHeader .account li+li{
+		border-top: 1px solid #eeeeee;
+	}
+	.accountHover:hover .account{
+		height: 121px;
+	}
+</style>
+<div class="userHeader">
+	<!-- <img src="__STATIC__/img/header/logo1.png" class="logo"> -->
+	<a href="/">
+		<img src="{$config.store_user_logo|default='/public/static/images/logo/pc_home_user_logo_default.png'}" class="logo">
+	</a>
+	<div class="userHRight">
+		<a href="/" class="link"><img src="__STATIC__/img/user/search.png" class="linkImg">返回商城</a>
+		<!-- <a href="" class="link"><img src="__STATIC__/img/user/kf.png" class="linkImg">客服</a> -->
+		<!-- <a href="/home/order/order_list" class="link"><img src="__STATIC__/img/user/order.png" class="linkImg">订单</a> -->
+		<!-- <a href="" class="link"><img src="__STATIC__/img/user/news.png" class="linkImg">消息</a> -->
+		<span class="link accountHover"><img src="__STATIC__/img/user/kf.png" class="linkImg">账户名称<img src="__STATIC__/img/header/up1.png" class="linkUp">
+			<div class="account">
+				<ul>
+					<li><a href="/home/user/safety_settings">{$user.nickname}</a></li>
+					<li><a href="{:U('/Home/user/logout')}">退出</a></li>
+				</ul>
+			</div>
+		</span>
+		<!-- <a href="{:U('/Home/user/logout')}">退出</a> -->
+	</div>
+</div>

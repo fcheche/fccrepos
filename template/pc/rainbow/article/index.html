@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="content-language" content="zh-cn" />
+    <meta name="renderer" content="webkit|ie-comp|ie-stand" />
+    <meta http-equiv="Cache-control" content="public" max-age="no-cache" />
+    <title>蜂车车-{$article.title}</title>
+    <meta name="keywords" content="{$article.keywords}" />
+    <meta name="description" content="{$article.description|getSubstr=0,200}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{$tpshop_config.shop_info_store_ico|default='/public/static/images/logo/storeico_default.png'}" media="screen" />
+    <script type="text/javascript" src="__STATIC__/js/publicJs.js"></script>
+    <style type="text/css">
+        .topic_body{
+            width: 1224px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .topic_tab{
+            height: 40px;
+            padding-left: 10px;
+            border-radius: 5px;
+            line-height: 40px;
+            background: #fff;
+            border: 1px solid #eee;
+        }
+        .topic_tab a{
+            color: #5b64de;
+        }
+        .topic_tab .title{
+            color: #333;
+        }
+        .topic_navleft{
+            background: #fff;
+            border-radius: 5px;
+            border-left: 1px solid #eee;
+            border-right: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+        .topic_weil{
+            padding: 50px 20px;
+        }
+        .topicInfoHeader{
+            text-align: center;
+        }
+        .topicInfoHeader h1{
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+        .topicInfoHeader p{
+            color: #999;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        .topicInfoBody{
+            margin-top: 20px;
+            color: #808080!important;
+        }
+        .topicInfoBody p{
+            color: #808080!important;
+        }
+    </style>
+</head>
+
+
+<body>
+    <!--------头部开始-------------->
+    <include file="public/header" w='w1224' />
+
+    <div class="topic_body">
+        <div class="topic_tab">
+            当前位置：<a href="http://www.fcheche.vip/">蜂车车首页</a> > <a href="../Home/Topic/topicList">新媒服务动态</a> > <a class="title">{$article.title|getSubstr=0,15}</a>
+        </div>
+        <!-- 文章左边开始 -->
+        <div class="topic_navleft">
+            <div class="topic_weil">
+                <div class="topicInfoHeader">
+                    <h1>{$article.title}</h1>
+                    <p>发布者：蜂车车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发布时间：{$article.add_time|date='Y-m-d',###}</p>
+                </div>
+                <div class="topicInfoBody">{$article.content}</div>
+            </div>
+        </div>
+        
+        <!-- 文章右边结束 -->
+    </div>
+    <include file="public/footer" />
+</body>
+
+</html>

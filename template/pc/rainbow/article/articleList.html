@@ -1,0 +1,232 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>蜂车车-{$tpshop_config['shop_info_store_title']}</title>
+    <meta name="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+    <meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+    <script type="text/javascript" src="__STATIC__/js/publicJs.js"></script>
+</head>
+<body>
+<style type="text/css">
+    body{
+        background-color: #f4f4f4
+    }
+    header{
+        height: 80px;
+        width: 100%;
+        position: fixed;
+        background-color: rgba(0,0,0,0.5);
+    }
+    .headerBox{
+        width: 1224px;
+        margin: 0 auto;
+        overflow: hidden;
+    }
+    .logo{
+        float: left;
+        margin-top:17px;
+    }
+    nav{
+        float: left;
+        overflow: hidden;
+            margin-left: 120px;
+    }
+    nav ul li{
+            width: 100px;
+    float: left;
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+    }
+    nav ul li:hover{
+        background-color: rgba(0,0,0,0.2);
+    }
+    nav ul li a{
+        color: white;
+        display: inline-block;
+    }
+    .goHome{
+        float: right;
+        border: 1px solid white;
+        border-radius: 30px;
+        padding: 5px 20px;
+        color: white;
+        margin-top: 23px
+    }
+    .banner{
+        width: 100%;
+    }
+    .banner img{
+        width: 100%;
+    }
+    .topicListBody{
+        width: 1224px;
+        margin: 0 auto;
+    }
+    .topicListBox{
+        background-color: white;
+        height: 100px;
+        overflow: hidden;
+        margin-bottom: 20px;
+        border-radius: 5px;
+    }
+    .topicBoxLeft{
+        float: left;
+        width: 150px;
+        height: 100px;
+    }
+    .topicRight{
+        float: left;
+        padding-left: 20px;
+        width: 850px
+    }
+    .topicName{
+        font-size: 20px;
+        margin-top: 35px;
+    }
+    .topicInfo{
+        margin-top: 20px;
+        word-wrap: break-word;
+        word-break: normal;
+        line-height: 25px;
+    }
+    .topicListBox:hover{
+        background-color: #eee;
+    }
+    .dateTop{
+        text-align: center;
+        font-size: 50px;
+        color: gray;
+        float: left;
+        width: 100%;
+        height: 65px;
+        line-height: 65px;
+    }
+    .dateMid{
+        float: right;
+        width: 25px;
+        margin: 0 auto;
+        height: 2px;
+        margin-right: 50px;
+        background-color: #c30202;
+    }
+    .dateBottom{
+        width: 100%;
+        float: left;
+        margin-top: 10px;
+        text-align: center;
+    }
+    .topicImg{
+        float: right;
+        width: 170px;
+        height: 170px;
+    }
+    .topicImg img{
+        width: 150px;
+        height: 150px;
+        margin-top: 10px;
+    }
+    a{
+        color: #333333
+    }
+    /*分页 s*/
+    .operating{
+        width: calc(100% - 20px);
+        margin: 0 auto;
+        background: #fff;
+        padding: 20px 10px;
+        text-align: center;
+    }
+    .operating .pagination{
+        /*text-align: center;*/
+        display: inline-block;
+    }
+    .operating .pagination li{
+        float: left;
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        text-align: center;
+        border: 1px solid #ddd;
+        margin-left: 10px;
+    }
+    .operating .pagination li a{
+        color: #8d7afe;
+        font-size: 16px;
+    }
+    .operating .pagination li.active{
+        background: #8d7afe;
+        border: 1px solid #8d7afe;
+    }
+    .operating .pagination li:not(.active):hover{
+        background: #f5f5f5;
+    }
+    .operating .pagination li.active a{
+        color: #fff;
+    }
+    .operating .pagination li.next,
+    .operating .pagination li.previous{
+        width: 60px;
+    }
+    /*分页 e*/
+</style>
+<header>
+    <div class="headerBox">
+        <a href="/" target="_blank">
+        <div class="logo">
+            <img src="{$config.store_user_logo|default='/public/static/images/logo/pc_home_user_logo_default.png'}">
+        </div>
+         </a>
+        <nav>
+            <ul>
+                <li><a href="/Home/article/aboutUs" target="_blank">关于我们</a></li>
+                <li><a href="/Home/Topic/topicList" target="_blank">行业资讯</a></li>
+                <li><a href="/home/article/articleList" target="_blank">公司动态</a></li>
+                <li><a href="/home/article/articleList?id=18" target="_blank">帮助中心</a></li>
+                <li><a href="/home/rmwd" target="_blank">常见问题</a></li>
+            </ul>
+        </nav>
+        <a href="/" target="_blank">
+            <div class="goHome">
+                返回首页
+            </div>
+        </a>
+    </div>
+</header>
+<div class="banner">
+    <img src="__STATIC__/img/index/infBanner.jpg">
+</div>
+<div class="topicListBody">
+    <foreach name="article" item="v" key="k">
+    <a href="/Home/Article?article_id={$v.article_id}" target="_blank">
+    <div class="topicListBox">
+        <div class="topicBoxLeft">
+            <div class="dateTop">
+                {$v.publish_time|date='d',###}
+            </div>
+            <div class="dateMid"></div>
+            <div class="dateBottom">
+                {$v.publish_time|date='Y-m',###}
+            </div>
+        </div>
+        <div class="topicRight">
+            <div class="topicName">
+                {$v.title}
+            </div>
+        </div>
+    </div>
+    </a>
+    </foreach>
+    <div class="operating" id="bottom">
+        <div class="clearfix">
+            {$page}
+        </div>
+    </div>
+</div>
+
+<!--------footer-开始-------------->
+<include file="public/footer" />
+<!--------footer-结束-------------->
+</body>
+</html>

@@ -1,0 +1,110 @@
+<table>
+ 	<tbody>
+ 	<if condition="empty($pinggu) eq true">
+ 		<tr data-id="0">
+	        <td class="no-data" align="center" axis="col0" colspan="50">
+	        	<i class="fa fa-exclamation-circle"></i>没有符合条件的记录
+	        </td>
+	     </tr>
+	<else/>
+ 	<volist name="pinggu" id="list">
+  	<tr data-id="{$list.pg_id}">
+        <td class="sign" axis="col0">
+          <div style="width: 24px;"><i class="ico-check" ><input type="checkbox" name="selected[]" value="{$list.pg_id}" style="display:none;"/></i></div>
+        </td>
+        <td align="left" abbr="tel" axis="col3" class="">
+          <div style="text-align: left; width: 120px;" class="">{$list.tel}</div>
+        </td> 
+         <td align="left" abbr="tel" axis="col3" class="">
+          <div style="text-align: left; width: 120px;" class="">{$list.ip}</div>
+        </td>        
+        <td align="left" abbr=leixing axis="col4" class="">
+          	<div style="text-align: left; width: 60px;" class="">
+              <if condition="$list.leixing eq 1">短视频
+              <elseif condition="$list.leixing eq 2">自媒体
+              <elseif condition="$list.leixing eq 3">微博
+              <elseif condition="$list.leixing eq 4">微信
+            </elseif></div>
+        </td> 
+        <td align="left" abbr=name axis="col4" class="">
+            <div style="text-align: left; width: 220px;" class="">{$list.content}</div>
+        </td> 
+         <td align="left" abbr=name axis="col4" class="">
+            <div style="text-align: left; width: 100px;" class="">{$list.qq}</div>
+        </td> 
+         <td align="left" abbr=name axis="col4" class="">
+            <div style="text-align: left; width: 100px;" class="">{$list.weixin}</div>
+        </td> 
+        <td align="center" abbr="add_time" axis="col6" class="">
+          <div style="text-align: center; width: 180px;" class="">{$list.on_time|date='Y-m-d H:i:s',###}</div>
+        </td> 
+        <td align="center" abbr="cl_name" axis="col5" class="" style="white-space: normal;">
+            <div style="text-align: center; width: 100px;white-space: normal;height:inherit;line-height: inherit;" class="">
+             {$list.cl_name}
+            </div>
+        </td>
+        <td align="center" abbr="cl_time" axis="col6" class="">
+          <div style="text-align: center; width: 160px;" class=""><if condition="$list.cl_time neq 0">{$list.cl_time|date='Y-m-d H:i:s',###}</if></div>
+        </td>   
+         <td align="left" abbr=chulires axis="col4" class="">
+            <div style="text-align: left; width: 60px;" class=""><if condition="$list.is_chuli eq 0">未处理<else>已处理</if></div>
+        </td>  
+        <td align="center" abbr="article_time" axis="col6" class="">
+               <div style="text-align: center; width: 80px;" class="">
+                <if condition="$list.is_chuli eq 0"><a class="btn green" onclick="chuli({$list.pg_id});" ><i class="fa fa-list-alt"></i>处理</a><else>已处理</if>
+       			
+       		</div>
+           </td>
+         <td align="" class="" style="width: 100%;">
+            <div>&nbsp;</div>
+          </td>
+      </tr>
+      </volist>
+      </if>
+    </tbody>
+</table>
+<div class="row">
+    <div class="col-sm-6 text-left"></div>
+    <div class="col-sm-6 text-right">{$page}</div>
+</div>
+<script>
+    $(".pagination  a").click(function(){
+        var page = $(this).data('p');
+        ajax_get_table('search-form2',page);
+    }); 
+    
+    $( '.ftitle > h5').empty().html("(共{$pager->totalRows}条记录)");
+
+
+function chuli(id){
+
+var pg_id = id;
+
+// alert(goodsid);
+
+   $.ajax({
+                type: "POST",
+                url: "{:U('Comment/cl_pinggu_list')}",
+                data: {pg_id: pg_id},
+                async:false,
+                dataType: "json",
+                error: function (data) {
+                    layer.alert("服务器繁忙, 请联系管理员!");
+                },
+                success: function (data) {
+                    if (data.status == 1) {
+                        layer.msg(data.msg, {icon: 1, time: 2000},function(){
+                                    location.href = data.url;
+                                });
+                    } else {
+                        layer.msg(data.msg, {icon: 2,time: 3000});
+                        return false;
+                    }
+                }
+            });
+
+
+
+}
+
+</script>

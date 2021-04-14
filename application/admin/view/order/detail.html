@@ -1,0 +1,770 @@
+<include file="public/layout" />
+<style>
+.ncm-goods-gift {
+  text-align: left;
+}
+.ncm-goods-gift ul {
+    display: inline-block;
+    font-size: 0;
+    vertical-align: middle;
+}
+.ncm-goods-gift li {
+    display: inline-block;
+    letter-spacing: normal;
+    margin-right: 4px;
+    vertical-align: top;
+    word-spacing: normal;
+}
+.ncm-goods-gift li a {
+    background-color: #fff;
+    display: table-cell;
+    height: 30px;
+    line-height: 0;
+    overflow: hidden;
+    text-align: center;
+    vertical-align: middle;
+    width: 30px;
+}
+.ncm-goods-gift li a img {
+    max-height: 30px;
+    max-width: 30px;
+}
+
+a.green{
+  
+  background: #fff none repeat scroll 0 0;
+    border: 1px solid #f5f5f5;
+    border-radius: 4px;
+    color: #999;
+    cursor: pointer !important;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: normal;
+    height: 20px;
+    letter-spacing: normal;
+    line-height: 20px;
+    margin: 0 5px 0 0;
+    padding: 1px 6px;
+    vertical-align: top;
+}
+
+a.green:hover { color: #FFF; background-color: #1BBC9D; border-color: #16A086; }
+
+.ncap-order-style .ncap-order-details{
+  margin:20px auto;
+}
+.contact-info h3,.contact-info .form_class{
+  display: inline-block;
+  vertical-align: middle;
+}
+.form_class i.fa{
+  vertical-align: text-bottom;
+}
+
+</style>
+<div class="page">
+  <div class="fixed-bar">
+    <div class="item-title"><a class="back" href="javascript:history.go(-1)" title="返回列表"><i class="fa fa-arrow-circle-o-left"></i></a>
+      <div class="subject">
+        <h3>订单详情</h3>
+        <h5>商城交易订单查询及管理</h5>
+      </div>
+      <div class="subject" style="width:62%">
+         <if condition="$order['order_status'] lt 4">
+          <a href="{:U('Admin/order/edit_order',array('order_id'=>$order['order_id']))}" style="float:right;margin-right:10px" class="ncap-btn-big ncap-btn-green" ><i class="fa fa-pencil-square-o"></i>修改订单</a>
+         </if>
+         
+         <!-- <a href="{:U('Order/order_print',array('order_id'=>$order['order_id']))}" target="_blank"  style="float:right;margin-right:10px" class="ncap-btn-big ncap-btn-green" ><i class="fa fa-print"></i>打印订单</a> -->
+      </div>
+    </div>
+      
+  </div>
+  <div class="ncap-order-style">
+    <div class="titile">
+      <h3></h3>
+    </div>
+ 
+    <div class="ncap-order-details">
+
+      <form id="order-action">
+          <input name="order_id" value="{$order['order_id']}" type="hidden"/>
+        <div class="tabs-panels">
+            <div class="misc-info">
+                <h3>基本信息</h3>
+                <dl>
+                    <dt>订单 ID：</dt>
+                    <dd>{$order.order_id}</dd>
+                    <dt>订单编号：</dt>
+                    <dd>{$order.order_sn}</dd>
+                    <dt>销售人员：</dt>
+                    <dd>{$xs_admin}</dd>
+                </dl>
+               
+                <dl>
+                    <dt>订单状态：</dt>
+                    <dd>
+                        <if condition="($order['order_status'] eq 0)">
+                          未支付
+                        <elseif condition="($order['order_status'] eq 1)">
+                          已付定金
+                          <elseif condition="($order['order_status'] eq 2)">
+                          已付尾款
+                          <elseif condition="($order['order_status'] eq 3)">
+                          已付全款
+                          <elseif condition="($order['order_status'] eq 4)">
+                          已完成
+                          <elseif condition="($order['order_status'] eq 5)">
+                          已退款
+                        </if>
+                    </dd>
+                    <dt>下单时间：</dt>
+                    <dd>{$order.add_time|date='Y-m-d H:i',###}</dd>
+                    <dt>挂售人员：</dt>
+                    <dd>{$gs_admin}</dd>
+                </dl>
+              
+            </div>
+
+            <div class="addr-note">
+                <h4>买家信息 <if condition="($maijiav['price'] gt 0)">  该用户有一个{$maijiav.price}元红包抵用券，是否使用<a class="" href="javascript:;" onclick="order_voucher({$order.order_id});"> 使用红包</a></if></h4>
+                <dl>
+                  <dt>会员账号：</dt>
+                    <dd>{$maijiaselect.nickname}  ID:{$maijiaselect.user_id}</dd>
+                    
+                    <dt>联系方式：</dt>
+                    <dd>{$maijiaselect.mobile}</dd>
+
+                    <dt>QQ：</dt>
+                    <dd>{$maijiaselect.qq}</dd>
+                </dl>
+           
+            </div>
+
+            <div class="addr-note">
+                <h4>卖家信息</h4>
+                <dl>
+                  <dt>会员账号：</dt>
+                    <dd>{$order.sellername}  ID:{$sellerselect.user_id}</dd>
+                    
+                    <dt>联系方式：</dt>
+                    <dd>{$sellerselect.mobile}</dd>
+
+                    <dt>QQ：</dt>
+                    <dd>{$sellerselect.qq}</dd>
+                 
+                </dl>
+            </div>
+         
+        <div class="goods-info">
+          <h4>商品信息</h4>
+          <table>
+            <thead>
+
+              <tr>
+                <th>商品编号</th>
+                <th>商品标题</th>
+                <th>商品价格</th>
+              </tr>
+            </thead>
+            <tbody>
+                
+            <tr>
+                <td class="w300">{$good.goods_sn}</td>
+                <td class="w600"><a href="{:U('Admin/Goods/addEditGoods',array('id'=>$good['goods_id'],'act'=>'read'))}">{$good.goods_name}</a><br/></td>
+                <td class="w60">{$good.shop_price}</td>
+            </tr>
+          </table>
+        </div>
+         
+        <div class="contact-info">
+          <h3>费用信息 </h3>
+            <if condition="$order.order_status lt 4 or $roleid eq 2 or $roleid eq 1">
+              <div class="form_class">
+                    <a class="btn green" href="{:U('Admin/Order/editprice',array('order_id'=>$order['order_id']))}"><i class="fa fa-pencil-square-o"></i>编辑</a>
+              </div>
+            </if>
+           
+            <dl>
+              <dt>实际业绩：</dt>
+              <dd><strong class="red_common">{$order.shiji_yeji}</strong></dd>
+              <dt>佣金：</dt>
+              <dd><strong class="red_common">{$order.goods_price*0.2+$order.chajia_price-$order.kaizhi_price-$order.youhui_price-$order.coupon_price}</strong></dd>
+              <dt><strong class="red_common">订单总额：</strong></dt><dd style="min-width: 50px"><strong class="red_common">￥{$order.total_amount}</strong></dd>
+            </dl>
+        </div>
+        <div class="contact-info">
+        <h3>收入费用 </h3>
+          <dl>
+            <dt>商品费用：</dt>
+            <dd>{$order.goods_price}</dd>
+            <dt>手续费：</dt>
+            <dd>{$order.goods_price*0.1}</dd>
+            <dt>优惠金额：</dt>
+            <dd>{$order.goods_price*0.1}</dd>
+            <dt>活动抵扣：</dt>
+            <dd>{$order.coupon_price}</dd>
+             <dt>买家应付：</dt>
+            <dd><strong class="red_common">{$order.goods_price*1.1-$order.youhui_price-$order.coupon_price}</strong></dd>
+            <dt>买家实付：</dt>
+              <if condition="$order.order_status eq 0">
+                  <dd>未支付<strong class="red_common"></strong></dd>
+              <elseif condition="$order.order_status eq 1">
+                  <dd>订金：<strong class="red_common">{$order.paid_money} 尾款未支付</strong></dd>
+              <elseif condition="$order.order_status eq 2">
+                  <dd>订金：<strong class="red_common">{$order.paid_money}</strong>尾款：<strong class="red_common">{$order.total_amount-$order.paid_money-$order.youhui_price-$order.coupon_price}</strong></dd>
+              <elseif condition="$order.order_status eq 3">
+                  <dd>（全款）<strong class="red_common">{$order.total_amount-$order.youhui_price-$order.coupon_price}</strong></dd>
+              <elseif condition="$order.order_status eq 4">
+                  <dd><strong class="red_common">{$order.total_amount-$order.youhui_price-$order.coupon_price}</strong></dd>
+              </if>
+          </dl>
+        </div>
+        <div class="contact-info">
+           <h3>支出费用 </h3>
+          <dl class="addr-note">
+            <dt>增值服务费：</dt>
+            <dd>{$order.chajia_price}</dd>
+             <dt>卖家到手：</dt>
+            <dd><strong class="red_common">{$order.goods_price*0.9-$order.chajia_price}</strong></dd>
+            <dt>开支费用：</dt>
+            <dd><strong class="red_common">{$order.kaizhi_price}</strong></dd>
+          </dl>
+        </div>
+
+<if condition="$order['order_status'] lt 4 and ($roleid eq 1 or $roleid eq 2 or in_array(208,$act_list))">
+      <div class="contact-info">
+          <h3>放款操作</h3>
+          <dl class="row">
+          <dt class="tit">
+            <label for="note">放款金额</label>
+          </dt>
+          <dd class="opt" style="margin-left:10px">
+          <input type="text" name="fangkuan_price" id="fangkuan_price" value="0.00" /><strong class="red_common">本次最多放款金额￥<if condition="$order['order_status'] eq 0">0.00<elseif condition="$order['order_status'] eq 1">{$order.paid_money+$order.erci_price-$fk_price-$order.kaizhi_price}<else>{$order.goods_price*0.9-$fk_price-$order.chajia_price}</if></strong>
+          </dd>
+        </dl> 
+          <dl class="row">
+          <dt class="tit">
+          <label for="note">放款备注</label>
+          </dt>
+          <dd class="opt" style="margin-left:10px">
+          <textarea id="beizhu" name="beizhu" style="width:600px;height: 50px;" rows="4"  maxlength="200" placeholder="请输入放款备注" class="tarea">{$keyword.text}</textarea>
+          </dd>
+        </dl> 
+        <dl class="row" id="fangkuanbt">
+          <dt class="tit">
+          </dt>
+          <dd class="opt" style="margin-left:10px">
+            <a class="ncap-btn-big ncap-btn-green" href="javascript:;" onclick="fangkuan({$order.order_id});"> 确认放款</a>
+          </dd>
+        </dl> 
+      </div>
+</if>
+        <div class="goods-info">
+          <h4>放款记录</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>操作者</th>
+                <th>操作时间</th>
+                <th>放款金额</th>
+                <th>挂售人</th>
+                <th>销售人</th>
+                <th>备注</th>
+              </tr>
+            </thead>
+              <tbody id="fangkuan_action">
+              </tbody>
+          </table>
+          <dl  class="addr-note">
+            
+          </dl>
+        </div>
+
+
+<if condition="$order.order_status neq 7">
+        <div class="contact-info">
+        
+        <dl class="row">
+          <dt class="tit">
+            <label for="note">可执行操作</label>
+          </dt>
+          <dd class="opt" style="margin-left:10px">
+                <if condition="$order.order_status eq 0 and ($roleid eq 1 or in_array(385,$act_list))">
+                 <a class="ncap-btn-big ncap-btn-green" href="javascript:;" onclick="order_dingjin({$order.order_id});"> 支付定金</a>
+                </if>
+                <if condition="$order.order_status eq 1 and ($roleid eq 1 or in_array(386,$act_list))">
+                 <a class="ncap-btn-big ncap-btn-green" href="javascript:;" onclick="order_weikuan({$order.order_id});"> 支付尾款</a>
+                </if>
+                <if condition="$order.order_status eq 0 and ($roleid eq 1 or in_array(387,$act_list))">
+                 <a class="ncap-btn-big ncap-btn-green" href="javascript:;" onclick="order_quankuan({$order.order_id});"> 支付全款</a>
+                </if>
+                <if condition="$order.order_status neq 4 and ($roleid eq 1 or in_array(235,$act_list))">
+                 <a class="ncap-btn-big ncap-btn-green" href="javascript:;" onclick="order_confirm({$order.order_id});"> 确认完成</a>
+                </if>
+              
+                <if condition="$fk_price eq 0">
+                  <if condition="$order.is_return eq 0 and ($roleid eq 1 or in_array(234,$act_list))">
+                    <a class="ncap-btn-big ncap-btn-green" href="javascript:;" onclick="order_tuikuan({$order.order_id});"> 退款申请</a>
+                  </if>
+                 <if condition="$order.fadan_time eq 0 and ($roleid eq 1 or in_array(236,$act_list))">
+                    <a class="ncap-btn-big ncap-btn-green" href="javascript:;" onclick="order_fadan({$order.order_id});"> 转为罚单</a>
+                    <br>
+                    （转为罚单之后该订单将不存在，请谨慎操作！）
+                  </if>
+              </if>
+          </dd>
+        </dl> 
+        </div>
+     </if>
+        <div class="goods-info">
+          <h4>操作记录</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>操作者</th>
+                <th>操作时间</th>
+                <th>订单状态</th>
+                <th>付款状态</th>
+                <th>商品状态</th>
+                <th>描述</th>
+                <th>备注</th>
+              </tr>
+            </thead>
+              <tbody id="order_action">
+              </tbody>
+          </table>
+        </div>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="z-ztfh-bg" hidden>
+</div>
+
+<script type="text/javascript">
+    //使用红包
+    function order_voucher(order_id){
+      
+        layer.confirm("你确定要使用红包吗?",{
+            btn:['确定','取消']
+        },function(){
+
+            $.ajax({
+                type: 'post',
+                url: '/index.php?m=Admin&c=Order&a=order_voucher',
+                data:{order_id:order_id},
+                dataType : 'json',
+                success : function(datas){
+                  // layer.alert(data,{icon:2});
+                    if(datas.status == 1){
+                        layer.alert(datas.msg, {icon: 1});
+                    }else{
+                        layer.alert(datas.msg,{icon:2});
+                    }
+                },
+
+                error : function(XMLHttpRequest, textStatus, errorThrown, datas) {
+                    layer.alert(data, {icon: 2});
+
+                    layer.alert(datas.msg, {icon: 2});
+
+                }
+            })
+        }, function(index){
+            layer.close(index);
+        });
+    }
+
+   //确定转为罚单
+    function order_fadan(order_id){
+      
+        layer.confirm("你确定要将该订单转为罚单吗?生成之后不可更改哦！",{
+            btn:['确定','取消']
+        },function(){
+
+            $.ajax({
+                type : 'post',
+                url : '/index.php?m=Admin&c=Order&a=order_fadan',
+                data:{order_id:order_id},
+                dataType : 'json',
+                success : function(datas){
+                  
+                    if(datas.status == 1){
+                        layer.alert(datas.msg, {icon: 1},function () {
+                            window.location.href = datas.url;
+                        });
+                    }else{
+                        layer.alert(datas.msg,{icon:2});
+                    }
+                },
+
+                error : function(XMLHttpRequest, textStatus, errorThrown, datas) {
+                    layer.alert(data, {icon: 2});
+
+                    layer.alert(datas.msg, {icon: 2});
+
+                }
+            })
+        }, function(index){
+            layer.close(index);
+        });
+    }
+
+          //确定tuikuan
+    function order_tuikuan(order_id){
+      
+        layer.confirm("你确定要退款吗?",{
+            btn:['确定','取消']
+        },function(){
+
+            $.ajax({
+                type : 'post',
+                url : '/index.php?m=Admin&c=Order&a=order_tuikuan',
+                data:{order_id:order_id},
+                dataType : 'json',
+                success : function(datas){
+                 
+                    if(datas.status == 1){
+                        layer.alert(datas.msg, {icon: 1},function () {
+                            window.location.href = datas.url;
+                        });
+                    }else{
+                        layer.alert(datas.msg,{icon:2});
+                    }
+                },
+
+                error : function(XMLHttpRequest, textStatus, errorThrown, datas) {
+                    layer.alert(data, {icon: 2});
+
+                    layer.alert(datas.msg, {icon: 2});
+
+                }
+            })
+        }, function(index){
+            layer.close(index);
+        });
+    }
+
+
+           //放款操作
+    function fangkuan(order_id){
+              
+        $("#fangkuanbt").attr("style","display:none;");
+        layer.confirm("你确定向卖家放款吗?",{
+            btn:['确定','取消']
+        },function(){
+            var fangkuan_price = $("#fangkuan_price").val();
+            var beizhu = $("#beizhu").val();
+
+             if(fangkuan_price == 0){
+              layer.alert('请输入放款金额',{icon:2});
+              return false;
+             }
+             if(beizhu == ''){
+              layer.alert('请填写备注',{icon:2});
+              return false;
+             }
+            
+
+            $.ajax({
+                type : 'post',
+                url : '/index.php?m=Admin&c=Order&a=fangkuan_seller',
+                data:{order_id:order_id,price:fangkuan_price,beizhu:beizhu},
+                dataType : 'json',
+                success : function(datas){
+                  // layer.alert(data,{icon:2});
+                    if(datas.status == 1){
+                        layer.alert(datas.msg, {icon: 1},function () {
+                            window.location.href = datas.url;
+                        });
+                    }else{
+                        layer.alert(datas.msg,{icon:2});
+                    }
+                },
+
+                error : function(XMLHttpRequest, textStatus, errorThrown, datas) {
+                    // layer.alert(data, {icon: 2});
+
+                    layer.alert(datas.msg, {icon: 2});
+
+                }
+            })
+        }, function(index){
+            layer.close(index);
+        });
+    }
+
+
+    //定金支付
+    function order_dingjin(order_id){
+      
+        layer.confirm("你确定支付定金吗?",{
+            btn:['确定','取消']
+        },function(){
+
+            $.ajax({
+                type : 'post',
+                url : '/index.php?m=Admin&c=Order&a=order_dingjin',
+                data:{order_id:order_id},
+                dataType : 'json',
+                success : function(datas){
+                  // layer.alert(data,{icon:2});
+                    if(datas.status == 1){
+                        layer.alert(datas.msg, {icon: 1},function () {
+                            window.location.href = datas.url;
+                        });
+                    }else{
+                        layer.alert(datas.msg,{icon:2});
+                    }
+                },
+
+                error : function(XMLHttpRequest, textStatus, errorThrown, datas) {
+                    // layer.alert(data, {icon: 2});
+
+                    layer.alert(datas.msg, {icon: 2});
+
+                }
+            })
+        }, function(index){
+            layer.close(index);
+        });
+    }
+
+
+
+
+        //尾款支付
+    function order_weikuan(order_id){
+      
+        layer.confirm("你确定支付尾款吗?",{
+            btn:['确定','取消']
+        },function(){
+
+            $.ajax({
+                type : 'post',
+                url : '/index.php?m=Admin&c=Order&a=order_weikuan',
+                data:{order_id:order_id},
+                dataType : 'json',
+                success : function(datas){
+                  // layer.alert(data,{icon:2});
+                    if(datas.status == 1){
+                        layer.alert(datas.msg, {icon: 1},function () {
+                            window.location.href = datas.url;
+                        });
+                    }else{
+                        layer.alert(datas.msg,{icon:2});
+                    }
+                },
+
+                error : function(XMLHttpRequest, textStatus, errorThrown, datas) {
+                    // layer.alert(data, {icon: 2});
+
+                    layer.alert(datas.msg, {icon: 2});
+
+                }
+            })
+        }, function(index){
+            layer.close(index);
+        });
+    }
+
+
+     //全款支付
+    function order_quankuan(order_id){
+      
+        layer.confirm("你确定支付全款吗?",{
+            btn:['确定','取消']
+        },function(){
+
+            $.ajax({
+                type : 'post',
+                url : '/index.php?m=Admin&c=Order&a=order_quankuan',
+                data:{order_id:order_id},
+                dataType : 'json',
+                success : function(datas){
+                  // layer.alert(data,{icon:2});
+                    if(datas.status == 1){
+                        layer.alert(datas.msg, {icon: 1},function () {
+                            window.location.href = datas.url;
+                        });
+                    }else{
+                        layer.alert(datas.msg,{icon:2});
+                    }
+                },
+
+                error : function(XMLHttpRequest, textStatus, errorThrown, datas) {
+                    // layer.alert(data, {icon: 2});
+
+                    layer.alert(datas.msg, {icon: 2});
+
+                }
+            })
+        }, function(index){
+            layer.close(index);
+        });
+    }
+
+
+
+        //确定完成
+    function order_confirm(order_id){
+      
+        layer.confirm("你确定交易完成了吗?",{
+            btn:['确定','取消']
+        },function(){
+
+            $.ajax({
+                type : 'post',
+                url : '/index.php?m=Admin&c=Order&a=order_confirm',
+                data:{order_id:order_id},
+                dataType : 'json',
+                success : function(datas){
+                  // layer.alert(data,{icon:2});
+                    if(datas.status == 1){
+                        layer.alert(datas.msg, {icon: 1},function () {
+                            window.location.href = datas.url;
+                        });
+                    }else{
+                        layer.alert(datas.msg,{icon:2});
+                    }
+                },
+
+                error : function(XMLHttpRequest, textStatus, errorThrown, datas) {
+                    // layer.alert(data, {icon: 2});
+
+                    layer.alert(datas.msg, {icon: 2});
+
+                }
+            })
+        }, function(index){
+            layer.close(index);
+        });
+    }
+
+    $(function () {
+        getOrderAction();
+        fangkuanAction();
+    })
+    function delfun() {
+        // 删除按钮
+        layer.confirm('确认删除？', {
+            btn: ['确定'] //按钮
+        }, function () {
+            console.log("确定");
+        }, function () {
+            console.log("取消");
+        });
+    }
+
+    before_request = 1; // 标识上一次ajax 请求有没回来, 没有回来不再进行下一次
+    function verifyForm(form_id,submit_url){
+        if(before_request == 0)
+            return false;
+        $("[id^='err_']").hide();  // 隐藏提示
+        $.ajax({
+            type : "POST",
+            url  : submit_url,
+            data : $('#'+form_id).serialize(),// 你的formid
+            dataType: 'json',
+            error: function(request) {
+                layer.msg("服务器繁忙, 请联系管理员!", {icon: 1, time: 2000});
+            },
+            success: function(data) {
+                before_request = 1; // 标识ajax 请求已经返回
+                // 验证成功提交表单
+                if(data.status == 1)
+                {
+                    layer.msg(data.msg, {icon: 1, time: 2000},function () {
+                      window.location.href = data.url;
+                    });
+                }else{
+                    layer.msg(data.msg, {icon: 2, time: 2000});
+                }
+            }
+        });
+        before_request = 0; // 标识ajax 请求已经发出
+    }
+
+    function getOrderAction(){
+        var order_id = "{$order.order_id}";
+        $.ajax({
+            type : "get",
+            url  : "{:U('Admin/order/getOrderAction')}",
+            data : {order_id:order_id},
+            dataType: 'json',
+            error: function(request) {
+                layer.msg("服务器繁忙, 请联系管理员!", {icon: 1, time: 2000});
+            },
+            success: function(data) {
+                // 验证成功提交表单
+                if(data.status == 1)
+                {
+                    var html = '';
+                    for (var i=0; i<data.data.length;i++){
+                        html +='<tr><td class="text-center">'+data.data[i].action_user_name+'</td>' +
+                                '<td class="text-center">'+data.data[i].log_time+'</td>' +
+                                '<td class="text-center">'+data.data[i].order_status+'</td>' +
+                                '<td class="text-center">'+data.data[i].pay_status+'</td>' +
+                                '<td class="text-center">'+data.data[i].shipping_status+'</td>' +
+                                '<td class="text-center">'+data.data[i].status_desc+'</td>' +
+                                '<td class="text-center">'+data.data[i].action_note+'</td></tr>'
+                    }
+                    $('#order_action').html(html);
+                }else{
+                    layer.msg(data.msg, {icon: 2, time: 2000});
+                }
+            }
+        });
+    }
+
+
+  function fangkuanAction(){
+        var order_id = "{$order.order_id}";
+        $.ajax({
+            type : "get",
+            url  : "{:U('Admin/order/fangkuanAction')}",
+            data : {order_id:order_id},
+            dataType: 'json',
+            error: function(request) {
+                layer.msg("服务器繁忙, 请联系管理员!", {icon: 1, time: 2000});
+            },
+            success: function(data) {
+                // 验证成功提交表单
+                if(data.status == 1)
+                {
+                    var html = '';
+                    for (var i=0; i<data.data.length;i++){
+                        html +='<tr><td class="text-center">'+data.data[i].czname+'</td>' +
+                                '<td class="text-center">'+data.data[i].add_time+'</td>' +
+                                '<td class="text-center">'+data.data[i].price+'</td>' +
+                                '<td class="text-center">'+data.data[i].gs_name+'</td>' +
+                                '<td class="text-center">'+data.data[i].xs_name+'</td>' +
+                                '<td class="text-center">'+data.data[i].beizhu+'</td></tr>'
+                    }
+                    $('#fangkuan_action').html(html);
+                }else{
+                    layer.msg(data.msg, {icon: 2, time: 2000});
+                }
+            }
+        });
+    }
+
+
+    $(".ztfh-label label").click(function  () {
+        var index= $(this).attr("ints")
+        $(".ztfh-label label").removeClass("ztfh-lab-bg");
+        $(this).addClass("ztfh-lab-bg");
+        if (index==1) {
+            $(".z-ztfh-input").show();
+        } else{
+            $(".z-ztfh-input").hide();
+        }
+    });
+    $(".z-ztfh-close").click(function  () {
+        $(".z-ztfh-bg,.z-ztfh-pop").hide();
+    })
+
+</script>
+</body>
+</html>

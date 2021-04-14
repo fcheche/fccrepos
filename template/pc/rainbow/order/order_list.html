@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>我的订单</title>
+	<script type="text/javascript" src="__STATIC__/js/publicJs.js"></script>
+	<link rel="stylesheet" type="text/css" href="__STATIC__/css/userIndex.css">
+	<style type="text/css">
+		.personerinfro{
+			width: 100%;
+    		float: left;
+		}
+		.menumain{
+			padding: 15px 15px 40px;
+		}
+		.menumain:before, .menumain:after {
+		    content: "";
+		    clear: both;
+		    display: block;
+		}
+		.navitems2 {
+		    position: relative;
+		    height: 40px;
+		}
+		.navitems2 li{
+		    float: left;
+		    margin: 0 8px;
+		}
+		.navitems2 li .selected {
+	        color: #7262ff;
+    		border-bottom-color: #7262ff;
+		}
+
+		.navitems2 li a {
+		    display: inline-block;
+		    padding: 0 8px;
+		    font-size: 16px;
+		    line-height: 38px;
+		    color: #333;
+		    border-bottom: 2px solid transparent;
+		}
+		.wrap-line{
+
+		}
+		.menu_search {
+		    margin-top: 20px;
+		}
+		.menu_search .sea_ol {
+		    width: 250px;
+		    height: 30px;
+		    outline: none;
+		    padding: 0 6px;
+		    border: 1px solid #ccc;
+		    vertical-align: middle;
+		}
+		.menu_search .sea_et {
+		    width: 50px;
+		    height: 32px;
+		    padding: 0 10px;
+		    background: #f9f9f9;
+		    border: 1px solid #ccc;
+		    outline: none;
+		    vertical-align: middle;
+		}
+		.orderbook-list {
+		    position: relative;
+		}
+		.book-tit {
+		    margin-top: 20px;
+		    display: block;
+		    overflow: hidden;
+		    width: 100%;
+		    background: #f5f5f5;
+		    height: 38px;
+		    line-height: 38px;
+		}
+		.book-tit ul li {
+		    float: left;
+		    text-align: center;
+		    position: relative;
+		    font-size: 14px;
+		    color: #7b7777;
+    		font-weight: bold;
+		}
+		.sx1 {
+		    /*width: 400px;*/
+		    width: 52%;
+		}
+		.sx2, .sx3, .sx4, .sx5, .sx6 {
+		    /*width: 121px;*/
+		    width: 12%;
+		}
+		/*.order-alone-li .conten_or .sx1{
+			width: 52%;
+		}*/
+		.sxbb {
+		    border: 1px solid #ccc;
+		    background: white;
+		    position: relative;
+		    z-index: 22;
+		    width: 177px;
+		}
+		.sx5 {
+		    cursor: pointer;
+		}
+		.sx5 .jt-x {
+		    display: inline-block;
+		    top: 12px;
+		    transition: transform .4s ease-out,-webkit-transform .4s ease-out,-o-transform .4s ease-out;
+		    background-image: url(/template/pc/rainbow/static/img/header/up.png);
+		    background-size: 100%;
+		    width: 16px;
+		    height: 13px;
+		    position: absolute;
+		}
+		.hid-derei {
+		    display: none;
+		    opacity: 1;
+		    overflow: hidden;
+		    right: 182px;
+		    position: absolute;
+		    border: 1px solid #ccc;
+		    border-top: 0;
+		    width: 177px;
+		    background: white;
+		    z-index: 99;
+		}
+		.hid-derei ul li {
+		    padding: 4px 0;
+		    font-size: 14px;
+		    text-align: center;
+		}
+		.hid-derei ul li a {
+		    padding: 6px 0px 6px 0px;
+		}
+		.car-none-pl {
+		    height: 221px;
+		    line-height: 221px;
+		    text-align: center;
+		    color: #999;
+		}
+		.car-none-pl a {
+		    color: #e23435;
+		}
+		.car-none-pl .account-acco1 {
+		    display: inline-block;
+		    vertical-align: middle;
+		    margin-right: 30px;
+		}
+		.account-acco1 {
+		    height: 60px;
+		    width: 60px;
+		    background-image: url("/template/pc/rainbow/static/img/user/empty.png");
+    		background-repeat: no-repeat;
+		    background-size: 100%;
+		}
+		.order-alone-li table {
+		    margin-top: 10px;
+		    margin-bottom: 30px;
+		    border: 1px solid #dadada;
+		    border-collapse: collapse;
+		}
+		.order-alone-li .time_or {
+		    border-bottom: 0;
+		}
+		.order-alone-li .time_or td {
+		    background: #f5f5f5;
+		    padding: 8px 15px;
+		}
+		.order-alone-li .time_or td .fl_ttmm {
+		    position: relative;
+		}
+		.order-alone-li .time_or td .time-num {
+		    color: #999999;
+		}
+		.order-alone-li .time_or td .num {
+		    color: #333333;
+		    margin-right: 50px;
+		}
+		.order-alone-li .conten_or {
+		    border-top: 0;
+		}
+		.order-alone-li .conten_or .sx1 {
+		    border-right: 0;
+		}
+		.order-alone-li .conten_or .sx2 {
+		    border-left: 0;
+		    font-size: 16px;
+		}
+		.order-alone-li .conten_or .sx2, .order-alone-li .conten_or .sx3, .order-alone-li .conten_or .sx4, .order-alone-li .conten_or .sx5, .order-alone-li .conten_or .sx6 {
+		    text-align: center;
+		    font-size: 14px;
+		}
+		.lastset_cm .conten_or td {
+		    padding: 10px 0;
+		    vertical-align: top;
+		}
+		.order-alone-li .conten_or td {
+		    padding: 26px 0;
+		    border: 1px solid #dadada;
+		}
+		.shop-if-dif {
+		    padding: 0 15px;
+		    overflow: hidden;
+		}
+		.lastset_cm .shop-if-dif .shop_name {
+		    margin-top: 0px;
+		}
+		.shop-if-dif .shop_name {
+		    float: left;
+		    margin-top: 25px;
+		    width: 550px;
+		}
+		.shop_name, .shop_price {
+		    width: 157px;
+		    height: 36px;
+		    overflow: hidden;
+		    line-height: 18px;
+		    font-size: 14px;
+		    color: #5e5e5e;
+		    text-overflow: ellipsis;
+		    display: -webkit-box;
+		    -webkit-line-clamp: 2;
+		    -webkit-box-orient: vertical;
+		    word-break: break-word;
+		}
+		.fixed {
+		    display: block;
+		    min-height: 1%;
+		}
+		.clearfix {
+		    zoom: 1;
+		}
+		.clearfix:before, .clearfix:after {
+		    content: '';
+		    display: table;
+		}
+		/*分页 s*/
+		.operating{
+			width: 100%;
+			margin: 0 auto;
+		}
+		.operating .pagination{
+			float: right;
+		}
+		.operating .pagination li{
+			float: left;
+		    width: 35px;
+		    height: 35px;
+		    line-height: 35px;
+		    text-align: center;
+		    border: 1px solid #ddd;
+		    margin-left: 10px;
+		}
+		.operating .pagination li a{
+			color: #8d7afe;
+		    font-size: 16px;
+		}
+		.operating .pagination li.active{
+		    background: #8d7afe;
+	    	border: 1px solid #8d7afe;
+		}
+		.operating .pagination li:not(.active):hover{
+			background: #f5f5f5;
+		}
+		.operating .pagination li.active a{
+			color: #fff;
+		}
+		.operating .pagination li.next,
+		.operating .pagination li.previous{
+			width: 60px;
+		}
+		/*分页 e*/
+	</style>
+</head>
+<body>
+<include file="user/userHeader">
+<div class="userContent">
+	<include file="user/userMenu">
+	<div class="userCont">
+		<div class="userTitle">我的订单</div>
+		<div class="personerinfro">
+			<div class="menumain">
+				<div class="navitems2" id="navitems5">
+					<ul>
+                        <li>
+                            <a href="{:U('Order/order_list')}" class="<if condition="$Request.param.type eq ''">selected</if>">全部订单</a>
+                        </li>
+                        <li>
+                            <a href="{:U('Order/order_list',array('type'=>'WAITPAY'))}" class="<if condition="$Request.param.type eq 'WAITPAY'">selected</if>">未付款</a>
+                        </li>
+                        <li>
+                            <a href="{:U('Order/order_list',array('type'=>'WAITSEND'))}" class="<if condition="$Request.param.type eq 'WAITSEND'">selected</if>">已预定</a>
+                        </li>
+                        <li>
+                            <a href="{:U('Order/order_list',array('type'=>'WAITRECEIVE'))}" class="<if condition="$Request.param.type eq 'WAITRECEIVE'">selected</if>">交接中</a>
+                        </li>
+                        
+                        <li>
+                            <a href="{:U('Order/order_list',array('type'=>'FINISH'))}" class="<if condition="$Request.param.type eq 'FINISH'">selected</if>">已完成</a>
+                        </li>
+                      
+                    </ul>
+                    <div class="wrap-line" <if condition="$Request.param.type eq 'WAITPAY'">style="width: 130px; left: 140px;"<elseif condition="$Request.param.type eq 'WAITSEND'"/>style="width: 130px; left: 270px;"<elseif condition="$Request.param.type eq 'WAITRECEIVE'"/>style="width: 130px; left: 400px;"<else/>style="width: 130px; left: 10px;"</if> >
+                		<span style="left:15px;"></span>
+            		</div>
+				</div>
+				<div class="menu_search p">
+                    <form id="search_order" action="{:U('Order/order_list')}" method="get">
+                        <input class="sea_ol" type="text" name="search_key" id="search_key" value="{$Request.param.search_key}"  placeholder="商品名称，订单编号" />
+                        <input class="sea_et" type="submit" value="查询" style="cursor: pointer;"/>
+                    </form>
+                </div>
+                <div class="orderbook-list">
+                    <div class="book-tit">
+                        <ul>
+                            <li class="sx1">商品信息</i></li>
+                            <li class="sx2">商品金额</li>
+                            <li class="sx3">支付情况</li>
+                            <li class="sx4">订单金额</li>
+                            </li>
+                            <li class="sx6">操作</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="order-alone-li lastset_cm">
+                	
+                    <empty name="lists">
+	                    <div class="car-none-pl">
+	                        <i class="account-acco1"></i>您还没有订单，<a href="/">快去逛逛吧~</a>
+	                    </div>
+                    <else/>
+                    <volist name="lists" id="list">
+                        <table width="100%" border="" cellspacing="" cellpadding="">
+                            <tr class="time_or">
+                                <td colspan="6">
+                                    <div class="fl_ttmm">
+                                        <span class="time-num">下单时间：<span class="num">{$list.add_time|date='Y-m-d H:i:s',###}</span></span>
+                                        <span class="time-num">订单编号：<span class="num">{$list.order_sn}</span></span>
+                                       
+                                    </div>
+                                    <div class="fr_ttmm"></div>
+                                </td>
+                            </tr>
+                                    <tr class="conten_or">
+                                        <td class="sx1">
+                                            <div class="shop-if-dif">
+                                                <div class="shop_name">
+                                                    <a href="{:U('Home/Goods/goodsinfo',array('id'=>$goods['goods_id']))}">
+                                                        {$list.goods_name}
+                                                    </a>
+                                                    <p>{$list.pingtai}-{$list.catname}</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="sx2"><span>￥</span><span>{$list['goods_price']}</span></td>
+                                        <td class="sx3">
+                                        	<if condition="($list.order_status eq 0)">
+                                        		未支付
+                                             <elseif condition="($list.order_status eq 1)">
+                                                <span>已付定金<br>￥{$list.paid_money}元
+                                                <if condition="$list.erci_price neq 0">
+                                                  <br>二次付款<br>￥{$list.erci_price}元
+                                                </if>
+                                                </span>
+                                             
+                                            <elseif condition="($list[order_status] eq 3)">
+                                                全款支付
+                                            <elseif condition="($list[order_status] eq 2)">
+                                                <p >定金￥{$list.paid_money}元</p>
+                                                <p >尾款￥{$list.total_amount-$list.paid_money}元</p>
+                                            </if>
+                                         
+                                        </td>
+                                        <td class="sx4" rowspan="1">
+                                            <div class="pric_rhz">
+                                                <p class="d_pri"><span>总价￥</span><span>{$list['total_amount']}</span></p>
+                                                    <if condition="$list[coupon_price] gt 0">
+                                                        <p class="d_yzo"><span>已使用红包抵扣￥</span><span>{$list['coupon_price']}</span></p>
+                                                    </if>
+                                                         <p class="d_pri"><span>手续费￥</span><span>{$list.shop_price*0.1}</span></p>
+                                            </div>
+                                        </td>
+                                       
+                                        <td class="sx6" rowspan="1">
+                                            <div class="rbac">
+		                                        <if condition="$list[order_status] lt 4 and $list[order_status] gt 0">
+		                                           <if condition="$list[is_return] eq 1">
+		                                                <a class="applyafts">已申请退款</a>
+		                                            <else />
+		                                                 <a href="{:U('Home/Order/return_goods',array('order_id'=>$list['order_id']))}" class="applyafts">申请退款</a>
+		                                            </if>
+		                                        </if>
+	                                            <p>
+	                                                <a href="{:U('Order/order_detail',array('id'=>$list['order_id']))}">查看详情</a>
+	                                            </p>
+	                                             <div class="paysoon">
+                                            <if condition="$list.order_status eq 0">
+                                                <a class="ps_lj" href="{:U('Home/Order/payorder',array('order_id'=>$list[order_id]))}"  target="_blank">
+                                                立即支付
+                                                </a>
+                                            </if>
+                                            <if condition="$list.order_status eq 1">
+                                                <a class="ps_lj" href="{:U('Home/Order/payorder',array('order_id'=>$list[order_id],'order_status'=>2))}"  target="_blank">
+                                                支付尾款
+                                                </a>
+                                            </if>
+                                        </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                        </table>
+                    </volist>
+                    </empty>
+                </div>
+			</div>
+			<div class="operating fixed" id="bottom">
+                <div class="fn_page clearfix">
+                    {$page}
+                </div>
+            </div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+        $('.s5clic').click(function(){
+            $('.hid-derei').slideToggle(400);
+            $(this).animate({opacity:"1"},200,function(){
+                $(this).toggleClass('sxbb')
+            })
+        })
+    });
+</script>
+</body>
+</html>

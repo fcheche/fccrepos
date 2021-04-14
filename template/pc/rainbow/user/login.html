@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>登录-{$tpshop_config['shop_info_store_title']}</title>
+	<script type="text/javascript" src="__STATIC__/js/publicJs.js"></script>
+	<style type="text/css">
+		.loginWrap{
+	        width: 100%;
+		    height: 680px;
+		    padding-top: 200px;
+		    background: url(/template/pc/rainbow/static/img/user/loginBg.png);
+		    background-size: 100% 100%;
+		    position: relative;
+		}
+		.loginWrap .fccLogo{
+		   position: absolute;
+		    top: 20px;
+		    left: 20px;
+		}
+		.returnBack{
+			position: absolute;
+		    top: 20px;
+		    right: 20px;
+		    font-size: 18px;
+		    color: #eee;
+		    }.returnBack:hover{
+		    	color: #fff;
+		    }
+		.loginBox{
+			width: 988px;
+			height: 518px;
+			margin: 0 auto;
+			border-radius: 20px;
+			box-shadow: 0px 15px 50px 0px rgba(126, 106, 240, 0.5);
+			background: #fff;
+			overflow: hidden;
+		}
+		.loginBoxLeft{
+			background: url(/template/pc/rainbow/static/img/user/loginBoxLeft.jpg);
+		    float: left;
+		    width: 50%;
+		    height: inherit;
+		    background-repeat: no-repeat;
+		    background-position: 58% 80%;
+		}
+		
+		.loginBoxRight{
+			float: left;
+			width: 50%;
+			height: inherit;
+			text-align: center;
+		}
+		.loginBoxRight .welcome{
+			color: #7D69F0;
+			font-size: 40px;
+			display: inline-block;
+			margin-top: 23px;
+			letter-spacing: 4px;
+		    width: 290px;
+		}
+		.loginBoxRight .note{
+			color: #9289A6;
+			font-size: 20px;
+			display: inline-block;
+			margin-top: 20px;
+			letter-spacing: 2px;
+		    width: 290px;
+		}
+		.loginBoxRight .loginInput{
+		    border: 1px solid #B1B3CC;
+		    width: 290px;
+		    height: 45px;
+		    margin: 30px auto 0 auto;
+		    border-radius: 8px;
+		    text-align: left;
+		    line-height: 45px;
+		}
+		.loginBoxRight .loginInputCode{
+			text-align: left;
+		    margin-left: 102px;
+		    width: 150px;
+		    float: left;
+		}
+		.loginBoxRight .loginInputCode input{
+		    width: 125px!important;
+  			padding-left: 20px!important;
+		}
+	    .verifyImg{
+			width: 130px;
+		    height: 50px;
+		    float: left;
+		    margin-top: 30px;
+		    margin-left: 10px;
+	    }
+		.loginBoxRight .loginInput input{
+		    background: none!important;
+		    outline: none;
+		    border: none;
+	        height: 30px;
+   			width: 230px;
+		    padding-left: 5px;
+   			-webkit-box-shadow: 0 0 0 1000px white inset;
+		}
+		.loginBoxRight .inputIcon{
+			margin-left: 20px;
+			width: 20px;
+		}
+		.loginBoxRight .msgCodeInput{
+			text-align: left;
+		    margin-left: 102px;
+		    width: 150px;
+		    float: left;
+		}
+		.loginBoxRight .msgCodeInput input{
+		    width: 125px!important;
+  			padding-left: 20px!important;
+		}
+		.loginBoxRight .sendCode{
+		    width: 130px;
+		    float: left;
+		    margin-left: 10px;
+		    text-align: center;
+		    background: #f4f4f4;
+		    cursor: pointer;
+		}
+		.loginBoxRight .textFocusStyle{
+		    border: 1px solid #7d6af0;
+   			box-shadow: 0 0 5px #cfd5f8;
+		}
+		.loginBoxRight .forgetPwd{
+		    color: #7E6AF0;
+		    margin-top: 15px;
+		    text-align: left;
+		    display: inline-block;
+		    width: 290px;
+		    cursor: pointer;
+		}
+		.loginBoxRight .loginBtn{
+		    width: 281px;
+		    height: 50px;
+		    background: #7D69F0;
+		    border-radius: 28px;
+		    margin: 0 auto;
+		    color: #fff;
+		    font-size: 22px;
+		    text-align: center;
+		    line-height: 50px;
+		    margin-top: 30px;
+		    cursor: pointer;
+		}
+		.loginBoxRight .noAccount{
+			color: #8D9EAD;
+			font-size: 18px;
+		  	margin-top: 15px;
+    		display: inline-block;
+		}
+		.loginBoxRight .goToReg{
+			color: #6C5DFF;
+		}
+		/*底部 s*/
+		.grid-top {
+		    margin-top: 20px;
+		    text-align: center;
+		}
+		.mod_copyright > p {
+		    margin-top: 10px;
+		    color: #666;
+		    text-align: center;
+		}
+		.friendship-links {
+		    padding-top: 10px;
+		    /*width: 675px;*/
+		    font-size: 14px;
+		    margin: 0 auto;
+		}
+		.friendship-links>span {
+		    float: left;
+		    width: 80px;
+		    line-height: 20px;
+		    font-weight: bold;
+		    color: #888;
+		}
+		.links-wrap-h {
+		    float: left;
+		}
+		.links-wrap-h>a {
+		    float: left;
+		    line-height: 1;
+		    margin: 3px 0;
+		    padding: 0 10px;
+		    color: #888;
+		}
+		.mod_copyright > p {
+		    margin-top: 20px;
+		    color: #666;
+		    text-align: center;
+		}
+		.p:before, .p:after {
+		    content: "";
+		    clear: both;
+		    display: block;
+		}
+		.mod_copyright_auth{
+		    width: 458px;
+		    background: #fff;
+		    margin: 0 auto;
+		    height: 40px;
+		}
+		.mod_copyright_auth_ico {
+		    overflow: hidden;
+		    display: inline-block;
+		    margin: 4px 3px;
+		    width: 103px;
+		    height: 32px;
+		    background-image: url("__STATIC__/img/footer/ico_footer.png");
+		    line-height: 1000px;
+		}
+		 .mod_copyright_auth_ico_1 {
+		        background-position: 0 -151px;
+		    }
+		    .mod_copyright_auth_ico_2 {
+		        background-position: -104px -151px;
+		    }
+		    .mod_copyright_auth_ico_3 {
+		        background-position: 0 -184px;
+		    }
+		    .mod_copyright_auth_ico_4 {
+		        background-position: -104px -184px;
+		    }
+		    .mod_copyright_auth_ico_5 {
+		        background-position: 0 -217px;
+		    }
+		    .mod_copyright_auth_ico_6{
+		        background-image: url("https://aqyzmedia.yunaq.com/labels/label_sm_90020.png");
+		        background-size: cover;
+		    }
+		/*底部 e*/
+	</style>
+</head>
+<body>
+<div class="loginWrap">
+	<a href="/"><img src="{$config.store_user_logo|default='/public/static/images/logo/pc_home_user_logo_default.png'}" class="fccLogo"></a>
+	<a href="/" class="returnBack">返回首页</a>
+	<div class="loginBox">
+		<div class="loginBoxLeft">
+		</div>
+		<div class="loginBoxRight">
+			<span class="welcome">欢迎登录</span>
+			<span class="note">请使用您本人的账号密码登录</span>
+			<!-- 密码登录 -->
+			<div class="loginInput pwdLoginStatus">
+				<img src="__STATIC__/img/user/account.png" class="inputIcon">
+				<input type="text" autofocus="autofocus" name="username" class="textFocus" id="username" placeholder="请输入账号" autocomplete="off" value="">
+			</div>
+			<div class="loginInput pwdLoginStatus">
+				<img src="__STATIC__/img/user/password.png" class="inputIcon">
+				<input type="password" name="password" class="textFocus" id="password" placeholder="请输入密码" autocomplete="off" value="">
+			</div>
+			<div class="loginInput loginInputCode pwdLoginStatus">
+				<input type="text" autofocus="autofocus" name="verifyCode" class="textFocus" id="verifyCode" placeholder="验证码" autocomplete="off" value="">
+            </div>
+            <div class="verifyImg pwdLoginStatus">
+            	<img src="/index.php?m=Home&c=User&a=verify" id="verifyImgCode" onclick="verify()" style="width: 100%;height: 50px;" />
+            </div>
+            <!-- 密码登录 -->
+            <!-- 短信验证码登录 -->
+        	<div class="loginInput msgLoginStatus" style="display: none;">
+				<img src="__STATIC__/img/user/account.png" class="inputIcon">
+				<input type="text" autofocus="autofocus" name="userPhone" class="textFocus" id="userPhone" placeholder="请输入手机号" autocomplete="off" value="">
+			</div>
+        	<div class="loginInput msgCodeInput msgLoginStatus" style="display: none;">
+				<input type="text" name="msgCode" id="msgCode" class="textFocus" id="password" placeholder="请输入验证码" autocomplete="off" value="">
+			</div>
+			<button type="button" class="loginInput sendCode msgLoginStatus" onclick="send_sms_reg_code()" id="count_down" style="display: none;">发送</button>
+			<!-- 短信验证码登录 -->
+			<a class="forgetPwd pwdLoginStatus" onclick="msgLogin()">短信验证码登录</a>
+			<a class="forgetPwd msgLoginStatus" onclick="pwdLogin()" style="display: none;">密码登录</a>
+			<div class="loginBtn" onclick="submitLogin();">登&nbsp;&nbsp;录</div>
+			<span class="noAccount">没有账号？<a class="goToReg" href="{:U('Home/User/reg')}">去注册</a></span>
+		</div>
+	</div>	
+</div>
+<div class="mod_copyright p">
+	<div class="grid-top">
+	    <tpshop sql="SELECT * FROM `__PREFIX__navigation` where is_show = 1 AND position = 'bottom' ORDER BY `sort` DESC" key="kk" item='vv'>
+	        <a href="{$vv[url]}" <if condition="$vv[is_new] eq 1"> target="_blank" </if> >{$vv[name]}</a><span>|</span>
+	    </tpshop>
+	</div>
+	<p style="color: #ab9f9f;font-size: 14px;">Copyright © 2016-2025 {$tpshop_config.shop_info_store_name|default='蜂车车'} 版权所有 保留一切权利 <a href="http://www.beian.miit.gov.cn/" target="_blank" title="{$tpshop_config['shop_info_record_no']|default='蜀ICP备18022979号-1'}" style="color: #ab9f9f;">备案号:{$tpshop_config['shop_info_record_no']|default='蜀ICP备18022979号-1'} 友链交换QQ： {$tpshop_config['shop_info_qq']}</a></p>
+	<p class="mod_copyright_auth">
+	    <!-- <a class="mod_copyright_auth_ico mod_copyright_auth_ico_1" href="http://www.beian.miit.gov.cn/" target="_blank">经营性网站备案中心</a> -->
+	    <!-- <a class="mod_copyright_auth_ico mod_copyright_auth_ico_2" href="http://www.kxnet.cn/" target="_blank">可信网站信用评估</a> -->
+	    <a class="mod_copyright_auth_ico mod_copyright_auth_ico_3" href="http://www.cyberpolice.cn/wfjb/" target="_blank">网络警察提醒你</a>
+	    <a class="mod_copyright_auth_ico mod_copyright_auth_ico_4" target="_blank">诚信网站</a>
+	    <!-- <a href="https://cec.osichina.cn/bz8687345698.html" target="_blank"><img src="http://cec.osichina.cn/cec/gswj.png" alt="企业亮照验证电子标识" width="100px" height="32px" border="0" /></a> -->
+	    <a class="mod_copyright_auth_ico mod_copyright_auth_ico_5" href="http://www.12377.cn/" target="_blank">中国互联网举报中心</a>
+	    <a class="mod_copyright_auth_ico mod_copyright_auth_ico_6" href="https://v.yunaq.com/certificate?domain=www.fcheche.com&from=label&code=90020" target="_blank">实名认证</a>
+	</p>
+</div>
+</body>
+<script type="text/javascript">
+	var loginStatus = 1;//0 短信登录 1 密码登录
+	$('.textFocus').focus(function(){
+		$(this).parent().addClass('textFocusStyle');
+	})
+	$('.textFocus').blur(function(){
+		$(this).parent().removeClass('textFocusStyle');
+	})
+	// 发送手机短信
+    function send_sms_reg_code(){
+        var userPhone = $.trim($('#userPhone').val());
+        if(!checkMobile(userPhone)){
+            showMsg('请输入正确的手机号码', 2);
+            return;
+        }
+        ajaxGetData(urlList.user.sendMsg,'post',{"scene": 2,"mobile": userPhone}).then(data => {
+			if(data.status == 1){
+                $('#count_down').attr("disabled","disabled");
+                intAs = {$tpshop_config['sms_sms_time_out']|default=60}; // 手机短信超时时间
+                jsInnerTimeout('count_down',intAs);
+                showMsg(data.msg, 1);
+            }else{
+                showMsg(data.msg,2);
+            }
+        })
+    }
+    //倒计时函数
+    function jsInnerTimeout(id,intAs)
+    {
+        var codeObj=$("#"+id);
+        intAs--;
+        if(intAs<=-1)
+        {
+            codeObj.removeAttr("disabled");
+            codeObj.text("重新发送");
+            return true;
+        }
+        codeObj.text(intAs+'秒');
+        setTimeout("jsInnerTimeout('"+id+"',"+intAs+")",1000);
+    };
+    function checkMobile(tel) {
+	//        var reg = /(^1[3|4|5|7|8][0-9]{9}$)/;
+        var reg = /^(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/;
+        if (reg.test(tel)) {
+            return true;
+        }else{
+            return false;
+        };
+    }
+	function submitLogin(){
+		if (loginStatus == 0){
+			var userPhone = $.trim($('#userPhone').val());
+			var msgCode = $("#msgCode").val();
+
+			if (userPhone == ''){
+				showMsg("手机号不能为空",0);
+			}
+			if(msgCode == ''){
+				showMsg("短信验证码不能为空",0);
+			}
+			ajaxGetData(urlList.user.login,'post',{"username": userPhone,"code": msgCode}).then(data => {
+				if(data.status == 1){
+	                window.location.href = data.url;
+	            }else{
+	            	showMsg(data.msg,2)
+	            }
+			})
+
+		}else if(loginStatus == 1){
+			var username = $.trim($('#username').val());
+			var password = $.trim($('#password').val());
+			var verifyCode = $('#verifyCode').val();
+			
+			if(username == ''){
+				showMsg("用户名不能为空",0);
+			}
+			if(password == ''){
+				showMsg("密码不能为空",0);
+			}
+			if(verifyCode == ''){
+				showMsg("验证码不能为空",0)
+			}
+
+			ajaxGetData(urlList.user.login,'post',{"username": username,"password": password,"verify_code": verifyCode}).then(data => {
+				if(data.status == ''){
+	                showMsg('验证码错误',2);
+	                verify();
+	            }
+	            if(data.status == 1){
+	                window.location.href = data.url;
+	            }
+	            if(data.status == -1){
+	                showMsg('账号不存在',2);
+	                verify();
+	            }
+	            if(data.status == -2){
+	                showMsg('密码错误',2);
+	                verify();
+	            }
+	            if(data.status == -3){
+	                showMsg('账号异常已被锁定！！！');
+	                verify();
+	            }
+			})
+		}
+		
+	}
+	function verify(){
+		$('#verifyImgCode').attr('src',urlList.user.verifyImg);
+	}
+	//回车提交
+    $(document).keyup(function(event){
+        if(event.keyCode ==13){
+            var isFocus=$("#verifyCode").is(":focus");
+            if(true==isFocus){
+                submitLogin();
+            }
+        }
+    });
+    function msgLogin(){
+    	loginStatus = 0;
+    	$('.pwdLoginStatus').css('display','none');
+    	$('.msgLoginStatus').css('display','inline-block');
+    	$('.note').text('请使用您本人的手机号登录')
+    }
+    function pwdLogin(){
+    	loginStatus = 1;
+    	$('.pwdLoginStatus').css('display','inline-block');
+    	$('.msgLoginStatus').css('display','none');
+    	$('.note').text('请使用您本人的账号密码登录')
+    }
+</script>
+</html>

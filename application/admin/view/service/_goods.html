@@ -1,0 +1,982 @@
+<include file="public/layout" />
+<!--物流配置 css -start-->
+<script src="__ROOT__/public/static/js/layer/laydate/laydate.js"></script>
+<style>
+ul.group-list {
+    width: 96%;min-width: 1000px; margin: auto 5px;list-style: disc outside none;
+}
+.err{color:#F00; display:none;}
+ul.group-list li {
+    white-space: nowrap;float: left;
+    width: 150px; height: 25px;
+    padding: 3px 5px;list-style-type: none;
+    list-style-position: outside;border: 0px;margin: 0px;
+}
+.row .table-bordered td .btn,.row .table-bordered td img{
+    vertical-align: middle;
+}
+.row .table-bordered td{
+  padding: 8px;
+  line-height: 1.42857143;
+}
+.table-bordered{
+  width: 100%
+}
+/*.table-bordered tr td{
+  border: 1px solid #f4f4f4;
+}*/
+.btn-success {
+    color: #fff;background-color: #449d44;border-color: #398439 solid 1px;
+}
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.col-xs-8 {
+    width: 66.66666667%;
+}
+.col-xs-4 {
+    width: 65%;
+}
+.col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+    float: left;
+}
+.row .tab-pane h4{
+  padding: 10px 0;
+}
+.row .tab-pane h4 input{
+  vertical-align: middle;
+} 
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+.ncap-form-default .title{
+  border-bottom: 0
+}
+.ncap-form-default dl.row, .ncap-form-all dd.opt{
+    /*border-color: #F0F0F0;*/
+    border: none;
+}
+.ncap-form-default dl.row:hover, .ncap-form-all dd.opt:hover{
+    border: none;box-shadow: inherit;
+}
+textarea{outline:none;resize:none !important;}
+.addprine{display: inline; }
+.alisth{margin-top: 10px}
+.p_plus strong{cursor: pointer;margin-left: 4px;}
+.freight_template {
+    font-size: 14px;
+    display: inline-block;
+    padding: 0px 10px;
+}
+.err{color:#F00; display:none;}
+
+
+/*新增css*/
+.leftBox{
+    width: 660px;
+    float: left;
+    /*height: 700px;*/
+    margin-left: 50px;
+}
+.rightBox{
+    width: 830px;
+    float: left;
+    
+}
+.tit{
+    text-align:justify; 
+    resize:none;
+    text-justify:distribute-all-lines; 
+    text-align-last:justify; 
+    text-indent:10px;
+}
+.mybutton{
+    padding: 0 0 !important;
+    width: 100px;
+    margin-left: 35%;
+}
+
+.hideBox{
+    height: 0;
+    transition: 0.3s
+}
+#tjzh{
+    cursor: pointer;
+    margin-left: 30px;
+    border-radius: 5px;
+    background-color: #f30;
+    color: white;
+    padding: 5px;
+    font-size: 15px;
+    font-weight: bold;
+}
+.shuxing{
+    float: left;
+    width: 830px;
+}
+table{
+    border-style:none;
+}
+#spec_type{
+    margin-left: 10px;
+}
+.BZ{
+    float: left;
+}
+.t_mane{
+    width: 280px;
+    margin-right: 10px
+}
+.form-control{
+    width: 291px
+}
+.shuxing h1{
+    font-size: 25px;
+    margin: 25px auto;
+    color: #ca0000;
+}
+.row .table-bordered td{
+    width: 100px
+}
+</style>
+<!--物流配置 css -end-->
+<!--以下是在线编辑器 代码 -->
+<load href="__ROOT__/public/plugins/Ueditor/ueditor.config.js"/>
+<load href="__ROOT__/public/plugins/Ueditor/ueditor.all.min.js"/>
+<script type="text/javascript" charset="utf-8" src="__ROOT__/public/plugins/Ueditor/lang/zh-cn/zh-cn.js"></script>
+<!--以上是在线编辑器 代码  end-->
+<body style="background-color: #FFF; overflow: auto;">
+    <div id="append_parent"></div>
+    <div id="ajaxwaitid"></div>
+    <div class="page">
+        <div class="fixed-bar">
+            <div class="item-title">
+                <div class="subject">
+                    <if condition="$goods['goods_type'] eq 1">
+                    <h3>短视频信息设置</h3>
+                    <h5>短视频基本信息设置</h5>
+                    <elseif condition="$goods['goods_type'] eq 2">
+                    <h3>新媒体信息设置</h3>
+                    <h5>新媒体基本信息设置</h5>
+                    <elseif condition="$goods['goods_type'] eq 3">
+                    <h3>微博信息设置</h3>
+                    <h5>微博基本信息设置</h5>
+                    <elseif condition="$goods['goods_type'] eq 4">
+                    <h3>微信公众号信息设置</h3>
+                    <h5>微信公众号基本信息设置</h5>
+                    </if>
+                </div>
+                <ul class="tab-base nc-row">
+                    <li><a href="javascript:void(0);" data-index='1' class="tab current"><span>通用信息</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- 操作说明 -->
+        <div class="explanation" id="explanation">
+            <div class="title" id="checkZoom"><i class="fa fa-lightbulb-o"></i>
+                <h4 title="提示相关设置操作时应注意的要点">操作提示</h4>
+                <span id="explanationZoom" title="收起提示"></span> 
+            </div>
+                <ul>
+                    <li>请务必正确填写相关信息</li>
+                    <li style="color: red">特别注意：修改信息和备注不能同时进行！（提交备注的时候，信息不能修改！）</li>
+                </ul>
+        </div>
+            <!--表单数据-->
+            <form method="post" id="addEditGoodsForm">
+                <input type="hidden" name="goods_id" id="goods_id" value="{$goods.goods_id}">
+                <!--通用信息-->
+                <div class="ncap-form-default tab_div_1">
+                    <div class="leftBox">
+                        <dl class="row">
+                            <dt class="tit"><em>*</em>
+                                <label>标题信息</label>
+                            </dt>
+                            <dd class="opt">
+                                    <input type="text" value="{$goods.goods_name}" name="goods_name" class="input-txt" id="goods_name"/>
+                                <span class="err" id="err_goods_name"></span>
+                                <p class="notic">标题不得超过120个字符</p>
+                            </dd>
+                        </dl>
+                        <dl class="row">
+                            <dt class="tit">
+                                <label>详情描述</label>
+                            </dt>
+                            <dd class="opt">
+                                    <textarea rows="3" cols="120" name="goods_remark" class="input-txt" id="dpxqms">{$goods.goods_remark}</textarea> 
+                                   <p class="notic">详情不得超过250个字符</p>
+                            </dd>
+                        </dl>
+                        <dl class="row">
+                            <dt class="tit">
+                                <label>系统编号</label>
+                            </dt>
+                            <dd class="opt">
+                                {$goods.goods_sn}
+                                <span class="err" id="err_goods_sn"></span>
+                                <span onclick="myshow()" style="cursor: pointer" id="tjzh">查看详情</span>
+                            </dd>
+                        </dl>
+                        <dl class="row">
+                            <dt class="tit"><em>*</em>
+                                <label>粉丝数量</label>
+                            </dt>
+                            <dd class="opt">
+                                     <input class="input-txt" type="text" name="fensi_num" id="fensi_num" value="{$goods.fensi_num}"/>
+                                <span class="err" id="err_spu"></span>
+                                <p class="notic">请填写阿拉伯数字</p>       
+                            </dd>
+                        </dl>
+
+                         <dl class="row">
+                                <dt class="tit"><em>*</em>
+                                    <label>所属平台</label>
+                                </dt>
+                                <dd class="opt">
+                                    <select name="pingtai_id" id="pingtai_id" class="small form-control">
+                                        <option value="">请选择所属平台</option>
+                                        <foreach name="pingtaiList" item="v" key="k" >
+                                            <option value="{$v['attr_id']}" <if condition="$goods['pingtai_id'] eq $v['attr_id']">selected="selected"</if>>{$v['attr_name']}</option>
+                                        </foreach>
+                                    </select>
+                                <span class="err" id="err_cat_id"></span>
+                            </dd>
+                        </dl>
+                        <dl class="row">
+                            <dt class="tit"><em>*</em>
+                                <label>行业分类</label>
+                            </dt>
+                            <dd class="opt">
+                                <select name="cat_id" id="cat_id" class="small form-control" >
+                                    <option value="">请选择类别</option>
+                                     <foreach name="categoryList" item="vcat" key="kcat" >
+                                       <option value="{$vcat['id']}" <if condition="$goods['cat_id'] eq $vcat['id']">selected="selected"</if>>{$vcat['name']}</option>
+                                     </foreach>
+                                </select>
+                            </dd>
+                        </dl>
+
+                        <!--隐藏部分-->
+                        <div class="hideBox" id="hideBox">
+                        
+                        <if condition="$goods['sellername'] neq ''">
+                            <dl class="row">
+                                <dt class="tit">
+                                    <label>卖家账号</label>
+                                </dt>
+                                <dd class="opt">
+                                    <a><p class="notic myNotic">
+                                            <input type="text" value="{$goods.sellername}" name="sellername" class="input-txt" id="hyzh"/>
+                                        </p></a>
+                                </dd>
+                            </dl>
+                            <else>
+                                <dl class="row">
+                                    <dt class="tit">
+                                        <label>卖家账号</label>
+                                    </dt>
+                                    <dd class="opt">
+                                            <input type="text" value="{$goods.sellername}" name="sellername" class="input-txt" id="hyzh"/>
+                                       <a class="btn green" href="javascript:layer.open({type: 2,title: '添加会员',shadeClose: true,shade: 0.3,area: ['60%', '70%'],content:'{:U('User/add_user')}'});"><p class="notic myNotic">添加会员账号</p></a>
+                                    </dd>
+                                </dl>
+                            </if>
+                            
+                                
+                                <if condition="$user['qq'] neq ''">
+                                 <dl class="row">
+                                    <dt class="tit">
+                                        <label>Q Q账号</label>
+                                    </dt>
+                                    <dd class="opt">
+                                           {$seller.qq}
+                                    </dd>
+                                </dl>
+                                <else>
+                                    <dl class="row">
+                                        <dt class="tit">
+                                            <label>Q Q账号</label>
+                                        </dt>
+                                        <dd class="opt">
+                                        <a href="{:U('Admin/user/detail',array('id'=>$seller.user_id))}"><p class="notic">添加Q Q账号</p></a>
+                                        </dd>
+                                    </dl>
+                                </if>
+
+                                <if condition="$user['mobile'] neq ''">
+                                 <dl class="row">
+                                    <dt class="tit">
+                                        <label>联系电话</label>
+                                    </dt>
+                                    <dd class="opt">
+                                          {$seller.mobile}
+                                    </dd>
+                                </dl>
+                                <else>
+                                    <dl class="row">
+                                        <dt class="tit">
+                                            <label>联系电话</label>
+                                        </dt>
+                                        <dd class="opt">
+                                            <a href="{:U('Admin/user/detail',array('id'=>$seller.user_id))}"><p class="notic">添加电话</p></a>
+                                        </dd>
+                                    </dl>
+                                </if>
+                            </div>
+                            <!--隐藏部分end-->
+                        <dl class="row">
+                            <dt class="tit"><em>*</em>
+                                <label>注册时间</label>
+                            </dt>
+                            <dd class="opt">
+                               <select name="zhuce_time" id="zhuce_time">
+                                  <option value="">请选择时间</option>
+                                  <option value="2008" <if condition="$goods['zhuce_time'] eq 2008">selected="selected"</if>>2008</option>
+                                  <option value="2009" <if condition="$goods['zhuce_time'] eq 2009">selected="selected"</if>>2009</option>
+                                  <option value="2010" <if condition="$goods['zhuce_time'] eq 2009">selected="selected"</if>>2010</option>
+                                  <option value="2011" <if condition="$goods['zhuce_time'] eq 2009">selected="selected"</if>>2011</option>
+                                  <option value="2012" <if condition="$goods['zhuce_time'] eq 2009">selected="selected"</if>>2012</option>
+                                  <option value="2013" <if condition="$goods['zhuce_time'] eq 2009">selected="selected"</if>>2013</option>
+                                  <option value="2014" <if condition="$goods['zhuce_time'] eq 2009">selected="selected"</if>>2014</option>
+                                  <option value="2015" <if condition="$goods['zhuce_time'] eq 2009">selected="selected"</if>>2015</option>
+                                  <option value="2016" <if condition="$goods['zhuce_time'] eq 2009">selected="selected"</if>>2016</option>
+                                  <option value="2017" <if condition="$goods['zhuce_time'] eq 2009">selected="selected"</if>>2017</option>
+                                  <option value="2018" <if condition="$goods['zhuce_time'] eq 2009">selected="selected"</if>>2018</option>
+                                  <option value="2019" <if condition="$goods['zhuce_time'] eq 2009">selected="selected"</if>>2019</option>
+                                  <option value="2020" <if condition="$goods['zhuce_time'] eq 2009">selected="selected"</if>>2020</option>
+                                </select>  
+                                <span class="err" id="err_goods_sn"></span>
+                            </dd>
+                        </dl>
+                        <dl class="row">
+                            <dt class="tit"><em>*</em>
+                                <label>是否开通直播</label>
+                            </dt>
+                            <dd class="opt">
+                               <select name="is_zhibo" id="is_zhibo">
+                                  <option value="">是否开通直播</option>
+                                  <option value="1" <if condition="$goods['is_zhibo'] eq 1">selected="selected"</if>>已开通</option>
+                                  <option value="2" <if condition="$goods['is_zhibo'] eq 2">selected="selected"</if>>未开通</option>
+                                  <option value="3" <if condition="$goods['is_zhibo'] eq 3">selected="selected"</if>>可申请</option>
+                                </select>   
+                            </dd>
+                        </dl>
+                        <dl class="row">
+                            <dt class="tit"><em>*</em>
+                                <label>是否开通橱窗</label>
+                            </dt>
+                            <dd class="opt">
+                               <select name="is_chuchuang" id="is_chuchuang">
+                                  <option value="">是否开通橱窗</option>
+                                  <option value="1" <if condition="$goods['is_chuchuang'] eq 1">selected="selected"</if>>已开通</option>
+                                  <option value="2" <if condition="$goods['is_chuchuang'] eq 2">selected="selected"</if>>未开通</option>
+                                </select>
+                            </dd>
+                        </dl>
+                         <dl class="row">
+                            <dt class="tit"><em>*</em>
+                                <label>认证主体</label>
+                            </dt>
+                            <dd class="opt">
+                               <select name="renzheng_type" id="renzheng_type">
+                                  <option value="">请选择主体</option>
+                                  <option value="1" <if condition="$goods['renzheng_type'] eq 1">selected="selected"</if>>个人认证</option>
+                                  <option value="2" <if condition="$goods['renzheng_type'] eq 2">selected="selected"</if>>企业认证</option>
+                                </select> 
+                            </dd>
+                        </dl>
+                         <dl class="row">
+                            <dt class="tit"><em>*</em>
+                                <label>有无处罚</label>
+                            </dt>
+                            <dd class="opt">
+                               <select name="is_chufa" id="is_chufa">
+                                  <option value="">有无处罚</option>
+                                  <option value="1" <if condition="$goods['is_chufa'] eq 1">selected="selected"</if>>有处罚</option>
+                                  <option value="2" <if condition="$goods['is_chufa'] eq 2">selected="selected"</if>>无处罚</option>
+                                </select>
+                            </dd>
+                        </dl>
+                      
+                       <dl class="row">
+                            <dt class="tit"><em>*</em>
+                                <label>粉丝偏向</label>
+                            </dt>
+                            <dd class="opt">
+                               <select name="fs_pianxiang" id="fs_pianxiang">
+                                  <option value="0" <if condition="$goods['fs_pianxiang'] eq 0">selected="selected"</if>>男女均衡</option>
+                                  <option value="1" <if condition="$goods['fs_pianxiang'] eq 1">selected="selected"</if>>男粉偏多</option>
+                                  <option value="2" <if condition="$goods['fs_pianxiang'] eq 2">selected="selected"</if>>女粉偏多</option>
+                                </select>
+                            </dd>
+                        </dl>
+                        <dl class="row">
+                            <dt class="tit">
+                                <label>挂售时间</label>
+                            </dt>
+                            <dd class="opt">
+                                    <input type="text" size="30" id="on_time" name="on_time" value="<if condition='$goods[on_time] eq 0'>{$todeytime|date='Y-m-d H:i:s',###}<else>{$goods.on_time|date='Y-m-d H:i:s',###}</if>" class="qsbox t_mane"  placeholder="挂售时间">
+                                <p class="notic">不修改时间可以不填</p>
+                            </dd>
+                        </dl>
+                    </div>
+
+
+                <!--图片板块-->
+                <div class="shuxing">
+                    <!-- <h1>丨店铺属性</h1> -->
+          <!--           <dl>
+                        <div class="ncap-form-default tab_div_2" >
+                            <dl class="row">
+                               <div class="tab-pane" id="tab_goods_images">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <volist name="goods['goods_images']" id="image">
+                                                    <div style="width:100px; text-align:center; margin: 5px; display:inline-block;" class="goods_xc">
+                                                        <input type="hidden" value="{$image['image_url']}" name="goods_images[]">
+                                                        <a onClick="" href="{$image['image_url']}" target="_blank"><img width="100" height="100" src="{$image['image_url']}"></a>
+                                                        <br>
+                                                        <a href="javascript:void(0)" onClick="ClearPicArr2(this,'{$image.image_url}')">删除</a>
+                                                    </div>
+                                                </volist>
+
+                                                <div class="goods_xc" style="width:100px; text-align:center; margin: 5px; display:inline-block;">
+                                                    <input type="hidden" name="goods_images[]" value="" />
+                                                    <a href="javascript:void(0);" onClick="GetUploadify(10,'','goods','call_back2');"><img src="/public/images/add-button.jpg" width="100" height="100" /></a>
+                                                    <br/>
+                                                    <a href="javascript:void(0)">&nbsp;&nbsp;</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </dl>             
+                    </div>   
+                    <div class="bot mybutton">  
+                        <input type="hidden" name="goodsimages" id="goodsimages" value="" />          
+                        <a href="JavaScript:void(0);" id="submit_img" class="ncap-btn-big ncap-btn-green">上传图片</a>
+                        <span class="err" id="err_goods_id"></span>
+                    </div>
+                    </dl> -->
+                    
+
+                    <!--备注板块-->
+                    <div class="BZ">
+                                    <dl class="row">
+                            <dt class="tit"><em>*</em>
+                                <label>主管</label>
+                            </dt>
+                            <dd class="opt">
+                                <select class="small form-control" name="zhuguan" id="select">
+                                  <option value="">请选择主管</option>
+                                  <volist name="admin_corps" id="template_admin_corps">
+                                      <option value="{$template_admin_corps.zhuguan_name}"<if condition="$template_admin_corps['zhuguan_name'] eq $goods['zhuguan'] ">selected="selected"</if>>{$template_admin_corps.zhuguan_name}</option>
+                                  </volist>
+                              </select>
+                                <span class="err" id="err_zhuguan"></span>
+                            </dd>
+                        </dl>
+                        <dl class="row">
+                            <dt class="tit"><em>*</em>
+                                <label>归属人</label>
+                            </dt>
+                            <dd class="opt">
+                                <select class="small form-control" name="guishu" id="vall">
+                                  <option value="">请选择挂店人</option>
+                                  <volist name="admins" id="template_admins">
+                                      <option value="{$template_admins.user_name}"<if condition="$template_admins['user_name'] eq $goods['guishu'] ">selected="selected"</if>>{$template_admins.user_name}</option>
+                                  </volist>
+                              </select>
+                                <span class="err" id="err_guishu"></span>
+                            </dd>
+                        </dl>
+                        <script type="text/javascript">
+                                var select = document.getElementById("select");
+                                select.onchange=function(){
+                                    var selvalue = select.value;
+                                    var val = document.getElementById("vall");
+                                    var guishu2 = '{$goods[guishu]}';
+                                            $.ajax({
+                                                'url': "{:U('goods/getCategoryguishu')}",
+                                                'data': {zhuguan: selvalue},
+                                                'dataType': 'json',
+                                                success: function (data) {
+                                                    console.log(data);
+                                                    if (data.status == 1) {
+                                                        var html = '<option value="">请选择挂店人</option>';
+                                                        for (var i = 0; i < data.result.length; i++) {
+                                                            var guishu = data.result[i].user_name;
+                                                            if (guishu2 == guishu) {
+                                                                html += '<option value="' + guishu + '" selected>' + guishu + '</option>'
+                                                            } else {
+                                                                html += '<option value="' + guishu + '">' + guishu + '</option>'
+                                                            }
+                                                        }
+                                                        $('#vall').empty().html(html);
+                                                    }
+                                                }
+                                            })
+                                };
+                        </script>
+                       
+                        <foreach name="beizhus" item="vos" key="ks" >
+                            <dl class="row">
+                                <dt class="tit">
+                                    <label>备注{$ks+1}</label>
+                                </dt>
+                                <dd class="opt" style="color:red;font-size: 18px">   
+                                    {$vos.beizhu}
+                                </dd>
+
+                                <dt class="tit">
+                                    <label></label>
+                                </dt>
+                                <dd class="opt">   
+                                    {$vos.bz_name}--{$vos.bz_time|date='Y-m-d H:i',###}
+                                </dd>
+                            </dl>    
+                        </foreach>
+                        <dl class="row">
+                            <dt class="tit">
+                                <label>备注</label>
+                            </dt>
+                            <dd class="opt">   
+                                <textarea rows="3" cols="120" name="beizhu" style="height: 200px" class="input-txt" id="bz"></textarea>
+                            </dd>
+                        </dl>
+                        <dl class="row">
+                            <dt class="tit">
+                                <label>状态</label>
+                            </dt>
+                            <dd class="opt">
+                                <select name="is_on_sale" id="is_on_sale" class="small form-control">
+                                    <option value="2" <if condition="$goods['is_on_sale'] eq 2">selected="selected"</if>>已售</option>
+                                    <option value="1" <if condition="$goods['is_on_sale'] eq 1">selected="selected"</if>>在售</option>
+                                    <option value="0" <if condition="$goods['is_on_sale'] eq 0">selected="selected"</if>>未审核</option>
+                                </select>
+                            </dd>
+                        </dl>
+                         <dl class="row">
+                            <dt class="tit">
+                                <label>记录</label>
+                            </dt>
+                            <dd class="opt">
+                                <select name="" id="" class="small form-control">
+                                    <foreach name="goods_log" item="log_vos" key="log_ks" >
+                                    <option value="">{$log_vos.admin_name}{$log_vos.time|date='Y-m-d H:i',###}</option>
+                                </foreach>
+                                </select>
+                            </dd>
+                        </dl>
+                    <div class="ncap-form-default" style="float: left;width: 300px;margin-left: 64px">
+                        <div>
+                            <a href="JavaScript:void(0);" id="submit" class="ncap-btn-big ncap-btn-green">确认提交</a>
+    <if condition="$goods['is_on_sale'] eq 0 and empty($act)"><a href="JavaScript:void(0);" id="shenhe" class="ncap-btn-big ncap-btn-green">点击审核</a></if>
+                        </div>
+                    </div>         
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+    <div id="goTop"> <a href="JavaScript:void(0);" id="btntop"><i class="fa fa-angle-up"></i></a><a href="JavaScript:void(0);" id="btnbottom"><i class="fa fa-angle-down"></i></a></div>
+
+    <script>
+
+        /*新加js*/
+        /*显示隐藏添加店铺信息*/
+        function myshow(){
+            var goodsid = $("#goods_id").val();
+            
+            $.ajax({
+                type: "POST",
+                url: "{:U('Goods/ckgoods')}",
+                data: {goodsid: goodsid},
+                async:false,
+                dataType: "json",
+                error: function (data) {
+                    layer.alert("服务器繁忙, 请联系管理员!");
+                },
+                success: function (data) {
+                    if (data.status == 1) {
+                         let myBox=document.getElementsByClassName("hideBox")[0];
+                           myBox.style.height="180px";
+                        layer.msg(data.msg,{icon: 1,time: 2000},function(){
+                          
+                        });
+                    } else {
+                        var v=document.getElementById("hideBox");
+                            v.innerHTML="<p>无权限查看</p>"; //v.innerHTML = 修改值
+                        layer.msg(data.msg, {icon: 2,time: 3000});
+                        return false;
+                    }
+                }
+            });
+
+            // let myNotic=document.getElementsByClassName("myNotic")[0]
+            // let tjzh=document.getElementById("tjzh")
+            // myNotic.parentNode.removeChild(myNotic);
+            // console.log(tjzh)
+            // console.log(tjzh.innerHTML)
+            // tjzh.innerHTML="<input type='text'  value='{$goods.sellername}' name='sellername' class='input-txt' placeholder='请输入会员名'/>"
+            
+        }
+
+
+
+   
+           
+     
+
+    
+    $(function(){
+
+            var act ='{$act}';
+            if (act=='read') {
+                $("select").attr("disabled", "disabled");
+                $("input").attr('readonly', true);
+                $("#dpxqms").attr('readonly', true);
+            }else{
+                $('#on_time').layDate();
+            }
+
+        //提交
+        $(document).on("click",'#submit',function(){
+            let dpxqms=$("#dpxqms").val()
+            let goods_name=$('#goods_name').val()
+            let bz=$('#bz').val()
+            if(goods_name.indexOf("银行卡")>-1){
+                layer.msg('标题包含关键词', {icon: 2});
+                return false
+            }
+            if(dpxqms.indexOf("银行卡")>-1){
+                layer.msg('详情描述包含关键词', {icon: 2});
+                return false
+            }
+            if(bz.indexOf("银行卡")>-1){
+                layer.msg('备注包含关键词', {icon: 2});
+                return false
+            }
+
+
+            $('#submit').attr('disabled', true);
+            $.ajax({
+                type: "POST",
+                url: "{:U('Goods/save')}",
+                data: $("#addEditGoodsForm").serialize(),
+                async:false,
+                dataType: "json",
+                error: function (data) {
+                    console.log(data);
+                    layer.alert("服务器繁忙, 请联系管理员!");
+                },
+                success: function (data) {
+                    if (data.status == 1) {
+                        layer.msg(data.msg,{icon: 1,time: 2000},function(){
+                           
+                        ajax_get_table('search-form2',cur_page);
+                           
+                        });
+                    } else {
+                        $('#submit').attr('disabled',false);
+                        layer.msg(data.msg, {icon: 2,time: 3000});
+                    }
+                    let mypage=parseInt(sessionStorage.getItem('pagelistTM'))
+                    cur_page=mypage
+                    ajax_get_table('search-form2',cur_page);
+                }
+            });
+        })
+
+    $(document).on("click",'#submit_img',function(){
+            document.getElementById('goodsimages').value='1';
+        
+            $('#submit_img').attr('disabled', true);
+            $.ajax({
+                type: "POST",
+                url: "{:U('Goods/save')}",
+                data: $("#addEditGoodsForm").serialize(),
+                async:false,
+                dataType: "json",
+                error: function (data) {
+                    layer.alert("上传成功！");
+                },
+                success: function (data) {
+                    if (data.status == 1) {
+                        layer.msg(data.msg,{icon: 1,time: 2000},function(){
+                        ajax_get_table('search-form2',cur_page);
+                           
+                        });
+                    } else {
+                        $('#submit_img').attr('disabled',false);
+                        layer.msg(data.msg, {icon: 2,time: 3000});
+                    }
+                }
+            });
+        })
+
+                             //审核
+         $(document).on("click",'#shenhe',function(){
+            var goodsid =$("#goods_id").val();
+
+            if (goodsid=='') {
+                alert('系统错误，请联系管理员');
+                return false;
+            }
+            $.ajax({
+                type: "POST",
+                url: "{:U('Goods/goods_shenhe')}",
+                data: {goodsid: goodsid},
+                async:false,
+                dataType: "json",
+                error: function (data) {
+                    layer.alert("服务器繁忙, 请联系管理员!");
+                },
+                success: function (data) {
+                    if (data.status == 1) {
+                        layer.msg(data.msg,{icon: 1,time: 2000},function(){
+                           
+                        });
+                    } else {
+                        layer.msg(data.msg, {icon: 2,time: 3000});
+                        return false;
+                    }
+                }
+            });
+        })
+
+              //账号验证
+            $("#hyzh").blur(function(){
+                if (hyzh=='') {
+                alert('老板，不要逗我，请输入账号查询是否存在好吗！？');
+                return false;
+            }
+                    hyzhcc()
+            })
+
+
+    })
+
+
+ function hyzhcc(){
+         var hyzh = $("#hyzh").val();
+
+            $.ajax({
+                type: "POST",
+                url: "{:U('Goods/hyzhcc')}",
+                data: {filename: hyzh},
+                async:false,
+                dataType: "json",
+                error: function (data) {
+                    layer.alert("服务器繁忙, 请联系管理员!");
+                },
+                success: function (data) {
+                    if (data.status == 1) {
+                        layer.msg(data.msg,{icon: 1,time: 2000},function(){
+                           
+                        });
+                    } else {
+                        alert(data.msg);
+                        document.getElementById("hyzh").value = "";
+                        // layer.msg(data.msg, {icon: 2,time: 3000});
+                        return false;
+                    }
+                }
+            });
+    }
+
+
+
+    //规格批量填充
+    $(function () {
+        $(document).on("click", '#item_fill', function () {
+            var item_price_fill = $("#item_price").val();
+            var item_market_price_fill = $("#item_market_price").val();
+            var item_cost_price_fill = $("#item_cost_price").val();
+            var item_commission_fill = $("#item_commission").val();
+            var item_store_count_fill = $("#item_store_count").val();
+            var item_sku_fill = $("#item_sku").val();
+            $("input[name$='[price]']").val(item_price_fill);
+            $("input[name$='[market_price]']").val(item_market_price_fill);
+            $("input[name$='[cost_price]']").val(item_cost_price_fill);
+            $("input[name$='[commission]']").val(item_commission_fill);
+            $("input[name$='[store_count]']").val(item_store_count_fill);
+            $("input[name$='[sku]']").each(function(i,o){
+                $(this).val(item_sku_fill);
+                item_sku_fill++;
+            })
+        })
+    })
+
+   
+
+    var url="{:url('Admin/Ueditor/index',array('savePath'=>'goods'))}";
+    var ue = UE.getEditor('goods_content',{
+     toolbars: [[
+     'fullscreen', 'source', '|', 'undo', 'redo', '|',
+     'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
+     'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
+     'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
+     'directionalityltr', 'directionalityrtl', 'indent', '|',
+     'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|',
+     'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
+     'simpleupload', 'insertimage', 'emotion', 'scrawl', 'music', 'attachment', 'map', 'gmap', 'insertframe', 'insertcode', 'webapp', 'pagebreak', 'template', 'background', '|',
+     'horizontal', 'date', 'time', 'spechars', 'snapscreen', 'wordimage', '|',
+     'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
+     'print', 'preview', 'searchreplace', 'drafts', 'help'
+     ]],
+     serverUrl :url,
+     zIndex: 999,
+         initialFrameWidth: "100%", //初化宽度
+         initialFrameHeight: 300, //初化高度            
+         focus: false, //初始化时，是否让编辑器获得焦点true或false
+         maximumWords: 99999, removeFormatAttributes: 'class,style,lang,width,height,align,hspace,valign',//允许的最大字符数 'fullscreen',
+         pasteplain:false, //是否默认为纯文本粘贴。false为不使用纯文本粘贴，true为使用纯文本粘贴
+         autoHeightEnabled: true
+     });
+
+    // 上传店铺图片成功回调函数
+    function call_back(fileurl_tmp){
+        $("#original_img").val(fileurl_tmp);
+        $("#original_img2").attr('href', fileurl_tmp);
+    }
+
+    // 上传店铺相册回调函数
+    function call_back2(paths) {
+        var last_div = $(".goods_xc:last").prop("outerHTML");
+        for (var i = 0; i < paths.length; i++) {
+            $(".goods_xc:eq(0)").before(last_div);  // 插入一个 新图片
+            $(".goods_xc:eq(0)").find('a:eq(0)').attr('href', paths[i]).attr('onclick', '').attr('target', "_blank");// 修改他的链接地址
+            $(".goods_xc:eq(0)").find('img').attr('src', paths[i]);// 修改他的图片路径
+            $(".goods_xc:eq(0)").find('a:eq(1)').attr('onclick', "ClearPicArr2(this,'" + paths[i] + "')").text('删除');
+            $(".goods_xc:eq(0)").find('input').val(paths[i]); // 设置隐藏域 要提交的值
+        }
+    }
+    //上传之后删除组图
+    function ClearPicArr2(obj, path) {
+        $.ajax({
+            type: 'GET',
+            url: "{:U('Admin/Uploadify/delupload')}",
+            data: {action: "del", filename: path},
+            success: function () {
+                $(obj).parent().remove(); // 删除完服务器的, 再删除 html上的图片
+            }
+        });
+        // 删除数据库记录
+        $.ajax({
+            type: 'GET',
+            url: "{:U('Admin/Goods/del_goods_images')}",
+            data: {filename: path},
+            success: function () {
+            }
+        });
+    }
+
+    // 属性输入框的加减事件
+    function addAttr(a) {
+        var attr = $(a).parent().parent().prop("outerHTML");
+        attr = attr.replace('addAttr', 'delAttr').replace('+', '-');
+        $(a).parent().parent().after(attr);
+    }
+    // 属性输入框的加减事件
+    function delAttr(a) {
+        $(a).parent().parent().remove();
+    }
+
+
+    //插件切换列表
+    $('.tab-base').find('.tab').click(function(){
+        $('.tab-base').find('.tab').each(function(){
+            $(this).removeClass('current');
+        });
+        $(this).addClass('current');
+        var tab_index = $(this).data('index');
+        console.log(tab_index)
+        $(".tab_div_1, .tab_div_2, .tab_div_3,.tab_div_5").hide();
+        $(".tab_div_"+tab_index).show();
+    });
+
+    //上传图片回调事件
+    function img_call_back(fileurl_tmp) {
+        $("#imagetext").val(fileurl_tmp);
+        $("#img_a").attr('href', fileurl_tmp);
+        $("#img_i").attr('onmouseover', "layer.tips('<img src=" + fileurl_tmp + ">',this,{tips: [1, '#fff']});");
+    }
+
+    //上传视频回调事件
+    function video_call_back(fileurl_tmp) {
+        $("#videotext").val(fileurl_tmp);
+        $("#video_a").attr('href', fileurl_tmp);
+        $("#video_i").attr('onmouseover', "layer.tips('<img src=" + fileurl_tmp + ">',this,{tips: [1, '#fff']});");
+        if (typeof(fileurl_tmp) != 'undefined') {
+            $('#video_button').html('<input type="button" onclick="delupload()" value="删除视频" class="type-file-button" >');
+        }
+    }
+
+    //品牌选项框
+    function getCategoryBrandList(val) {
+        var goods_brand_id = $("input[name='goods_brand_id']").val();
+        $.ajax({
+            'url': "{:U('goods/getCategoryBrandList')}",
+            'data': {cart_id: val},
+            'dataType': 'json',
+            success: function (data) {
+                if (data.status == 1) {
+                    var html = '<option value="">所有品牌</option>';
+                    for (var i = 0; i < data.result.length; i++) {
+                        var bind_id = data.result[i].id;
+                        if (goods_brand_id == bind_id) {
+                            html += '<option value="' + bind_id + '" selected>' + data.result[i].name + '</option>'
+                        } else {
+                            html += '<option value="' + bind_id + '">' + data.result[i].name + '</option>'
+                        }
+                    }
+                    $('#brand_id').empty().html(html);
+                }
+            }
+        })
+    }
+    //删除上传图片事件
+    function delupload() {
+        $.ajax({
+            url: "{:U('Uploadify/delupload')}",
+            data: {url: $('#videotext').val()},
+            success: function (data) {
+                if (data == 1) {
+                    layer.msg('删除成功！', {icon: 1});
+                    $('#videotext').val('');
+                    var html = '<input type="button" name="button" id="videobutton1" value="选择上传..." class="type-file-button"> <input class="type-file-file" onClick="GetUploadify(1,\'\',\'goods\',\'video_call_back\',\'Flash\')" size="30" hidefocus="true" nc_type="change_site_logo" title="点击按钮选择文件并提交表单后上传生效">';
+                    $('#video_button').html(html);
+                } else {
+                    layer.msg('删除失败', {icon: 2});
+                }
+            },
+            error: function () {
+                layer.msg('网络繁忙，请稍后再试!', {icon: 2});
+            }
+        })
+    }
+</script>
+</body>
+</html>

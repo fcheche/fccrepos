@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>修改密码</title>
+	<script type="text/javascript" src="__STATIC__/js/publicJs.js"></script>
+	<link rel="stylesheet" type="text/css" href="__STATIC__/css/userIndex.css">
+	<style type="text/css">
+		/*.menu-ri-t {
+		    background: white
+		}
+
+		.menu-ri-t .mu-head {
+		    padding: 2px;
+		    margin: 18px;
+		    position: relative;
+		    border-radius: 50%;
+		    border: 2px solid #e5e5e5;
+		    overflow: hidden;
+		    width: 100px;
+		    height: 100px
+		}
+
+		.menu-ri-t .mu-head img {
+		     line-height: 100px;
+		    text-align: center;
+		    position: relative;
+		    border-radius: 50%;
+		    width: 100px;
+		    height: 100px;
+		}
+
+		.menu-ri-t .mu-midd {
+		    margin-top: 41px;
+		    margin-left: 150px;
+		}
+
+		.menu-ri-t .mu-midd .mu-m-phone {
+		    font-size: 14px;
+		    color: #333;
+		    white-space: nowrap;
+		    overflow: hidden;
+		    text-overflow: ellipsis;
+		    display: block
+		}
+
+		.menu-ri-t .mu-midd .mu-m-vip {
+		    background: #e23435;
+		    text-align: center;
+		    color: #FFF;
+		    width: 100px;
+		    margin: 2px 0 0;
+		    padding: 2px 0;
+		    border-radius: 11px;
+		    font-weight: 700;
+		    display: block
+		}
+
+		.menu-ri-t .mu-midd p {
+		    margin: 2px 0 0
+		}
+
+		.menu-ri-t .mu-midd p span {
+		    float: left
+		}
+
+		.menu-ri-t .mu-midd p .tt-zd {
+		    height: 10px;
+		    width: 60px;
+		    background: #F5F5F5;
+		    margin: 5px 6px 2px 0
+		}
+
+		.menu-ri-t .mu-midd p .tt-zd i {
+		    display: block;
+		    background: #e23435;
+		    width: 0;
+		    height: 100%;
+		    transition: width .8s;
+		    -moz-transition: width .8s;
+		    -webkit-transition: width .8s;
+		    -o-transition: width .8s
+		}
+
+		.menu-ri-t .mu-midd p .c_ye {
+		    color: #ff8f21;
+		    margin-left: 10px
+		}
+
+		.menu-ri-t .mu-midd p .c_bl {
+		    color: #007dda;
+		    margin-left: 10px
+		}
+		.setsafe {
+		    background: #fffef2;
+		    border: 1px solid #DADADA;
+		    margin-top: 20px
+		}
+
+		.setsafe .mu-midd {
+		    font-size: 14px;
+		    margin-left: 50px;
+		    margin-top: 28px
+		}
+
+		.setsafe .mu-midd .mu-m-phone {
+		    font-size: 16px;
+		    margin-bottom: 10px
+		}
+
+		.setsafe .mu-midd .dmht {
+		    padding: 2px 20px;
+		    background: #dddddd;
+		    color: white
+		}
+
+		.setsafe .mu-midd .dark {
+		    background: #6fa13f
+		}
+
+		.setsafe .mu-midd .advice {
+		    color: #ff5a00;
+		    margin-top: 10px
+		}*/
+		.safe_list_set {
+		    margin-top: 5px
+		}
+
+		.safe_list_set ul {
+		    overflow: hidden;
+		    line-height: 70px;
+		    border-bottom: 1px dashed #DADADA
+		}
+
+		.safe_list_set ul li {
+		    float: left;
+		    margin: 30px 0
+		}
+
+		.safe_list_set ul .sx1 {
+		    width: 59%;
+		    font-size: 14px;
+		    border-left: 1px dashed #DADADA
+		}
+
+		.safe_list_set ul .sx1 span {
+		    padding-left: 50px;
+		    display: block
+		}
+
+		.safe_list_set ul .sx1 .coxli {
+		    margin-top: -100px;
+		    color: #e23435
+		}
+
+		.safe_list_set ul .sx2 {
+		    font-size: 20px;
+		    text-align: center;
+		    color: #6fa13f
+		}
+
+		.safe_list_set ul .sx3 {
+		    font-size: 14px;
+		    text-align: center
+		}
+
+		.safe_list_set ul .sx3 a {
+		    margin: 0 10px
+		}
+
+		.safe_list_set ul .sx2,.safe_list_set ul .sx3 {
+		    width: 20%;
+		}
+
+		.safe_list_set ul .lock {
+		    padding: 10px 26px;
+		    background: #e23435;
+		    color: white
+		}
+		.co_blue{
+			color: #7E31FF;
+		}
+		/*登录密码弹窗 s*/
+		.pwdBg{
+		    position: fixed;
+		    max-width: 1920px;
+		    margin: 0 auto;
+		    width: 100%;
+		    left: 0;
+		    right: 0;
+		    top: 0;
+		    display: none;
+		    bottom: 0;
+		    z-index: 0;
+		    background: rgba(0,0,0,0.4);
+		}
+		.pwdLBox,.pwdPBox{
+			position: fixed;
+		    top: 50%;
+		    left: 50%;
+		    margin-left: -300px;
+		    margin-top: -250px;
+		    background: #fff;
+		    width: 600px;
+		    height: 500px;
+		    z-index: 999;
+		    display: none;
+		}
+		.pwdHead{
+			width: 100%;
+		    height: 50px;
+		    line-height: 50px;
+		    border-bottom: 1px solid #e0e0e0;
+		    margin-bottom: 60px;
+		}
+		.pwdHead h1{
+		    font-size: 16px;
+		    padding-left: 25px;
+		    font-weight: bold;
+		    color: #333;
+		}
+		.pwdItem{
+			padding: 15px 0;
+		    width: 366px;
+		    margin: 0 auto;
+		}
+		.pwdItem .itemTi{
+			width: 100px;
+    		display: inline-block;
+    		text-align: right;
+		}
+		.pwdItem  .name_zjxs{
+		    width: 234px;
+		    height: 36px;
+		    border: 1px solid #ddd;
+		    padding-left: 10px;
+		}
+		.pwdCancel{
+		    margin-left: 190px;
+		}
+		.pwdSave{
+			margin-left: 40px;
+			background: #8d7afe!important;
+    		border: 1px solid #8d7afe!important;
+		}
+		.pwdCancel,.pwdSave{
+		    width: 80px;
+		    height: 30px;
+		    margin-top: 40px;
+		    /*margin: 30px auto 15px;*/
+		    border: 1px solid #ddd;
+		    background: #f5f5f5;
+		    border-radius: 5px;
+		    line-height: 30px;
+		    text-align: center;
+		    float: left;
+		    cursor: pointer;
+		}
+		.pwdCancel .pwdBtn, .pwdSave .pwdBtn{
+			border: none;
+   			color: #333; 
+   		}
+   		 .pwdSave .pwdBtn{
+   		 	background: #8d7afe;
+    		color: #fff;
+   		 }
+		/*登录密码弹窗 e*/
+		/*支付密码弹窗 s*/
+		.pwdPBox{
+
+		}
+		.pwdPBox .pwdItem .itemTi{
+			width: 115px;
+		}
+		.pwdPBox .pwdItem .name_zjxs_yzm{
+			width: 120px;
+		    height: 36px;
+		    border: 1px solid #ddd;
+		    padding-left: 10px;
+		}
+		.pwdPBox .pwdItem .getYzm{
+			height: 36px;
+		    width: 90px;
+		    border: none;
+		    border-radius: 5px;
+		    color: #6f6f6f;
+		    margin-left: 10px;
+		}
+		.safebil{
+	        margin: 0 0 10px 220px;
+		}
+		.safebil .lowzg{
+			background: #d5d5d5;
+			color: #fff;
+			padding: 0 20px;
+			margin-left: 15px;
+		}
+		.safebil .red{
+			background: #e23435;
+
+		}
+		.pwdPBox .note{
+		    margin-left: 90px;
+		    font-size: 12px;
+		    color: #999;
+		    display: inline-block;
+		}	
+		.pwdPBox .note1{
+		    margin-top: 20px;
+		}
+		.pwdPay3{
+		    width: 400px;
+		    overflow: hidden;
+		    margin: 150px auto 0;
+		}
+		.pwdPay3 .pwdOverLeft{
+			width: 50px;
+    		float: left;
+		}
+		.pwdPay3 .pwdOverRight{
+			float: left;
+    		margin-left: 20px;
+		}
+		.pwdPay3 .pwdOverRight p{
+			font-size: 14px;
+    		color: #999;
+		}
+		.pwdPay3 .pwdOverRight .goToSetting{
+		    color: #7E31FF;
+		}
+		/*支付密码弹窗 e*/
+	</style>
+</head>
+<body>
+<include file="user/userHeader">
+<div class="userContent">
+	<include file="user/userMenu">
+	<div class="userCont">
+		<div class="userTitle">修改密码</div>
+		<!-- <div class="menu-ri-t setsafe p">
+			<div class="mu-head fl">
+				<img src="__STATIC__/images/pers.png"/>
+			</div>
+			<div class="mu-midd fl">
+				<a class="mu-m-phone" href="" style="margin-bottom: 0px">{$user['nickname']}</a>
+				<a class="dmht <if condition="($user['mobile_validated'] eq 0) or ($user['email_validated'] eq 0)">dark</if>" >低</a>
+				<a class="dmht <if condition="($user['mobile_validated'] eq 1) and ($user['email_validated'] eq 1) and ($user[paypwd] eq null)">dark</if>" >中</a>
+			    <a class="dmht <if condition="($user['mobile_validated'] eq 1) and ($user['email_validated'] eq 1) and ($user[paypwd] neq null)">dark</if>" >高</a>
+				<p class="advice">建议你启动全部安全设置，以保障账户及资金安全</p>
+			</div>
+		</div> -->
+		<div class="safe_list_set">
+			<ul>
+				<li class="sx2"><span>登录密码</span></li>
+				<li class="sx1"><span>互联网账号存在被盗风险，建议您定期更改密码以及保护账户安全。</span></li>
+				<li class="sx3"><a class="co_blue" href="javascript:void(0);" id="modLoginPwd">修改</a></li>
+			</ul>
+			<ul>
+				<li class="sx2"><span>支付密码</span></li>
+				<li class="sx1"><span>申请提现或余额支付时，均须支付密码进行身份验证。</span></li>
+				<li class="sx3">
+					<a class="co_blue" href="javascript:void(0);" id="modPayPwd">重置</a>
+				</li>
+			</ul>
+		<!-- 	<ul>
+				<li class="sx2"><span>手机验证</span></li>
+				<li class="sx1"><span><if condition="$user['mobile_validated'] eq 0">您没有绑定手机。互联网账号存在被盗风险，建议您立即绑定一保护账户安全。<else/>您验证的手机：<em>{$user['mobile']}</em>若已丢失或停用，请立即更换，避免账户被盗。</if></span></li>
+				<li class="sx3"><a class="co_blue <if condition='$user[email_validated] eq 1'>lock</if>" href="{:U('Home/User/mobile_validate',array('type'=>'mobile','step'=>1))}"><if condition="$user['mobile_validated'] eq 0">未验证(点击验证)<else/>已验证(点击修改)</if></a></li>
+			</ul>
+			<ul>
+				<li class="sx2"><span>邮箱验证</span></li>
+				<li class="sx1"><span><if condition="$user['email_validated'] eq 0">您没有绑定邮箱。互联网账号存在被盗风险，建议您立即绑定一保护账户安全。<else/>您验证的邮箱：<em>{$user['email']}</em>若已丢失或停用，请立即更换，避免账户被盗。</if></span><br /></li>
+				<li class="sx3"><a class="co_blue <if condition='$user[mobile_validated] eq 1'>lock</if>" href="{:U('Home/User/email_validate',array('type'=>'email','step'=>1))}"><if condition="$user['email_validated'] eq 0">未验证(点击验证)<else/>已验证(点击修改)</if></a></li>
+			</ul> -->
+		</div>
+	</div>
+</div>
+<div class="pwdBg" id="pwdBg"></div>
+<div class="pwdLBox" id="pwdLBox">
+	<div class="pwdHead">
+		<h1>重置密码</h1>
+	</div>
+	<form action="" method="post" id="pwdLogin">
+		<!-- <div class="pwdItem">
+			<span class="itemTi">当前密码：</span>
+			<input class="name_zjxs" type="password" name="old_password" autocomplete="off" id="old_passwordL" value="" >
+		</div> -->
+		<div class="pwdItem">
+			<span class="itemTi">新登录密码：</span>
+			<input class="name_zjxs" type="password" name="new_password" id="new_passwordL" autocomplete="off" value="" placeholder="6-16位字母、数字或符号组合"  onkeyup="securityLevel(this.value)">
+		</div>
+		<div class="safebil">
+			<span class="lowzg red">低</span>
+			<span class="lowzg">中</span>
+			<span class="lowzg">高</span>
+		</div>
+		<div class="pwdItem">
+			<span class="itemTi">确认新密码：</span>
+			<input class="name_zjxs" type="password" name="confirm_password" id="confirm_passwordL" autocomplete="off" value=""placeholder="6-16位字母、数字或符号组合">
+		</div>
+		<div class="pwdCancel" onclick="pwdCancel()">
+			<input class="pwdBtn" type="button" value="取消">
+		</div>
+		<div class="pwdSave" onclick="checkSubmitL()">
+			<input class="pwdBtn" type="button" value="保存">
+		</div>
+	</form>
+</div>
+<div class="pwdPBox" id="pwdPBox">
+	<div class="pwdHead">
+		<h1>重置密码</h1>
+	</div>
+	<!-- 第一步 -->
+	<!-- <form action="" method="post" id="pwdPay1">
+		<div class="pwdItem">
+			<span class="itemTi">请选择验证方式：</span>
+			<select class="name_zjxs" name="sender" id="sender">
+				<option value="phone" rel="{$user.mobile}">手机验证</option>
+			</select>
+		</div>
+		<div class="pwdItem">
+			<span class="itemTi">已绑定手机号码：</span>
+			<span class="itemValue">{$user.mobile}</span>
+		</div>
+		<div class="pwdItem">
+			<span class="itemTi">验证码：</span>
+			<input class="name_zjxs_yzm" type="text" name="tpcode" id="tpcode">
+			<input type="button" class="getYzm" onclick="sendcode(this)" value="获取验证码">
+		</div>
+		<div class="pwdCancel" id="pwdCancel">
+			<input class="pwdBtn" type="button" value="取消">
+		</div>
+		<div class="pwdSave">
+			<input class="pwdBtn" type="button" onclick="nextstep()" value="下一步">
+		</div>
+		<p style="text-align: center;clear: both;padding-top: 10px;">支付密码是购物卡或账户余额的支付凭证，建议不要与其他网站密码相同</p>
+	</form> -->
+	<!-- 第二步 -->
+	<form action="" method="post" id="pwdPay2">
+		<div class="pwdItem">
+			<span class="itemTi">新支付密码：</span>
+			<input class="name_zjxs" type="password" name="new_password" id="new_passwordP" autocomplete="off" value=""placeholder="6-16位字母、数字或符号组合" onkeyup="securityLevel(this.value)">
+		</div>
+		<div class="safebil">
+			<span class="lowzg red">低</span>
+			<span class="lowzg">中</span>
+			<span class="lowzg">高</span>
+		</div>
+		<div class="pwdItem">
+			<span class="itemTi">确认支付密码：</span>
+			<input class="name_zjxs" type="password" name="confirm_password" id="confirm_passwordP" autocomplete="off" value=""placeholder="6-16位字母、数字或符号组合">
+		</div>
+		<div class="pwdCancel" onclick="pwdCancel()">
+			<input class="pwdBtn" type="button" value="取消">
+		</div>
+		<div class="pwdSave" onclick="checkSubmitP()">
+			<input class="pwdBtn" type="button" value="保存">
+		</div>
+		<p class="note note1">1.支付密码是购物卡或账户余额的支付凭证，建议不要与其他网站密码相同</p>
+		<p class="note note2">2.定期修改支付密码能让账户资金更安全。</p>
+	</form>
+	<!-- 第三步完成 -->
+	<!-- <div class="pwdPay3" id="pwdPay3">
+		<div class="pwdOverLeft">
+			<img src="__STATIC__/img/user/setSuccess.png" style="width: 100%;">
+		</div>
+		<div class="pwdOverRight">
+			<p>支付密码设置成功</p>
+			<p>请牢记您设置的支付密码。 <a href="{:U('User/safety_settings')}" class="goToSetting">查看安全设置</a></p>
+		</div>
+	</div> -->
+</div>
+</body>
+<script type="text/javascript">
+	//登录密码
+	$('#modLoginPwd').click(function(){
+		$('#pwdLogin')[0].reset();
+		$('#pwdBg,#pwdLBox').show();
+	})
+	// 支付密码
+	// $('#setPayPwd').click(function(){
+	// 	$('#pwdBg,#pwdPBox').show();
+	// })
+	$('#modPayPwd').click(function(){
+		$('#pwdPay2')[0].reset();
+		$('#pwdBg,#pwdPBox').show();
+	})
+	function pwdCancel(){
+		$('#pwdBg, #pwdLBox').hide();
+		$('#pwdBg, #pwdPBox').hide();
+	}
+
+	function checkSubmitL(){
+		var new_password = $('#new_passwordL').val();
+		var confirm_password = $('#confirm_passwordL').val();
+		if(new_password == ''){
+			showMsg('新登录密码不能为空', 2);
+			return false;
+		}
+		if(new_password.length<6 || new_password.length>18){
+			showMsg('密码长度不符合规范', 2);
+			return false;
+		}
+		if(new_password != confirm_password){
+			showMsg('两次密码不一致', 2);
+			return false;
+		}
+		ajaxGetData(urlList.user.modLoginPwd,'post',{"new_password": new_password,"confirm_password": confirm_password}).then(data => {
+			if (data.status == 1) {
+				$('#pwdBg, #pwdLBox').hide();
+				showMsg(data.msg, 1);
+			}else{
+				showMsg(data.msg, 2);
+			}
+		})
+	}
+
+	//显示密码安全等级
+    function securityLevel(sValue) {
+        var modes = 0;
+        //正则表达式验证符合要求的
+        if (sValue.length < 6 ) return modes;
+        if (/\d/.test(sValue)) modes++; //数字
+        if (/[a-z]/.test(sValue)) modes++; //小写
+        if (/[A-Z]/.test(sValue)) modes++; //大写
+        if (/\W/.test(sValue)) modes++; //特殊字符
+        $('.lowzg').eq(modes-1).addClass('red').siblings('.lowzg').removeClass('red');
+    };
+
+    function checkSubmitP(){
+		var new_password = $('#new_passwordP').val();
+		var confirm_password = $('#confirm_passwordP').val();
+		if(new_password == ''){
+			showMsg('新支付密码不能为空', 2);
+			return false;
+		}
+		if(new_password.length<6 || new_password.length>18){
+			showMsg('密码长度不符合规范', 2);
+			return false;
+		}
+		if(new_password != confirm_password){
+			showMsg('两次密码不一致', 2);
+			return false;
+		}
+		ajaxGetData(urlList.user.modPayPwd,'post',{"new_password": new_password,"confirm_password": confirm_password}).then(data => {
+			if (data.status == 1) {
+				$('#pwdBg, #pwdPBox').hide();
+				showMsg(data.msg, 1);
+			}else{
+				showMsg(data.msg, 2);
+			}
+		})
+	}
+
+	//获取验证码
+	// function sendcode(o){
+	// 	$.ajax({
+	// 		url:'/index.php?m=Home&c=Api&a=send_validate_code&scene=6&t='+Math.random(),
+	// 		type:'get',
+	// 		dataType:'json',
+	// 		data:{type:$('#sender').val(),send:$('#sender').find("option:selected").attr('rel')},
+	// 		success:function(res){
+	// 			if(res.status=='1'){
+	// 				showMsg(res.msg, 1);
+	// 				timer(o);
+	// 			}else{
+	// 				showMsg(res.msg, 2);
+	// 			}
+	// 		}
+	// 	})
+	// }
+	// var wait=180;
+	// function timer(o) {
+	//     if (wait == 0) {  
+	//         o.removeAttribute("disabled");            
+	//         o.value="获取验证码";  
+	//         wait = {$tpshop_config['sms_sms_time_out']|default=60};
+	//     } else {  
+	//         o.setAttribute("disabled", true);  
+	//         o.value="重新发送(" + wait + ")";  
+	//         wait--;  
+	//         setTimeout(function() {  
+	//           timer(o)  
+	//         }, 1000)  
+	//     }  
+	// }
+
+	// function nextstep(){
+	// 	var tpcode = $('#tpcode').val();
+	// 	if(tpcode == ''){
+	// 		showMsg('验证码不能为空',2);
+	// 		return false;
+	// 	}
+	// 	if(tpcode.length != 4){
+	// 		showMsg('验证码错误',2);
+	// 		return false;
+	// 	}
+	// 	$.ajax({
+	// 		url:'/index.php?m=Home&c=Api&a=check_validate_code&t='+Math.random(),
+	// 		type:'post',
+	// 		dataType:'json',
+	// 		data:{type:$('#sender').val(),code:tpcode,send:$('#sender').find("option:selected").attr('rel'),scene:6},
+	// 		success:function(res){
+	// 			if(res.status==1){
+	// 				is_check = true;
+	// 				window.location.href='/index.php?m=Home&c=User&a=paypwd&step=2&t='+Math.random();
+	// 			}else{
+	// 				showMsg(res.msg,2);
+	// 				return false;
+	// 			}
+	// 		}
+	// 	})
+	// 	// $('#payyanzheng').submit();
+	// }
+
+	
+</script>
+</html>

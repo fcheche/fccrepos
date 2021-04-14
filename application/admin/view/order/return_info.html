@@ -1,0 +1,253 @@
+<include file="public/layout" />
+
+<style type="text/css">
+    html, body {
+        overflow: visible;
+    }
+</style>
+<body style="background-color: #FFF; overflow: auto;">
+<div id="toolTipLayer" style="position: absolute; z-index: 9999; display: none; visibility: visible; left: 95px; top: 573px;"></div>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    <div class="fixed-bar">
+        <div class="item-title"><a class="back" href="{:U('/Admin/Order/return_list')}" title="微信公众号配置"><i class="fa fa-arrow-circle-o-left"></i></a>
+            <div class="subject">
+                <h3>退款详情</h3>
+                <h5>用户提交退款详情</h5>
+            </div>
+        </div>
+    </div>
+    <if condition="$return_goods['status'] eq 0">
+        <form class="form-horizontal" method="post" id="return_form"  name="return_form">
+            <div class="ncap-form-default">
+                <dl class="row">
+                    <dt class="tit">
+                        <label>订单编号</label>
+                    </dt>
+                    <dd class="opt">
+                        <a href="{:U('Admin/Order/detail',array('order_id'=>$return_goods['order_id']))}">{$return_goods.order_sn}</a>
+                    </dd>
+                </dl>
+                <dl class="row">
+                    <dt class="tit">
+                        <label for="cate_id">用户</label>
+                    </dt>
+                    <dd class="opt">
+                        {$user.nickname}
+                    </dd>
+                </dl>
+                <dl class="row">
+                    <dt class="tit">
+                        <label>申请日期</label>
+                    </dt>
+                    <dd class="opt">
+                        {$return_goods.addtime|date="Y-m-d H:i",###}
+                    </dd>
+                </dl>
+                <dl class="row">
+                    <dt class="tit">
+                        <label >商品名称</label>
+                    </dt>
+                    <dd class="opt">
+                      
+                            {$order['goods'][goods_name]}
+                        
+                    </dd>
+                </dl>
+               
+                    <dl class="row">
+                        <dt class="tit">
+                            <label>退款详情</label>
+                        </dt>
+                        <dd class="opt">
+                            <label>需退还金额 ：<input type="text" name="refund_deposit" value="{$return_goods['refund_deposit']}"></label>
+                        </dd>
+                    </dl>
+                  
+                <dl class="row">
+                    <dt class="tit">
+                        <label>退款原因</label>
+                    </dt>
+                    <dd class="opt">
+                        {$return_goods['reason']}
+                    </dd>
+                </dl>
+                <dl class="row">
+                    <dt class="tit">
+                        <label>退款描述</label>
+                    </dt>
+                    <dd class="opt">
+                        {$return_goods['describe']}
+                    </dd>
+                </dl>
+                
+                <if condition="$return_goods['status'] eq 0">
+                    <dl class="row">
+                        <dt class="tit">
+                            <label>审核意见</label>
+                        </dt>
+                        <dd class="opt">
+                            <label><input type="radio" name="status" checked value="1">审核通过</label>
+                            <label><input type="radio" name="status" value="-1">拒绝通过</label>
+                        </dd>
+                    </dl>
+                </if>
+                <dl class="row">
+                        <dt class="tit">
+                            <label>状态修改</label>
+                        </dt>
+                        <dd class="opt">
+                            <label><input type="radio" name="is_on_sale" value="0">未售状态</label>
+                            <label><input type="radio" name="is_on_sale" value="1">在售状态</label>
+                            <label><input type="radio" name="is_on_sale" checked value="2">已售状态</label>
+                        </dd>
+                </dl>
+                    <input type="hidden" name="goods_id" value="{$order['goods'][goods_id]}">
+                    <input type="hidden" name="order_id" value="{$order['order_id']}">
+                <dl class="row">
+                    <dt class="tit">
+                        <label>处理备注</label>
+                    </dt>
+                    <dd class="opt">
+                        <textarea name="remark" id="remark" style="width:300px; height:120px;"  placeholder="退款描述" class="tarea" id="subject_desc">{$return_goods['remark']}</textarea>
+                    </dd>
+                </dl>
+                <input type="hidden" name="id" value="{$id}">
+                <div class="bot"><a href="JavaScript:;" subimtid="return_form" data-href="{:U('Admin/Order/update_return_info')}" class="ncap-btn-big ncap-btn-green submitBtn">确认提交</a></div>
+            </div>
+        </form>
+        <else/>
+        <div class="ncap-form-default">
+            <dl class="row">
+                <dt class="tit">
+                    <label>订单编号</label>
+                </dt>
+                <dd class="opt">
+                    <a href="{:U('Admin/Order/detail',array('order_id'=>$return_goods['order_id']))}">{$return_goods.order_sn}</a>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="cate_id">用户</label>
+                </dt>
+                <dd class="opt">
+                    {$user.nickname}
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label>申请日期</label>
+                </dt>
+                <dd class="opt">
+                    {$return_goods.addtime|date="Y-m-d H:i",###}
+                </dd>
+            </dl>
+            <if condition="$return_goods['type'] lt 2 ">
+                <dl class="row">
+                    <dt class="tit">
+                        <label>退款详情</label>
+                    </dt>
+                    <dd class="opt">
+                        <form method="post" id='return_money' action="{:U('Order/return_money')}">
+                            <input type="hidden" name="rec_id" value="{$return_goods[rec_id]}"/>
+                            <input type="hidden" name="id" value="{$return_goods[id]}"/>
+                             <label>需退还余额：<input type="text" name="refund_deposit" value="{$return_goods['refund_deposit']}"></label>
+                          
+                        </form>
+                    </dd>
+                </dl>
+            </if>
+            <dl class="row">
+                <dt class="tit">
+                    <label >商品</label>
+                </dt>
+                <dd class="opt">
+                        标题：{$order['goods'][goods_name]}
+                </dd>
+            </dl>
+            
+            <if condition="$return_goods['type'] lt 2 and ($return_goods['status'] eq 1 or $return_goods['status'] eq 3)">
+                <dl class="row">
+                    <dt class="tit">
+                        <label>处理方式</label>
+                    </dt>
+                    
+                    <dd class="opt">
+                        <a class="ncap-btn ncap-btn-green submitBtn" subimtid="return_money"  data-href="{:U('Admin/Order/return_money')}">退款到用户余额</a>
+                    </dd>
+                </dl>
+            </if>
+            <dl class="row">
+                <dt class="tit">
+                    <label>售后申请原因</label>
+                </dt>
+                <dd class="opt">
+                    {$return_goods['reason']}
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label>售后申请描述</label>
+                </dt>
+                <dd class="opt">
+                    {$return_goods['describe']}
+                </dd>
+            </dl>
+             
+            <dl class="row">
+                <dt class="tit">
+                    <label>状态</label>
+                </dt>
+                <dd class="opt">
+                    {$refund_status[$return_goods[status]]}
+                </dd>
+            </dl>
+           
+            <dl class="row">
+                <dt class="tit">
+                    <label>处理备注</label>
+                </dt>
+                <dd class="opt">
+                    {$return_goods['remark']}
+                </dd>
+            </dl>
+            
+        </div>
+    </if>
+</div>
+<script>
+    //修改退款金额
+    $(document).on('click','.submitBtn',function(){
+        var subimtid = $(this).attr('subimtid');
+        var formUrl = $(this).data('href')
+        submitForm(subimtid,formUrl);
+    })
+
+   
+
+    //提交表单
+    function  submitForm(subimtid,formUrl) {
+        $.ajax({
+            type : "POST",
+            url: formUrl,
+            data:$('#'+subimtid).serialize(),
+            dataType:'json',
+            async:false,
+            success: function(data){
+                if(data.status ==1){
+                    layer.msg(data.msg, {icon: 1},function () {
+                        window.location.href=data.url;
+                    });
+                }else{
+                    layer.msg(data.msg, {icon: 2});
+                }
+            },
+            error:function(){
+                layer.msg('网络异常，请稍后重试',{icon: 2});
+            }
+        });
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<include file="public/layout" />
+<script type="text/javascript">
+    window.UEDITOR_Admin_URL = "__ROOT__/public/plugins/Ueditor/";
+    var URL_upload = "{$URL_upload}";
+    var URL_fileUp = "{$URL_fileUp}";
+    var URL_scrawlUp = "{$URL_scrawlUp}";
+    var URL_getRemoteImage = "{$URL_getRemoteImage}";
+    var URL_imageManager = "{$URL_imageManager}";
+    var URL_imageUp = "{$URL_imageUp}";
+    var URL_getMovie = "{$URL_getMovie}";
+    var URL_home = "{$URL_home}";    
+</script>
+
+<load href="__ROOT__/public/plugins/Ueditor/ueditor.config.js"/>
+<load href="__ROOT__/public/plugins/Ueditor/ueditor.all.js"/>
+<script src="__ROOT__/public/static/js/layer/laydate/laydate.js"></script>
+
+<style type="text/css">
+html, body {
+    overflow: visible;
+}
+</style>  
+<body style="background-color: #FFF; overflow: auto;">
+<div id="toolTipLayer" style="position: absolute; z-index: 9999; display: none; visibility: visible; left: 95px; top: 573px;"></div>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+  <div class="fixed-bar">
+    <div class="item-title"><a class="back" href="javascript:history.back();" title="返回列表"><i class="fa fa-arrow-circle-o-left"></i></a>
+      <div class="subject">
+        <h3>红包管理</h3>
+        <h5>客户领取红包信息及分配</h5>
+      </div>
+    </div>
+  </div>
+  <form action="" method="post" id="subject_form">
+    <div class="ncap-form-default">
+      <dl class="row">
+        <dt class="tit">
+          <label><em>*</em>领取者电话</label>
+        </dt>
+        <dd class="opt">
+          {$res.tel}
+          <span class="err"></span>
+          <p class="notic"></p>
+        </dd>
+      </dl>
+      <dl class="row">
+        <dt class="tit">
+          <label><em>*</em>领取金额</label>
+        </dt>
+        <dd class="opt">
+          {$res.price}
+          <span class="err"></span>
+          <p class="notic"></p>
+        </dd>
+      </dl>
+      <dl class="row">
+        <dt class="tit">
+          <label><em>*</em>领取时间</label>
+        </dt>
+        <dd class="opt">
+          {$res.time|date='Y-m-d H:i:s',###}
+          <span class="err"></span>
+          <p class="notic"></p>
+        </dd>
+      </dl>
+
+      <dl class="row">
+        <dt class="tit">
+          <label><em>*</em>分配人员</label>
+        </dt>
+        <dd class="opt">
+                <select name="cl_adminid">
+                        <option value="">请选择人员</option>
+                    <volist name="xs_name" id="template_admins">
+                        <option value="{$template_admins.admin_id}" <if condition="$template_admins['admin_id'] eq $res['cl_adminid'] ">selected="selected"</if>>{$template_admins.user_name}</option>
+                    </volist>
+                </select>
+          <span class="err"></span>
+          <p class="notic"></p>
+        </dd>
+      </dl>
+       
+      <dl class="row">
+        <dt class="tit">
+          <label><em>*</em>备注</label>
+        </dt>
+        <dd class="opt">
+          <textarea name="desc" rows="6" class="tarea" id="subject_desc">{$res.desc}</textarea>
+          <span class="err"></span>
+          <p class="notic"></p>
+        </dd>
+      </dl>
+      <div class="bot"><a href="JavaScript:void(0);" onClick="checkForm()" class="ncap-btn-big ncap-btn-green" id="submitBtn">保存</a></div>
+    </div>
+        <input type="hidden" name="act" value="{$act}">
+        <input type="hidden" name="article_id" value="{$info.article_id}"></label>    
+  </form>
+</div>
+<script type="text/javascript">
+    function checkForm(){
+
+        var subject_desc = $('#subject_desc').val();
+        var error ='';
+       
+        
+        if(subject_desc == ''){
+             error += "描述不能为空\n";
+        }
+        
+        if(error){
+            layer.alert(error, {icon: 2});  //alert(error);
+            return ;
+        }
+        $("#subject_form").submit();
+    }
+    
+</script>
+</body>
+</html>

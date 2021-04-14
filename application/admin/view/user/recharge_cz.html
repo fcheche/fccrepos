@@ -1,0 +1,87 @@
+<include file="public/layout" />
+<body style="background-color: #FFF; overflow: auto;">
+<div id="toolTipLayer" style="position: absolute; z-index: 9999; display: none; visibility: visible; left: 95px; top: 573px;"></div>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    <div class="fixed-bar">
+        <div class="item-title"><a class="back" href="javascript:history.back();" title="返回列表"><i class="fa fa-arrow-circle-o-left"></i></a>
+            <div class="subject">
+                <h3>会员管理 - 后台充值</h3>
+                <h5>后台充值账户余额</h5>
+            </div>
+        </div>
+    </div>
+    <form class="form-horizontal" method="post" id="add_form">
+        <div class="ncap-form-default">
+            <dl class="row">
+                <dt class="tit">
+                    <label for="nickname"><em>*</em>会员昵称</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="nickname" id="nickname" class="input-txt" value="{$user.nickname}" readonly="readonly">
+                   
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="account"><em>*</em>充值金额</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="account" id="account" class="input-txt">
+                    <span class="err"></span>
+                    <p class="notic"></p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="ddlastnum"><em>*</em>订单/银行卡后六位</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="ddlastnum" id="ddlastnum" class="input-txt">
+                    <span class="err"></span>
+                    <p class="notic"></p>
+                </dd>
+            </dl>
+
+            <dl class="row">
+                <dt class="tit">
+                    <label for="cz_type">充值方式</label>
+                </dt>
+                <dd class="opt">
+                    <input name="cz_type" type="radio" value="支付宝" checked>支付宝  &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input name="cz_type" type="radio" value="银行卡">银行卡  &nbsp;&nbsp;&nbsp;&nbsp;
+                    
+                </dd>
+            </dl>
+            <div class="bot"><a href="JavaScript:void(0);" onclick="checkUserUpdate();" class="ncap-btn-big ncap-btn-green" id="submitBtn">确认提交</a></div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    function checkUserUpdate(){
+        var account = $('input[name="account"]').val();
+        var ddlastnum = $('input[name="ddlastnum"]').val();
+        
+        var error ='';
+        if(account == ''){
+            error += "金额不能为空\n";
+        }
+        if(ddlastnum == ''){
+            error += "后六位不能为空\n";
+        }
+
+         var reg = /^\d{6}\b/;
+        if(!reg.test(ddlastnum)){
+          error += "订单/银行卡后六位，请输入正确六位数字\n";
+        }
+       
+        if(error){
+            layer.alert(error, {icon: 2});  //alert(error);
+            return false;
+        }
+        $('#add_form').submit();
+    }
+</script>
+</body>
+</html>

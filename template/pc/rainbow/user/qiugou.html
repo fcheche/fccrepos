@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>我要求购</title>
+	<script type="text/javascript" src="__STATIC__/js/publicJs.js"></script>
+	<link rel="stylesheet" type="text/css" href="__STATIC__/css/userIndex.css">
+	<style type="text/css">
+		.personerinfro ul {
+		    overflow: hidden;
+		}
+		.personerinfro ul li {
+		    float: left;
+		    font-size: 14px;
+		    width: 234px;
+		    height: 36px;
+		    padding: 10px 0
+		}
+		.item{
+		    margin-top: 20px;
+	        line-height: 38px;
+		}
+		.itemL{
+			display: inline-block;
+		    width: 240px;
+		    text-align: right;
+		    float: left;
+		}
+		.itemR{
+		    display: inline-block;
+		    width: 400px;
+		    margin-left: 15px;
+		}
+		.itemR .itemSelect{
+			border: 1px solid #ddd;
+		    width: 100%;
+		    padding: 8px 0;
+		}
+		.itemR .itemSelect .title{
+		    color: #999;
+		}
+		.itemR .itemText{
+			width: 98%;
+		    height: 100px;
+		    border: 1px solid #ddd;
+		    padding: 1%;
+		}
+		.item .note{
+	        display: inline-block;
+		    margin-left: 255px;
+		    margin-top: 20px;
+		    color: #999;
+		    font-size: 12px;
+		    line-height: 20px;
+		}
+		.item .save{
+			color: white;
+		    background: #8d7afe;
+		    border: 0;
+		    padding: 10px 52px;
+		    font-size: 15px;
+		    outline: none;
+		    font-weight: bold;
+		    border-radius: 5px;
+	        margin-left: 255px;
+	        display: block;
+		}
+		.item .itemInput{
+			border: 1px solid #ddd;
+		    width: 98%;
+		    padding: 8px 1%;
+		}
+		.itemR .itemSelect .title{
+		    color: #999;
+		}
+		.itemR .itemText{
+			width: 98%;
+		    height: 100px;
+		    border: 1px solid #ddd;
+		    padding: 1%;
+		}
+	</style>
+</head>
+<body>
+<include file="user/userHeader">
+<div class="userContent">
+	<include file="user/userMenu">
+	<div class="userCont">
+		<div class="userTitle">我要求购</div>
+		<div class="personerinfro">
+			<form action="{:U('Home/User/save_qgcs')}" method="post" id="addEditGoodsForm" name="addEditGoodsForm">
+
+                    <input type="hidden" name="type" value="1">
+		       <div class="item">
+		        	<span class="itemL">
+		        		<span style="color: red">*</span>
+		        		平台类型：
+		        	</span>
+		        	<span class="itemR">
+		        		<input type="text" name="pingtai" class="itemInput" placeholder="请输入平台名称：抖音，微博，头条号。。。">
+		        	</span>
+		        </div>
+		        <div class="item">
+		        	<span class="itemL">
+		        		<span style="color: red">*</span>
+		        		行业分类：
+		        	</span>
+		        	<span class="itemR">
+		        		<input type="text" name="cat_name" class="itemInput" placeholder="请输入行业类别：搞笑，美食，音乐。。。">
+		        	</span>
+		        </div>
+		        <div class="item">
+		        	<span class="itemL">
+		        		<span style="color: red">*</span>
+		        		期望售价（元）：
+		        	</span>
+		        	<span class="itemR">
+						<select name="price" id="price" class="itemSelect">
+	                        <option value="0" class="title">请选择价格</option>
+							<option value="5000以下">5000以下</option>
+							<option value="5000-10000">5000-10000</option>
+							<option value="10000-20000">10000-20000</option>
+							<option value="20000-50000">20000-50000</option>
+							<option value="50000-100000">50000-100000</option>
+							<option value="100000以上">100000以上</option>
+	                    </select>
+		        	</span>
+		        </div>
+		        <div class="item">
+		        	<span class="itemL">
+		        		<span style="color: red">*</span>
+		        		入驻时间：
+		        	</span>
+		        	<span class="itemR">
+						<select name="rz_time" id="rz_time" class="itemSelect">
+	                        <option value="0" class="title">请选择入驻时间</option>
+							<option value="2016">2016</option>
+							<option value="2017">2017</option>
+							<option value="2018">2018</option>
+							<option value="2019">2019</option>
+							<option value="2020">2020</option>
+	                    </select>
+		        	</span>
+		        </div>
+		        <div class="item">
+		        	<span class="itemL">
+		        		备注描述：
+		        	</span>
+		        	<span class="itemR">
+						<textarea name="desc" cols="50" rows="3" class="itemText" placeholder="请输入详细的求购需求，便于我们为您服务..."></textarea>
+		        	</span>
+		        </div>
+		        <div class="item">
+		        	<input class="save" type="button" name="" value="确认提交" onclick="return check(this.form)" />
+					<span class="note">温馨提示：店铺成交后我们将收取售价的<span style="color: #ff0000">10%</span>的服务费<br>&emsp;&emsp;&emsp;&emsp;&emsp;如售价为10000，我们将收取1000的服务费</span>
+		        </div>
+			</form>
+		</div>
+	</div>
+</div>
+</body>
+<script type="text/javascript">
+    function check(form) {
+		// if(form.leixing.value=='0') {
+		// 	showMsg('请选择店铺类型!', 2);
+		// 	form.leixing.focus();
+		// 	return false;
+		// }
+		document.addEditGoodsForm.submit();
+	}
+</script>
+</html>

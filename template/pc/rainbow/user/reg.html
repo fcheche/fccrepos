@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>注册-{$tpshop_config['shop_info_store_title']}</title>
+	<meta name="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+    <meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+    <script type="text/javascript" src="__STATIC__/js/publicJs.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/md5.min.js"></script>
+    <style type="text/css">
+    	body{
+    		background: #f4f4f4;
+    	}
+    	.regheader{
+			width: 100%;
+		    height: 80px;
+		    background-color: white;
+		    position: relative;
+    	}
+    	.regheaderBox{
+			width: 500px;
+		    height: 60px;
+		    position: absolute;
+		    left: 5%;
+		    top: 50%;
+		    margin-top: -30px;
+    	}
+    	.regheaderBox .headerlogo{
+			display: inline;
+		    float: left;
+            margin-top: 8px;
+    	}
+    	.regheaderBox .welcomeReg{
+			display: inline-block;
+		    height: 40px;
+		    line-height: 40px;
+		    border-left: 1px solid #ddd;
+		    color: #6c6c6c;
+		    padding: 0px 15px;
+		    font-size: 22px;
+		    font-family: 'Microsoft YaHei';
+		    margin-top: 12px;
+    	}
+    	.regBox{
+			background: #f5f5f5;
+		    width: 600px;
+		    margin: 0 auto;
+		    padding-top: 25px;
+		    font-size: 13px;
+		    font-family: 'Microsoft YaHei';
+    	}
+    	.regBoxHead{
+
+    	}
+    	.regBoxHead .nav{
+		    margin: 20px 0px 0px;
+    	}
+    	.regBoxHead .nav .regBtn{
+		    margin: 0 10px 0 0;
+		    padding: 0px 30px;
+		    float: left;
+		    height: 30px;
+		    line-height: 35px;
+		    text-align: center;
+		    border: 1px solid #d5d5d5;
+		    border-bottom: 0 none;
+		    background: #fff;
+		    font-size: 14px;
+    	}
+    	.regBoxHead .nav .regBtn a{
+		    color: #6c74e1;
+    	}
+    	.regBoxHead .nav .active{
+		    font-weight: bold;
+		    height: 33px;
+		    border-top: 2px solid #6c74e1;
+		    margin-bottom: -1px;
+    	}
+    	.regBoxHead .nav .loginBtn{
+			padding: 15px 12px 0px;
+		    color: #3c3c3c;
+		    float: right;
+    	}
+    	.regBoxHead .nav .loginBtn a{
+    		color: #0066cc;
+    	}
+    	.regContent{
+			border: 1px solid #d5d5d5;
+		    background: #fff;
+		    padding: 35px;
+		    clear: both;
+		    margin-bottom: 50px;
+    	}
+    	.regContentWrap{
+		    font-family: 'Microsoft YaHei';
+		    font-size: 12px;
+		     color: #3c3c3c; 
+		    /*/* height: 465px;*/
+    	}
+    	.regContentWrap .line{
+		    height: 37px;
+		    padding-bottom: 25px;
+		    width: 410px;
+		    margin: 0 auto;
+		    background-color: rgba(255,255,255,0);
+    	}
+    	.regContentWrap .line .linel{
+			float: left;
+		    text-align: right;
+		    width: 90px;
+    	}
+    	.regContentWrap .line .linel em{
+    		color: #ff0000;
+    	}
+    	.regContentWrap .line .dt{
+			display: inline-block;
+		    height: 34px;
+		    line-height: 34px;
+		    padding-left: 10px;
+    	}
+    	.regContentWrap .line .liner{
+			float: left;
+    	}
+    	.regContentWrap .line .inp{
+			float: left;
+		    border: 1px solid #ccc;
+		    padding: 8px;
+		    height: 18px;
+		    line-height: 18px;
+		    margin-right: 10px;
+		    color: #333; 
+		    font-family: 'Microsoft YaHei';
+		    outline: 0 none;
+		    font-size: 14px;
+		    vertical-align: middle;
+		    width: 290px;
+    	}
+    	.regContentWrap .line .phoneCode{
+		    width: 164px;
+    	}
+    	.regContentWrap .line .sendCode{
+    		color: #3c3c3c;
+    		width: 115px;
+    		height: 35px;
+    		font-size: 12px;
+    		text-align: center;
+    		line-height: 35px;
+    		cursor: pointer;
+    		outline: 0 none;
+    		border: 1px solid #ddd;
+    		background: #f5f5f5;
+
+    	}
+    	.regContentWrap .line .getToReg{
+		    background: #5B64DE;
+		    color: #fff;
+		    text-align: center;
+		    width: 250px;
+		    height: 40px;
+		    line-height: 40px;
+		    font-size: 18px;
+		    padding: 9px 44px;
+		    opacity: 0.9;
+    	}
+    	.regContentWrap .line .getToReg:hover{
+		    opacity: 1;
+    	}
+    	.regContentWrap .line .checkRegBox{
+    		height: 34px;
+    	}
+    	.regContentWrap .line .checkText a{
+			color: #0066cc;
+    	}
+        /*底部 s*/
+        .mod_copyright{
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            margin-left: -484px;
+        }
+        .grid-top {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .mod_copyright > p {
+            margin-top: 10px;
+            color: #666;
+            text-align: center;
+        }
+        .friendship-links {
+            padding-top: 10px;
+            /*width: 675px;*/
+            font-size: 14px;
+            margin: 0 auto;
+        }
+        .friendship-links>span {
+            float: left;
+            width: 80px;
+            line-height: 20px;
+            font-weight: bold;
+            color: #888;
+        }
+        .links-wrap-h {
+            float: left;
+        }
+        .links-wrap-h>a {
+            float: left;
+            line-height: 1;
+            margin: 3px 0;
+            padding: 0 10px;
+            color: #888;
+        }
+        .mod_copyright > p {
+            margin-top: 20px;
+            color: #666;
+            text-align: center;
+        }
+        .p:before, .p:after {
+            content: "";
+            clear: both;
+            display: block;
+        }
+        .mod_copyright_auth{
+            width: 458px;
+            background: #fff;
+            margin: 0 auto;
+            height: 40px;
+        }
+        .mod_copyright_auth_ico {
+            overflow: hidden;
+            display: inline-block;
+            margin: 4px 3px;
+            width: 103px;
+            height: 32px;
+            background-image: url("__STATIC__/img/footer/ico_footer.png");
+            line-height: 1000px;
+        }
+        .mod_copyright_auth_ico_1 {
+            background-position: 0 -151px;
+        }
+        .mod_copyright_auth_ico_2 {
+            background-position: -104px -151px;
+        }
+        .mod_copyright_auth_ico_3 {
+            background-position: 0 -184px;
+        }
+        .mod_copyright_auth_ico_4 {
+            background-position: -104px -184px;
+        }
+        .mod_copyright_auth_ico_5 {
+            background-position: 0 -217px;
+        }
+        .mod_copyright_auth_ico_6{
+            background-image: url("https://aqyzmedia.yunaq.com/labels/label_sm_90020.png");
+            background-size: cover;
+        }
+        /*底部 e*/
+    </style>
+</head>
+<body>
+<div class="regheader">
+    <div class="regheaderBox">
+        <a class="headerlogo" href="/" ><img src="{$tpshop_config['shop_info_store_logo']|default='__PUBLIC__/static/img/header/logo.png'}" style="margin-right: 10px"/></a>
+        <span class="welcomeReg">欢迎注册</span>
+    </div>
+</div>
+<div class="regBox">
+    <div class="regBoxHead">
+        <ul class="nav">
+            <li class="regBtn <if condition="I('get.t') eq ''">active</if> "><a href="{:U('Home/User/reg')}" >手机注册</a></li>
+            <!-- <li class="regBtn <if condition="I('get.t') eq 'email'">active</if> "><a href="{:U('Home/User/reg',array('t'=>'email'))}">邮箱注册</a></li> -->
+            <li class="loginBtn">我已注册，马上<a href="{:U('Home/User/login')}">登录></a></li>
+        </ul>
+            
+	<if condition="$Request.param.t eq ''">
+	    <form id="regForm" method="post" action="">
+	        <input type="hidden" name="auth_code" value="{$Think.config.AUTH_CODE}"/>
+	        <input type="hidden" name="scene" value="1">    
+	        <div class="regContent">
+	            <div class="regContentWrap" style="display: block;">
+                    <div class="line">
+                        <label class="linel"><em>*</em><span class="dt">会员昵称：</span></label>
+                        <div class="liner">
+                            <input type="text" class="inp" placeholder="请输入会员账号"  name="username" autocomplete="off" id="username" onblur="chkuser()" required=""/>
+                        </div>
+                    </div>
+                    <div class="line">
+                        <label class="linel"><em>*</em><span class="dt">手机号码：</span></label>
+                        <div class="liner">
+                            <input type="text" class="inp fmobile J_cellphone" placeholder="请输入手机号码"  name="mobile" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" id="mobile" required=""/>
+                        </div>
+                    </div>
+                    <if condition="$tpshop_config['sms_regis_sms_enable'] eq 1" >
+                        <div class="line">
+                            <label class="linel"><em>*</em><span class="dt">短信验证码：</span></label>
+                            <div class="liner">
+                                <input type="text" class="inp phoneCode" placeholder="手机验证码" id="code" name="code" required=""/>                                
+                                <button class="sendCode" onclick="send_sms_reg_code()" type="button" id="count_down" style="margin: 0 0">发送</button>
+                            </div>
+                            <div id="show-voice" class="show-voice"></div>
+                        </div>
+                    </if>
+                    <div class="line">
+                        <label class="linel"><em>*</em><span class="dt">设置密码：</span></label>
+                        <div class="liner">
+                            <input type="password" class="inp" placeholder="6-16位大小写英文字母、数字或符号的组合" autocomplete="off" maxlength="16"  id="password" value="" required=""/>
+                            <input name="password" type="hidden" value=""/>
+                        </div>
+                    </div>
+                    <div class="line">
+                        <label class="linel"><em>*</em><span class="dt">确认密码：</span></label>
+                        <div class="liner">
+                            <input type="password" class="inp" placeholder="请再次输入密码" autocomplete="off" maxlength="16" id="password2" required="" value=""/>
+                            <input name="password2" type="hidden" value=""/>
+                        </div>
+                    </div>
+                   
+                    <div class="line">
+                        <label class="linel">&nbsp;</label>
+                        <div class="liner">
+                            <div class="checkRegBox">
+                                <p class="checkText"><input type="checkbox" id="checktxt"  class="iyes fn-fl J_protocal" checked />
+                                	<span>我已阅读并同意<a href="{:U('Home/Article/agreement',['doc_code'=>'agreement'])}" target="_blank">《服务协议》</a></span>
+                                </p>
+                            </div>
+                            <a class="getToReg J_btn_agree" href="javascript:void(0);" onClick="checkSubmit();">同意协议并注册</a>
+                    	</div>
+                	</div>
+                </div>
+	        </div>
+ 	   </form>
+	</if>
+    </div>
+</div>
+<div class="mod_copyright p">
+    <div class="grid-top">
+        <tpshop sql="SELECT * FROM `__PREFIX__navigation` where is_show = 1 AND position = 'bottom' ORDER BY `sort` DESC" key="kk" item='vv'>
+            <a href="{$vv[url]}" <if condition="$vv[is_new] eq 1"> target="_blank" </if> >{$vv[name]}</a><span>|</span>
+        </tpshop>
+    </div>
+    <p style="color: #ab9f9f;font-size: 14px;">Copyright © 2016-2025 {$tpshop_config.shop_info_store_name|default='蜂车车'} 版权所有 保留一切权利 <a href="http://www.beian.miit.gov.cn/" target="_blank" title="{$tpshop_config['shop_info_record_no']|default='蜀ICP备18022979号-1'}" style="color: #ab9f9f;">备案号:{$tpshop_config['shop_info_record_no']|default='蜀ICP备18022979号-1'} 友链交换QQ： {$tpshop_config['shop_info_qq']}</a></p>
+    <p class="mod_copyright_auth">
+        <!-- <a class="mod_copyright_auth_ico mod_copyright_auth_ico_1" href="http://www.beian.miit.gov.cn/" target="_blank">经营性网站备案中心</a> -->
+        <!-- <a class="mod_copyright_auth_ico mod_copyright_auth_ico_2" href="http://www.kxnet.cn/" target="_blank">可信网站信用评估</a> -->
+        <a class="mod_copyright_auth_ico mod_copyright_auth_ico_3" href="http://www.cyberpolice.cn/wfjb/" target="_blank">网络警察提醒你</a>
+        <a class="mod_copyright_auth_ico mod_copyright_auth_ico_4" target="_blank">诚信网站</a>
+        <!-- <a href="https://cec.osichina.cn/bz8687345698.html" target="_blank"><img src="http://cec.osichina.cn/cec/gswj.png" alt="企业亮照验证电子标识" width="100px" height="32px" border="0" /></a> -->
+        <a class="mod_copyright_auth_ico mod_copyright_auth_ico_5" href="http://www.12377.cn/" target="_blank">中国互联网举报中心</a>
+        <a class="mod_copyright_auth_ico mod_copyright_auth_ico_6" href="https://v.yunaq.com/certificate?domain=www.fcheche.com&from=label&code=90020" target="_blank">实名认证</a>
+    </p>
+</div>
+</body>
+<script type="text/javascript">
+	var ajax_return_status = 1; // 标识ajax 请求是否已经回来 可以进行下一次请求
+	function chkuser(){
+        var username = $('#username').val();
+        if(username == ''){
+            showMsg('会员昵称不能为空',2);
+            return false;
+        }else{
+        	ajaxGetData(urlList.user.checkUsername,'post',{username:username}).then(data => {
+        		if(data>=1){
+                    showMsg('会员昵称已存在');
+                    return false;
+                }else{
+                     return true;
+                }
+        	})
+        }
+    }
+    // 发送手机短信
+    function send_sms_reg_code(){
+        var mobile = $('input[name="mobile"]').val();
+        if(!checkMobile(mobile)){
+            showMsg('请输入正确的手机号码', 2);//alert('请输入正确的手机号码');
+            return;
+        }
+        ajaxGetData(urlList.user.sendMsg,'post',{"scene": 1,"mobile": mobile}).then(data => {
+			if(data.status == 1){
+                $('#count_down').attr("disabled","disabled");
+                intAs = {$tpshop_config['sms_sms_time_out']|default=60}; // 手机短信超时时间
+                jsInnerTimeout('count_down',intAs);
+                showMsg(data.msg, 1);
+            }else{
+                showMsg(data.msg,2);
+            }
+        })
+    }
+    $('#count_down').removeAttr("disabled");
+    //倒计时函数
+    function jsInnerTimeout(id,intAs)
+    {
+        var codeObj=$("#"+id);
+        intAs--;
+        if(intAs<=-1)
+        {
+            codeObj.removeAttr("disabled");
+            codeObj.text("发送");
+            return true;
+        }
+        codeObj.text(intAs+'秒');
+        setTimeout("jsInnerTimeout('"+id+"',"+intAs+")",1000);
+    };
+    function checkMobile(tel) {
+//        var reg = /(^1[3|4|5|7|8][0-9]{9}$)/;
+        var reg = /^(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/;
+        if (reg.test(tel)) {
+            return true;
+        }else{
+            return false;
+        };
+    }
+    function checkSubmit(){
+    	var password = $.trim($('#password').val());
+        var username = $.trim($('#username').val());
+        var reg = /^[\u4E00-\u9FA5A-Za-z0-9]+$/;
+        var myphone = $('#mobile').val();
+        if($("#username").val()==''){
+            showMsg('会员名不能为空！', 2);
+            return  false;
+        }
+        if(!reg.test(username)){
+            showMsg('用户名请输入数字/字母/中文', 2);
+            return  false;
+        }
+        if(username.length < 3 || username.length>12){
+            showMsg('用户名有效长度为3-12位,并且不得有空格！', 2);
+            return  false;
+        }
+        if(password.length < 6 || password.length>16){
+            showMsg('密码有效长度为6-16位,并且不得有空格！', 2);
+            return  false;
+        }
+        if(!$('#checktxt').is(':checked')){
+            showMsg('请认真阅读并勾选服务协议！', 2);
+            return  false;
+        }
+        if($("#mobile").val()==''){
+            showMsg('手机号码不能为空！', 2);
+            return  false;
+        }else if(!checkMobile(myphone)){
+            showMsg("手机号码有误，请重填");  
+            return false; 
+        }
+        var username = $('#username').val();
+        
+
+        if (ajax_return_status == 0) {
+            return false;
+        }
+
+        ajax_return_status = 0;
+        ajaxGetData(urlList.user.reg,"post",$('#regForm').serialize()).then(data => {
+            ajax_return_status = 1;
+            if(data.status == 1){
+                showMsg(data.msg, 1,function(){
+                    window.location.href = "{:U('Home/Index/index')}";
+                });
+            }else{
+                showMsg(data.msg, 2);
+            }
+        })
+    }
+    $(document).on('keyup', '#password', function() {
+        var password = md5($("input[name='auth_code']").val() + this.value);
+        $('input[name="password"]').val(password);
+    })
+    $(document).on('keyup', '#password2', function() {
+        var password2 = md5($("input[name='auth_code']").val() + this.value);
+        $('input[name="password2"]').val(password2);
+    })
+</script>
+</html>

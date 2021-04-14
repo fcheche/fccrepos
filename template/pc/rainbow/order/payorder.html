@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="text/javascript" src="__STATIC__/js/publicJs.js"></script>
+		<title>支付订单-{$tpshop_config['shop_info_store_title']}</title>
+		<meta name="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+	    <meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+	</head>
+	<style type="text/css">
+		.addOrderBox{
+			    width: 500px;
+			    margin: 150px auto;
+			    height: 500px;
+			    overflow: hidden;
+			    border-radius: 5px;
+		}
+		.order-top{
+			width: 100%;
+			    padding: 0 20px;
+			    height: 50px;
+			    background-color: #b9b9b9;
+			    color: white;
+			    line-height: 50px;
+			    font-size: 18px;
+		}
+		.order-body{
+			height: 300px;
+			    background-color: white;
+		}
+		.order-body li{
+			height: 40px;
+			    line-height: 40px;
+			    overflow: hidden;
+			    padding: 0 20px;
+			    border-bottom: 1px solid #e7e7e7;
+		}
+		.order-body li h1{
+			float: left;
+		}
+		.order-body li p{
+			float: right;
+		}
+		.order-Bottom{
+			height: 50px;
+			    line-height: 50px;
+			    overflow: hidden;
+			    padding-left: 20px;
+			    background-color: #c5c5c5;
+				border-radius: 0 0 5px 5px;
+		}
+		.order-price{
+			height: 50px;
+			    line-height: 50px;
+			    overflow: hidden;
+			    padding-right: 20px;
+				background-color: white;
+		}
+		.order-price p{
+			float: right;
+		}
+		.order-price p span{
+			color: #ff5c5c;
+			    font-size: 25px;
+		}
+		.order-Bottom .a2{
+			    float: right;
+			    width: 200px;
+			    text-align: center;
+			    color: white;
+			    background-color: #ff5c5c;
+		}
+		.payPassword{
+			width: 100%;
+			    height: 40px;
+			    line-height: 40px;
+				background-color: white;
+		}
+		.payPassword input{
+			width: 200px;
+			    float: right;
+			    height: 40px;
+			    text-align: center;
+				background-color: #e7e7e7;
+		}
+	</style>
+	<body>
+		<!--头部-->
+		<include file="public/header"/>
+		<!--头部end-->
+		<div class="addOrderBox">
+			<div class="order-top">
+				支付订单
+			</div>
+			<div class="order-body">
+
+				<li><h1>订单编号：</h1><p>{$order.order_sn}</p></li>
+				<li><h1>商品名称：</h1><p>{$goods.goods_name}</p></li>
+				<li><h1>所属平台：</h1><p><if condition="$goods.goods_type eq 3">微博号<else>{$goods.pingtai}</if></p></li>
+				<li><h1>行业分类：</h1><p>{$goods.catname}</p></li>
+				<li><h1>商品编号：</h1><p>{$goods.goods_sn}</p></li>
+				<li><h1>商品价格：</h1><p>{$goods.shop_price}</p></li>
+				<li><h1>手续费：</h1><p>{$goods.shop_price*0.1}</p></li>
+				<li><h1>优惠金额：</h1><p>{$order.youhui_price}</p></li>
+				<if condition="$order.coupon_price gt 0"><li><h1>活动抵扣：</h1><p>{$order.coupon_price}</p></li></if>
+
+				<li><h1>定金金额：</h1><p>{$order.paid_money}</p></li>
+				<li><h1>尾款金额：</h1><p>{$goods.shop_price*1.1-$order.youhui_price-$order.coupon_price-$order.paid_money}</p></li>
+			</div>
+			<form action="">
+			    <div class="order-price">
+				    <p>订单合计：<span>¥{$goods.shop_price*1.1-$order.youhui_price-$order.coupon_price}</span></p>
+			    </div>
+				<div class="payPassword">
+					<input type="password" placeholder="请输入支付密码">
+				</div>
+			    <div class="order-Bottom">
+					<a href="/home/user/safety_settings" class="a1">忘记密码？</a>
+				    <a href="" class="a2">立即支付</a>
+			    </div>
+			</form>
+		</div>
+		<include file="public/footer"/>
+	</body>
+</html>

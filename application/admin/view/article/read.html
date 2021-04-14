@@ -1,0 +1,68 @@
+<include file="public/layout" />
+<load href="__ROOT__/public/plugins/Ueditor/ueditor.config.js"/>
+<load href="__ROOT__/public/plugins/Ueditor/ueditor.all.min.js"/>
+<script type="text/javascript" charset="utf-8" src="__ROOT__/public/plugins/Ueditor/lang/zh-cn/zh-cn.js"></script>
+<script src="__ROOT__/public/static/js/layer/laydate/laydate.js"></script>
+
+<style type="text/css">
+html, body {overflow: visible;}
+</style>  
+<body style="background-color: #FFF; overflow: auto;">
+<div id="toolTipLayer" style="position: absolute; z-index: 9999; display: none; visibility: visible; left: 95px; top: 573px;"></div>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+  <div class="fixed-bar">
+    <div class="item-title">
+      <div class="subject">
+        <h3> {$info.title}</h3>
+      </div>
+    </div>
+  </div>
+  <form class="form-horizontal" action="{:U('Article/aticleHandle')}" id="add_post" method="post">    
+    <div class="ncap-form-default">
+      
+   
+	 
+	  <dl class="row">
+        
+        <dd class="opt">
+           <!-- {$info.publish_time|date="Y-m-d",###} -->
+            
+          <span class="err"></span>
+        </dd>
+      </dl>       
+    
+      <dl class="row">
+      
+        <dd class="opt">       
+        {$info.content|htmlspecialchars_decode}
+            <span class="err"  id="err_content"></span>
+            <p class="notic"></p>
+        </dd>
+      </dl>
+       
+        <input type="hidden" name="article_id" value="{$info.article_id}">
+  </form>
+</div>
+<script type="text/javascript">
+   
+
+    var url="{:url('Ueditor/index',array('savePath'=>'article'))}";
+    var ue = UE.getEditor('post_content',{
+        serverUrl :url,
+        zIndex: 999,
+        initialFrameWidth: "80%", //初化宽度
+        initialFrameHeight: 300, //初化高度            
+        focus: false, //初始化时，是否让编辑器获得焦点true或false
+        maximumWords: 99999, removeFormatAttributes: 'class,style,lang,width,height,align,hspace,valign',//允许的最大字符数 'fullscreen',
+        pasteplain:true, //是否默认为纯文本粘贴。false为不使用纯文本粘贴，true为使用纯文本粘贴
+        autoHeightEnabled: true
+    });
+
+
+
+    
+</script>
+</body>
+</html>

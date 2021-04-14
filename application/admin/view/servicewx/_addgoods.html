@@ -1,0 +1,638 @@
+<include file="public/layout" />
+<!--物流配置 css -start-->
+<script src="__ROOT__/public/static/js/layer/laydate/laydate.js"></script>
+<style>
+ul.group-list {
+    width: 96%;min-width: 1000px; margin: auto 5px;list-style: disc outside none;
+}
+.err{color:#F00; display:none;}
+ul.group-list li {
+    white-space: nowrap;float: left;
+    width: 150px; height: 25px;
+    padding: 3px 5px;list-style-type: none;
+    list-style-position: outside;border: 0px;margin: 0px;
+}
+.row .table-bordered td .btn,.row .table-bordered td img{
+    vertical-align: middle;
+}
+.row .table-bordered td{
+  padding: 8px;
+  line-height: 1.42857143;
+}
+.table-bordered{
+  width: 100%
+}
+.table-bordered tr td{
+  border: 1px solid #f4f4f4;
+}
+.btn-success {
+    color: #fff;background-color: #449d44;border-color: #398439 solid 1px;
+}
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.col-xs-8 {
+    width: 66.66666667%;
+}
+.col-xs-4 {
+    width: 65%;
+}
+.col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+    float: left;
+}
+.row .tab-pane h4{
+  padding: 10px 0;
+}
+.row .tab-pane h4 input{
+  vertical-align: middle;
+} 
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+.ncap-form-default .title{
+  border-bottom: 0
+}
+.ncap-form-default dl.row, .ncap-form-all dd.opt{
+    /*border-color: #F0F0F0;*/
+    border: none;
+}
+.ncap-form-default dl.row:hover, .ncap-form-all dd.opt:hover{
+    border: none;box-shadow: inherit;
+}
+textarea{outline:none;resize:none !important;}
+.addprine{display: inline; }
+.alisth{margin-top: 10px}
+.p_plus strong{cursor: pointer;margin-left: 4px;}
+.freight_template {
+    font-size: 14px;
+    display: inline-block;
+    padding: 0px 10px;
+}
+.err{color:#F00; display:none;}
+
+
+/*新增css*/
+.leftBox{
+    width: 660px;
+    float: left;
+    /*height: 700px;*/
+    margin-left: 50px;
+}
+.rightBox{
+    width: 830px;
+    float: left;
+    
+}
+.tit{
+    text-align:justify; 
+    resize:none;
+    text-justify:distribute-all-lines; 
+    text-align-last:justify; 
+    text-indent:10px;
+}
+.mybutton{
+    padding: 0 0 !important;
+    width: 100px;
+    margin-left: 35%;
+}
+
+.hideBox{
+    height: 0;
+    transition: 0.3s
+}
+</style>
+<!--物流配置 css -end-->
+<!--以下是在线编辑器 代码 -->
+<load href="__ROOT__/public/plugins/Ueditor/ueditor.config.js"/>
+<load href="__ROOT__/public/plugins/Ueditor/ueditor.all.min.js"/>
+<script type="text/javascript" charset="utf-8" src="__ROOT__/public/plugins/Ueditor/lang/zh-cn/zh-cn.js"></script>
+<!--以上是在线编辑器 代码  end-->
+<body style="background-color: #FFF; overflow: auto;">
+    <div id="append_parent"></div>
+    <div id="ajaxwaitid"></div>
+    <div class="page">
+        <div class="fixed-bar">
+            <div class="item-title">
+                <div class="subject">
+                    <h3>营销微信公众号添加</h3>
+                    <h5>营销微信公众号基本信息添加</h5>
+                </div>
+                <ul class="tab-base nc-row">
+                    <li><a href="javascript:void(0);" data-index='1' class="tab current"><span>通用信息</span></a></li>
+                    <!-- <li><a href="javascript:void(0);" data-index='2' class="tab"><span>微信相册</span></a></li>
+                    <li><a href="javascript:void(0);" data-index='3' class="tab"><span>微信版块</span></a></li> -->
+                    <!-- <li><a href="javascript:void(0);" data-index='5' class="tab"><span>积分折扣</span></a></li> -->
+                </ul>
+            </div>
+        </div>
+        <!-- 操作说明 -->
+        <div class="explanation" id="explanation">
+            <div class="title" id="checkZoom"><i class="fa fa-lightbulb-o"></i>
+                <h4 title="提示相关设置操作时应注意的要点">操作提示</h4>
+                <span id="explanationZoom" title="收起提示"></span> </div>
+                <ul>
+                    <li>请务必正确填写微信公众号信息</li>
+                </ul>
+            </div>
+            <!--表单数据-->
+            <form method="post" id="addEditGoodsForm">
+                <input type="hidden" name="goods_type" id="goods_type" value="{$goods_type}">
+                <!--通用信息-->
+                <div class="ncap-form-default tab_div_1">
+                    <div class="leftBox">
+                       <dl class="row">
+                            <dt class="tit">
+                                <label>头像上传</label>
+                            </dt>
+                            <dd class="opt">
+                                <div class="input-file-show">
+                                    <span class="show">
+                                            <a id="img_a" target="_blank" class="nyroModal" rel="gal" href="">
+                                                <i id="img_i" class="fa fa-picture-o"
+                                                   onMouseOver="layer.tips('<img src=>',this,{tips: [1, '#fff']});" onMouseOut="layer.closeAll();"></i>
+                                            </a>
+                                    </span>
+                                    <span class="type-file-box">
+                                        <input type="text" id="imagetext" name="images" value="" class="type-file-text">
+                                        <input type="button" id="button1" value="选择上传..." class="type-file-button">
+                                        <input class="type-file-file" onClick="GetUploadify(1,'','goods','img_call_back')" size="30"
+                                               title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
+                                    </span>
+                                </div>
+                                <span class="err"></span>
+
+                                <p class="notic">请上传图片格式文件</p>
+                            </dd>
+                        </dl>
+                        <dl class="row">
+                            <dt class="tit"><em>*</em>
+                                <label>微信标题</label>
+                            </dt>
+                            <dd class="opt">
+                                <input type="text" value="" name="goods_name" class="input-txt" id="goods_name"/>
+                                <span class="err" id="err_goods_name"></span>
+                                <p class="notic">微信标题不得超过120个字符</p>
+                            </dd>
+                        </dl>
+                        <dl class="row">
+                        <dt class="tit"><em>*</em>
+                            <label>微信详情描述</label>
+                        </dt>
+                        <dd class="opt">
+                            <textarea rows="3" cols="120" name="goods_remark" class="input-txt" id="goods_remark"></textarea>       
+                                <p class="notic">微信详情简单描述不得超过250个字符</p>             
+                        </dd>
+                        </dl>
+                        <dl class="row">
+                            <dt class="tit">
+                                <label>微信编号</label>
+                            </dt>
+                            <dd class="opt">
+                                <span class="err" id="err_goods_sn"></span>
+                                <p class="notic">此处无需填写，会自动生成</p>
+                            </dd>
+                        </dl>    
+                        <dl class="row">
+                            <dt class="tit"><em>*</em>
+                                <label>粉丝数量</label>
+                            </dt>
+                            <dd class="opt">
+                                <input class="input-txt" type="text" name="fensi_num" id="fensi_num" value=""/>
+                                <p style="display: inline;">请填写阿拉伯数字</p>    
+                                <span class="err" id="err_spu"></span>   
+                            </dd>
+                        </dl>
+
+                        <dl class="row">
+                            <dt class="tit"><em>*</em>
+                                <label>互动数量</label>
+                            </dt>
+                            <dd class="opt">
+                                <input class="input-txt" type="text" name="hudong_num" id="hudong_num" value=""/>
+                                <p style="display: inline;">请填写阿拉伯数字</p>    
+                                <span class="err" id="err_spu"></span>   
+                            </dd>
+                        </dl>
+                        
+                        <dl class="row">
+                                    <dt class="tit"><em>*</em>
+                                        <label>卖家账号</label>
+                                    </dt>
+                                    <dd class="opt">
+                                    <input type="text" value="" name="sellername" class="input-txt" id="hyzh"/>
+                                      <a class="btn green" href="javascript:layer.open({type: 2,title: '添加会员',shadeClose: true,shade: 0.3,area: ['60%', '70%'],content:'{:U('User/add_user')}'});"><p class="notic myNotic">添加会员账号</p></a>
+                                    </dd>
+                        </dl>
+                        <dl class="row">
+                                <dt class="tit"><em>*</em>
+                                    <label>所属平台</label>
+                                </dt>
+                                <dd class="opt">
+                                    <select name="pingtai_id" id="pingtai_id" class="small form-control">
+                                        <option value="">请选择所属平台</option>
+                                        <foreach name="pingtaiList" item="v" key="k" >
+                                            <option value="{$v['attr_id']}">{$v['attr_name']}</option>
+                                        </foreach>
+                                    </select>
+                                <span class="err" id="err_cat_id"></span>
+                            </dd>
+                        </dl>
+                            
+                         <dl class="row">
+                            <dt class="tit"><em>*</em>
+                                <label>行业分类</label>
+                            </dt>
+                            <dd class="opt">
+                                <select name="cat_id" id="cat_id" class="small form-control" >
+                                    <option value="">请选择类别</option>
+                                     <foreach name="categoryList" item="vcat" key="kcat" >
+                                       <option value="{$vcat['id']}">{$vcat['name']}</option>
+                                     </foreach>
+                                </select>
+                            </dd>
+                        </dl>
+
+                        <dl class="row">
+                            <dt class="tit"><em>*</em>
+                                <label>1类投放价格</label>
+                            </dt>
+                            <dd class="opt">
+                                    <input type="text" value="" id="shop_price" name="shop_price" class="t_mane"
+                                onKeyUp="this.value=this.value.replace(/[^\d.]/g,'')" onpaste="this.value=this.value.replace(/[^\d.]/g,'')"/>
+                                <p style="display: inline;">1s-20s</p>
+                                <span class="err" id="err_shop_price"></span>
+                            </dd>
+                        </dl>
+                        <dl class="row">
+                            <dt class="tit"><em>*</em>
+                                <label>2类投放价格</label>
+                            </dt>
+                            <dd class="opt">
+                                    <input type="text" value="" id="two_price" name="two_price" class="t_mane"
+                                onKeyUp="this.value=this.value.replace(/[^\d.]/g,'')" onpaste="this.value=this.value.replace(/[^\d.]/g,'')"/>
+                                <p style="display: inline;">20s-60s</p>
+                                <span class="err" id="err_shop_price"></span>
+                            </dd>
+                        </dl>
+
+                    </div>
+
+                    <div class="rightBox">
+                       
+                         <dl class="row">
+                            <dt class="tit"><em>*</em>
+                                <label>认证主体</label>
+                            </dt>
+                            <dd class="opt">
+                               <select name="renzheng_type" id="renzheng_type">
+                                  <option value="">请选择主体</option>
+                                  <option value="1">个人认证</option>
+                                  <option value="2">企业认证</option>
+                                </select> 
+                            </dd>
+                        </dl>
+                        
+
+                        <dl class="row">
+                            <dt class="tit"><em>*</em>
+                                <label>主管</label>
+                            </dt>
+                            <dd class="opt">
+                                <select name="zhuguan" id="zhuguan">
+                                  <option value="">请选择主管</option>
+                                <volist name="admin_corps" id="template_admin_corps">
+                                      <option value="{$template_admin_corps.zhuguan_name}"<if condition="$template_admin_corps['zhuguan_name'] eq $goods['zhuguan'] ">selected="selected"</if>>{$template_admin_corps.zhuguan_name}</option>
+                                  </volist>
+                              </select>
+                                <span class="err" id="err_zhuguan"></span>
+                            </dd>
+                        </dl>
+                        <dl class="row">
+                            <dt class="tit"><em>*</em>
+                                <label>归属人</label>
+                            </dt>
+                            <dd class="opt">
+                                <select name="guishu" id="guishu">
+                                  <option value="">请选择归属人</option>
+                                  <volist name="admins" id="template_admins">
+                                      <option value="{$template_admins.user_name}"<if condition="$template_admins['user_name'] eq $goods['guishu'] ">selected="selected"</if>>{$template_admins.user_name}</option>
+                                  </volist>
+                              </select>
+                                <span class="err" id="err_guishu"></span>
+                            </dd>
+                        </dl>
+                       <script type="text/javascript">
+                                var select = document.getElementById("zhuguan");
+                                select.onchange=function(){
+                                    var selvalue = select.value;
+                                    var val = document.getElementById("vall");
+                                            $.ajax({
+                                                'url': "{:U('goods/getCategoryguishu')}",
+                                                'data': {zhuguan: selvalue},
+                                                'dataType': 'json',
+                                                success: function (data) {
+                                                    // console.log(data);
+                                                    if (data.status == 1) {
+                                                        var html = '<option value="">请选择归属人</option>';
+                                                        for (var i = 0; i < data.result.length; i++) {
+                                                            var guishu = data.result[i].user_name;
+                                                            html += '<option value="' + guishu + '">' + guishu + '</option>'
+                                                        }
+                                                        $('#vall').empty().html(html);
+                                                    }
+                                                }
+                                            })
+                                };
+                        </script>
+                    <div class="ncap-form-default" style="float: left;width: 200px;margin-left: 64px">
+                        <div class="bot mybutton">            
+                            <a href="JavaScript:void(0);" id="submit" class="ncap-btn-big ncap-btn-green">确认提交</a>
+                            <span class="err" id="err_goods_id"></span>
+                        </div>
+                    </div>                                                
+                </div>
+            <!--通用信息-->
+          
+    </div>
+
+        </form>
+        <!--表单数据-->
+    </div>
+    <div id="goTop"> <a href="JavaScript:void(0);" id="btntop"><i class="fa fa-angle-up"></i></a><a href="JavaScript:void(0);" id="btnbottom"><i class="fa fa-angle-down"></i></a></div>
+    <script>
+       
+    /** 微信规格相关 js*/
+    $(function(){
+        $('#on_time').layDate();
+    })
+
+
+    //提交
+    
+    $(function(){
+        $(document).on("click",'#submit',function(){
+
+            //点击提交判断是否输入等级
+            let goods_name=$("#goods_name").val()// 微信标题
+            let goods_remark=$("#goods_remark").val()
+            let fensi_num=$("#fensi_num").val()
+            let sellername=$("#hyzh").val()
+            let cat_id=$("#cat_id").val()
+            let pingtai_id=$("#pingtai_id").val()
+            let shop_price=$('#shop_price').val()
+            let guishu=$('#guishu').val()
+            
+
+            if(goods_name.indexOf("银行卡")>-1){
+                layer.msg('微信标题包含关键词', {icon: 2});
+                return false
+            }
+            if(goods_remark.indexOf("银行卡")>-1){
+                layer.msg('微信详情描述包含关键词', {icon: 2});
+                return false
+            }
+            if(goods_name==''){
+                layer.msg('请填写微信标题', {icon: 3});
+                return false
+            }
+            if(goods_remark==''){
+                layer.msg('请填写微信描述', {icon: 3});
+                return false
+            }
+            if(fensi_num==''){
+                layer.msg('请填写粉丝数量', {icon: 3});
+                return false
+            }
+            if(sellername==''){
+                layer.msg('请填写卖家账号', {icon: 3});
+                return false
+            }
+            if(pingtai_id==''){
+                layer.msg('请选择微信平台', {icon: 3});
+                    return false
+            }
+            if(cat_id==''){
+                layer.msg('请选择微信类型', {icon: 3});
+                return false
+            }
+            
+            if(shop_price==0){
+                layer.msg('请填写售价', {icon: 3});
+                    return false
+            }
+            if(guishu==''){
+                layer.msg('请选择归属人', {icon: 3});
+                    return false
+            }
+
+
+            $('#submit').attr('disabled', true);
+           
+            // console.log($("#addEditGoodsForm").serialize());
+            $.ajax({
+                type: "POST",
+                url: "{:U('Goods/save')}",
+                data: $("#addEditGoodsForm").serialize(),
+                async:false,
+                dataType: "json",
+                error: function (data) {
+                    console.log(data);
+                    layer.alert("服务器繁忙, 请联系管理员!");
+                },
+                success: function (data) {
+                    console.log(data);
+                    if (data.status == 1) {
+                        layer.msg(data.msg,{icon: 1,time: 2000},function(){
+                            
+                        window.location.href="{:U('Servicewx/goodsList')}";
+                           
+                        });
+                    } else {
+                        $('#submit').attr('disabled',false);
+                        $.each(data.result, function (index, item) {
+                            $('span.err').show();
+                            $('#err_'+index).text(item);
+                        });
+                        layer.msg(data.msg, {icon: 2,time: 3000});
+                    }
+                }
+            });
+        })
+
+        
+
+              //账号验证
+            $("#hyzh").blur(function(){
+                if (hyzh=='') {
+                alert('老板，不要逗我，请输入账号查询是否存在好吗！？');
+                return false;
+            }
+                    hyzhcc()
+            })
+
+
+    })
+
+    function hyzhcc(){
+         var hyzh = $("#hyzh").val();
+
+            $.ajax({
+                type: "POST",
+                url: "{:U('Goods/hyzhcc')}",
+                data: {filename: hyzh},
+                async:false,
+                dataType: "json",
+                error: function (data) {
+                    layer.alert("服务器繁忙, 请联系管理员!");
+                },
+                success: function (data) {
+                    if (data.status == 1) {
+                        layer.msg(data.msg,{icon: 1,time: 2000},function(){
+                           
+                        });
+                    } else {
+                        alert(data.msg);
+                        document.getElementById("hyzh").value = "";
+                        // layer.msg(data.msg, {icon: 2,time: 3000});
+                        return false;
+                    }
+                }
+            });
+    }
+
+
+
+    var url="{:url('Admin/Ueditor/index',array('savePath'=>'goods'))}";
+    var ue = UE.getEditor('goods_content',{
+     toolbars: [[
+     'fullscreen', 'source', '|', 'undo', 'redo', '|',
+     'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
+     'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
+     'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
+     'directionalityltr', 'directionalityrtl', 'indent', '|',
+     'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|',
+     'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
+     'simpleupload', 'insertimage', 'emotion', 'scrawl', 'music', 'attachment', 'map', 'gmap', 'insertframe', 'insertcode', 'webapp', 'pagebreak', 'template', 'background', '|',
+     'horizontal', 'date', 'time', 'spechars', 'snapscreen', 'wordimage', '|',
+     'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
+     'print', 'preview', 'searchreplace', 'drafts', 'help'
+     ]],
+     serverUrl :url,
+     zIndex: 999,
+         initialFrameWidth: "100%", //初化宽度
+         initialFrameHeight: 300, //初化高度            
+         focus: false, //初始化时，是否让编辑器获得焦点true或false
+         maximumWords: 99999, removeFormatAttributes: 'class,style,lang,width,height,align,hspace,valign',//允许的最大字符数 'fullscreen',
+         pasteplain:false, //是否默认为纯文本粘贴。false为不使用纯文本粘贴，true为使用纯文本粘贴
+         autoHeightEnabled: true
+     });
+
+    // 上传微信图片成功回调函数
+    function call_back(fileurl_tmp){
+        $("#original_img").val(fileurl_tmp);
+        $("#original_img2").attr('href', fileurl_tmp);
+    }
+
+    // 上传微信相册回调函数
+    function call_back2(paths) {
+        var last_div = $(".goods_xc:last").prop("outerHTML");
+        for (var i = 0; i < paths.length; i++) {
+            $(".goods_xc:eq(0)").before(last_div);	// 插入一个 新图片
+            $(".goods_xc:eq(0)").find('a:eq(0)').attr('href', paths[i]).attr('onclick', '').attr('target', "_blank");// 修改他的链接地址
+            $(".goods_xc:eq(0)").find('img').attr('src', paths[i]);// 修改他的图片路径
+            $(".goods_xc:eq(0)").find('a:eq(1)').attr('onclick', "ClearPicArr2(this,'" + paths[i] + "')").text('删除');
+            $(".goods_xc:eq(0)").find('input').val(paths[i]); // 设置隐藏域 要提交的值
+        }
+    }
+    //上传之后删除组图
+    function ClearPicArr2(obj, path) {
+        $.ajax({
+            type: 'GET',
+            url: "{:U('Admin/Uploadify/delupload')}",
+            data: {action: "del", filename: path},
+            success: function () {
+                $(obj).parent().remove(); // 删除完服务器的, 再删除 html上的图片
+            }
+        });
+        // 删除数据库记录
+        $.ajax({
+            type: 'GET',
+            url: "{:U('Admin/Goods/del_goods_images')}",
+            data: {filename: path},
+            success: function () {
+            }
+        });
+    }
+
+   
+
+    //插件切换列表
+    $('.tab-base').find('.tab').click(function(){
+        $('.tab-base').find('.tab').each(function(){
+            $(this).removeClass('current');
+        });
+        $(this).addClass('current');
+        var tab_index = $(this).data('index');
+        console.log(tab_index)
+        $(".tab_div_1, .tab_div_2, .tab_div_3,.tab_div_5").hide();
+        $(".tab_div_"+tab_index).show();
+    });
+
+    //上传图片回调事件
+    function img_call_back(fileurl_tmp) {
+        $("#imagetext").val(fileurl_tmp);
+        $("#img_a").attr('href', fileurl_tmp);
+        $("#img_i").attr('onmouseover', "layer.tips('<img src=" + fileurl_tmp + ">',this,{tips: [1, '#fff']});");
+    }
+
+    //上传微信回调事件
+    function video_call_back(fileurl_tmp) {
+        $("#videotext").val(fileurl_tmp);
+        $("#video_a").attr('href', fileurl_tmp);
+        $("#video_i").attr('onmouseover', "layer.tips('<img src=" + fileurl_tmp + ">',this,{tips: [1, '#fff']});");
+        if (typeof(fileurl_tmp) != 'undefined') {
+            $('#video_button').html('<input type="button" onclick="delupload()" value="删除微信" class="type-file-button" >');
+        }
+    }
+
+    //删除上传图片事件
+    function delupload() {
+        $.ajax({
+            url: "{:U('Uploadify/delupload')}",
+            data: {url: $('#videotext').val()},
+            success: function (data) {
+                if (data == 1) {
+                    layer.msg('删除成功！', {icon: 1});
+                    $('#videotext').val('');
+                    var html = '<input type="button" name="button" id="videobutton1" value="选择上传..." class="type-file-button"> <input class="type-file-file" onClick="GetUploadify(1,\'\',\'goods\',\'video_call_back\',\'Flash\')" size="30" hidefocus="true" nc_type="change_site_logo" title="点击按钮选择文件并提交表单后上传生效">';
+                    $('#video_button').html(html);
+                } else {
+                    layer.msg('删除失败', {icon: 2});
+                }
+            },
+            error: function () {
+                layer.msg('网络繁忙，请稍后再试!', {icon: 2});
+            }
+        })
+    }
+</script>
+</body>
+</html>

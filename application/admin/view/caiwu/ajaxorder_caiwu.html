@@ -1,0 +1,209 @@
+<table>
+ 	<tbody>
+ 	<if condition="empty($orderList) eq true">
+ 		<tr data-id="0">
+	        <td class="no-data" align="center" axis="col0" colspan="50">
+	        	<i class="fa fa-exclamation-circle"></i>没有符合条件的记录
+	        </td>
+	     </tr>
+	<else/>
+  <tr >
+       <!-- <td align="center" abbr="article_time" axis="col6" class="">
+          <div style="text-align: center; width: 90px;color: red;" class="">汇总</div>
+        </td> -->
+      <!--   <td align="center" abbr="order_sn" axis="col3" class="">
+          <div style="text-align: center; width: 160px;" class="">
+          </div>
+
+        </td>
+        <td align="center" abbr="order_sn" axis="col3" class="">
+          <div style="text-align: center; width: 120px;" class=""></div>
+        </td>
+        
+        <td align="left" abbr="consignee" axis="col4" class="">
+          <div style="text-align: left; width: 100px;" class=""></div>
+        </td> -->
+         <!-- <td align="left" abbr="consignee" axis="col4" class="">
+          <div style="text-align: left; width: 100px;" class=""></div>
+        </td> -->
+        <td align="center" abbr="article_show" axis="col5" class="" colspan="16">
+          <div style="text-align: center; color: red;" class="">卖家到手：{$seller_count} 买家应付：{$order_amount_count} 未放款：{$wgkall} 佣金：{$yongjin} 订单开支：{$ddkaizhi} 消保金：{$bidbondall} 实际业绩：{$shijiyeji}</div>
+        </td>
+  
+      <!--  <td align="center" abbr="article_time" axis="col6" class="" colspan="2">
+          <div style="text-align: center; color: red;" class="">{$order_amount_count}</div>
+        </td>
+        <td align="center" abbr="article_time" axis="col6" class="" colspan="2">
+          <div style="text-align: center; color: red;" class="">{$wgkall}</div>
+        </td>
+        <td align="center" abbr="article_time" axis="col6" class="" colspan="2">
+          <div style="text-align: center; color: red;" class="">{$ddzijinall}</div>
+        </td>
+        <td align="center" abbr="article_time" axis="col6" class="" colspan="2">
+          <div style="text-align: center; width: 60px;color: red;" class="">{$yongjin}</div>
+        </td>
+        <td align="center" abbr="article_time" axis="col6" class="" colspan="2">
+          <div style="text-align: center; width: 60px;color: red;" class="">{$ddkaizhi}</div>
+        </td>
+        <td align="center" abbr="article_time" axis="col6" class="" colspan="2">
+          <div style="text-align: center; width: 80px;color: red;" class="">{$bidbondall}</div>
+        </td>
+        <td align="center" abbr="article_show" axis="col5" class="" colspan="2">
+          <div style="text-align: center; width: 80px;color: red;" class="money">{$shijiyeji}</div>
+        </td>
+      -->
+        <!--  <td align="center" axis="col1" align="center">
+           
+        </td> -->
+    <td style="width: 100%;">
+          <div></div>
+        </td>
+      </tr>
+ 	<volist name="orderList" id="list">
+  	<tr data-order-id="{$list.order_id}" id="{$list.order_id}">
+       <td align="center" abbr="article_time" axis="col6" class="">
+          <div style="text-align: center; width: 90px;" class="">{$list.add_time|date='Y-m-d',###}</div>
+        </td>
+        <td align="center" abbr="order_sn" axis="col3" class="">
+          <div style="text-align: center; width: 160px;" class="">
+            <if condition="$list.fadan_time gt 1">
+              <a class="btn green" href="{:U('Admin/order/fadan_detail',array('order_id'=>$list['order_id']))}">
+              <else>
+              <a class="btn green" href="{:U('Admin/order/detail',array('order_id'=>$list['order_id']))}">
+            </if>{$list.order_sn}</a></div>
+        </td>
+        <td align="center" abbr="order_sn" axis="col3" class="">
+          <div style="text-align: center; width: 160px;" class=""><if condition="$list.goods_type eq 111">购买看店卡<else>{$list.goods_sn}</if></div>
+        </td>
+        
+        <td align="left" abbr="consignee" axis="col4" class="">
+          <div style="text-align: left; width: 100px;" class=""><if condition="$list.consignee neq ''">
+            {$list.consignee}
+            <else>
+              {$list.tel}
+            </if></div>
+        </td>
+         <td align="left" abbr="consignee" axis="col4" class="">
+          <div style="text-align: left; width: 100px;" class="">{$list.sellername|default="/"}</div>
+        </td>
+      
+        <td align="center" abbr="article_time" axis="col6" class="">
+          <div style="text-align: center; width: 80px;" class="">
+           {$list.seller_count}
+          </div>
+        </td>
+      
+        <td align="center" abbr="article_time" axis="col6" class="">
+          <div style="text-align: center; width: 80px;" class="">{$list.order_amount_count}</div>
+        </td>
+        <td align="center" abbr="article_time" axis="col6" class="">
+          <div style="text-align: center; width: 80px;" class="">{$list.wfangkuan}</div>
+        </td>
+         <td align="center" abbr="article_time" axis="col6" class="">
+          <div style="text-align: center; width: 80px;" class="">{$list.yongjin}</div>
+        </td>
+       
+        <td align="center" abbr="article_time" axis="col6" class="">
+          <div style="text-align: center; width: 60px;" class="">{$list.kaizhi_price}</div>
+        </td>
+       
+        <td align="center" abbr="article_show" axis="col5" class="">
+          <div style="text-align: center; width: 80px;" class="money">{$list.shiji_yeji|default="0.00"}</div>
+        </td>
+       <td align="center" abbr="article_time" axis="col6" class="">
+          <div style="text-align: center; width: 50px;" class="gsName">{$list.gs_name|default="/"}</div>
+        </td>
+         <td align="center" abbr="article_time" axis="col6" class="">
+          <div style="text-align: center; width: 50px;" class="xsName">{$list.xs_name|default="/"}</div>
+        </td>
+        
+         <td align="center" abbr="article_time" axis="col6" class="">
+          <div style="text-align: center; width: 90px;" class=""><if condition="$list.confirm_time neq 0">{$list.confirm_time|date='Y-m-d',###}<else>未完成</if></div>
+        </td>
+        <!--  <td align="center" axis="col1" align="center">
+            <div style="text-align: center; ">
+              <if condition="$list.catid0 eq 581">
+              <a class="btn green" href="{:U('Admin/ordertm/detail',array('order_id'=>$list['order_id']))}">
+              <elseif condition="$list.catid0 eq 582">
+                <a class="btn green" href="{:U('Admin/ordertb/detail',array('order_id'=>$list['order_id']))}">
+              <elseif condition="$list.catid0 eq 583">
+                <a class="btn green" href="{:U('Admin/orderjd/detail',array('order_id'=>$list['order_id']))}">
+              <elseif condition="$list.catid0 eq 584">
+                <a class="btn green" href="{:U('Admin/orderot/detail',array('order_id'=>$list['order_id']))}">
+              <else>
+                <a class="btn green" href="{:U('Admin/ordertb/detail',array('order_id'=>$list['order_id']))}">
+              </if>
+                <i class="fa fa-list-alt"></i>查看
+              </a>
+            </div>
+        </td> -->
+		<td style="width: 100%;">
+          <div></div>
+        </td>
+      </tr>
+      </volist>
+      </if>
+    </tbody>
+</table>
+<!-- <div class="myMoney">
+  <div class="myMoneyBox" style="width: 725px">
+    <div class="allMoney">
+      <p>总业绩： <span id="moneyOne"></span></p>
+    </div>
+    <div class="nowMoney" style="margin-left: 30px;float: left;">
+      <p>完成业绩： <span id="moneyTwo"></span></p>
+    </div>
+    <div class="peopleMoney" style="margin-left: 30px;float: left;">
+      <p>个人完成业绩： <span id="moneyThree"></span></p>
+    </div>
+  </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-6 text-left"></div>
+    <div class="col-sm-6 text-right">{$page}</div>
+</div>
+<script>
+  $(function(){
+    //订单状态背景颜色渲染
+    $(".djzf").parent().parent().css("background-color","#e04949")
+    $(".jjz").parent().parent().css("background-color","#3532a7")
+    $(".qkzf").parent().parent().css("background-color","#0d6d0d")
+  })
+
+
+
+
+  $(".pagination  a").click(function(){
+    sessionStorage.removeItem("orderPagelist");
+    var page = $(this).data('p');
+    ajax_get_table('search-form2',page);
+    sessionStorage.setItem('orderPagelist',page);
+  });
+    
+ // 删除操作
+    function del(obj) {
+        layer.confirm('确定要删除吗?', function(){
+            var id=$(obj).data('order-id');
+            $.ajax({
+                type : "POST",
+                url: "{:U('Admin/order/delete_order')}",
+                data:{order_id:id},
+                dataType:'json',
+                async:false,
+                success: function(data){
+                    if(data.status ==1){
+                        layer.alert(data.msg, {icon: 1});
+                        $('#'+id).remove();
+                    }else{
+                        layer.alert(data.msg, {icon: 2});
+                    }
+                },
+                error:function(){
+                    layer.alert('网络异常，请稍后重试',{icon: 2});
+                }
+            });
+		});
+	}
+    
+    $('.ftitle>h5').empty().html("(共{$pager->totalRows}条记录)");
+</script>

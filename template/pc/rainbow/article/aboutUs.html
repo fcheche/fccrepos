@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>关于我们-蜂车车|新媒服务</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <script type="text/javascript" src="__STATIC__/js/publicJs.js"></script>
+</head>
+<style type="text/css">
+    body,ul,h1,h2,h3,p{
+        margin: 0 0;
+        padding: 0 0
+    }
+    .myHeader{
+            position: absolute;
+    height: 80px;
+    width: 100%;
+    min-width: 1224px;
+    line-height: 80px;
+    }
+    .myHeader img{
+        float: left;
+    margin-top: 200px;
+    }
+    .myHeader nav{
+        float: right;
+        overflow: hidden;
+    }
+    .myHeader nav ul{
+        overflow: hidden;
+    }
+    .myHeader nav ul li{
+            float: left;
+            list-style: none;
+    color: white;
+    padding: 0 20px;
+    cursor: pointer;
+    }
+    .banner{
+        margin-top: -200px;
+        background-image: url("__STATIC__/img/aboutUs/banner.jpg");
+        height: 900px
+    }
+    .GoInfcc{
+        background-image: url("__STATIC__/img/aboutUs/GoInfcc.jpg");
+            float: left;
+                background-size: cover;
+    width: 30%;
+    height: 180px;
+    }
+    .bannerBottom{
+            width: 80%;
+    min-width: 1224px;
+    overflow: hidden;
+    margin: -180px auto 0 auto;
+    }
+    .GoInfcc h1{
+        color: white;
+    font-weight: lighter;
+    padding:30px 20px;
+    }
+    .GoInfcc p{
+            color: white;
+    padding-left:20px;
+    }
+    .GoInfccLine{
+            width: 40px;
+    height: 8px;
+    background-color: #dc3232;
+    margin-left: 20px;
+    margin-top: 20px
+    }
+    .GoInfccRight{
+        float: left;
+            width: 70%;
+    height: 100px;
+    margin-top: 80px;
+    }
+    .GoInfccRight p{
+            float: left;
+    line-height: 100px;
+    color: white;
+    background-color: rgba(93, 92, 92, 0.3);
+    width: 33.3%;
+    text-align: center;
+    }
+    .synopsisBox{
+        width: 80%;
+        min-width: 1224px;
+        margin: 0 auto;
+        overflow: hidden;
+    }
+    .synopsisLeft{
+        width: 30%;
+        background-image: url("__STATIC__/img/aboutUs/synopsisLeft.jpg");
+            background-size: cover;
+            color: white;
+            float: left;
+            height: 777px
+    }
+    .synopsisLeft h1{
+            font-size: 50px;
+    font-weight: lighter;
+    letter-spacing: 15px;
+    padding-top: 50px;
+    text-align: center;
+    }
+    .synopsisLeft p{
+            padding-left: 100px;
+    font-size: 20px;
+    margin: 10px auto;
+    }
+    .synopsisLeft h2{
+            width: 240px;
+    height: 1px;
+    background-color: white;
+    margin-left: 100px;
+    margin-top: 30px;
+    }
+    .synopsisSmallBox{
+            width: 50%;
+    float: left;
+    text-align: center;
+    margin-top: 30px 
+    }
+    .synopsisSmallBox h3{
+            font-weight: lighter;
+    font-size: 30px;
+    margin-top: 15px;
+    }
+    .synopsisRight{
+            width: 70%;
+    float: left;
+    }
+    .synopsisTitle{
+            padding-left: 50px;
+    margin-top: 70px;
+    overflow: hidden;
+    }
+    .synopsisTitleLeft{
+            float: left;
+    width: 10px;
+    height: 70px;
+    background-color: #dd3333;
+    }
+    .synopsisTitleRight{
+            float: left;
+    padding-left: 30px;
+    }
+    .synopsisTitleRight h1{
+        font-weight: lighter;
+    }
+    .synopsisBody{
+        padding-left: 50px;
+        margin-top: 20px;
+    }
+    .synopsisBody p{
+            margin-top: 25px;
+    text-indent: 32px;
+    color: #333;
+    }
+    .culture{
+            min-width: 1224px;
+    width: 80%;
+    margin: 87px auto;
+    overflow: hidden;
+    }
+    .cultureLeft{
+            float: left;
+    width: 67%;
+    }
+    .cultureHead{
+        overflow: hidden;
+    }
+    .cultureHeadLeft{
+            width: 7px;
+    height: 67px;
+    float: left;
+    background-color: #dd3333;
+    }
+    .cultureHeadRight{
+            margin-left: 25px;
+    float: left;
+    }
+    .cultureHeadRight h1{
+        font-weight: lighter;
+        font-size: 30px
+    }
+    .cultureHeadRight p{
+        margin-top: 5px
+    }
+    .cultureBody{
+        width: 100%;
+        overflow: hidden;
+        margin-top: 10px
+    }
+    .cultureSmallBox{
+            float: left;
+    background-color: #dd3333;
+    width: 48%;
+    height: 220px;
+    border-radius: 7px;
+        margin-right: 20px;
+    margin-top: 20px;
+    transition: 0.3s
+    }
+    .cultureSmallBox img{
+            margin-left: 40px;
+    margin-top: 40px;
+    }
+    .cultureRight{
+            float: right;
+    width: 30%;
+    height: 550px;
+    border: 4px solid #dd3333;
+    }
+    .cultureRight h1{
+            font-weight: lighter;
+    margin-top: 88px;
+    margin-left: 50px;
+    font-size: 55px;
+    color: #dd3333
+    }
+    .cultureRight h2{
+            font-weight: lighter;
+    margin-top: 20px;
+    margin-left: 50px;
+    font-size: 30px;
+    color: #dd3333;
+    }
+    .cultureLine{
+        margin: 50px 50px;
+    width: 53%;
+    height: 2px;
+    background-color: #dd3333;
+    }
+    .cultureRight h3{
+            font-weight: lighter;
+    margin-top: 20px;
+    margin-left: 50px;
+    font-size: 20px;
+    color: #dd3333;
+    }
+    .cultureSmallBox:hover{
+        background-color: #3c3f46;
+        transition: 0.3s
+    }
+    .serveHeader{
+        text-align: center;
+    }
+    .serveBodyTop{
+        width: 1000px;
+        overflow: hidden;
+        margin: 50px auto
+    }
+    .serveSmallBox{
+            float: left;
+    width: 200px;
+    height: 300px;
+    background-color: white;
+    border-radius: 5px;
+    margin: auto 20px;
+    transition: 0.3s;
+    } 
+    .serveSmallBox:hover{
+        transition: 0.3s;
+        background-color: #DD3333
+    }
+    .serveSmallBox:hover h1{
+        transition: 0.3s;
+        color: white
+    }
+    .serveSmallBox:hover p{
+        transition: 0.3s;
+        color: white
+    }
+    .serveBody{
+        background-image: url("__STATIC__/img/aboutUs/serveBack.jpg");
+        overflow: hidden;
+    }
+    .ssbTopBox{
+        border: 2px solid #e7e7e7;
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    border-radius: 7px;
+    margin-left: 20px;
+    margin-top: 30px;
+    }
+    .ssbTopBox img{
+        margin-top:17px;
+    }
+    .serveSmallBox h1{
+            margin-top: 30px;
+    font-weight: lighter;
+    font-size: 20px;
+    color: black;
+    transition: 0.3s;
+    margin-left: 20px;
+    }
+    .serveSmallBox p{
+            font-size: 15px;
+    color: gray;
+    margin-left: 20px;
+    transition: 0.3s;
+    margin-top: 7px;
+    }
+    .serveSmallBox>img{
+            margin-top: 20px;
+    margin-left: 20px;
+    }
+    .friendship-links{
+        width: 1224px
+    }
+    .footer .w1224{
+        overflow: hidden;
+    }
+</style>
+<body>
+    <header class="myHeader">
+        <a href="/"><img src="{$config.store_user_logo|default='/public/static/images/logo/pc_home_user_logo_default.png'}" style="width: 240px;float: left;"></a>
+    </header>
+    <div class="banner"></div>
+    <div class="bannerBottom">
+        <div class="GoInfcc">
+            <h1>走进蜂车车</h1>
+            <p>品质于心</p>
+            <div class="GoInfccLine"></div>
+        </div>
+        <div class="GoInfccRight">
+            <p>企业服务一站式平台</p>
+            <p>汇聚50W+优质资源</p>
+            <p>一对一专属服务</p>
+        </div>
+    </div>
+    <div class="synopsis">
+        <div class="synopsisBox">
+            <div class="synopsisLeft">
+                <h1>创业梦想</h1>
+                <h1>扬帆起航</h1>
+                <p>ENTREPRENEURIAL</p>
+                <p>DREAM</p>
+                <p>FENGCHECHE TO SET SAIL</p>
+                <h2></h2>
+                <!-- <div class="synopsisSmallBox">
+                    <h3>50W+</h3>
+                    <h3>优质店铺</h3>
+                </div>
+                <div class="synopsisSmallBox">
+                    <h3>300+</h3>
+                    <h3>专业客服</h3>
+                </div>
+                <div class="synopsisSmallBox">
+                    <h3>20W+</h3>
+                    <h3>覆盖用户</h3>
+                </div>
+                <div class="synopsisSmallBox">
+                    <h3>26W+</h3>
+                    <h3>交易数量</h3>
+                </div> -->
+            </div>
+            <div class="synopsisRight">
+                <div class="synopsisTitle">
+                    <div class="synopsisTitleLeft"></div>
+                    <div class="synopsisTitleRight">
+                        <h1>公司简介</h1>
+                        <p>COMPANY PROFILE</p>
+                    </div>
+                </div>
+                <div class="synopsisBody">
+                    <img src="__STATIC__/img/aboutUs/synopsisBody.jpg">
+                    <p>成都蜂车车网络科技有限公司立足于天府之国，国家中心城市--成都！公司以创新创业激情及拼搏精神为动力，以技术服务为推广核心，以诚信服务为导向，以现代互联网科技为衬托，提供抖音、快手等短视频以及头条号、微博号等自媒体交易服务，以新媒体交易、知识产权、科技互联、现代新媒、智企服务、软件开发等6大业务为主的一站式服务体系，致力于开创现代互联网科技未来的市场。平台应广大市场需求而诞生，对市场进行资源整合，不仅为广大的b2b商家和无数创业梦想者 提供了第三方交易担保，也对整个电商行业的改善做出些许贡献。正因如此，才能凭借着得天独厚的优势，一路披荆斩棘从整个互联网行业中崭露头角。</p>
+                    <p>平台全程一对一透明化交易流程，以优质的服务、真挚的态度、提供全方位解决方案。“以帮助电商发展”为己任，“以保护客户利益”为使命。赢得客户可贵的信任，赢得行业的效仿，赢得社会的认同。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="culture">
+        <div class="cultureLeft">
+            <div class="cultureHead">
+                <div class="cultureHeadLeft"></div>
+                <div class="cultureHeadRight">
+                    <h1>企业文化</h1>
+                    <p>CORPORATE CULTURE</p>
+                </div>
+            </div>
+            <div class="cultureBody">
+                <div class="cultureSmallBox">
+                    <img src="__STATIC__/img/aboutUs/culture1.png">
+                </div>
+                <div class="cultureSmallBox">
+                    <img src="__STATIC__/img/aboutUs/culture2.png">
+                </div>
+                <div class="cultureSmallBox">
+                    <img src="__STATIC__/img/aboutUs/culture3.png">
+                </div>
+                <div class="cultureSmallBox">
+                    <img src="__STATIC__/img/aboutUs/culture4.png">
+                </div>
+            </div>
+        </div>
+        <div class="cultureRight">
+            <h1>用专业</h1>
+            <h2>致敬您的电商梦想</h2>
+            <div class="cultureLine"></div>
+            <h3>PROFESSIONAL ERVICES</h3>
+            <h3>SALUTE YOUR</h3>
+            <h3>E-COMMERCE DREAM</h3>
+        </div>
+    </div>
+    <div class="serve">
+        <div class="serveHeader">
+            <img src="__STATIC__/img/aboutUs/serveHeader.png">
+        </div>
+        <div class="serveBody">
+            <div class="serveBodyTop">
+                <a href="/home/lists?l=4" target="_blank">
+                    <div class="serveSmallBox">
+                        <div class="ssbTopBox">
+                            <img src="__STATIC__/img/aboutUs/ssb1.png">
+                        </div>
+                        <h1>微信号交易</h1>
+                        <p>海量优质账号</p>
+                        <p>免费在线估值</p>
+                        <img src="__STATIC__/img/aboutUs/serveToRight.png">
+                    </div>
+                </a>
+                <a href="/home/lists?l=3" target="_blank">
+                    <div class="serveSmallBox">
+                        <div class="ssbTopBox">
+                            <img src="__STATIC__/img/aboutUs/ssb2.png">
+                        </div>
+                        <h1>微博号交易</h1>
+                        <p>品牌诚信认证平台</p>
+                        <p>账号真实无虚假</p>
+                        <img src="__STATIC__/img/aboutUs/serveToRight.png">
+                    </div>
+                </a>
+                <a href="/home/lists?l=2-18" target="_blank">
+                    <div class="serveSmallBox">
+                        <div class="ssbTopBox">
+                            <img src="__STATIC__/img/aboutUs/ssb3.png">
+                        </div>
+                        <h1>头条号交易</h1>
+                        <p>优质账号触手可及</p>
+                        <p>优质服务客户至上</p>
+                        <img src="__STATIC__/img/aboutUs/serveToRight.png">
+                    </div>
+                </a>
+                <a href="/home/lists?l=1" target="_blank">
+                    <div class="serveSmallBox">
+                        <div class="ssbTopBox">
+                            <img src="__STATIC__/img/aboutUs/ssb4.png">
+                        </div>
+                        <h1>抖音快手</h1>
+                        <p>专业资深客服</p>
+                        <p>免费答复意见</p>
+                        <img src="__STATIC__/img/aboutUs/serveToRight.png">
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!--footer-->
+    <include file="public/footer"/>
+    <!--footer-->
+
+
+</body>
+
+</html>

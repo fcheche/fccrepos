@@ -1,0 +1,145 @@
+<include file="public/layout" />
+<script src="__ROOT__/public/static/js/layer/laydate/laydate.js"></script>
+<style>
+    .ncsc-default-table {
+        line-height: 20px;
+        width: 100%;
+        border-collapse: collapse;
+        clear: both;
+    }
+    .ncsc-default-table thead th {
+        line-height: 20px;
+        color: #777;
+        background-color: #FFF;
+        text-align: center;
+        height: 20px;
+        padding: 8px 0;
+        border-bottom: solid 1px #DDD;
+    }
+    .ncsc-default-table tbody td {
+        color: #777;
+        background-color: #FFF;
+        text-align: center;
+        padding: 10px 0;
+    }
+</style>
+<body style="background-color: #FFF; overflow: auto;">
+<div id="toolTipLayer" style="position: absolute; z-index: 9999; display: none; visibility: visible; left: 95px; top: 573px;"></div>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    <div class="fixed-bar">
+        <div class="item-title"><a class="back" href="javascript:history.back();" title="返回列表"><i class="fa fa-arrow-circle-o-left"></i></a>
+            <div class="subject">
+                <h3>看店卡管理 - 编辑看店卡</h3>
+                <h5>网站系统看店卡管理</h5>
+            </div>
+        </div>
+    </div>
+    <form class="form-horizontal" id="handleposition" method="post">
+        <input type="hidden" name="id" value="{$coupon.id}"/>
+        <div class="ncap-form-default">
+            <dl class="row">
+                <dt class="tit">
+                    <label><em>*</em>看店卡名称</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" id="name" name="name" value="{$coupon.name}" class="input-txt">
+                    <span class="err" id="err_name"></span>
+                    <p class="notic">请填写看店卡名称</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label><em>*</em>看店卡面额</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" id="money" name="money"  onpaste="this.value=this.value.replace(/[^\d.]/g,'')" onkeyup="this.value=this.value.replace(/[^\d.]/g,'')" value="{$coupon.money}" class="input-txt">
+                    <span class="err" id="err_money"></span>
+                    <p class="notic">看店卡可抵扣金额</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label><em>*</em>看店卡次数</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" id="send_num" name="send_num" value="{$coupon.send_num}" class="input-txt">
+                    <span class="err" id="err_send_num"></span>
+                    <p class="notic">看店卡次数</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label><em>*</em>看店卡价格</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" id="shop_price" name="shop_price"  onpaste="this.value=this.value.replace(/[^\d.]/g,'')" onkeyup="this.value=this.value.replace(/[^\d.]/g,'')" value="{$coupon.shop_price}" class="input-txt">
+                    <span class="err" id="err_shop_price"></span>
+                    <p class="notic">看店卡金额</p>
+                </dd>
+            </dl>
+        
+            <dl class="row">
+                <dt class="tit">
+                    <label><em>*</em>描述</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" id="desc" name="desc" value="{$coupon.desc}" class="input-txt">
+                    <span class="err" id="err_desc"></span>
+                    <p class="notic">请填写看店卡描述</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label>状态</label>
+                </dt>
+                <dd class="opt">
+                    <input name="status" type="radio" value="1" <if condition="$coupon['status'] neq 2">checked</if> ><label>有效</label>
+                    <input name="status" type="radio" value="2" <if condition="$coupon['status'] eq 2">checked</if> ><label>无效</label>
+                </dd>
+            </dl>
+                <div class="bot">
+                        <a onclick="verifyForm();" class="ncap-btn-big ncap-btn-green">确认提交</a>
+                </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+
+    var ajax_return_status=1;
+    function verifyForm(){
+        if(ajax_return_status==0){
+            return ;
+        }
+        ajax_return_status=0
+        $('span.err').show();
+       
+        $.ajax({
+            type: "POST",
+            url: "{:U('Admin/Coupon/addEditCoupon')}",
+            data: $('#handleposition').serialize(),
+            dataType: "json",
+            success: function (data) {
+                ajax_return_status=1;
+                if (data.status == 1) {
+                    layer.msg(data.msg, {icon: 1},function () {
+                        location.href = "{:U('Admin/Coupon/index')}";
+                    });
+                } else {
+                    layer.msg(data.msg, {icon: 2});
+                    $.each(data.result, function (index, item) {
+                        $('#err_' + index).text(item).show();
+                    });
+                }
+            },
+            error: function () {
+                ajax_return_status=1;
+                layer.alert("服务器繁忙, 请联系管理员!");
+            },
+        });
+    }
+
+</script>
+</body>
+</html>
